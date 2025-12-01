@@ -26,4 +26,10 @@ public abstract class PlayerState : EntityState
         base.Exit();
         player.anim.SetBool(animBoolName, false);
     }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+        player.anim.SetFloat("yVelocity", rb.linearVelocity.y);
+    }
 }

@@ -4,6 +4,8 @@ public abstract class EntityState
 {
     // 子クラス全てで使用するため, protected
     protected StateMachine stateMachine;
+    // Animator側で作るパラメータの名前
+    // 例えばmoveがtrueだと、現在moveStateである状態を示すことになる。
     protected string animBoolName;
 
     // 敵味方共通のコンポーネントなど
