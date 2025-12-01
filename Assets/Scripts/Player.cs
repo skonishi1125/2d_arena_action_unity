@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -6,27 +6,53 @@ public class Player : MonoBehaviour
     // New Input System
     private PlayerInputSet input;
 
+    // StateMachine
+    // Playerの状態を別のコードでも見ることになるので、publicとしておくとよい
+    public StateMachine stateMachine { get; private set; }
+    public PlayerIdleState idleState { get; private set; } // moveからidleに遷移するときなどに、参照するのでpublic
+    public PlayerMoveState moveState { get; private set; }
+
+
     [Header("Components")]
-    private Rigidbody2D rb;
+    public Rigidbody2D rb { get; private set; } // moveStateがrbを使って速度を弄るのでgetできるようにする
     private Collider2D co;
     private SpriteRenderer sr;
 
     [Header("Input Settings")]
-    public Vector2 moveInput { get; private set; } // InputSystem��digital -1,0,1
-    [SerializeField] private float moveSpeed = 5f;
+    public Vector2 moveInput { get; private set; } // InputSystemのdigital -1,0,1
+    public float moveSpeed = 5f; // moveState等が扱うので public
 
 
     private void Awake()
     {
+        // New Input System
         input = new PlayerInputSet();
+
+        // StateMachine
+        stateMachine = new StateMachine();
+        idleState = new PlayerIdleState(this, stateMachine, "idle");
+        moveState = new PlayerMoveState(this, stateMachine, "move");
+
         rb = GetComponent<Rigidbody2D>();
         co = GetComponent<Collider2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
+    }
+
     private void Update()
     {
-        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        stateMachine.currentState.Update(); // 状態中の処理
+    }
+
+
+
+    public void SetVelocity(float xVelocity, float yVelocity)
+    {
+        rb.linearVelocity = new Vector2(xVelocity, yVelocity);
     }
 
     private void OnEnable()
