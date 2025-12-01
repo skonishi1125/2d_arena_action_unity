@@ -4,17 +4,17 @@ public abstract class EntityState
 {
     // 子クラス全てで使用するため, protected
     protected StateMachine stateMachine;
-    protected string statename;
+    protected string animBoolName;
 
     // 敵味方共通のコンポーネントなど
     protected Rigidbody2D rb;
     // anim, collider, spriteなど必要になれば
 
 
-    public EntityState(StateMachine stateMachine, string statename)
+    public EntityState(StateMachine stateMachine, string animBoolName)
     {
         this.stateMachine = stateMachine;
-        this.statename = statename;
+        this.animBoolName = animBoolName;
     }
 
     // 入口処理 状態に入ったときにやること

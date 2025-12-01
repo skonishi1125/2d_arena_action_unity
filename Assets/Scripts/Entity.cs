@@ -7,6 +7,7 @@ public abstract class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; } // moveStateがrbを使って速度を弄るため。
     public Collider2D co { get; private set; }
     public SpriteRenderer sr { get; private set; }
+    public Animator anim { get; private set; } // Stateで切り替え対応するために使う。
 
     [Header("Common Movement Detail")]
     private bool facingRight = true;
@@ -24,6 +25,7 @@ public abstract class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         co = GetComponent<Collider2D>();
         sr = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Start()

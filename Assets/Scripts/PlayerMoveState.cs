@@ -1,6 +1,6 @@
 ﻿public class PlayerMoveState : PlayerGroundState
 {
-    public PlayerMoveState(Player player, StateMachine stateMachine, string statename) : base(player, stateMachine, statename)
+    public PlayerMoveState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
 

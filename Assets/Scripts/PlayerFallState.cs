@@ -2,7 +2,7 @@
 
 public class PlayerFallState : PlayerAirState
 {
-    public PlayerFallState(Player player, StateMachine stateMachine, string statename) : base(player, stateMachine, statename)
+    public PlayerFallState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
 

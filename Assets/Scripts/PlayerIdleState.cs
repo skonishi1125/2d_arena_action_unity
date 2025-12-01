@@ -3,7 +3,7 @@
 public class PlayerIdleState : PlayerGroundState
 {
     // 親のEntityStateにコンストラクタが存在するので、同様に定義する
-    public PlayerIdleState(Player player, StateMachine stateMachine, string statename) : base(player, stateMachine, statename)
+    public PlayerIdleState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
 
