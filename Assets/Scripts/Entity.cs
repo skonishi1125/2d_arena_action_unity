@@ -8,6 +8,10 @@ public abstract class Entity : MonoBehaviour
     public Collider2D co { get; private set; }
     public SpriteRenderer sr { get; private set; }
 
+    [Header("Common Movement Detail")]
+    private bool facingRight = true;
+
+
     protected virtual void Awake()
     {
         // Components
@@ -31,6 +35,26 @@ public abstract class Entity : MonoBehaviour
     public void SetVelocity(float xVelocity, float yVelocity)
     {
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
+        HandleFlip(xVelocity);
+    }
+
+    // 右を向いているときに右を向いても反転させず、
+    // 左を向いているときに左を向いても反転させないようにする制御処理
+    private void HandleFlip(float xVelocity)
+    {
+        // →入力 かつ 右を向いていないとき
+        if (xVelocity > 0 && facingRight == false)
+            Flip();
+        // ←入力 かつ 右を向いているとき
+        else if (xVelocity < 0 && facingRight == true)
+            Flip();
+    }
+
+    // 反転自体の処理
+    private void Flip()
+    {
+        transform.Rotate(0, 180, 0);
+        facingRight = !facingRight;
     }
 
 }
