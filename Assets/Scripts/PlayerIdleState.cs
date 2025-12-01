@@ -1,19 +1,30 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerIdleState : PlayerState
 {
-    // e‚ÌEntityState‚ÉƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ª‘¶İ‚·‚é‚Ì‚ÅA“¯—l‚É’è‹`‚·‚é
+    // è¦ªã®EntityStateã«ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ãŒå­˜åœ¨ã™ã‚‹ã®ã§ã€åŒæ§˜ã«å®šç¾©ã™ã‚‹
     public PlayerIdleState(Player player, StateMachine stateMachine, string statename) : base(player, stateMachine, statename)
     {
     }
 
-    public override void Update()
+    public override void Enter()
     {
-        base.Update();
+        base.Enter();
+        player.SetVelocity(0f, rb.linearVelocity.y); // æ¨ªæ»‘ã‚Šé˜²æ­¢
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
 
         if (player.moveInput.x != 0)
         {
             stateMachine.ChangeState(player.moveState);
         }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
     }
 }

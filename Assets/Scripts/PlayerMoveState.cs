@@ -4,19 +4,21 @@
     {
     }
 
-
     // 入力を受け付け、移動できるようにする
-    public override void Update()
+    public override void LogicUpdate()
     {
-        base.Update();
+        base.LogicUpdate();
 
         if (player.moveInput.x == 0)
         {
             stateMachine.ChangeState(player.idleState);
         }
-
-        // todo: rb.linearVelocityでアクセスできるはずだが...
-        player.SetVelocity(player.moveInput.x * player.moveSpeed, player.rb.linearVelocity.y);
-
     }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        player.SetVelocity(player.moveInput.x * player.moveSpeed, rb.linearVelocity.y);
+    }
+
 }

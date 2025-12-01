@@ -23,7 +23,13 @@ public abstract class EntityState
     }
 
     // 状態中にやること
-    public virtual void Update()
+    // 論理演算系のUpdate
+    public virtual void LogicUpdate()
+    {
+    }
+
+    // 物理演算系(移動、ジャンプ)のUpdate()
+    public virtual void PhysicsUpdate()
     {
     }
 

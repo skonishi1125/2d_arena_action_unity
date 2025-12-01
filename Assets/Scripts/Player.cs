@@ -28,14 +28,18 @@ public class Player : MonoBehaviour
         // New Input System
         input = new PlayerInputSet();
 
+        // Components
+        rb = GetComponent<Rigidbody2D>();
+        co = GetComponent<Collider2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
+
         // StateMachine
+        // ※Components取得より手前に書くと、contruct上のrb割当等でnullになるので注意
         stateMachine = new StateMachine();
         idleState = new PlayerIdleState(this, stateMachine, "idle");
         moveState = new PlayerMoveState(this, stateMachine, "move");
 
-        rb = GetComponent<Rigidbody2D>();
-        co = GetComponent<Collider2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
+
     }
 
     private void Start()
@@ -45,7 +49,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        stateMachine.currentState.Update(); // 状態中の処理
+        stateMachine.currentState.LogicUpdate(); // 状態中の処理
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.currentState.PhysicsUpdate();
     }
 
 
