@@ -10,5 +10,6 @@ public abstract class PlayerState : EntityState
     {
         this.player = player;
         rb = player.rb;
+        input = player.input;
     }
 }

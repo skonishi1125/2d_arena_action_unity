@@ -489,7 +489,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.12860449, g: 0.15743537, b: 0.3207547, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 1318066093}
   - component: {fileID: 1318066092}
   - component: {fileID: 1318066091}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,8 +690,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.007488966, y: 0.01670003}
-  m_Size: {x: 0.80529165, y: 1.4734397}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.75, y: 1.5}
   m_Direction: 0
 --- !u!50 &1323484117
 Rigidbody2D:
@@ -708,7 +708,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -732,7 +732,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2732b6ba8efe45245b44ff533ccc5179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  groundCheckDistance: 0.8
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  moveSpeed: 8
+  jumpForce: 12
+  inAirMoveMultiplier: 0.8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

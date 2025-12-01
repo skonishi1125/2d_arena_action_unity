@@ -1,4 +1,4 @@
-﻿public class PlayerMoveState : PlayerState
+﻿public class PlayerMoveState : PlayerGroundState
 {
     public PlayerMoveState(Player player, StateMachine stateMachine, string statename) : base(player, stateMachine, statename)
     {

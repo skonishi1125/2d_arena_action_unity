@@ -11,6 +11,12 @@ public abstract class Entity : MonoBehaviour
     [Header("Common Movement Detail")]
     private bool facingRight = true;
 
+    [Header("Collision Detection")]
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask whatIsGround;
+    public bool groundDetected { get; private set; }
+
+
 
     protected virtual void Awake()
     {
@@ -26,6 +32,7 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
+        HandleCollisionDetection();
     }
     protected virtual void FixedUpdate()
     {
@@ -55,6 +62,24 @@ public abstract class Entity : MonoBehaviour
     {
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
+    }
+
+    // 地面判定チェック
+    private void HandleCollisionDetection()
+    {
+        groundDetected = Physics2D.Raycast(
+            transform.position, Vector2.down, groundCheckDistance, whatIsGround
+        );
+        Debug.Log(groundDetected);
+    }
+
+    // 地面判定チェックのGizmos
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(
+            transform.position,
+            transform.position + new Vector3(0, -groundCheckDistance, groundCheckDistance)
+        );
     }
 
 }

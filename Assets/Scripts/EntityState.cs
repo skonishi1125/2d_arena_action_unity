@@ -23,12 +23,14 @@ public abstract class EntityState
     }
 
     // 状態中にやること
-    // 論理演算系のUpdate
+    // 論理演算系のUpdate。状態遷移、入力受付, anim切替, 条件式評価
+    // フレームの最終決定
     public virtual void LogicUpdate()
     {
     }
 
     // 物理演算系(移動、ジャンプ)のUpdate()
+    // rbに速度加算, addForce, 物理挙動などrg, coを調整
     public virtual void PhysicsUpdate()
     {
     }
