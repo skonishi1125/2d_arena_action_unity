@@ -10,6 +10,9 @@ public class PlayerGroundState : PlayerState
     {
         base.LogicUpdate();
 
+        if (rb.linearVelocity.y < 0 && ! player.groundDetected)
+            stateMachine.ChangeState(player.fallState);
+
         // このStateを継承すれば、地上Stateの子状態のどれでも、
         // /ジャンプが押されたらジャンプに移行できるようになる
         if (input.Player.Jump.WasPerformedThisFrame())

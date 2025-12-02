@@ -11,12 +11,15 @@ public abstract class Entity : MonoBehaviour
     public Animator anim { get; private set; } // Stateで切り替え対応するために使う。
 
     [Header("Common Movement Detail")]
-    private bool facingRight = true;
+    public bool facingRight { get; private set; } = true;
+    public int facingDir { get; private set; } = 1; // 向いている方向 右: 1 左: -1
 
     [Header("Collision Detection")]
     [SerializeField] private float groundCheckDistance;
+    [SerializeField] private float wallCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
     public bool groundDetected { get; private set; }
+    public bool wallDetected { get; private set; }
 
 
 
@@ -61,26 +64,39 @@ public abstract class Entity : MonoBehaviour
     }
 
     // 反転自体の処理
-    private void Flip()
+    // WallSlideで、着地時（Exit)に反転処理を使うのでpublicとした
+    public void Flip()
     {
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
+        facingDir = facingDir * -1;
     }
 
-    // 地面判定チェック
+    // 地面, 壁判定チェック
     private void HandleCollisionDetection()
     {
         groundDetected = Physics2D.Raycast(
             transform.position, Vector2.down, groundCheckDistance, whatIsGround
         );
+
+        wallDetected = Physics2D.Raycast(
+            transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround
+        );
     }
 
-    // 地面判定チェックのGizmos
+    // 各種判定チェックのGizmos
     private void OnDrawGizmos()
     {
+        // 地面
         Gizmos.DrawLine(
             transform.position,
-            transform.position + new Vector3(0, -groundCheckDistance, groundCheckDistance)
+            transform.position + new Vector3(0, -groundCheckDistance)
+        );
+
+        // 壁
+        Gizmos.DrawLine(
+            transform.position,
+            transform.position + new Vector3(wallCheckDistance * facingDir, 0)
         );
     }
 

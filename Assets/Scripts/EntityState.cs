@@ -12,6 +12,9 @@ public abstract class EntityState
     protected Rigidbody2D rb;
     protected Animator anim;
 
+    // ダッシュなど、時間制限のあるStateで使用するタイマー
+    protected float stateTimer;
+
     public EntityState(StateMachine stateMachine, string animBoolName)
     {
         this.stateMachine = stateMachine;
@@ -37,6 +40,7 @@ public abstract class EntityState
     // フレームの最終決定
     public virtual void LogicUpdate()
     {
+        stateTimer -= Time.deltaTime;
     }
 
     // 物理演算系(移動、ジャンプ)のUpdate()

@@ -13,6 +13,8 @@ public class Player : Entity
     public PlayerMoveState moveState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
     public PlayerFallState fallState { get; private set; }
+    public PlayerDashState dashState { get; private set; }
+    public PlayerWallSlideState wallSlideState { get; private set; }
 
 
     [Header("Input Settings")]
@@ -21,6 +23,10 @@ public class Player : Entity
     public float jumpForce = 5f;
     [Range(0,1)] // 空中移動補正
     public float inAirMoveMultiplier = .8f;
+    [Range(0, 1)] // ダッシュ全体時間
+    public float dashDuration = .25f;
+    public float dashSpeed = 20f;
+    public float wallSlideSlowMultiplier = .5f; // 壁張り付き中落下速度
 
 
     protected override void Awake()
@@ -37,6 +43,8 @@ public class Player : Entity
         moveState = new PlayerMoveState(this, stateMachine, "move");
         jumpState = new PlayerJumpState(this, stateMachine, "jumpFall");
         fallState = new PlayerFallState(this, stateMachine, "jumpFall");
+        dashState = new PlayerDashState(this, stateMachine, "dash");
+        wallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
     }
 
     protected override void Start()

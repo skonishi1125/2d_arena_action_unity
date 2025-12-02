@@ -31,5 +31,10 @@ public abstract class PlayerState : EntityState
         base.LogicUpdate();
         // Jump/Fallアニメの切り替えはPlayerだけなので、EntityStateには書かない。
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
+
+        // ダッシュは全ての状況下でできる。
+        if (input.Player.Dash.WasPressedThisFrame())
+            stateMachine.ChangeState(player.dashState);
+
     }
 }
