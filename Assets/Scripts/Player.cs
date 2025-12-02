@@ -15,6 +15,7 @@ public class Player : Entity
     public PlayerFallState fallState { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerWallSlideState wallSlideState { get; private set; }
+    public PlayerWallJumpState wallJumpState { get; private set; }
 
 
     [Header("Input Settings")]
@@ -27,6 +28,7 @@ public class Player : Entity
     public float dashDuration = .25f;
     public float dashSpeed = 20f;
     public float wallSlideSlowMultiplier = .5f; // 壁張り付き中落下速度
+    public Vector2 wallJumpDir; // 壁ジャンプ時の初期ベクトル
 
 
     protected override void Awake()
@@ -45,6 +47,7 @@ public class Player : Entity
         fallState = new PlayerFallState(this, stateMachine, "jumpFall");
         dashState = new PlayerDashState(this, stateMachine, "dash");
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
+        wallJumpState = new PlayerWallJumpState(this, stateMachine, "jumpFall");
     }
 
     protected override void Start()
