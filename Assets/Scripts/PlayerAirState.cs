@@ -18,13 +18,30 @@ public class PlayerAirState : PlayerState
     {
         base.PhysicsUpdate();
 
+        // === 徐々にxを遅くしたいとき(一旦不採用)
+        //float currentX = rb.linearVelocity.x;
+        //float targetX = (player.moveInput.x != 0)
+        //    ? player.moveInput.x * player.moveSpeed * player.inAirMoveMultiplier
+        //    : 0f;
+        //float smoothedX = Mathf.Lerp(currentX, targetX, 0.2f);
+
+        // Playerが左右入力しているときだけ、移動させる
+        //if (player.moveInput.x != 0)
+        //{
+        //    targetX = player.moveInput.x * player.moveSpeed * player.inAirMoveMultiplier;
+        //} else
+        //{
+        //    targetX = 0f;
+        //}
+
         // 空中でも左右入力が入ったら、その方向に移動
-        // jump, fallどちらでも対応できるようにするため、super stateの本classに書く
+        // jump, fallどちらでも対応できるようにするため、SuperStateの本classに書く
         if (player.moveInput.x != 0)
-            player.SetVelocity(
-                player.moveInput.x * player.moveSpeed * player.inAirMoveMultiplier,
-                rb.linearVelocity.y
-            );
+        {
+            float targetX = player.moveInput.x * player.moveSpeed * player.inAirMoveMultiplier;
+            player.SetVelocity(targetX, rb.linearVelocity.y);
+        }
+
 
     }
 
