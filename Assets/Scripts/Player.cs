@@ -22,6 +22,8 @@ public class Player : Entity
     public Vector2 moveInput { get; private set; } // InputSystemのdigital -1,0,1
     public float moveSpeed = 5f; // moveState等が扱うので public
     public float jumpForce = 5f;
+    public int maxJumps = 2; // 多段ジャンプ
+    [HideInInspector] public int jumpCount = 0;
     [Range(0,1)] // 空中移動補正
     public float inAirMoveMultiplier = .8f;
     [Range(0, 1)] // ダッシュ全体時間

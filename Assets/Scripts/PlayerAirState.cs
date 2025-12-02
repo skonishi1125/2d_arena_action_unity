@@ -6,6 +6,14 @@ public class PlayerAirState : PlayerState
     {
     }
 
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
+        if (CanMultiJump())
+            stateMachine.ChangeState(player.jumpState);
+    }
+
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();

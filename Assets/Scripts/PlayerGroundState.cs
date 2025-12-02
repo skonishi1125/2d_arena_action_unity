@@ -6,6 +6,12 @@ public class PlayerGroundState : PlayerState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        player.jumpCount = 0;
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -14,9 +20,11 @@ public class PlayerGroundState : PlayerState
             stateMachine.ChangeState(player.fallState);
 
         // このStateを継承すれば、地上Stateの子状態のどれでも、
-        // /ジャンプが押されたらジャンプに移行できるようになる
-        if (input.Player.Jump.WasPerformedThisFrame())
+        // 条件を満たせばジャンプに移行できるようになる
+        if (CanMultiJump())
             stateMachine.ChangeState(player.jumpState);
+
+
 
     }
 

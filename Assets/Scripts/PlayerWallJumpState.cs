@@ -17,6 +17,9 @@ public class PlayerWallJumpState : PlayerState
     {
         base.LogicUpdate();
 
+        if (CanMultiJump())
+            stateMachine.ChangeState(player.jumpState);
+
         if (rb.linearVelocity.y < 0)
             stateMachine.ChangeState(player.fallState);
 

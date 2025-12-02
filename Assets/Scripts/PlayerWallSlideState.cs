@@ -1,7 +1,15 @@
-﻿public class PlayerWallSlideState : PlayerState
+﻿using UnityEditor.Tilemaps;
+
+public class PlayerWallSlideState : PlayerState
 {
     public PlayerWallSlideState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        player.jumpCount = 1;
     }
 
     public override void LogicUpdate()
