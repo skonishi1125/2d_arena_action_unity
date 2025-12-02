@@ -12,6 +12,10 @@ public class PlayerAirState : PlayerState
 
         if (CanMultiJump())
             stateMachine.ChangeState(player.jumpState);
+
+        if(input.Player.Attack.WasPressedThisFrame())
+            stateMachine.ChangeState(player.airAttackState);
+
     }
 
     public override void PhysicsUpdate()

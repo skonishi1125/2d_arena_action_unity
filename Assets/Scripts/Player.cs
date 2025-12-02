@@ -18,6 +18,7 @@ public class Player : Entity
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerBasicAttackState basicAttackState { get; private set; }
+    public PlayerAirAttackState airAttackState { get; private set; }
 
 
     [Header("Input Settings")]
@@ -42,10 +43,13 @@ public class Player : Entity
     [SerializeField] private float attackInputBufferTime = 0.2f; // 先行入力受付時間（秒）
     // 直近で攻撃ボタンが押された時間
     [HideInInspector] public float lastAttackInputTime = Mathf.NegativeInfinity;
+    [SerializeField] private float airAttackFallSpeed = -1.5f; // 攻撃中にゆっくり落ちる速度（負の値）
+    [SerializeField] private float airAttackVerticalAccel = 10f; // どのくらいの速さでtargetVyに近づけるか
 
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;
-
+    public float AirAttackFallSpeed => airAttackFallSpeed;
+    public float AirAttackVerticalAccel => airAttackVerticalAccel;
 
 
     protected override void Awake()
@@ -66,6 +70,7 @@ public class Player : Entity
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "jumpFall");
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "basicAttack");
+        airAttackState = new PlayerAirAttackState(this, stateMachine, "airAttack");
     }
 
     protected override void Start()
