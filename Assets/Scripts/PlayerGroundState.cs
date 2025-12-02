@@ -24,6 +24,8 @@ public class PlayerGroundState : PlayerState
         if (CanMultiJump())
             stateMachine.ChangeState(player.jumpState);
 
+        if (input.Player.Attack.WasPerformedThisFrame())
+            stateMachine.ChangeState(player.basicAttackState);
 
 
     }

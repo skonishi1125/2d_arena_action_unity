@@ -843,7 +843,7 @@ Transform:
   m_GameObject: {fileID: 1323484114}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 5.58, z: 0}
+  m_LocalPosition: {x: -5.08, y: -2.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -940,6 +940,8 @@ MonoBehaviour:
   dashSpeed: 20
   wallSlideSlowMultiplier: 0.6
   wallJumpDir: {x: 6, y: 12}
+  attackVelocity: {x: 3, y: 1.5}
+  attackVelocityDuration: 0.1
 --- !u!1 &1848579485
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +953,7 @@ GameObject:
   - component: {fileID: 1848579486}
   - component: {fileID: 1848579487}
   - component: {fileID: 1848579488}
+  - component: {fileID: 1848579489}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -1050,6 +1053,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1848579489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848579485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dfb2bdbd933b8842ab825f0f9faadfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2076962954
 GameObject:
   m_ObjectHideFlags: 0

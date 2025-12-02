@@ -15,6 +15,9 @@ public abstract class EntityState
     // ダッシュなど、時間制限のあるStateで使用するタイマー
     protected float stateTimer;
 
+    // アニメーショントリガー 攻撃終わりの判定に使う
+    protected bool triggerCalled;
+
     public EntityState(StateMachine stateMachine, string animBoolName)
     {
         this.stateMachine = stateMachine;
@@ -32,6 +35,8 @@ public abstract class EntityState
         // 
         // これで、敵stateを作るときも、敵stateコンストラクタでenemy.animとしてセットすれば使いまわせる。
         anim.SetBool(animBoolName, true);
+
+        triggerCalled = false; // 状態に入ったとき、falseとする
 
     }
 
@@ -54,5 +59,15 @@ public abstract class EntityState
     {
         anim.SetBool(animBoolName, false);
     }
+
+
+    // アニメ用メソッド
+    // stateのメソッドをPlayerアニメに割り当てることはできないので、
+    // アニメには、Playerに持たせた同等のメソッド CallAnimationTrigger() を割り当てる
+    public void CallAnimationTrigger()
+    {
+        triggerCalled = true;
+    }
+
 
 }

@@ -16,6 +16,7 @@ public class Player : Entity
     public PlayerDashState dashState { get; private set; }
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerWallJumpState wallJumpState { get; private set; }
+    public PlayerBasicAttackState basicAttackState { get; private set; }
 
 
     [Header("Input Settings")]
@@ -31,6 +32,10 @@ public class Player : Entity
     public float dashSpeed = 20f;
     public float wallSlideSlowMultiplier = .5f; // 壁張り付き中落下速度
     public Vector2 wallJumpDir; // 壁ジャンプ時の初期ベクトル
+
+    [Header("Attack details")]
+    public Vector2 attackVelocity;
+    public float attackVelocityDuration = .1f;
 
 
     protected override void Awake()
@@ -50,6 +55,7 @@ public class Player : Entity
         dashState = new PlayerDashState(this, stateMachine, "dash");
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "jumpFall");
+        basicAttackState = new PlayerBasicAttackState(this, stateMachine, "basicAttack");
     }
 
     protected override void Start()
@@ -68,6 +74,13 @@ public class Player : Entity
     {
         base.FixedUpdate();
         stateMachine.currentState.PhysicsUpdate();
+    }
+
+    // 攻撃モーションの終わりに呼び出すトリガー用メソッド
+    // こちらをアニメに割り当てている
+    public void CallAnimationTrigger()
+    {
+        stateMachine.currentState.CallAnimationTrigger();
     }
 
 
