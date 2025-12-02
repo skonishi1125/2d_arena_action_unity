@@ -19,7 +19,7 @@ public class PlayerAirAttackState : PlayerAirState
 
     public override void PhysicsUpdate()
     {
-        // 稼働させず、攻撃中は移動できなくする
+        // 親のPhysicsUpdateは稼働させない（攻撃中の移動受付を止める）
         // base.PhysicsUpdate();
 
         // 攻撃中に着地したら、Idle

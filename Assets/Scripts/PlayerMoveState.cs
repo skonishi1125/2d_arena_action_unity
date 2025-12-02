@@ -9,10 +9,8 @@
     {
         base.LogicUpdate();
 
-        if (player.moveInput.x == 0)
-        {
+        if (player.moveInput.x == 0 || player.wallDetected)
             stateMachine.ChangeState(player.idleState);
-        }
     }
 
     public override void PhysicsUpdate()

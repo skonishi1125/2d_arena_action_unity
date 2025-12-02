@@ -17,6 +17,10 @@ public class PlayerIdleState : PlayerGroundState
     {
         base.LogicUpdate();
 
+        // 向いている方向に進行しようとして、壁があるときはstate移行しない
+        if (player.moveInput.x == player.facingDir && player.wallDetected)
+            return;
+
         if (player.moveInput.x != 0)
             stateMachine.ChangeState(player.moveState);
     }
