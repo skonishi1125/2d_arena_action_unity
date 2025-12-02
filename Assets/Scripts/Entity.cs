@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// 敵味方共通で使用する仕組みをまとめる
 public abstract class Entity : MonoBehaviour
 {
 
@@ -72,7 +73,6 @@ public abstract class Entity : MonoBehaviour
         groundDetected = Physics2D.Raycast(
             transform.position, Vector2.down, groundCheckDistance, whatIsGround
         );
-        Debug.Log(groundDetected);
     }
 
     // 地面判定チェックのGizmos

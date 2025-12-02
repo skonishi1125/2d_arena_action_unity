@@ -11,6 +11,7 @@ public class PlayerAirState : PlayerState
         base.PhysicsUpdate();
 
         // 空中でも左右入力が入ったら、その方向に移動
+        // jump, fallどちらでも対応できるようにするため、super stateの本classに書く
         if (player.moveInput.x != 0)
             player.SetVelocity(
                 player.moveInput.x * player.moveSpeed * player.inAirMoveMultiplier,

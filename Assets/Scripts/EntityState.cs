@@ -10,8 +10,7 @@ public abstract class EntityState
 
     // 敵味方共通のコンポーネントなど
     protected Rigidbody2D rb;
-    // anim, collider, spriteなど必要になれば
-
+    protected Animator anim;
 
     public EntityState(StateMachine stateMachine, string animBoolName)
     {
@@ -22,6 +21,15 @@ public abstract class EntityState
     // 入口処理 状態に入ったときにやること
     public virtual void Enter()
     {
+        // anim取得の流れ Playerの例
+        // * Entity.csでanimをGetComponentInChildrenで取得。
+        // * stateを作るとき、new PlayerJumpState(this, stateMachine, "jumpFall");という感じで渡す。
+        // * PlayerState側のコンストラクタが anim = player.anim; としてセット。
+        // * 本メソッドが、入口処理でjumpFallというanimパラメータにtrueをセットしている。
+        // 
+        // これで、敵stateを作るときも、敵stateコンストラクタでenemy.animとしてセットすれば使いまわせる。
+        anim.SetBool(animBoolName, true);
+
     }
 
     // 状態中にやること
@@ -40,6 +48,7 @@ public abstract class EntityState
     // 出口処理 状態が終わったとき、次のStateを呼ぶときにやること
     public virtual void Exit()
     {
+        anim.SetBool(animBoolName, false);
     }
 
 }

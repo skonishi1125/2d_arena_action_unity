@@ -12,24 +12,24 @@ public abstract class PlayerState : EntityState
     {
         this.player = player;
         rb = player.rb;
+        anim = player.anim;
         input = player.input;
     }
 
     public override void Enter()
     {
         base.Enter();
-        player.anim.SetBool(animBoolName, true);
     }
 
     public override void Exit()
     {
         base.Exit();
-        player.anim.SetBool(animBoolName, false);
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        player.anim.SetFloat("yVelocity", rb.linearVelocity.y);
+        // Jump/Fallアニメの切り替えはPlayerだけなので、EntityStateには書かない。
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 }
