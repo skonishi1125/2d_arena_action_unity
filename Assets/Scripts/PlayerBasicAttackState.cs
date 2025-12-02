@@ -10,6 +10,9 @@ public class PlayerBasicAttackState : PlayerState
     private int comboIndex = 1; // 1のとき、basicAttack1が発生する
     private int comboLimit = 3; // 最大3連コンボ
     private float lastTimeAttacked; // 最後に攻撃した時間の保持
+    //private bool comboAttackQueued; // AttackState中に攻撃ボタンが連打されたとき、trueとなる
+    // lastTimeAttackedで管理することにしたので使わなくなったが、実装が参考になるので残しておく
+    private int attackDir; // 攻撃方向
 
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -20,7 +23,11 @@ public class PlayerBasicAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        //comboAttackQueued = false;
         ResetComboIndexIfNeeded();
+
+        // 左右入力を受付け、攻撃方向を切り替えられるようにする
+        attackDir = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDir;
 
         anim.SetInteger("basicAttackIndex", comboIndex);
         ApplyAttackVelocity();
@@ -32,12 +39,19 @@ public class PlayerBasicAttackState : PlayerState
     {
         base.LogicUpdate();
 
+
+        // 攻撃中に攻撃ボタンが押されたかどうかの判定
+        if (input.Player.Attack.WasPressedThisFrame())
+            player.lastAttackInputTime = Time.time;
+        //comboAttackQueued = true;
+
+        // triggerCalled:
         // 攻撃モーションの終わりにアニメーショントリガーとして以下を挟む。
         // EntityState.CallAnimationTrigger()
         // trueとなった場合、攻撃stateから抜け出し、idleに戻る。
         // idleに戻ったとき(Enter時)にはfalseとなり,再びこの値が使えるようになる。
         if (triggerCalled)
-            stateMachine.ChangeState(player.idleState);
+            HandleAttackStateExit();
     }
 
     public override void PhysicsUpdate()
@@ -68,7 +82,7 @@ public class PlayerBasicAttackState : PlayerState
     private void ApplyAttackVelocity()
     {
         attackVelocityTimer = player.attackVelocityDuration;
-        player.SetVelocity(player.attackVelocities[comboIndex - 1].x * player.facingDir, player.attackVelocities[comboIndex - 1].y);
+        player.SetVelocity(player.attackVelocities[comboIndex - 1].x * attackDir, player.attackVelocities[comboIndex - 1].y);
     }
 
     // 3回コンボが終わった後、indexが4などの値になるのを防ぐ
@@ -81,6 +95,29 @@ public class PlayerBasicAttackState : PlayerState
 
         if (comboIndex > comboLimit)
             comboIndex = FirstComboIndex;
+    }
+
+    // AttackStateから抜け出すときに考慮することをまとめる
+    // * 攻撃が連打され、先行入力時間内
+    //   -> AttackStateにもう一度遷移する。その時、Coroutineで 1F 待機して遷移する。
+    // * 何も入力がない場合
+    //   -> IdleStateへ。
+    private void HandleAttackStateExit()
+    {
+        bool buffered =
+            Time.time - player.lastAttackInputTime <= player.AttackInputBufferTime;
+
+        // 攻撃ボタンが先行入力されていたら、続けて攻撃する
+        // まだコンボ回数に余裕があり、先行入力されていたら次段へ
+        if (buffered && comboIndex < comboLimit)
+        {
+            anim.SetBool(animBoolName, false); // 保険 やりたいのは、animBoolNameをfalseから、1F後にtrueにすること
+            player.EnterAttackStateWithDelay();
+        }
+        else
+        {
+            stateMachine.ChangeState(player.idleState);
+        }
     }
 
 }

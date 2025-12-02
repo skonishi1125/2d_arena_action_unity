@@ -11,7 +11,7 @@
     {
         base.Enter();
 
-        dashDir = player.facingDir;
+        dashDir = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDir;
         stateTimer = player.dashDuration;
 
         originalGravityScale = rb.gravityScale; // 既存のrbを保存しておき、0にする
@@ -26,13 +26,9 @@
         if (stateTimer < 0)
         {
             if (player.groundDetected)
-            {
                 stateMachine.ChangeState(player.idleState);
-            }
             else
-            {
                 stateMachine.ChangeState(player.fallState);
-            }
 
         }
     }
@@ -57,13 +53,9 @@
         if (player.wallDetected)
         {
             if (player.groundDetected)
-            {
                 stateMachine.ChangeState(player.idleState);
-            }
             else
-            {
                 stateMachine.ChangeState(player.wallSlideState);
-            }
         }
     }
 

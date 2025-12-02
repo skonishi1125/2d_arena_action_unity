@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : Entity
 {
     // New Input System
-    public PlayerInputSet input {  get; private set; }
+    public PlayerInputSet input { get; private set; }
 
     // StateMachine
     // Playerの状態を別のコードでも見ることになるので、publicとしておくとよい
@@ -25,7 +26,7 @@ public class Player : Entity
     public float jumpForce = 5f;
     public int maxJumps = 2; // 多段ジャンプ
     [HideInInspector] public int jumpCount = 0;
-    [Range(0,1)] // 空中移動補正
+    [Range(0, 1)] // 空中移動補正
     public float inAirMoveMultiplier = .8f;
     [Range(0, 1)] // ダッシュ全体時間
     public float dashDuration = .25f;
@@ -37,6 +38,14 @@ public class Player : Entity
     public Vector2[] attackVelocities; // 攻撃時の前方向の加速度 技それぞれに持つ。
     public float attackVelocityDuration = .1f;
     public float comboResetTime = .5f; // 攻撃時、この時間だけ何もしなければcomboIndexが1に戻る。
+    private Coroutine queuedAttackCo;
+    [SerializeField] private float attackInputBufferTime = 0.2f; // 先行入力受付時間（秒）
+    // 直近で攻撃ボタンが押された時間
+    [HideInInspector] public float lastAttackInputTime = Mathf.NegativeInfinity;
+
+    // 公開用変数等
+    public float AttackInputBufferTime => attackInputBufferTime;
+
 
 
     protected override void Awake()
@@ -82,6 +91,24 @@ public class Player : Entity
     public void CallAnimationTrigger()
     {
         stateMachine.currentState.CallAnimationTrigger();
+    }
+
+    public void EnterAttackStateWithDelay()
+    {
+        if(queuedAttackCo != null)
+            StopCoroutine(queuedAttackCo);
+
+        queuedAttackCo = StartCoroutine(EnterAttackStateWithDelayCo());
+    }
+
+    // 先行入力のAttackState -> AttackStateへの切り替えの時、
+    // フレーム単位で待機しないとエラーが発生する
+    // そのため、CoroutineとしてAttackStateへの切り替え処理を作成する
+    // CoroutineはMonobehaviourが必要なので、このクラスで実装。
+    private IEnumerator EnterAttackStateWithDelayCo()
+    {
+        yield return new WaitForEndOfFrame();
+        stateMachine.ChangeState(basicAttackState);
     }
 
 

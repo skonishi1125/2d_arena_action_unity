@@ -946,6 +946,8 @@ MonoBehaviour:
   - {x: 9, y: 5}
   attackVelocityDuration: 0.1
   comboResetTime: 0.2
+  attackInputBufferTime: 0.1
+  lastAttackInputTime: -Infinity
 --- !u!1 &1848579485
 GameObject:
   m_ObjectHideFlags: 0
