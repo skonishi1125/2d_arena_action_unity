@@ -34,8 +34,9 @@ public class Player : Entity
     public Vector2 wallJumpDir; // 壁ジャンプ時の初期ベクトル
 
     [Header("Attack details")]
-    public Vector2 attackVelocity;
+    public Vector2[] attackVelocities; // 攻撃時の前方向の加速度 技それぞれに持つ。
     public float attackVelocityDuration = .1f;
+    public float comboResetTime = .5f; // 攻撃時、この時間だけ何もしなければcomboIndexが1に戻る。
 
 
     protected override void Awake()

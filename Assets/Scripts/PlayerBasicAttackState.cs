@@ -2,17 +2,31 @@
 
 public class PlayerBasicAttackState : PlayerState
 {
+    // アニメータなど、最初のcomboIndexの値
+    private const int FirstComboIndex = 1;
+
     // 攻撃中、前に進める猶予時間
     private float attackVelocityTimer;
+    private int comboIndex = 1; // 1のとき、basicAttack1が発生する
+    private int comboLimit = 3; // 最大3連コンボ
+    private float lastTimeAttacked; // 最後に攻撃した時間の保持
+
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
+        if (comboLimit != player.attackVelocities.Length)
+            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とplayer.attackVelocitiesの設定値が一致していません。");
     }
 
     public override void Enter()
     {
         base.Enter();
-        GenerateAttackVelocity();
+        ResetComboIndexIfNeeded();
+
+        anim.SetInteger("basicAttackIndex", comboIndex);
+        ApplyAttackVelocity();
     }
+
+
 
     public override void LogicUpdate()
     {
@@ -32,6 +46,13 @@ public class PlayerBasicAttackState : PlayerState
         HandleAttackVelocity();
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        comboIndex++;
+        lastTimeAttacked = Time.time;
+    }
+
     // 攻撃中の動きの制御
     private void HandleAttackVelocity()
     {
@@ -44,10 +65,22 @@ public class PlayerBasicAttackState : PlayerState
     }
 
     // 攻撃中、向いているほうにx加速度を加える
-    private void GenerateAttackVelocity()
+    private void ApplyAttackVelocity()
     {
         attackVelocityTimer = player.attackVelocityDuration;
-        player.SetVelocity(player.attackVelocity.x * player.facingDir, player.attackVelocity.y);
+        player.SetVelocity(player.attackVelocities[comboIndex - 1].x * player.facingDir, player.attackVelocities[comboIndex - 1].y);
+    }
+
+    // 3回コンボが終わった後、indexが4などの値になるのを防ぐ
+    private void ResetComboIndexIfNeeded()
+    {
+        // コンボ保持時間が切れた時、indexを1に戻す
+        // 歩き回ってから2段目の攻撃が出ることを防ぐ。
+        if (Time.time > lastTimeAttacked + player.comboResetTime)
+            comboIndex = FirstComboIndex;
+
+        if (comboIndex > comboLimit)
+            comboIndex = FirstComboIndex;
     }
 
 }

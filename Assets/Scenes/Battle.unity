@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &80544777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -940,8 +940,12 @@ MonoBehaviour:
   dashSpeed: 20
   wallSlideSlowMultiplier: 0.6
   wallJumpDir: {x: 6, y: 12}
-  attackVelocity: {x: 3, y: 1.5}
+  attackVelocities:
+  - {x: 3, y: 1.5}
+  - {x: 6, y: 1.5}
+  - {x: 9, y: 5}
   attackVelocityDuration: 0.1
+  comboResetTime: 0.2
 --- !u!1 &1848579485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,7 +1086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &2076962955
 BoxCollider2D:
   m_ObjectHideFlags: 0
