@@ -1,0 +1,69 @@
+﻿using UnityEngine;
+
+public class Enemy : Entity
+{
+    public EnemyIdleState idleState; // Playerと違い、さらに子要素で使うためpublic
+    public EnemyMoveState moveState;
+    public EnemyBattleState battleState;
+    public EnemyAttackState attackState;
+
+    [Header("Battle Detail")]
+    public float battleMovespeed = 3f; // battleState時のmove速度
+    public float attackDistance = 2f; // 敵がAttack移行するために必要な距離
+
+    // 移動速度などPlayer側と共有することもできるが、見やすくするため分割する
+    [Header("Movement Details")]
+    //待機時間 stateTimerと照らし合わせて使う
+    // Player側のDashと同じ感じで、一定時間経過したらstateを移動するために使う。
+    public float idleTime = 2f;
+    public float moveSpeed = 2f;
+    [Range(0,2)]
+    public float moveAnimSpeedMultiplier = 1; // アニメーションスピード
+
+
+    [Header("Player detection")]
+    [SerializeField] private LayerMask whatIsPlayer; // 感知距離のobjectがPlayerかどうか
+    [SerializeField] private Transform playerCheck; // 感知用Raycastの始点
+    [SerializeField] private float playerCheckDistance = 10f; // 感知距離
+
+
+    // GroundStateで使うので、publicとする
+    // 感知したPlayer | Groundの各種情報を返す。
+    public RaycastHit2D PlayerDetection()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(
+            playerCheck.position, Vector2.right * facingDir, playerCheckDistance, whatIsPlayer | whatIsGround
+        );
+
+        // 検知なし & 検知したものがPlayerでない場合は、
+        // 何も検知しなかった時のRaycastHit2Dクラスの形を返す
+        if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player")) {
+            return default;
+        }
+
+
+        return hit;
+
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        // GroundState -> Battle へと移行するための距離
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(
+            playerCheck.position,
+            new Vector3(playerCheck.position.x + (facingDir * playerCheckDistance), playerCheck.position.y)
+        );
+
+        // Battle -> Attack へと移行するための距離
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(
+            playerCheck.position,
+            new Vector3(playerCheck.position.x + (facingDir * attackDistance), playerCheck.position.y)
+        );
+
+    }
+
+}

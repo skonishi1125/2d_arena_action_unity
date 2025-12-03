@@ -9,7 +9,7 @@ public class Player : Entity
 
     // StateMachine
     // Playerの状態を別のコードでも見ることになるので、publicとしておくとよい
-    public StateMachine stateMachine { get; private set; }
+    //public StateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; } // moveからidleに遷移するときなどに、参照するのでpublic
     public PlayerMoveState moveState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
@@ -61,7 +61,7 @@ public class Player : Entity
 
         // StateMachine
         // ※Components取得より手前に書くと、contruct上のrb割当等でnullになるので注意
-        stateMachine = new StateMachine();
+        //stateMachine = new StateMachine(); Entityに書いているので不要
         idleState = new PlayerIdleState(this, stateMachine, "idle");
         moveState = new PlayerMoveState(this, stateMachine, "move");
         jumpState = new PlayerJumpState(this, stateMachine, "jumpFall");
@@ -79,24 +79,6 @@ public class Player : Entity
         stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        stateMachine.currentState.LogicUpdate(); // 状態中の処理
-    }
-
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        stateMachine.currentState.PhysicsUpdate();
-    }
-
-    // 攻撃モーションの終わりに呼び出すトリガー用メソッド
-    // こちらをアニメに割り当てている
-    public void CallAnimationTrigger()
-    {
-        stateMachine.currentState.CallAnimationTrigger();
-    }
 
     public void EnterAttackStateWithDelay()
     {

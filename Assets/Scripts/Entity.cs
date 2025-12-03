@@ -3,6 +3,7 @@
 // 敵味方共通で使用する仕組みをまとめる
 public abstract class Entity : MonoBehaviour
 {
+    protected StateMachine stateMachine;
 
     [Header("Components")]
     public Rigidbody2D rb { get; private set; } // moveStateがrbを使って速度を弄るため。
@@ -17,7 +18,10 @@ public abstract class Entity : MonoBehaviour
     [Header("Collision Detection")]
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float wallCheckDistance;
-    [SerializeField] private LayerMask whatIsGround;
+    // EnemyでPlayer検知時、壁ごしのチェックに使うのでprotectedとする
+    [SerializeField] protected LayerMask whatIsGround;
+    [SerializeField] private Transform groundCheck;
+
     public bool groundDetected { get; private set; }
     public bool wallDetected { get; private set; }
 
@@ -25,6 +29,8 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
+        stateMachine = new StateMachine();
+
         // Components
         rb = GetComponent<Rigidbody2D>();
         co = GetComponent<Collider2D>();
@@ -39,9 +45,12 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Update()
     {
         HandleCollisionDetection();
+        stateMachine.currentState.LogicUpdate();
+
     }
     protected virtual void FixedUpdate()
     {
+        stateMachine.currentState.PhysicsUpdate();
     }
 
     // Player, EnemyをStateから操作するのでpublic
@@ -67,7 +76,6 @@ public abstract class Entity : MonoBehaviour
     // WallSlideで、着地時（Exit)に反転処理を使うのでpublicとした
     public void Flip()
     {
-        Debug.Log(rb.linearVelocity.x);
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
         facingDir = facingDir * -1;
@@ -77,7 +85,7 @@ public abstract class Entity : MonoBehaviour
     private void HandleCollisionDetection()
     {
         groundDetected = Physics2D.Raycast(
-            transform.position, Vector2.down, groundCheckDistance, whatIsGround
+            groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround
         );
 
         wallDetected = Physics2D.Raycast(
@@ -85,13 +93,21 @@ public abstract class Entity : MonoBehaviour
         );
     }
 
+    // 攻撃モーションの終わりに呼び出すトリガー用メソッド
+    // こちらをアニメに割り当てている
+    public void CallAnimationTrigger()
+    {
+        stateMachine.currentState.CallAnimationTrigger();
+    }
+
+
     // 各種判定チェックのGizmos
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         // 地面
         Gizmos.DrawLine(
-            transform.position,
-            transform.position + new Vector3(0, -groundCheckDistance)
+            groundCheck.position,
+            groundCheck.position + new Vector3(0, -groundCheckDistance)
         );
 
         // 壁
