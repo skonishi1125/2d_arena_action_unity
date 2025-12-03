@@ -67,6 +67,7 @@ public abstract class Entity : MonoBehaviour
     // WallSlideで、着地時（Exit)に反転処理を使うのでpublicとした
     public void Flip()
     {
+        Debug.Log(rb.linearVelocity.x);
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
         facingDir = facingDir * -1;
