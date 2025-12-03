@@ -4,12 +4,12 @@ public class EntityAnimationTrigger : MonoBehaviour
 {
     private Entity entity;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         entity = GetComponentInParent<Entity>();
     }
 
-    private void CurrentStateTrigger()
+    protected virtual void CurrentStateTrigger()
     {
         entity.CallAnimationTrigger();
     }
