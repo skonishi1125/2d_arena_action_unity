@@ -7455,8 +7455,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 1381348507}
-  battleMovespeed: 3
-  attackDistance: 2
+  battleMoveSpeed: 3
+  attackDistance: 1
   idleTime: 2
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1.36

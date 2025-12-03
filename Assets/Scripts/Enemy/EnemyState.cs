@@ -22,6 +22,11 @@ public class EnemyState : EntityState
         // 速度が変更できる設定のanimatonは、数値に応じて早くなる
         anim.SetFloat("moveAnimSpeedMultiplier", enemy.moveAnimSpeedMultiplier);
         anim.SetFloat("xVelocity", rb.linearVelocity.x);
+
+        // 敵のBattleState時のアニメの速さを、battleMoveSpeedに即した値にする
+        float battleAnimSpeedMultiplier = enemy.battleMoveSpeed / enemy.moveSpeed;
+        anim.SetFloat("battleAnimSpeedMultiplier", battleAnimSpeedMultiplier);
+
     }
 
 

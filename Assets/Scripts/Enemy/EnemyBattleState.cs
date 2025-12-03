@@ -31,7 +31,7 @@ public class EnemyBattleState : EnemyState
         base.PhysicsUpdate();
         if (!WithinAttackRange())
         {
-            enemy.SetVelocity(enemy.battleMovespeed * DirectionToPlayer(), rb.linearVelocity.y);
+            enemy.SetVelocity(enemy.battleMoveSpeed * DirectionToPlayer(), rb.linearVelocity.y);
         }
     }
 

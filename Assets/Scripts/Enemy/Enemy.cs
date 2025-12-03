@@ -8,7 +8,7 @@ public class Enemy : Entity
     public EnemyAttackState attackState;
 
     [Header("Battle Detail")]
-    public float battleMovespeed = 3f; // battleState時のmove速度
+    public float battleMoveSpeed = 3f; // battleState時のmove速度
     public float attackDistance = 2f; // 敵がAttack移行するために必要な距離
 
     // 移動速度などPlayer側と共有することもできるが、見やすくするため分割する
