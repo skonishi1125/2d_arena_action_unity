@@ -82,7 +82,8 @@ public class PlayerBasicAttackState : PlayerState
     private void ApplyAttackVelocity()
     {
         attackVelocityTimer = player.attackVelocityDuration;
-        player.SetVelocity(player.attackVelocities[comboIndex - 1].x * attackDir, player.attackVelocities[comboIndex - 1].y);
+        if (player.moveInput.x != 0)
+            player.SetVelocity(player.attackVelocities[comboIndex - 1].x * attackDir, player.attackVelocities[comboIndex - 1].y);
     }
 
     // 3回コンボが終わった後、indexが4などの値になるのを防ぐ
