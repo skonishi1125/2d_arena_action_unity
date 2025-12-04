@@ -26,6 +26,22 @@ public class Enemy : Entity
     [SerializeField] private Transform playerCheck; // 感知用Raycastの始点
     [SerializeField] private float playerCheckDistance = 10f; // 感知距離
 
+    // 攻撃されたときのplayer transform情報
+    public Transform player {  get; private set; }
+
+    // Playerから殴られたときなど、BattleStateに遷移させる為のメソッド
+    public void TryEnterBattleState(Transform player)
+    {
+        // 既にbattlestate, attackstateの場合はスキップ
+        if (stateMachine.currentState == battleState)
+            return;
+
+        if (stateMachine.currentState == attackState)
+            return;
+
+        this.player = player;
+        stateMachine.ChangeState(battleState);
+    }
 
     // GroundStateで使うので、publicとする
     // 感知したPlayer | Groundの各種情報を返す。
@@ -41,9 +57,19 @@ public class Enemy : Entity
             return default;
         }
 
-
         return hit;
 
+    }
+
+    // playerのtransform情報を返す
+    // 後ろから殴られた場合などは、TryEnterBattleState()でplayerを格納しているのでそのまま返す。
+    // 感知から発見した場合は、感知対象のPlayerのtransform情報を返す。
+    public Transform GetPlayerReference()
+    {
+        if (player == null)
+            player = PlayerDetection().transform;
+
+        return player;
     }
 
     protected override void OnDrawGizmos()

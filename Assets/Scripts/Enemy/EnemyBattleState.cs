@@ -11,8 +11,9 @@ public class EnemyBattleState : EnemyState
     {
         base.Enter();
 
-        if (player == null)
-            player = enemy.PlayerDetection().transform; // 感知したRaycastのtransform
+        // 感知から状態に入ったケース, 後ろからplayerに殴られたケースなどを考慮
+        player ??= enemy.GetPlayerReference(); // if(player == null) player = ...と同じ
+
     }
 
     public override void LogicUpdate()

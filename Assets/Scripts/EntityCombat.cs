@@ -2,7 +2,7 @@
 
 public class EntityCombat : MonoBehaviour
 {
-
+    public float damage = 10;
 
     // 攻撃モーション時のトリガー検知に関する情報
     [Header("Target detection")]
@@ -14,7 +14,8 @@ public class EntityCombat : MonoBehaviour
     {
         foreach (Collider2D targetCollider in GetDetectedColliders())
         {
-            Debug.Log(targetCollider.name);
+            EntityHealth targetHealth = targetCollider.GetComponent<EntityHealth>();
+            targetHealth?.TakeDamage(damage, transform); // ?. : null条件演算子
         }
     }
 
