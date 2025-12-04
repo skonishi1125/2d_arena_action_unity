@@ -2,6 +2,7 @@
 
 public class EntityCombat : MonoBehaviour
 {
+    private EntityVFX entityVfx;
     public float damage = 10;
 
     // 攻撃モーション時のトリガー検知に関する情報
@@ -10,13 +11,23 @@ public class EntityCombat : MonoBehaviour
     [SerializeField] private float targetCheckRadius;
     [SerializeField] private LayerMask whatIsTarget;
 
+    private void Awake()
+    {
+        entityVfx = GetComponent<EntityVFX>();
+    }
+
     public void PerformAttack()
     {
         foreach (Collider2D targetCollider in GetDetectedColliders())
         {
             IDamagable damagable = targetCollider.GetComponent<IDamagable>();
-            damagable?.TakeDamage(damage, transform);
+
+            // colliderの配列からIDamagebleが見つからなければ、次のforeach対象に移る
+            if (damagable == null)
+                continue;
             
+            damagable?.TakeDamage(damage, transform);
+            entityVfx.CreateOnHitVfx(targetCollider.transform);
 
             //EntityHealth targetHealth = targetCollider.GetComponent<EntityHealth>();
             //targetHealth?.TakeDamage(damage, transform); // ?. : null条件演算子

@@ -12,10 +12,20 @@ public class EntityVFX : MonoBehaviour
     private Material originalMaterial;
     private Coroutine onDamageVfxCo;
 
+    [Header("Hit VFX")]
+    [SerializeField] private GameObject hitVfx; // 斬撃Prefab
+    [SerializeField] private Color hitVfxColor = Color.white; // vfxの割当カラー
+
     private void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         originalMaterial = sr.material;
+    }
+
+    public void CreateOnHitVfx(Transform target)
+    {
+        GameObject vfx = Instantiate(hitVfx, target.position, Quaternion.identity);
+        vfx.GetComponentInChildren<SpriteRenderer>().color = hitVfxColor;
     }
 
     // 被弾時走らせて、演出時間の間animatonのspriteを白くして、元に戻す。
