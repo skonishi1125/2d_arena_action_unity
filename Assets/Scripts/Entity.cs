@@ -131,9 +131,14 @@ public abstract class Entity : MonoBehaviour
         stateMachine.currentState.CallAnimationTrigger();
     }
 
+    public virtual void Death()
+    {
 
-    // 各種判定チェックのGizmos
-    protected virtual void OnDrawGizmos()
+    }
+
+
+   // 各種判定チェックのGizmos
+   protected virtual void OnDrawGizmos()
     {
         // 地面
         Gizmos.DrawLine(

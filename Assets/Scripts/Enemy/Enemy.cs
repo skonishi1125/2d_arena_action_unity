@@ -6,6 +6,7 @@ public class Enemy : Entity
     public EnemyMoveState moveState;
     public EnemyBattleState battleState;
     public EnemyAttackState attackState;
+    public EnemyDeadState deadState;
 
     [Header("Battle Detail")]
     public float battleMoveSpeed = 3f; // battleState時のmove速度
@@ -70,6 +71,14 @@ public class Enemy : Entity
             player = PlayerDetection().transform;
 
         return player;
+    }
+
+    // Health側で死亡したとき、呼び出してdeadstateへ遷移できるようにする
+    public override void Death()
+    {
+        base.Death();
+
+        stateMachine.ChangeState(deadState);
     }
 
     protected override void OnDrawGizmos()

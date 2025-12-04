@@ -13,6 +13,8 @@ public class DemonHound : Enemy
         moveState = new EnemyMoveState(this, stateMachine, "move");
         battleState = new EnemyBattleState(this, stateMachine, "battle");
         attackState = new EnemyAttackState(this, stateMachine, "attack");
+        // deadに入る時は、dead前のアニメーションを使う
+        deadState = new EnemyDeadState(this, stateMachine, "NONE");
 
     }
 

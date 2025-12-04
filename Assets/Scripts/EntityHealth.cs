@@ -53,7 +53,7 @@ public class EntityHealth : MonoBehaviour
     protected void Die()
     {
         isDead = true;
-        Debug.Log("die");
+        entity.Death();
     }
 
     private Vector2 CalculateKnockback(Transform attacker, float damage)
