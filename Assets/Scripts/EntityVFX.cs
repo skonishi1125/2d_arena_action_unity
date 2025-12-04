@@ -24,8 +24,6 @@ public class EntityVFX : MonoBehaviour
         if (onDamageVfxCo != null)
             StopCoroutine(onDamageVfxCo);
 
-        Debug.Log("co!");
-
         onDamageVfxCo = StartCoroutine(OnDamageVfxCo());
     }
 

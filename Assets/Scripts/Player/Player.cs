@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,7 @@ public class Player : Entity
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerBasicAttackState basicAttackState { get; private set; }
     public PlayerAirAttackState airAttackState { get; private set; }
+    public PlayerDeadState deadState { get; private set; }
 
 
     [Header("Input Settings")]
@@ -51,6 +53,9 @@ public class Player : Entity
     public float AirAttackFallSpeed => airAttackFallSpeed;
     public float AirAttackVerticalAccel => airAttackVerticalAccel;
 
+    // Action Event
+    public static event Action OnPlayerDeath;
+
 
     protected override void Awake()
     {
@@ -71,6 +76,7 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "jumpFall");
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "basicAttack");
         airAttackState = new PlayerAirAttackState(this, stateMachine, "airAttack");
+        deadState = new PlayerDeadState(this, stateMachine, "dead");
     }
 
     protected override void Start()
@@ -96,6 +102,16 @@ public class Player : Entity
     {
         yield return new WaitForEndOfFrame();
         stateMachine.ChangeState(basicAttackState);
+    }
+
+    public override void Death()
+    {
+        base.Death();
+
+        OnPlayerDeath?.Invoke();
+        Time.timeScale = 0.5f; // TODO: GameManagerとかで管理して、ちょっと経ったら戻すとよさそう
+        CameraManager.Instance.DeathShake();
+        stateMachine.ChangeState(deadState);
     }
 
 

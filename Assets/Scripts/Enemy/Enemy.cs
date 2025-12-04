@@ -30,6 +30,17 @@ public class Enemy : Entity
     // 攻撃されたときのplayer transform情報
     public Transform player {  get; private set; }
 
+    private void OnEnable()
+    {
+        Player.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
+
     // Playerから殴られたときなど、BattleStateに遷移させる為のメソッド
     public void TryEnterBattleState(Transform player)
     {
@@ -43,6 +54,23 @@ public class Enemy : Entity
         this.player = player;
         stateMachine.ChangeState(battleState);
     }
+
+    // Health側で死亡したとき、呼び出してdeadstateへ遷移できるようにする
+    public override void Death()
+    {
+        base.Death();
+
+        stateMachine.ChangeState(deadState);
+    }
+
+    // Player側の死亡時のActionEventにsubscribeしているので、
+    // Playerが倒れた時、BattleState / AttackStateなどからidleStateに戻る。
+    private void HandlePlayerDeath()
+    {
+        stateMachine.ChangeState(idleState);
+    }
+
+
 
     // GroundStateで使うので、publicとする
     // 感知したPlayer | Groundの各種情報を返す。
@@ -71,14 +99,6 @@ public class Enemy : Entity
             player = PlayerDetection().transform;
 
         return player;
-    }
-
-    // Health側で死亡したとき、呼び出してdeadstateへ遷移できるようにする
-    public override void Death()
-    {
-        base.Death();
-
-        stateMachine.ChangeState(deadState);
     }
 
     protected override void OnDrawGizmos()
