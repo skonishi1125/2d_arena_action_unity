@@ -82,6 +82,7 @@ public class PlayerBasicAttackState : PlayerState
     private void ApplyAttackVelocity()
     {
         attackVelocityTimer = player.attackVelocityDuration;
+        // プレイヤーが左右入力していたら、攻撃に横方向の加速度を加える
         if (player.moveInput.x != 0)
             player.SetVelocity(player.attackVelocities[comboIndex - 1].x * attackDir, player.attackVelocities[comboIndex - 1].y);
     }

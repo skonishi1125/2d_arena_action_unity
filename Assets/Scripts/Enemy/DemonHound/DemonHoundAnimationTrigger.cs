@@ -7,18 +7,15 @@ public class DemonHoundAnimationTrigger : EntityAnimationTrigger
 
     protected override void Awake()
     {
+        base.Awake();
         demonHound = GetComponentInParent<DemonHound>();
     }
 
-    protected override void CurrentStateTrigger()
-    {
-        demonHound.CallAnimationTrigger();
-    }
-
-    // 突進 demonHound自体の速度を弄っているので責務に懸念がああるが、
+    // 突進 demonHound自体の速度を弄っているので責務に懸念があるが、
     // 理解しやすい設計なので、今回はこのまま進める
-    private void AttackVerocityTringger()
+    protected override void AttackTrigger()
     {
+        base.AttackTrigger();
         demonHound.SetVelocity(demonHound.chargeAttackXVelocity * demonHound.facingDir, 0f);
     }
 }
