@@ -7342,6 +7342,7 @@ GameObject:
   - component: {fileID: 474448490}
   - component: {fileID: 474448493}
   - component: {fileID: 474448494}
+  - component: {fileID: 474448495}
   m_Layer: 8
   m_Name: DemonHound
   m_TagString: Untagged
@@ -7501,6 +7502,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   isDead: 0
+--- !u!114 &474448495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474448488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edad85a55eceec48888ce176ca8ce61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDamageMaterial: {fileID: 2100000, guid: fcb8dbf81218fa84384c638054b8d35a, type: 2}
+  onDamageVfxDuration: 0.15
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7912,6 +7927,7 @@ GameObject:
   - component: {fileID: 1323484118}
   - component: {fileID: 1323484119}
   - component: {fileID: 1323484120}
+  - component: {fileID: 1323484121}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -8069,6 +8085,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   isDead: 0
+--- !u!114 &1323484121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323484114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edad85a55eceec48888ce176ca8ce61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDamageMaterial: {fileID: 2100000, guid: fcb8dbf81218fa84384c638054b8d35a, type: 2}
+  onDamageVfxDuration: 0.15
 --- !u!1 &1381348506
 GameObject:
   m_ObjectHideFlags: 0
