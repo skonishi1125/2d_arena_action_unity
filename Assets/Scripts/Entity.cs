@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 // 敵味方共通で使用する仕組みをまとめる
 public abstract class Entity : MonoBehaviour
@@ -24,6 +25,10 @@ public abstract class Entity : MonoBehaviour
 
     public bool groundDetected { get; private set; }
     public bool wallDetected { get; private set; }
+
+    // ノックバック中かどうか
+    private bool isKnockbacked;
+    private Coroutine knockbackCo;
 
 
 
@@ -56,9 +61,35 @@ public abstract class Entity : MonoBehaviour
     // Player, EnemyをStateから操作するのでpublic
     public void SetVelocity(float xVelocity, float yVelocity)
     {
+        // ダメージなどでノックバックしたときは、操作を受け付けない。
+        if (isKnockbacked)
+            return;
+
         rb.linearVelocity = new Vector2(xVelocity, yVelocity);
         HandleFlip(xVelocity);
     }
+
+    public void ReceiveKnockback(Vector2 knockback, float duration)
+    {
+        if (knockbackCo != null)
+            StopCoroutine(knockbackCo);
+
+        knockbackCo = StartCoroutine(KnockbackCo(knockback, duration));
+    }
+
+    private IEnumerator KnockbackCo(Vector2 knockback, float duration)
+    {
+        isKnockbacked = true;
+        rb.linearVelocity = knockback;
+
+        yield return new WaitForSeconds(duration);
+
+        rb.linearVelocity = Vector2.zero;
+        isKnockbacked = false;
+
+
+    }
+
 
     // 右を向いているときに右を向いても反転させず、
     // 左を向いているときに左を向いても反転させないようにする制御処理
