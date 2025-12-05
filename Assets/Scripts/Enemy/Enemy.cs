@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Enemy : Entity
 {
@@ -11,6 +12,7 @@ public class Enemy : Entity
     [Header("Battle Detail")]
     public float battleMoveSpeed = 3f; // battleState時のmove速度
     public float attackDistance = 2f; // 敵がAttack移行するために必要な距離
+    [SerializeField] private float destroyWaitTime = 1f; // 敵が死んだときのDestroy時間
 
     // 移動速度などPlayer側と共有することもできるが、見やすくするため分割する
     [Header("Movement Details")]
@@ -61,6 +63,17 @@ public class Enemy : Entity
         base.Death();
 
         stateMachine.ChangeState(deadState);
+    }
+
+    public void DiedDestroy()
+    {
+        StartCoroutine(DiedDestroyCo());
+    }
+
+    private IEnumerator DiedDestroyCo()
+    {
+        yield return new WaitForSeconds(destroyWaitTime);
+        Destroy(gameObject);
     }
 
     // Player側の死亡時のActionEventにsubscribeしているので、

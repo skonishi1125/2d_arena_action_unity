@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 1000
+    baseValue: 15
     additiveBonus: 0
     multiplier: 1
   regenHp:
@@ -525,11 +525,11 @@ MonoBehaviour:
     additiveBonus: 0
     multiplier: 1
   attack:
-    baseValue: 0
+    baseValue: 5
     additiveBonus: 0
     multiplier: 1
   defense:
-    baseValue: 5
+    baseValue: 0
     additiveBonus: 0
     multiplier: 1
   evasion:

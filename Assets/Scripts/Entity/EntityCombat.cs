@@ -91,7 +91,7 @@ public class EntityCombat : MonoBehaviour
             }
         }
 
-        Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
+        //Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
 
         return raw;
     }

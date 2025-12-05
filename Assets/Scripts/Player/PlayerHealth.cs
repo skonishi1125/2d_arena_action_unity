@@ -8,5 +8,6 @@ public class PlayerHealth : EntityHealth
         base.Die();
 
         // you died!みたいなUIを併せて出す
+        GameManager.Instance.GameOver();
     }
 }

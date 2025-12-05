@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3926044590774942362}
   - component: {fileID: 405411518885948635}
   - component: {fileID: 3873375434374999399}
-  - component: {fileID: 8718951820993835276}
   - component: {fileID: 5374074082265270663}
+  - component: {fileID: 541217616874054697}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -179,25 +179,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   criticalRate: 1.5
---- !u!114 &8718951820993835276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111869580234304147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3b815693ad016f489415d7b9af35c18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHp: 0
-  isDead: 0
-  knockbackPower: {x: 1.5, y: 2.5}
-  heavyKnockbackPower: {x: 8, y: 8}
-  knockbackDuration: 0.2
-  heavyKnockbackDuration: 0.7
-  heavyDamageTreshold: 0.3
 --- !u!114 &5374074082265270663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,13 +216,32 @@ MonoBehaviour:
     additiveBonus: 0
     multiplier: 1
   evasion:
-    baseValue: 1
+    baseValue: 0.2
     additiveBonus: 0
     multiplier: 1
   critical:
-    baseValue: 0
+    baseValue: 0.2
     additiveBonus: 0
     multiplier: 1
+--- !u!114 &541217616874054697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111869580234304147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c2c5221debc0b4abad234a353b073b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 0
+  isDead: 0
+  knockbackPower: {x: 1.5, y: 2.5}
+  heavyKnockbackPower: {x: 8, y: 8}
+  knockbackDuration: 0.2
+  heavyKnockbackDuration: 0.7
+  heavyDamageTreshold: 0.3
 --- !u!1 &1834502347195787609
 GameObject:
   m_ObjectHideFlags: 0

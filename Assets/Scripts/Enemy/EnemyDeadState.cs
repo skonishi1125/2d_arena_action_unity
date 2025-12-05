@@ -19,6 +19,8 @@ public class EnemyDeadState : EnemyState
         // 以降、deadStateから別の状態に遷移することはない。
         stateMachine.SwitchOffStateMachine();
 
+        enemy.DiedDestroy();
+
     }
 
 }
