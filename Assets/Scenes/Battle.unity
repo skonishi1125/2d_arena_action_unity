@@ -7764,8 +7764,7 @@ MonoBehaviour:
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   critHitColor: {r: 1, g: 0.010103254, b: 0, a: 1}
-  missHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
-  missHitColor: {r: 0.75380325, g: 0, b: 1, a: 1}
+  missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
 --- !u!114 &474448496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9127,8 +9126,7 @@ MonoBehaviour:
   hitVfxColor: {r: 0.043137252, g: 0.9904362, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   critHitColor: {r: 1, g: 0, b: 0.041718483, a: 1}
-  missHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
-  missHitColor: {r: 0.534441, g: 0, b: 1, a: 1}
+  missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
 --- !u!114 &1323484122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9166,7 +9164,7 @@ MonoBehaviour:
     additiveBonus: 0
     multiplier: 1
   evasion:
-    baseValue: 0
+    baseValue: 1
     additiveBonus: 0
     multiplier: 1
   critical:
@@ -9345,7 +9343,6 @@ MonoBehaviour:
   critHitVfx: {fileID: 0}
   critHitColor: {r: 1, g: 1, b: 1, a: 1}
   missHitVfx: {fileID: 0}
-  missHitColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1503495715
 GameObject:
   m_ObjectHideFlags: 0

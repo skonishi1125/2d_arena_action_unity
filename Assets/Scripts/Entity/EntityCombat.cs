@@ -32,7 +32,6 @@ public class EntityCombat : MonoBehaviour
 
             EntityStatus targetStatus = target.GetComponent<EntityStatus>();
 
-
             // 1. 回避判定
             if (IsEvaded(entityStatus, targetStatus))
             {
@@ -60,11 +59,12 @@ public class EntityCombat : MonoBehaviour
         if (defender == null)
             return false;
 
-        float evasion = defender.GetEvasion(); // 0.0〜1.0 を想定
+        // 0.0 から 1.0  chestなど、statusを持たない場合は0f
+        float evasion = defender != null ? defender.GetEvasion() : 0f;
         if (evasion <= 0f)
             return false;
 
-        return UnityEngine.Random.value < evasion;
+        return Random.value < evasion;
     }
 
     // 実ダメージを返す
@@ -74,7 +74,7 @@ public class EntityCombat : MonoBehaviour
         isCritical = false;
 
         float attack = attacker.GetAttack();
-        float defense = defender.GetDefense();
+        float defense = defender != null ? defender.GetDefense() : 0f; // chestなど、statusを持たない場合は0
 
         float raw = attack - defense;
         if (raw < 1f)
@@ -84,7 +84,7 @@ public class EntityCombat : MonoBehaviour
         if (attacker != null)
         {
             float critChance = attacker.GetCritical(); // 0.0〜1.0想定
-            if (UnityEngine.Random.value < critChance)
+            if (Random.value < critChance)
             {
                 raw = raw * criticalRate; // クリティカル倍率
                 isCritical = true;

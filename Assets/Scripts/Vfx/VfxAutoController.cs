@@ -2,6 +2,7 @@
 
 // ヒット時の斬撃エフェクトなどの色を変えたり、破棄したりする
 // VFXにComponentとして割り当てて使う。
+// ※NOTE: MissVFXには現状割り当てていない
 public class VfxAutoController : MonoBehaviour
 {
     [SerializeField] private bool autoDestroy = true;

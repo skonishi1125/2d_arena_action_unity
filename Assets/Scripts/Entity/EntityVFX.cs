@@ -25,7 +25,6 @@ public class EntityVFX : MonoBehaviour
     // 共通 Evasionでよけた時
     [Header("Miss Hit VFX")]
     [SerializeField] private GameObject missHitVfx;
-    [SerializeField] private Color missHitColor = Color.white;
 
     private void Awake()
     {
@@ -52,7 +51,6 @@ public class EntityVFX : MonoBehaviour
     public void CreateOnMissHitVfx(Transform target)
     {
         GameObject vfx = Instantiate(missHitVfx, target.position, Quaternion.identity);
-        vfx.GetComponentInChildren<SpriteRenderer>().color = missHitColor;
     }
 
     // Player, 敵 被弾時に白くなる演出
