@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class EntityHealth : MonoBehaviour, IDamagable
@@ -19,6 +20,9 @@ public class EntityHealth : MonoBehaviour, IDamagable
     [SerializeField] private float heavyKnockbackDuration = .7f;
     //高いダメージを与えた時、強くKBさせる その割合
     [SerializeField] private float heavyDamageTreshold = .3f;
+
+    // 体力UI 更新用
+    public event Action OnHealthUpdate;
 
     protected virtual void Awake()
     {
@@ -54,6 +58,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         currentHp -= damage;
         UpdateHealthBar();
 
+        OnHealthUpdate?.Invoke();
         if (currentHp <= 0)
             Die();
     }
@@ -71,6 +76,12 @@ public class EntityHealth : MonoBehaviour, IDamagable
             return;
 
         healthBar.value = currentHp / entityStatus.GetMaxHp();
+    }
+
+    // 画面UIの体力バーから参照する
+    public float GetCurrentHp()
+    {
+        return currentHp;
     }
 
     private Vector2 CalculateKnockback(Transform attacker, float damage)
