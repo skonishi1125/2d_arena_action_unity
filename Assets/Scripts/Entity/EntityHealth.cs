@@ -5,9 +5,10 @@ public class EntityHealth : MonoBehaviour, IDamagable
 {
     private Entity entity;
     private EntityVFX entityVfx;
+    private EntityStatus entityStatus;
+
     private Slider healthBar; // using UnityEngine.UI;が必要。体力バー
 
-    [SerializeField] protected float maxHp = 100;
     [SerializeField] protected float currentHp;
     [SerializeField] protected bool isDead;
 
@@ -23,9 +24,10 @@ public class EntityHealth : MonoBehaviour, IDamagable
     {
         entity = GetComponent<Entity>();
         entityVfx = GetComponent<EntityVFX>();
+        entityStatus = GetComponent<EntityStatus>();
         healthBar = GetComponentInChildren<Slider>();
 
-        currentHp = maxHp;
+        currentHp = entityStatus.GetMaxHp();
         UpdateHealthBar();
     }
 
@@ -68,7 +70,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         if (healthBar == null)
             return;
 
-        healthBar.value = currentHp / maxHp;
+        healthBar.value = currentHp / entityStatus.GetMaxHp();
     }
 
     private Vector2 CalculateKnockback(Transform attacker, float damage)
@@ -92,7 +94,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     // ダメージの割合と最大HPを比較し、大ダメージならノックバックを高める
     private bool IsHeavyKnockback(float damage)
     {
-        return damage / maxHp > heavyDamageTreshold;
+        return damage / entityStatus.GetMaxHp() > heavyDamageTreshold;
     }
 
 

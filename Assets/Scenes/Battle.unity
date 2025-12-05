@@ -7574,12 +7574,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 474448489}
-  - component: {fileID: 474448492}
   - component: {fileID: 474448491}
   - component: {fileID: 474448490}
+  - component: {fileID: 474448492}
+  - component: {fileID: 474448495}
   - component: {fileID: 474448493}
   - component: {fileID: 474448494}
-  - component: {fileID: 474448495}
+  - component: {fileID: 474448496}
   m_Layer: 8
   m_Name: DemonHound
   m_TagString: Untagged
@@ -7720,12 +7721,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6983bbbc47ddb5d489297af4a5766159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
   targetCheck: {fileID: 907191942}
   targetCheckRadius: 0.5
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+  criticalRate: 1.5
 --- !u!114 &474448494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7738,7 +7739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a171bca11688e794abf4acf8ac78ecdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
   currentHp: 0
   isDead: 0
   knockbackPower: {x: 1.5, y: 2.5}
@@ -7762,6 +7762,50 @@ MonoBehaviour:
   onDamageVfxDuration: 0.15
   hitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &474448496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474448488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5899e70dd5e7a1d4eb6b891d48df1ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp:
+    baseValue: 1000
+    additiveBonus: 0
+    multiplier: 1
+  regenHp:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  maxMp:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  regenMp:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  attack:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  defense:
+    baseValue: 5
+    additiveBonus: 20
+    multiplier: 1
+  evasion:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  critical:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
 --- !u!1 &497937569
 GameObject:
   m_ObjectHideFlags: 0
@@ -8894,9 +8938,10 @@ GameObject:
   - component: {fileID: 1323484117}
   - component: {fileID: 1323484116}
   - component: {fileID: 1323484118}
+  - component: {fileID: 1323484121}
   - component: {fileID: 1323484119}
   - component: {fileID: 1323484120}
-  - component: {fileID: 1323484121}
+  - component: {fileID: 1323484122}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -9035,12 +9080,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6983bbbc47ddb5d489297af4a5766159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
   targetCheck: {fileID: 1280946203}
   targetCheckRadius: 1
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
+  criticalRate: 1.5
 --- !u!114 &1323484120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9053,7 +9098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b815693ad016f489415d7b9af35c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
   currentHp: 0
   isDead: 0
   knockbackPower: {x: 1.5, y: 2.5}
@@ -9077,6 +9121,50 @@ MonoBehaviour:
   onDamageVfxDuration: 0.15
   hitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   hitVfxColor: {r: 0.043137252, g: 0.9904362, b: 1, a: 1}
+--- !u!114 &1323484122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323484114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5899e70dd5e7a1d4eb6b891d48df1ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp:
+    baseValue: 100
+    additiveBonus: 0
+    multiplier: 1
+  regenHp:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  maxMp:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  regenMp:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  attack:
+    baseValue: 10
+    additiveBonus: 0
+    multiplier: 1
+  defense:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  evasion:
+    baseValue: 0
+    additiveBonus: 0
+    multiplier: 1
+  critical:
+    baseValue: 0.2
+    additiveBonus: 0
+    multiplier: 1
 --- !u!1 &1381348506
 GameObject:
   m_ObjectHideFlags: 0
