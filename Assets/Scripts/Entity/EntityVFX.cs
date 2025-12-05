@@ -12,9 +12,20 @@ public class EntityVFX : MonoBehaviour
     private Material originalMaterial;
     private Coroutine onDamageVfxCo;
 
-    [Header("Hit VFX")]
+    // 共通 斬撃(などのダメージ)
+    [Header("Attack Hit VFX")]
     [SerializeField] private GameObject hitVfx; // 斬撃Prefab
     [SerializeField] private Color hitVfxColor = Color.white; // vfxの割当カラー
+
+    // 共通 斬撃(などのダメージ) クリティカル
+    [Header("Attack CritHit VFX")]
+    [SerializeField] private GameObject critHitVfx;
+    [SerializeField] private Color critHitColor = Color.white;
+
+    // 共通 Evasionでよけた時
+    [Header("Miss Hit VFX")]
+    [SerializeField] private GameObject missHitVfx;
+    [SerializeField] private Color missHitColor = Color.white;
 
     private void Awake()
     {
@@ -22,12 +33,29 @@ public class EntityVFX : MonoBehaviour
         originalMaterial = sr.material;
     }
 
+    // Player, Enemy 通常斬撃などのVFX
     public void CreateOnHitVfx(Transform target)
     {
         GameObject vfx = Instantiate(hitVfx, target.position, Quaternion.identity);
         vfx.GetComponentInChildren<SpriteRenderer>().color = hitVfxColor;
     }
 
+    // クリティカル時
+    public void CreateOnCritHitVfx(Transform target)
+    {
+        GameObject vfx = Instantiate(critHitVfx, target.position, Quaternion.identity);
+        vfx.GetComponentInChildren<SpriteRenderer>().color = critHitColor;
+    }
+
+    // Miss!というようなvfx
+
+    public void CreateOnMissHitVfx(Transform target)
+    {
+        GameObject vfx = Instantiate(missHitVfx, target.position, Quaternion.identity);
+        vfx.GetComponentInChildren<SpriteRenderer>().color = missHitColor;
+    }
+
+    // Player, 敵 被弾時に白くなる演出
     // 被弾時走らせて、演出時間の間animatonのspriteを白くして、元に戻す。
     public void PlayOnDamageVfx()
     {

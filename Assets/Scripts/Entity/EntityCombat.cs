@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EntityCombat : MonoBehaviour
 {
@@ -32,15 +31,48 @@ public class EntityCombat : MonoBehaviour
                 continue;
 
             EntityStatus targetStatus = target.GetComponent<EntityStatus>();
-            float damage = CalculateDamage(entityStatus, targetStatus);
+
+
+            // 1. 回避判定
+            if (IsEvaded(entityStatus, targetStatus))
+            {
+                entityVfx.CreateOnMissHitVfx(target.transform);
+                continue;
+            }
+
+            // 2. ダメージ計算
+            bool isCritical = false;
+            float damage = CalculateDamage(entityStatus, targetStatus, out isCritical);
 
             damagable?.TakeDamage(damage, transform);
-            entityVfx.CreateOnHitVfx(target.transform);
+
+            if (isCritical)
+                entityVfx.CreateOnCritHitVfx(target.transform);
+            else
+                entityVfx.CreateOnHitVfx(target.transform);
+
         }
     }
 
-    private float CalculateDamage(EntityStatus attacker, EntityStatus defender)
+    // 回避率を計算し、その結果を返す
+    private bool IsEvaded(EntityStatus attacker, EntityStatus defender)
     {
+        if (defender == null)
+            return false;
+
+        float evasion = defender.GetEvasion(); // 0.0〜1.0 を想定
+        if (evasion <= 0f)
+            return false;
+
+        return UnityEngine.Random.value < evasion;
+    }
+
+    // 実ダメージを返す
+
+    private float CalculateDamage(EntityStatus attacker, EntityStatus defender, out bool isCritical)
+    {
+        isCritical = false;
+
         float attack = attacker.GetAttack();
         float defense = defender.GetDefense();
 
@@ -55,11 +87,11 @@ public class EntityCombat : MonoBehaviour
             if (UnityEngine.Random.value < critChance)
             {
                 raw = raw * criticalRate; // クリティカル倍率
-                Debug.Log("Critical!");
+                isCritical = true;
             }
         }
 
-        Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense);
+        Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
 
         return raw;
     }
