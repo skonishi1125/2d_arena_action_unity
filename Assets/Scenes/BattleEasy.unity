@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ab66ec3f758ab429513437eb6e2b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveDuration: 20
+  waveDuration: 15
   enemySpawner: {fileID: 1308022963}
 --- !u!4 &47324314
 Transform:
@@ -8103,7 +8103,7 @@ MonoBehaviour:
   - {fileID: 898256072}
   - {fileID: 73823379}
   - {fileID: 206965783}
-  spawnInterval: 0.2
+  spawnInterval: 1
 --- !u!4 &1308022964
 Transform:
   m_ObjectHideFlags: 0
