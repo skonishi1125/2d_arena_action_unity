@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 // 敵味方共通で使用する仕組みをまとめる
@@ -30,6 +31,8 @@ public abstract class Entity : MonoBehaviour
     private bool isKnockbacked;
     private Coroutine knockbackCo;
 
+    // 反転したときに同時実行するアクションイベント
+    public event Action OnFlipped;
 
 
     protected virtual void Awake()
@@ -110,6 +113,10 @@ public abstract class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
         facingDir = facingDir * -1;
+
+        // 例えば敵HPバーの反転は防ぎたいので、そういった関連eventの実行。
+        OnFlipped?.Invoke();
+
     }
 
     // 地面, 壁判定チェック

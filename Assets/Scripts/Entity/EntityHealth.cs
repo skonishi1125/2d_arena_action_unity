@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityHealth : MonoBehaviour, IDamagable
 {
     private Entity entity;
     private EntityVFX entityVfx;
+    private Slider healthBar; // using UnityEngine.UI;が必要。体力バー
 
     [SerializeField] protected float maxHp = 100;
     [SerializeField] protected float currentHp;
@@ -21,8 +23,10 @@ public class EntityHealth : MonoBehaviour, IDamagable
     {
         entity = GetComponent<Entity>();
         entityVfx = GetComponent<EntityVFX>();
+        healthBar = GetComponentInChildren<Slider>();
 
         currentHp = maxHp;
+        UpdateHealthBar();
     }
 
     public virtual void TakeDamage(float damage, Transform attacker)
@@ -46,6 +50,8 @@ public class EntityHealth : MonoBehaviour, IDamagable
     protected void ReduceHp(float damage)
     {
         currentHp -= damage;
+        UpdateHealthBar();
+
         if (currentHp <= 0)
             Die();
     }
@@ -54,6 +60,15 @@ public class EntityHealth : MonoBehaviour, IDamagable
     {
         isDead = true;
         entity.Death();
+    }
+
+    private void UpdateHealthBar()
+    {
+        // TODO: Player側に割り当てていないので、エラーメッセージが出る。回避用
+        if (healthBar == null)
+            return;
+
+        healthBar.value = currentHp / maxHp;
     }
 
     private Vector2 CalculateKnockback(Transform attacker, float damage)
