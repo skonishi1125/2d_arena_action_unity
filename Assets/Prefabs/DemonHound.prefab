@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 4362434199104477391}
   - component: {fileID: 8002789586864401947}
   - component: {fileID: 7389291929198543074}
+  - component: {fileID: 7622868976396431817}
   m_Layer: 8
   m_Name: DemonHound
   m_TagString: Untagged
@@ -431,6 +432,7 @@ MonoBehaviour:
   groundCheck: {fileID: 6863061273056700301}
   battleMoveSpeed: 3
   attackDistance: 1
+  destroyWaitTime: 1
   idleTime: 2
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1.36
@@ -540,6 +542,19 @@ MonoBehaviour:
     baseValue: 0
     additiveBonus: 0
     multiplier: 1
+--- !u!114 &7622868976396431817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2916633050222161211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exp: 2
 --- !u!1 &4831607760275357490
 GameObject:
   m_ObjectHideFlags: 0

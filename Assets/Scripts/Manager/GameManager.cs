@@ -4,6 +4,7 @@ public enum GameState
 {
     Ready,
     Playing,
+    LevelUp,
     Result
 }
 
@@ -11,7 +12,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    // ゲーム中の現状体
+    // Playerのレベル
+    [SerializeField] public PlayerLevel playerLevel;
+
+    // ゲーム中の現状態
     public GameState State { get; private set; } = GameState.Ready;
     [SerializeField] private float waveDuration = 30f; // この秒数生き残ればクリア
     private float remainingTime;
@@ -36,18 +40,37 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
+        playerLevel.OnLevelUp += HandleLevelUp;
+    }
+    private void OnDestroy()
+    {
+        if (playerLevel != null)
+            playerLevel.OnLevelUp -= HandleLevelUp;
     }
 
     private void Update()
     {
-        if (State != GameState.Playing)
-            return;
 
-        remainingTime -= Time.deltaTime;
-        if (remainingTime <= 0f)
-            ClearGame();
+        if (State == GameState.LevelUp)
+        {
+            Debug.Log("Levelup.. U を押すとPlayingに戻ります");
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                Time.timeScale = 1f;
+                State = GameState.Playing;
+            }
+        }
+
+        if (State == GameState.Playing)
+        {
+            remainingTime -= Time.deltaTime;
+            if (remainingTime <= 0f)
+                ClearGame();
+        }
 
     }
+
+
     public void StartGame()
     {
         State = GameState.Playing;
@@ -80,6 +103,17 @@ public class GameManager : MonoBehaviour
             return;
 
         EndGame(false);
+    }
+
+    private void HandleLevelUp(int newLevel)
+    {
+        // 例：スキル選択 State へ
+        State = GameState.LevelUp;
+
+        // TODO: Lv UPUI を出す、入力を止める、など
+        Debug.Log($"Level Up! New Level: {newLevel}");
+        Time.timeScale = .01f;
+
     }
 
 }

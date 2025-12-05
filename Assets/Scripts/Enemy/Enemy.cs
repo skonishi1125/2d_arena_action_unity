@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    private EnemyReward enemyReward;
+
     public EnemyIdleState idleState; // Playerと違い、さらに子要素で使うためpublic
     public EnemyMoveState moveState;
     public EnemyBattleState battleState;
@@ -32,6 +34,12 @@ public class Enemy : Entity
     // 攻撃されたときのplayer transform情報
     public Transform player {  get; private set; }
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+        enemyReward = GetComponent<EnemyReward>();
+    }
     private void OnEnable()
     {
         Player.OnPlayerDeath += HandlePlayerDeath;
@@ -61,6 +69,8 @@ public class Enemy : Entity
     public override void Death()
     {
         base.Death();
+        if (enemyReward != null)
+            GameManager.Instance.playerLevel.AddExp(enemyReward.Exp);
 
         stateMachine.ChangeState(deadState);
     }

@@ -20,6 +20,5 @@ public class EnemyHealth : EntityHealth
         if (attacker.GetComponent<Player>() != null)
             enemy.TryEnterBattleState(attacker);
 
-
     }
 }
