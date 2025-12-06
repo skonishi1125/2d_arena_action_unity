@@ -42,12 +42,14 @@ public class Enemy : Entity
     }
     private void OnEnable()
     {
-        Player.OnPlayerDeath += HandlePlayerDeath;
+        if (GameManager.Instance != null && GameManager.Instance.player != null)
+            GameManager.Instance.player.Health.OnDied += HandlePlayerDeath;
     }
 
     private void OnDisable()
     {
-        Player.OnPlayerDeath -= HandlePlayerDeath;
+        if (GameManager.Instance != null && GameManager.Instance.player != null)
+            GameManager.Instance.player.Health.OnDied -= HandlePlayerDeath;
     }
 
 
@@ -72,6 +74,7 @@ public class Enemy : Entity
     public override void Death()
     {
         base.Death();
+
         if (enemyReward != null)
             GameManager.Instance.player.Level.AddExp(enemyReward.Exp);
 

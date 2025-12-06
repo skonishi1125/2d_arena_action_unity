@@ -9,7 +9,18 @@ public class PlayerHealth : EntityHealth
 
     protected override void ReduceHp(float damage)
     {
-        base.ReduceHp(damage);
+        //base.ReduceHp(damage);
+
+        if (isDead)
+            return;
+
+        currentHp -= damage;
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            Die();// ここで自分の Die() を呼ぶ
+        }
+
         OnHealthUpdate?.Invoke(); // 体力が減ったことを通知
     }
 
@@ -18,6 +29,9 @@ public class PlayerHealth : EntityHealth
     // Health -> Player.Death() -> ...
     protected override void Die()
     {
+        if (isDead)
+            return;
+
         base.Die();
         OnDied?.Invoke();
         // 例えばGameOver時、

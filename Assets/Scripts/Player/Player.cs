@@ -57,8 +57,8 @@ public class Player : Entity
     public float AirAttackFallSpeed => airAttackFallSpeed;
     public float AirAttackVerticalAccel => airAttackVerticalAccel;
 
-    // Action Event
-    public static event Action OnPlayerDeath;
+    //// Action Event
+    //public static event Action OnPlayerDeath;
 
 
     protected override void Awake()
@@ -119,7 +119,6 @@ public class Player : Entity
     {
         base.Death();
 
-        OnPlayerDeath?.Invoke();
         Time.timeScale = 0.5f;
         CameraManager.Instance.DeathShake();
         stateMachine.ChangeState(deadState);
