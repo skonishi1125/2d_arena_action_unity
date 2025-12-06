@@ -15,24 +15,22 @@ public class CameraManager : MonoBehaviour
         impulse = GetComponent<CinemachineImpulseSource>();
     }
 
-    private void OnEnable()
+    // OnEnable,OnDisableで購読処理を行わない。
+    // playerHealth = GameManager.Instance.Player.Health;
+    // playerHealth.OnDied += HandleDeathShake; とできるが、
+    // GameObject側はこちらのOnEnable実行時点ではPlayerを所持していない。
+    // そのためこのメソッドを用意し、GameManagerの準備が出来次第割り当てる。
+    public void Bind(PlayerHealth newPlayerHealth)
     {
-        if (GameManager.Instance != null && GameManager.Instance.Player != null)
-        {
-            playerHealth = GameManager.Instance.Player.Health;
-            if (playerHealth != null)
-                playerHealth.OnDied += HandleDeathShake;
-        }
-    }
+        // 古い購読を解除
+        if (playerHealth != null)
+            playerHealth.OnDied -= HandleDeathShake;
 
-    private void OnDisable()
-    {
-        if (GameManager.Instance != null && GameManager.Instance.Player != null)
-        {
-            playerHealth = GameManager.Instance.Player.Health;
-            if (playerHealth != null)
-                playerHealth.OnDied -= HandleDeathShake;
-        }
+        // 新しく設定
+        playerHealth = newPlayerHealth;
+
+        if (playerHealth != null)
+            playerHealth.OnDied += HandleDeathShake;
     }
 
     // 死亡時、画面を揺らす処理

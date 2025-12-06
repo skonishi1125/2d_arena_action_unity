@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public enum GameState
@@ -6,6 +7,7 @@ public enum GameState
     Ready,
     Playing,
     LevelUp,
+    GameOverSlowing,
     Result
 }
 
@@ -59,14 +61,19 @@ public class GameManager : MonoBehaviour
         EnemySpawner = FindFirstObjectByType<EnemySpawner>();
         UIResult = FindFirstObjectByType<UIResult>();
 
+        // ★ CameraManager の再バインド
+        var cameraManager = FindFirstObjectByType<CameraManager>();
+        if (cameraManager != null && Player != null)
+            cameraManager.Bind(Player.Health);
+
         if (Player != null)
         {
             // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
             Player.Level.OnLevelUp -= HandleLevelUp;
-            Player.Health.OnDied -= GameOver;
+            Player.Health.OnDied -= SlowMotion;
 
             Player.Level.OnLevelUp += HandleLevelUp;
-            Player.Health.OnDied += GameOver;
+            Player.Health.OnDied += SlowMotion;
         }
     }
 
@@ -84,7 +91,8 @@ public class GameManager : MonoBehaviour
         remainingTime = waveDuration;
         State = GameState.Ready;
 
-        // シーン名で分岐してもいいし、タグでもよい
+        // Battle シーンではロード後すぐにゲームを開始
+        // 後でReadyを実装したとき、いろいろ挟むようにすればOK
         var scene = SceneManager.GetActiveScene();
         if (scene.name == "BattleEasy")
         {
@@ -136,6 +144,34 @@ public class GameManager : MonoBehaviour
         EnemySpawner.BeginSpawn();
     }
 
+    // Dieに、まずSlowMotionを購読させて呼び出す。
+    // スローになって倒れた後、GameOverのSceneに遷移。
+    private void SlowMotion()
+    {
+        if (State != GameState.Playing)
+            return;
+
+        StartCoroutine(SlowMotionCo());
+    }
+    private IEnumerator SlowMotionCo()
+    {
+        State = GameState.GameOverSlowing;
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(3f);
+        Time.timeScale = 1f;
+
+        GameOver();
+    }
+
+    public void GameOver()
+    {
+        if (State != GameState.GameOverSlowing)
+            return;
+
+        EndGame(false);
+    }
+
+
     private void ClearGame()
     {
         // Playing中以外に呼ばれても、何もしない
@@ -145,21 +181,13 @@ public class GameManager : MonoBehaviour
         EndGame(true);
     }
 
+    // Clear, GameOver共通処理
     private void EndGame(bool isClear)
     {
         State = GameState.Result;
         EnemySpawner.StopSpawn();
 
         UIResult.ShowResult(isClear);
-    }
-
-    public void GameOver()
-    {
-        if (State != GameState.Playing)
-            return;
-
-        Time.timeScale = 0.5f;
-        EndGame(false);
     }
 
     public void RetryGame()

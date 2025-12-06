@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 100
+    baseValue: 30
     additiveBonus: 0
     multiplier: 1
   regenHp:

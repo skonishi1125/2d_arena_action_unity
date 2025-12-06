@@ -15,9 +15,9 @@ MonoBehaviour:
   levels:
   - level: 1
     requiredExp: 20
-    maxHp: 100
+    maxHp: 30
     regenHp: 5
-    maxMp: 50
+    maxMp: 10
     regenMp: 1
     attack: 5
     defense: 0
@@ -25,9 +25,9 @@ MonoBehaviour:
     critical: 0
   - level: 2
     requiredExp: 50
-    maxHp: 110
+    maxHp: 40
     regenHp: 5
-    maxMp: 55
+    maxMp: 12
     regenMp: 1
     attack: 8
     defense: 1
@@ -35,9 +35,9 @@ MonoBehaviour:
     critical: 0.1
   - level: 3
     requiredExp: 100
-    maxHp: 120
+    maxHp: 50
     regenHp: 5
-    maxMp: 60
+    maxMp: 15
     regenMp: 1
     attack: 15
     defense: 2

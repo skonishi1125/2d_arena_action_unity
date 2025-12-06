@@ -40,6 +40,8 @@ public class UIInGame : MonoBehaviour
             // Level 経験値返還時のイベント
             playerLevel.OnExpChanged += HandleExpChanged;
         }
+
+        UpdatePlayerHealthBar();
     }
 
     private void OnDestroy()
@@ -65,6 +67,8 @@ public class UIInGame : MonoBehaviour
         float currentHp = playerHealth.GetCurrentHp();
         float maxHp = entityStatus.GetMaxHp();
 
+        //Debug.Log("currentHp: " + currentHp + " maxHp: " + maxHp);
+
         healthText.text = currentHp + "/" + maxHp;
         healthSlider.value = currentHp / maxHp;
     }
@@ -88,8 +92,7 @@ public class UIInGame : MonoBehaviour
             return;
         }
 
-        Debug.Log("HandleExpChanged currentExp: " + currentExp + " requiredExp: " + requiredExp + " 割合: " + currentExp / requiredExp);
-
+        //Debug.Log("HandleExpChanged currentExp: " + currentExp + " requiredExp: " + requiredExp + " 割合: " + currentExp / requiredExp);
 
         expSlider.value = (float)currentExp / requiredExp;
     }

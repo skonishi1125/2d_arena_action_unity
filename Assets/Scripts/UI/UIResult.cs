@@ -20,7 +20,7 @@ public class UIResult : MonoBehaviour
     public void ShowResult(bool isClear)
     {
         rootPanel.SetActive(true);
-        resultText.text = isClear ? "GAME CLEAR!" : "BURN OUT!";
+        resultText.text = isClear ? "GAME CLEAR!" : "EXHAUSTED!";
 
         retryButton.onClick.AddListener(() =>
         {
