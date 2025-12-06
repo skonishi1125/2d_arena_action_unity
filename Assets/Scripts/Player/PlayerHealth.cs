@@ -4,9 +4,8 @@ using UnityEngine;
 public class PlayerHealth : EntityHealth
 {
 
-    // 体力が変化したとき用 HealthbarUI 更新が主。
-    public event Action OnHealthUpdate;
-    public event Action OnDied;
+    public event Action OnHealthUpdate;// 体力変化時 HealthbarUI 更新が主。
+    public event Action OnDied; // 死亡時 画面シェイク,PlayerのState変更,GameOverUI他。
 
     protected override void ReduceHp(float damage)
     {
@@ -14,15 +13,17 @@ public class PlayerHealth : EntityHealth
         OnHealthUpdate?.Invoke(); // 体力が減ったことを通知
     }
 
+    // Player.Deathとの違い
+    // 数値的な事実を扱うようにする。死亡したかどうかの決定の始点はここ。
+    // Health -> Player.Death() -> ...
     protected override void Die()
     {
         base.Die();
-
-        // you died!みたいなUIを併せて出す
         OnDied?.Invoke();
-        // GameManager.Instance.GameOver(); とも書くことができる。
+        // 例えばGameOver時、
+        // GameManager.Instance.GameOver(); とも書いて呼ぶことができる。
         // ただしこれはHealthという下層が上層を呼ぶ形になっているので、
-        // GameManagerから購読し、処理を進めたほうがよい。
+        // GameManagerから購読し、OnDiedのイベント処理として進めたほうが綺麗。
     }
 
     // 体力全回復(LevelUp時など)

@@ -67,7 +67,6 @@ public class Player : Entity
         // New Input System
         input = new PlayerInputSet();
 
-
         // StateMachine
         // ※Components取得より手前に書くと、contruct上のrb割当等でnullになるので注意
         //stateMachine = new StateMachine(); Entityに書いているので不要
@@ -82,8 +81,8 @@ public class Player : Entity
         airAttackState = new PlayerAirAttackState(this, stateMachine, "airAttack");
         deadState = new PlayerDeadState(this, stateMachine, "dead");
 
-
         Health = GetComponent<PlayerHealth>();
+        Health.OnDied += HandleDied;
         Level = GetComponent<PlayerLevel>();
     }
 
@@ -112,14 +111,25 @@ public class Player : Entity
         stateMachine.ChangeState(basicAttackState);
     }
 
+    // Health.Dieとの違い
+    // Player死亡時のゲーム的振る舞いの管理をする。
+    // 例えばInvokeで敵のStateをBattleからIdleに変えたり,
+    // 画面振動させたり、自身のStateを変化させる。
     public override void Death()
     {
         base.Death();
 
         OnPlayerDeath?.Invoke();
-        Time.timeScale = 0.5f; // TODO: GameManagerとかで管理して、ちょっと経ったら戻すとよさそう
+        Time.timeScale = 0.5f;
         CameraManager.Instance.DeathShake();
         stateMachine.ChangeState(deadState);
+
+    }
+
+    // イベントへの入口をはっきりさせるため、Deathと分けておく
+    private void HandleDied()
+    {
+        Death();
     }
 
 
