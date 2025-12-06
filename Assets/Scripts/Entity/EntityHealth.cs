@@ -6,9 +6,9 @@ public class EntityHealth : MonoBehaviour, IDamagable
 {
     private Entity entity;
     private EntityVFX entityVfx;
-    private EntityStatus entityStatus;
+    protected EntityStatus entityStatus;
 
-    private Slider healthBar; // using UnityEngine.UI;が必要。体力バー
+    protected Slider healthBar; // using UnityEngine.UI;が必要。体力バー
 
     [SerializeField] protected float currentHp;
     [SerializeField] protected bool isDead;
@@ -21,8 +21,6 @@ public class EntityHealth : MonoBehaviour, IDamagable
     //高いダメージを与えた時、強くKBさせる その割合
     [SerializeField] private float heavyDamageTreshold = .3f;
 
-    // 体力UI 更新用
-    public event Action OnHealthUpdate;
 
     protected virtual void Awake()
     {
@@ -32,7 +30,6 @@ public class EntityHealth : MonoBehaviour, IDamagable
         healthBar = GetComponentInChildren<Slider>();
 
         currentHp = entityStatus.GetMaxHp();
-        UpdateHealthBar();
     }
 
     public virtual void TakeDamage(float damage, Transform attacker)
@@ -53,12 +50,10 @@ public class EntityHealth : MonoBehaviour, IDamagable
         ReduceHp(damage);
     }
 
-    protected void ReduceHp(float damage)
+    protected virtual void ReduceHp(float damage)
     {
         currentHp -= damage;
-        UpdateHealthBar();
 
-        OnHealthUpdate?.Invoke();
         if (currentHp <= 0)
             Die();
     }
@@ -67,15 +62,6 @@ public class EntityHealth : MonoBehaviour, IDamagable
     {
         isDead = true;
         entity.Death();
-    }
-
-    private void UpdateHealthBar()
-    {
-        // TODO: Player側に割り当てていないので、エラーメッセージが出る。回避用
-        if (healthBar == null)
-            return;
-
-        healthBar.value = currentHp / entityStatus.GetMaxHp();
     }
 
     // 画面UIの体力バーから参照する

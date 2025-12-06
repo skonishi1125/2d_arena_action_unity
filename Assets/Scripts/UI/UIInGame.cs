@@ -6,7 +6,7 @@ public class UIInGame : MonoBehaviour
 {
     private Player player;
     private EntityStatus entityStatus;
-    private EntityHealth entityHealth;
+    private PlayerHealth playerHealth;
     private PlayerLevel playerLevel;
     [SerializeField] private PlayerLevelTable levelTable;
 
@@ -26,19 +26,31 @@ public class UIInGame : MonoBehaviour
         {
             // Health
             entityStatus = player.GetComponent<EntityStatus>();
-            entityHealth = player.GetComponent<EntityHealth>();
-            entityHealth.OnHealthUpdate += UpdateHealthBar;
-
+            playerHealth = player.GetComponent<PlayerHealth>();
             // EXP
             playerLevel = player.GetComponent<PlayerLevel>();
-        }
 
+
+            // Health Actionイベントに、体力バー更新の購読
+            playerHealth.OnHealthUpdate += UpdatePlayerHealthBar;
+
+            // Level Actionイベントに、体力バー更新の購読
+            playerLevel.OnLevelUp += HandlePlayerLevelUp;
+        }
     }
 
-    private void UpdateHealthBar()
+    // レベルが上がった時に体力バーの更新を行う
+    // playerLevel.OnLevelUp には引数intの値が必要なので、
+    // 引数を無視する記述を書いて登録する
+    private void HandlePlayerLevelUp(int _)
     {
-        var currentHp = entityHealth.GetCurrentHp();
-        var maxHp = entityStatus.GetMaxHp();
+        UpdatePlayerHealthBar();
+    }
+
+    private void UpdatePlayerHealthBar()
+    {
+        float currentHp = playerHealth.GetCurrentHp();
+        float maxHp = entityStatus.GetMaxHp();
 
         healthText.text = currentHp + "/" + maxHp;
         healthSlider.value = currentHp / maxHp;

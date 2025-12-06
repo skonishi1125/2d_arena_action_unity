@@ -8,12 +8,21 @@ public class EnemyHealth : EntityHealth
     {
         base.Awake();
         enemy = GetComponent<Enemy>();
+        UpdateEnemyHealthBar();
+
+    }
+
+    protected override void ReduceHp(float damage)
+    {
+        base.ReduceHp(damage);
+        UpdateEnemyHealthBar();
     }
 
     public override void TakeDamage(float damage, Transform attacker)
     {
         base.TakeDamage(damage, attacker);
 
+        // ダメージ計算後に殴られたケースの考慮
         if (isDead)
             return;
 
@@ -21,4 +30,13 @@ public class EnemyHealth : EntityHealth
             enemy.TryEnterBattleState(attacker);
 
     }
+
+    private void UpdateEnemyHealthBar()
+    {
+        if (healthBar == null)
+            return;
+
+        healthBar.value = currentHp / entityStatus.GetMaxHp();
+    }
+
 }
