@@ -9,7 +9,8 @@ public class PlayerHealth : EntityHealth
 
     protected override void ReduceHp(float damage)
     {
-        //base.ReduceHp(damage);
+        // イベント関連の設計のため、自身でダメージ計算を済ませる
+        // base.ReduceHp(damage);
 
         if (isDead)
             return;
@@ -26,7 +27,7 @@ public class PlayerHealth : EntityHealth
 
     // Player.Deathとの違い
     // 数値的な事実を扱うようにする。死亡したかどうかの決定の始点はここ。
-    // Health -> Player.Death() -> ...
+    // PlayerHealth.Die() -> base.Die() -> Player.Death() -> ...
     protected override void Die()
     {
         if (isDead)
@@ -34,7 +35,7 @@ public class PlayerHealth : EntityHealth
 
         base.Die();
         OnDied?.Invoke();
-        // 例えばGameOver時、
+        // 例えばGameOver時、GameManagerの関数を実行したければ、
         // GameManager.Instance.GameOver(); とも書いて呼ぶことができる。
         // ただしこれはHealthという下層が上層を呼ぶ形になっているので、
         // GameManagerから購読し、OnDiedのイベント処理として進めたほうが綺麗。

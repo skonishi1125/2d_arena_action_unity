@@ -112,9 +112,7 @@ public class Player : Entity
     }
 
     // Health.Dieとの違い
-    // Player死亡時のゲーム的振る舞いの管理をする。
-    // 例えばInvokeで敵のStateをBattleからIdleに変えたり,
-    // 画面振動させたり、自身のStateを変化させる。
+    // Player死亡時の自身の振る舞いの管理をする。自身のStateを変化させる。
     public override void Death()
     {
         base.Death();
