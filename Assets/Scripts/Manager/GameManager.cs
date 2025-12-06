@@ -187,8 +187,6 @@ public class GameManager : MonoBehaviour
         State = GameState.Result;
         EnemySpawner.StopSpawn();
 
-        UIResult = null;
-
         Debug.Assert(UIResult != null, "[GameManager] UIResult が見つかりません");
         // ゲームクラッシュ対策
         if (UIResult == null)
