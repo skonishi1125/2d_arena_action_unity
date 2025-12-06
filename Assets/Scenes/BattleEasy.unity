@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLevel: {fileID: 1761581668}
-  UIInGame: {fileID: 1756588435}
   waveDuration: 15
   enemySpawner: {fileID: 1308022963}
 --- !u!4 &47324314
@@ -9574,17 +9573,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1756588435 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3698620982933502350, guid: cfe24ed8e812f7b48804aca1bd760bee, type: 3}
-  m_PrefabInstance: {fileID: 2901884286631674586}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3596cf5446e44744984217280a0844f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1761581668 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8108161354553201457, guid: cdfff86eb5f7f23499a58886690274a5, type: 3}

@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
 
     // Playerのレベル
     [SerializeField] public PlayerLevel playerLevel;
-    [SerializeField] public UIInGame UIInGame;
 
     // ゲーム中の現状態
     public GameState State { get; private set; } = GameState.Ready;

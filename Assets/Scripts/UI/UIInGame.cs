@@ -36,16 +36,29 @@ public class UIInGame : MonoBehaviour
 
             // Level Actionイベントに、体力バー更新の購読
             playerLevel.OnLevelUp += HandlePlayerLevelUp;
+
+            // Level 経験値返還時のイベント
+            playerLevel.OnExpChanged += HandleExpChanged;
         }
     }
 
-    // レベルが上がった時に体力バーの更新を行う
-    // playerLevel.OnLevelUp には引数intの値が必要なので、
-    // 引数を無視する記述を書いて登録する
-    private void HandlePlayerLevelUp(int _)
+    private void OnDestroy()
     {
-        UpdatePlayerHealthBar();
+        if (playerHealth != null)
+        {
+            playerHealth.OnHealthUpdate -= UpdatePlayerHealthBar;
+
+        }
+
+        if (playerLevel != null)
+        {
+            playerLevel.OnLevelUp -= HandlePlayerLevelUp;
+            playerLevel.OnExpChanged -= HandleExpChanged;
+        }
+
     }
+
+
 
     private void UpdatePlayerHealthBar()
     {
@@ -56,18 +69,29 @@ public class UIInGame : MonoBehaviour
         healthSlider.value = currentHp / maxHp;
     }
 
-    public void UpdateExpBar()
+    // レベルが上がった時に体力バーの更新を行う
+    // playerLevel.OnLevelUp には引数intの値が必要なので、
+    // 引数を無視する記述を書いて登録する
+    private void HandlePlayerLevelUp(int _)
     {
-        int currentExp = playerLevel.CurrentExp;
-        int currentLevel = playerLevel.Level;
-        int requiredExp = levelTable.GetLevelOfInfo(currentLevel).requiredExp;
-
-        float ratio = (float)currentExp / requiredExp;
-
-        Debug.Log("UpdateExpBar currentExp: " + currentExp + " requiredExp: " + requiredExp + " 割合: " + currentExp / requiredExp);
+        UpdatePlayerHealthBar();
+    }
 
 
-        expSlider.value = ratio;
+
+    // EXPバー更新処理
+    private void HandleExpChanged(int currentExp, int requiredExp)
+    {
+        if (requiredExp <= 0)
+        {
+            expSlider.value = 1f;
+            return;
+        }
+
+        Debug.Log("HandleExpChanged currentExp: " + currentExp + " requiredExp: " + requiredExp + " 割合: " + currentExp / requiredExp);
+
+
+        expSlider.value = (float)currentExp / requiredExp;
     }
 
 }

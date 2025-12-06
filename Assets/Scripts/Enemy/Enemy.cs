@@ -22,7 +22,7 @@ public class Enemy : Entity
     // Player側のDashと同じ感じで、一定時間経過したらstateを移動するために使う。
     public float idleTime = 2f;
     public float moveSpeed = 2f;
-    [Range(0,2)]
+    [Range(0, 2)]
     public float moveAnimSpeedMultiplier = 1; // アニメーションスピード
 
 
@@ -32,7 +32,7 @@ public class Enemy : Entity
     [SerializeField] private float playerCheckDistance = 10f; // 感知距離
 
     // 攻撃されたときのplayer transform情報
-    public Transform player {  get; private set; }
+    public Transform player { get; private set; }
 
 
     protected override void Awake()
@@ -65,16 +65,15 @@ public class Enemy : Entity
         stateMachine.ChangeState(battleState);
     }
 
-    // Health側で死亡したとき、呼び出してdeadstateへ遷移できるようにする
+    // Enemy死亡時の責務
+    // * deadstateへ遷移できるようにする
+    // * 経験値の付与
+    // ※expbarの更新は、PlayerLevel, UIInGameの責務
     public override void Death()
     {
         base.Death();
         if (enemyReward != null)
-        {
             GameManager.Instance.playerLevel.AddExp(enemyReward.Exp);
-            GameManager.Instance.UIInGame.UpdateExpBar();
-
-        }
 
         stateMachine.ChangeState(deadState);
     }
@@ -109,7 +108,8 @@ public class Enemy : Entity
 
         // 検知なし & 検知したものがPlayerでない場合は、
         // 何も検知しなかった時のRaycastHit2Dクラスの形を返す
-        if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player")) {
+        if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
             return default;
         }
 

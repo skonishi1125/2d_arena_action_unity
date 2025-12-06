@@ -14,6 +14,9 @@ public class PlayerLevel : MonoBehaviour
     // GameManagerでLvUP時のUIを出すとか。
     public event Action<int> OnLevelUp;
 
+    // 経験値変化のイベント currentExp, reuiredExp
+    public event Action<int, int> OnExpChanged;
+
     private void Awake()
     {
         entityStatus = GetComponent<EntityStatus>();
@@ -70,8 +73,12 @@ public class PlayerLevel : MonoBehaviour
                 break;
             }
         }
+
+        // 経験値が更新されたことで発生するイベントの発火
+        // EXPバーの更新など。
+        var currentRequired = levelTable.GetLevelOfInfo(Level).requiredExp;
+        OnExpChanged?.Invoke(CurrentExp, currentRequired);
+
     }
-
-
 
 }
