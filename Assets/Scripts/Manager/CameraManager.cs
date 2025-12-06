@@ -17,9 +17,9 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
+        if (GameManager.Instance != null && GameManager.Instance.Player != null)
         {
-            playerHealth = GameManager.Instance.player.Health;
+            playerHealth = GameManager.Instance.Player.Health;
             if (playerHealth != null)
                 playerHealth.OnDied += HandleDeathShake;
         }
@@ -27,9 +27,9 @@ public class CameraManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
+        if (GameManager.Instance != null && GameManager.Instance.Player != null)
         {
-            playerHealth = GameManager.Instance.player.Health;
+            playerHealth = GameManager.Instance.Player.Health;
             if (playerHealth != null)
                 playerHealth.OnDied -= HandleDeathShake;
         }

@@ -42,14 +42,14 @@ public class Enemy : Entity
     }
     private void OnEnable()
     {
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-            GameManager.Instance.player.Health.OnDied += HandlePlayerDeath;
+        if (GameManager.Instance != null && GameManager.Instance.Player != null)
+            GameManager.Instance.Player.Health.OnDied += HandlePlayerDeath;
     }
 
     private void OnDisable()
     {
-        if (GameManager.Instance != null && GameManager.Instance.player != null)
-            GameManager.Instance.player.Health.OnDied -= HandlePlayerDeath;
+        if (GameManager.Instance != null && GameManager.Instance.Player != null)
+            GameManager.Instance.Player.Health.OnDied -= HandlePlayerDeath;
     }
 
 
@@ -76,7 +76,7 @@ public class Enemy : Entity
         base.Death();
 
         if (enemyReward != null)
-            GameManager.Instance.player.Level.AddExp(enemyReward.Exp);
+            GameManager.Instance.Player.Level.AddExp(enemyReward.Exp);
 
         stateMachine.ChangeState(deadState);
     }

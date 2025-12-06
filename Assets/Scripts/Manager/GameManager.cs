@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -12,16 +13,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    // Level, Health等を取得するためにPlayerを持たせる
-    [SerializeField] public Player player;
-
-    // ゲーム中の現状態
+    // ゲーム中の状態
     public GameState State { get; private set; } = GameState.Ready;
     [SerializeField] private float waveDuration = 30f; // この秒数生き残ればクリア
     private float remainingTime;
 
-    // スポナー
-    [SerializeField] private EnemySpawner enemySpawner;
+    // Level, Health等を取得するためにPlayerを持たせる
+    public Player Player { get; private set; }
+    public EnemySpawner EnemySpawner { get; private set; }
+    public UIResult UIResult { get; private set; }
 
     private void Awake()
     {
@@ -34,19 +34,73 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(Instance);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        StartGame();
-        player.Level.OnLevelUp += HandleLevelUp;
-        player.Health.OnDied += GameOver;
+        CacheSceneObjects();
+        InitGameForCurrentScene();
     }
-    private void OnDestroy()
+
+    private void OnEnable()
     {
-        player.Level.OnLevelUp -= HandleLevelUp;
-        player.Health.OnDied -= GameOver;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void CacheSceneObjects()
+    {
+        Player = FindFirstObjectByType<Player>();
+        EnemySpawner = FindFirstObjectByType<EnemySpawner>();
+        UIResult = FindFirstObjectByType<UIResult>();
+
+        if (Player != null)
+        {
+            // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
+            Player.Level.OnLevelUp -= HandleLevelUp;
+            Player.Health.OnDied -= GameOver;
+
+            Player.Level.OnLevelUp += HandleLevelUp;
+            Player.Health.OnDied += GameOver;
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Player等を取り直す
+        CacheSceneObjects();
+        InitGameForCurrentScene();
+    }
+
+    private void InitGameForCurrentScene()
+    {
+        // 開始時、リトライ時共通の初期化
+        Time.timeScale = 1f;
+        remainingTime = waveDuration;
+        State = GameState.Ready;
+
+        // シーン名で分岐してもいいし、タグでもよい
+        var scene = SceneManager.GetActiveScene();
+        if (scene.name == "BattleEasy")
+        {
+            StartGame();
+        }
+    }
+
+    private void HandleLevelUp(int newLevel)
+    {
+        // 例：スキル選択 State へ
+        State = GameState.LevelUp;
+
+        // TODO: Lv UPUI を出す、入力を止める、など
+        Debug.Log($"Level Up! New Level: {newLevel}");
+        Time.timeScale = .01f;
+
     }
 
     private void Update()
@@ -54,12 +108,14 @@ public class GameManager : MonoBehaviour
 
         if (State == GameState.LevelUp)
         {
+#if UNITY_EDITOR
             Debug.Log("Levelup.. U を押すとPlayingに戻ります");
             if (Input.GetKeyDown(KeyCode.U))
             {
                 Time.timeScale = 1f;
                 State = GameState.Playing;
             }
+#endif
         }
 
         if (State == GameState.Playing)
@@ -72,9 +128,12 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+        if (EnemySpawner == null)
+            return;
+
         State = GameState.Playing;
         remainingTime = waveDuration;
-        enemySpawner.BeginSpawn();
+        EnemySpawner.BeginSpawn();
     }
 
     private void ClearGame()
@@ -89,13 +148,11 @@ public class GameManager : MonoBehaviour
     private void EndGame(bool isClear)
     {
         State = GameState.Result;
-        enemySpawner.StopSpawn();
+        EnemySpawner.StopSpawn();
 
-        // TODO: UI表示など
-        Debug.Log(isClear ? "CLEAR!" : "GAME OVER");
-
-        // 後で：タイトルに戻る・リトライ etc.
+        UIResult.ShowResult(isClear);
     }
+
     public void GameOver()
     {
         if (State != GameState.Playing)
@@ -105,15 +162,10 @@ public class GameManager : MonoBehaviour
         EndGame(false);
     }
 
-    private void HandleLevelUp(int newLevel)
+    public void RetryGame()
     {
-        // 例：スキル選択 State へ
-        State = GameState.LevelUp;
-
-        // TODO: Lv UPUI を出す、入力を止める、など
-        Debug.Log($"Level Up! New Level: {newLevel}");
-        Time.timeScale = .01f;
-
+        var scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
 }
