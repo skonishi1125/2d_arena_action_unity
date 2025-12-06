@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         if (State != GameState.Playing)
             return;
 
+        Time.timeScale = 0.5f;
         EndGame(false);
     }
 

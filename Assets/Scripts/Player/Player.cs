@@ -118,11 +118,7 @@ public class Player : Entity
     public override void Death()
     {
         base.Death();
-
-        Time.timeScale = 0.5f;
-        CameraManager.Instance.DeathShake();
         stateMachine.ChangeState(deadState);
-
     }
 
     // イベントへの入口をはっきりさせるため、Deathと分けておく
