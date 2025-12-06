@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    // Playerのレベル
-    [SerializeField] public PlayerLevel playerLevel;
+    // Level, Health等を取得するためにPlayerを持たせる
+    [SerializeField] public Player player;
 
     // ゲーム中の現状態
     public GameState State { get; private set; } = GameState.Ready;
@@ -40,12 +40,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
-        playerLevel.OnLevelUp += HandleLevelUp;
+        player.Level.OnLevelUp += HandleLevelUp;
+        player.Health.OnDied += GameOver;
     }
     private void OnDestroy()
     {
-        if (playerLevel != null)
-            playerLevel.OnLevelUp -= HandleLevelUp;
+        player.Level.OnLevelUp -= HandleLevelUp;
+        player.Health.OnDied -= GameOver;
     }
 
     private void Update()
@@ -69,8 +70,6 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
-
     public void StartGame()
     {
         State = GameState.Playing;

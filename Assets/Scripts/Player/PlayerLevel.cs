@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerLevel : MonoBehaviour
 {
     private EntityStatus entityStatus;
+    private PlayerHealth playerHealth;
 
     [SerializeField] private PlayerLevelTable levelTable;
 
@@ -20,6 +21,7 @@ public class PlayerLevel : MonoBehaviour
     private void Awake()
     {
         entityStatus = GetComponent<EntityStatus>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void Start()
@@ -66,6 +68,7 @@ public class PlayerLevel : MonoBehaviour
                 Level++;
 
                 ApplyLevelStatus();
+                playerHealth.FullHeal();
                 OnLevelUp?.Invoke(Level);
             }
             else

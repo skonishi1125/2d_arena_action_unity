@@ -73,7 +73,7 @@ public class Enemy : Entity
     {
         base.Death();
         if (enemyReward != null)
-            GameManager.Instance.playerLevel.AddExp(enemyReward.Exp);
+            GameManager.Instance.player.Level.AddExp(enemyReward.Exp);
 
         stateMachine.ChangeState(deadState);
     }

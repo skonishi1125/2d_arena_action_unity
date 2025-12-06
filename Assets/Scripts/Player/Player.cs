@@ -8,6 +8,10 @@ public class Player : Entity
     // New Input System
     public PlayerInputSet input { get; private set; }
 
+    // GameManagerなど、Playerを持つObjectが参照するために使う
+    public PlayerHealth Health { get; private set; }
+    public PlayerLevel Level { get; private set; }
+
     // StateMachine
     // Playerの状態を別のコードでも見ることになるので、publicとしておくとよい
     //public StateMachine stateMachine { get; private set; }
@@ -77,6 +81,10 @@ public class Player : Entity
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "basicAttack");
         airAttackState = new PlayerAirAttackState(this, stateMachine, "airAttack");
         deadState = new PlayerDeadState(this, stateMachine, "dead");
+
+
+        Health = GetComponent<PlayerHealth>();
+        Level = GetComponent<PlayerLevel>();
     }
 
     protected override void Start()
