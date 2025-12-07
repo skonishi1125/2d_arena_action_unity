@@ -17,13 +17,13 @@ public class GameManager : MonoBehaviour
 
     // ゲーム中の状態
     public GameState State { get; private set; } = GameState.Ready;
-    [SerializeField] private float waveDuration = 30f; // この秒数生き残ればクリア
-    private float remainingTime;
+    //[SerializeField] private float waveDuration = 30f; // この秒数生き残ればクリア
+    //private float remainingTime;
 
     // Level, Health等を取得するためにPlayerを持たせる
     public Player Player { get; private set; }
-    public EnemySpawner EnemySpawner { get; private set; }
     public UIResult ResultUi { get; private set; }
+    public WaveManager WaveManager { get; private set; }
 
     private void Awake()
     {
@@ -61,12 +61,12 @@ public class GameManager : MonoBehaviour
         if (!LogHelper.AssertNotNull(Player, nameof(Player), this))
             return;
 
-        EnemySpawner = FindFirstObjectByType<EnemySpawner>();
-        if (!LogHelper.AssertNotNull(EnemySpawner, nameof(EnemySpawner), this))
-            return;
-
         ResultUi = FindFirstObjectByType<UIResult>();
         if (!LogHelper.AssertNotNull(ResultUi, nameof(ResultUi), this))
+            return;
+
+        WaveManager = FindFirstObjectByType<WaveManager>();
+        if (!LogHelper.AssertNotNull(WaveManager, nameof(WaveManager), this))
             return;
 
         CameraManager cameraManager = FindFirstObjectByType<CameraManager>();
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     {
         // 開始時、リトライ時共通の初期化
         Time.timeScale = 1f;
-        remainingTime = waveDuration;
+        //remainingTime = waveDuration;
         State = GameState.Ready;
 
         // Battle シーンではロード後すぐにゲームを開始
@@ -132,22 +132,19 @@ public class GameManager : MonoBehaviour
 #endif
         }
 
-        if (State == GameState.Playing)
-        {
-            remainingTime -= Time.deltaTime;
-            if (remainingTime <= 0f)
-                ClearGame();
-        }
+        //if (State == GameState.Playing)
+        //{
+        //    remainingTime -= Time.deltaTime;
+        //    if (remainingTime <= 0f)
+        //        ClearGame();
+        //}
 
     }
     public void StartGame()
     {
-        if (EnemySpawner == null)
-            return;
-
         State = GameState.Playing;
-        remainingTime = waveDuration;
-        EnemySpawner.BeginSpawn();
+        //remainingTime = waveDuration;
+        WaveManager.BeginStage();
     }
 
     // Dieに、まずSlowMotionを購読させて呼び出す。
@@ -177,6 +174,11 @@ public class GameManager : MonoBehaviour
         EndGame(false);
     }
 
+    // WaveManagerなどから、クリア通知を送るためのメソッド
+    public void SendStageClear()
+    {
+        ClearGame();
+    }
 
     private void ClearGame()
     {
@@ -191,7 +193,7 @@ public class GameManager : MonoBehaviour
     private void EndGame(bool isClear)
     {
         State = GameState.Result;
-        EnemySpawner.StopSpawn();
+        WaveManager?.StopStage();
         ResultUi.ShowResult(isClear);
     }
 

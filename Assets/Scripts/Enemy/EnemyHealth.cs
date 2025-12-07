@@ -5,8 +5,13 @@ public class EnemyHealth : EntityHealth
 {
     private Enemy enemy;
 
-    // 被弾時、UIMiniHealthBarを出すなど
+    // 被弾時、UIMiniHealthBarを出すなどの用途
+    // 特定のEnemyHealthだけに対するイベントなので、static不要
     public event Action OnTakeDamaged;
+
+    // WaveManager側で討伐したことの通知などの用途
+    // どのEnemyHealthにも関わらず紐づけたいので、staticを付与する。
+    public static event Action<EnemyHealth> OnAnyEnemyDied;
 
     protected override void Awake()
     {
@@ -34,6 +39,13 @@ public class EnemyHealth : EntityHealth
             enemy.TryEnterBattleState(attacker);
 
         OnTakeDamaged?.Invoke();
+    }
+
+
+    protected override void Die()
+    {
+        base.Die();
+        OnAnyEnemyDied?.Invoke(this);
     }
 
     private void UpdateEnemyHealthBar()
