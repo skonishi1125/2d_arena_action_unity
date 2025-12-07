@@ -11,7 +11,7 @@ public class EntityCombat : MonoBehaviour
     [SerializeField] private float targetCheckRadius;
     [SerializeField] private LayerMask whatIsTarget;
 
-    // クリティカル倍率
+    // Criticalになったとき、何倍にするか
     [SerializeField] private float criticalRate = 1.5f;
 
     private void Awake()
