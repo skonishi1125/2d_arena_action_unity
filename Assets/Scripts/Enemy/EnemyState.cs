@@ -15,9 +15,6 @@ public class EnemyState : EntityState
     {
         base.LogicUpdate();
 
-        if (Input.GetKeyDown(KeyCode.E))
-            stateMachine.ChangeState(enemy.attackState);
-
         // 全ての敵stateで、指定animパラメータの値にこちらを割り当てる
         // 速度が変更できる設定のanimatonは、数値に応じて早くなる
         anim.SetFloat("moveAnimSpeedMultiplier", enemy.moveAnimSpeedMultiplier);

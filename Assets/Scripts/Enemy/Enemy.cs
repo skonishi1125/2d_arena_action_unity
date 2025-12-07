@@ -41,6 +41,11 @@ public class Enemy : Entity
     {
         base.Awake();
         enemyReward = GetComponent<EnemyReward>();
+
+        // 設定されるべき値のチェック
+        if (!LogHelper.AssertNotNull(playerCheck, nameof(playerCheck), this))
+            return;
+
     }
     private void OnEnable()
     {

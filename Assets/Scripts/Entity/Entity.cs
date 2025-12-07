@@ -41,9 +41,24 @@ public abstract class Entity : MonoBehaviour
 
         // Components
         rb = GetComponent<Rigidbody2D>();
+        if (!LogHelper.AssertNotNull(rb, nameof(rb), this))
+            return;
+
         co = GetComponent<Collider2D>();
+        if (!LogHelper.AssertNotNull(co, nameof(co), this))
+            return;
+
         sr = GetComponentInChildren<SpriteRenderer>();
+        if (!LogHelper.AssertNotNull(sr, nameof(sr), this))
+            return;
+
         anim = GetComponentInChildren<Animator>();
+        if (!LogHelper.AssertNotNull(anim, nameof(anim), this))
+            return;
+
+        // 設定されるべき値のチェック
+        if (!LogHelper.AssertNotNull(groundCheck, nameof(groundCheck), this))
+            return;
     }
 
     protected virtual void Start()
