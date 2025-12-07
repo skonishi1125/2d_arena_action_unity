@@ -11,15 +11,18 @@ public class UIEnemyMiniHealthBar : MonoBehaviour
     private void Awake()
     {
         enemy = GetComponentInParent<Enemy>();
-        if (enemy != null)
-            enemyHealth = enemy.GetComponent<EnemyHealth>();
+        if (!LogHelper.AssertNotNull(enemy, nameof(enemy), this))
+            return;
 
-        Debug.Assert(slider != null, $"[{GetType().Name}] slider が見つかりません。");
-        if (slider != null)
-        {
-            isDisplayedHealthBar = false;
-            slider.SetActive(false);
-        }
+        enemyHealth = enemy.GetComponent<EnemyHealth>();
+        if (!LogHelper.AssertNotNull(enemyHealth, nameof(enemyHealth), this))
+            return;
+
+        if (!LogHelper.AssertNotNull(slider, nameof(slider), this))
+            return;
+
+        isDisplayedHealthBar = false;
+        slider.SetActive(false);
     }
 
     private void OnEnable()
@@ -46,11 +49,11 @@ public class UIEnemyMiniHealthBar : MonoBehaviour
         if (isDisplayedHealthBar)
             return;
 
-        if (slider != null)
-        {
-            slider.SetActive(true);
-            isDisplayedHealthBar = true;
-        }
+        if (!LogHelper.AssertNotNull(slider, nameof(slider), this))
+            return;
+
+        slider.SetActive(true);
+        isDisplayedHealthBar = true;
     }
 
 }

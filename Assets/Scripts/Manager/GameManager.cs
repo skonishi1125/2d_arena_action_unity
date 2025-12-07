@@ -58,23 +58,29 @@ public class GameManager : MonoBehaviour
     private void CacheSceneObjects()
     {
         Player = FindFirstObjectByType<Player>();
+        if (!LogHelper.AssertNotNull(Player, nameof(Player), this))
+            return;
+
         EnemySpawner = FindFirstObjectByType<EnemySpawner>();
+        if (!LogHelper.AssertNotNull(EnemySpawner, nameof(EnemySpawner), this))
+            return;
+
         ResultUi = FindFirstObjectByType<UIResult>();
+        if (!LogHelper.AssertNotNull(ResultUi, nameof(ResultUi), this))
+            return;
 
-        // ★ CameraManager の再バインド
-        var cameraManager = FindFirstObjectByType<CameraManager>();
-        if (cameraManager != null && Player != null)
-            cameraManager.Bind(Player.Health);
+        CameraManager cameraManager = FindFirstObjectByType<CameraManager>();
+        if (!LogHelper.AssertNotNull(cameraManager, nameof(CameraManager), this))
+            return;
 
-        if (Player != null)
-        {
-            // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
-            Player.Level.OnLevelUp -= HandleLevelUp;
-            Player.Health.OnDied -= SlowMotion;
+        cameraManager.Bind(Player.Health);
 
-            Player.Level.OnLevelUp += HandleLevelUp;
-            Player.Health.OnDied += SlowMotion;
-        }
+        // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
+        Player.Level.OnLevelUp -= HandleLevelUp;
+        Player.Health.OnDied -= SlowMotion;
+
+        Player.Level.OnLevelUp += HandleLevelUp;
+        Player.Health.OnDied += SlowMotion;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -186,12 +192,6 @@ public class GameManager : MonoBehaviour
     {
         State = GameState.Result;
         EnemySpawner.StopSpawn();
-
-        Debug.Assert(ResultUi != null, "[GameManager] UIResult が見つかりません");
-        // ゲームクラッシュ対策
-        if (ResultUi == null)
-            return;
-
         ResultUi.ShowResult(isClear);
     }
 
