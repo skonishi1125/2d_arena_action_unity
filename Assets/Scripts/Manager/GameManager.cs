@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
     Ready,
+    WaveIntro, // 3 2 1...と、カウントダウン
     Playing,
     LevelUp,
+    BossAlert,
     GameOverSlowing,
     Result
 }
@@ -15,13 +17,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    // ゲーム中の状態
+    // ゲーム画面全体の状態
     public GameState State { get; private set; } = GameState.Ready;
-    //[SerializeField] private float waveDuration = 30f; // この秒数生き残ればクリア
-    //private float remainingTime;
 
-    // Level, Health等を取得するためにPlayerを持たせる
     public Player Player { get; private set; }
+    public UIWaveIntro WaveIntroUi { get; private set; }
     public UIResult ResultUi { get; private set; }
     public WaveManager WaveManager { get; private set; }
 
@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour
         if (!LogHelper.AssertNotNull(Player, nameof(Player), this))
             return;
 
+        WaveIntroUi = FindFirstObjectByType<UIWaveIntro>();
+        if (!LogHelper.AssertNotNull(WaveIntroUi, nameof(WaveIntroUi), this))
+            return;
+
         ResultUi = FindFirstObjectByType<UIResult>();
         if (!LogHelper.AssertNotNull(ResultUi, nameof(ResultUi), this))
             return;
@@ -78,9 +82,13 @@ public class GameManager : MonoBehaviour
         // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
         Player.Level.OnLevelUp -= HandleLevelUp;
         Player.Health.OnDied -= SlowMotion;
+        WaveManager.OnStageCleared -= HandleClearGame;
+        WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
 
         Player.Level.OnLevelUp += HandleLevelUp;
         Player.Health.OnDied += SlowMotion;
+        WaveManager.OnStageCleared += HandleClearGame;
+        WaveIntroUi.OnFinished += HandleWaveIntroFinished;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -94,7 +102,6 @@ public class GameManager : MonoBehaviour
     {
         // 開始時、リトライ時共通の初期化
         Time.timeScale = 1f;
-        //remainingTime = waveDuration;
         State = GameState.Ready;
 
         // Battle シーンではロード後すぐにゲームを開始
@@ -112,7 +119,7 @@ public class GameManager : MonoBehaviour
         State = GameState.LevelUp;
 
         // TODO: Lv UPUI を出す、入力を止める、など
-        Debug.Log($"Level Up! New Level: {newLevel}");
+        //Debug.Log($"Level Up! New Level: {newLevel}");
         Time.timeScale = .01f;
 
     }
@@ -122,30 +129,33 @@ public class GameManager : MonoBehaviour
 
         if (State == GameState.LevelUp)
         {
-#if UNITY_EDITOR
+            #if UNITY_EDITOR
             Debug.Log("Levelup.. U を押すとPlayingに戻ります");
             if (Input.GetKeyDown(KeyCode.U))
             {
                 Time.timeScale = 1f;
                 State = GameState.Playing;
             }
-#endif
+            #endif
         }
-
-        //if (State == GameState.Playing)
-        //{
-        //    remainingTime -= Time.deltaTime;
-        //    if (remainingTime <= 0f)
-        //        ClearGame();
-        //}
 
     }
     public void StartGame()
     {
+        State = GameState.WaveIntro;
+        WaveIntroUi.Play();
+    }
+
+    private void HandleWaveIntroFinished()
+    {
+        // 他の状態から呼ばれた場合は無視
+        if (State != GameState.WaveIntro)
+            return;
+
         State = GameState.Playing;
-        //remainingTime = waveDuration;
         WaveManager.BeginStage();
     }
+
 
     // Dieに、まずSlowMotionを購読させて呼び出す。
     // スローになって倒れた後、GameOverのSceneに遷移。
@@ -174,8 +184,8 @@ public class GameManager : MonoBehaviour
         EndGame(false);
     }
 
-    // WaveManagerなどから、クリア通知を送るためのメソッド
-    public void SendStageClear()
+    // イベント購読用
+    public void HandleClearGame()
     {
         ClearGame();
     }

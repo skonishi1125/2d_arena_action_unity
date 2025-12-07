@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -10,6 +11,9 @@ public class WaveManager : MonoBehaviour
     private int aliveEnemyCount;
     private Coroutine stageRoutine;
     private bool isRunning;
+
+    // Stageクリア通知 GameManagerなどで購読する
+    public event Action OnStageCleared;
 
     private void OnEnable()
     {
@@ -60,8 +64,7 @@ public class WaveManager : MonoBehaviour
 
         // ステージ終了( = 全てのWaveの呼び出し完了)
         isRunning = false;
-        GameManager.Instance?.SendStageClear();
-        
+        OnStageCleared?.Invoke();
     }
 
     // Wave単体の進行を担当
