@@ -8,7 +8,6 @@ public enum GameState
     WaveIntro, // 3 2 1...と、カウントダウン
     Playing,
     LevelUp,
-    BossAlert,
     GameOverSlowing,
     Result
 }
@@ -22,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public Player Player { get; private set; }
     public UIWaveIntro WaveIntroUi { get; private set; }
+    public UIBossAlert BossAlertUi { get; private set; }
     public UIResult ResultUi { get; private set; }
     public WaveManager WaveManager { get; private set; }
 
@@ -65,6 +65,10 @@ public class GameManager : MonoBehaviour
         if (!LogHelper.AssertNotNull(WaveIntroUi, nameof(WaveIntroUi), this))
             return;
 
+        BossAlertUi = FindFirstObjectByType<UIBossAlert>();
+        if (!LogHelper.AssertNotNull(BossAlertUi, nameof(BossAlertUi), this))
+            return;
+
         ResultUi = FindFirstObjectByType<UIResult>();
         if (!LogHelper.AssertNotNull(ResultUi, nameof(ResultUi), this))
             return;
@@ -83,11 +87,13 @@ public class GameManager : MonoBehaviour
         Player.Level.OnLevelUp -= HandleLevelUp;
         Player.Health.OnDied -= SlowMotion;
         WaveManager.OnStageCleared -= HandleClearGame;
+        WaveManager.OnBossWaveStarted -= HandleBossWaveStarted;
         WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
 
         Player.Level.OnLevelUp += HandleLevelUp;
         Player.Health.OnDied += SlowMotion;
         WaveManager.OnStageCleared += HandleClearGame;
+        WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
         WaveIntroUi.OnFinished += HandleWaveIntroFinished;
     }
 
@@ -129,14 +135,14 @@ public class GameManager : MonoBehaviour
 
         if (State == GameState.LevelUp)
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Debug.Log("Levelup.. U を押すとPlayingに戻ります");
             if (Input.GetKeyDown(KeyCode.U))
             {
                 Time.timeScale = 1f;
                 State = GameState.Playing;
             }
-            #endif
+#endif
         }
 
     }
@@ -154,6 +160,14 @@ public class GameManager : MonoBehaviour
 
         State = GameState.Playing;
         WaveManager.BeginStage();
+    }
+
+    private void HandleBossWaveStarted(WaveConfig wave)
+    {
+        if (State != GameState.Playing)
+            return;
+
+        BossAlertUi?.Play();
     }
 
 

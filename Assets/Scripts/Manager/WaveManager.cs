@@ -7,10 +7,13 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private StageConfig stageConfig;
     [SerializeField] private EnemySpawnPoints enemySpawnPoints;
 
-    private int currentWaveIndex = -1;
+    private int currentWaveIndex = -1; // なぜかハイライトされていないが使ってる
     private int aliveEnemyCount;
     private Coroutine stageRoutine;
     private bool isRunning;
+
+    // ボスウェーブであることの通知
+    public event Action<WaveConfig> OnBossWaveStarted;
 
     // Stageクリア通知 GameManagerなどで購読する
     public event Action OnStageCleared;
@@ -70,6 +73,10 @@ public class WaveManager : MonoBehaviour
     // Wave単体の進行を担当
     private IEnumerator RunWave(WaveConfig wave)
     {
+        // ボス戦なら、通知を入れる
+        if (wave.isBossWave)
+            OnBossWaveStarted?.Invoke(wave);
+
         // Wave開始前待機時間
         yield return new WaitForSeconds(wave.startDelay);
 

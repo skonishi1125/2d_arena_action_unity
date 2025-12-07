@@ -1475,9 +1475,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootBossAlert: {fileID: 8053882214483125482}
   alertText: {fileID: 6169070035642773404}
-  redScreen: {fileID: 95905071401771146}
   displayTime: 5
   blinkTime: 0.5
+  redScreen: {fileID: 95905071401771146}
+  maxAlpha: 0.4
+  minAlpha: 0
+  performTime: 0.8
+  loopCount: 3
 --- !u!1 &5637122248261205951
 GameObject:
   m_ObjectHideFlags: 0
