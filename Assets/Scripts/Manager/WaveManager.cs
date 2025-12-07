@@ -11,6 +11,7 @@ public class WaveManager : MonoBehaviour
     private int aliveEnemyCount;
     private Coroutine stageRoutine;
     private bool isRunning;
+    private bool isBossDefeated = false;
 
     // ボスウェーブであることの通知
     public event Action<WaveConfig> OnBossWaveStarted;
@@ -108,6 +109,11 @@ public class WaveManager : MonoBehaviour
                 while (aliveEnemyCount > 0 && isRunning)
                     yield return null;
                 break;
+
+            case WaveClearType.KillBoss:
+                while (! isBossDefeated && isRunning)
+                    yield return null;
+                break;
         }
     }
 
@@ -138,6 +144,13 @@ public class WaveManager : MonoBehaviour
             return;
 
         aliveEnemyCount--;
+
+        if (enemyHealth.IsBoss)
+        {
+            isBossDefeated = true;
+            OnStageCleared?.Invoke();
+        }
+
     }
 
 }

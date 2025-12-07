@@ -430,6 +430,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 6863061273056700301}
+  isBoss: 0
   battleMoveSpeed: 3
   attackDistance: 1
   destroyWaitTime: 1
@@ -498,6 +499,7 @@ MonoBehaviour:
   knockbackDuration: 0.2
   heavyKnockbackDuration: 0.7
   heavyDamageTreshold: 0.3
+  IsBoss: 0
 --- !u!114 &7389291929198543074
 MonoBehaviour:
   m_ObjectHideFlags: 0

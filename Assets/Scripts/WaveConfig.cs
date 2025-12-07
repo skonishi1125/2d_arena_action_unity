@@ -3,7 +3,8 @@
 public enum WaveClearType
 {
     SurviveTime,   // 一定時間生き延びる
-    KillAll        // 全滅させる(ボスなど討伐が必須なWaveはこっち）
+    KillAll,       // 相手を全滅
+    KillBoss,      // ボス撃破(敵が残っていても、倒せばOK)
 }
 
 [CreateAssetMenu(menuName = "Game/WaveConfig")]

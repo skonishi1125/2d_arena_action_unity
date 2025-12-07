@@ -5,6 +5,9 @@ public class EnemyHealth : EntityHealth
 {
     private Enemy enemy;
 
+    // Enemy.csに持たせたIsBossを扱う
+    public bool IsBoss;
+
     // 被弾時、UIMiniHealthBarを出すなどの用途
     // 特定のEnemyHealthだけに対するイベントなので、static不要
     public event Action OnTakeDamaged;
@@ -16,7 +19,12 @@ public class EnemyHealth : EntityHealth
     protected override void Awake()
     {
         base.Awake();
+
         enemy = GetComponent<Enemy>();
+        if (!LogHelper.AssertNotNull(enemy, nameof(enemy), this))
+            return;
+
+        IsBoss = enemy.IsBoss;
         UpdateEnemyHealthBar();
 
     }

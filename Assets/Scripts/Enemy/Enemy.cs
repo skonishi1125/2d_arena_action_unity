@@ -11,6 +11,8 @@ public class Enemy : Entity
     public EnemyAttackState attackState;
     public EnemyDeadState deadState;
 
+    [SerializeField] private bool isBoss;
+
     [Header("Battle Detail")]
     public float battleMoveSpeed = 3f; // battleState時のmove速度
     public float attackDistance = 2f; // 敵がAttack移行するために必要な距離
@@ -25,7 +27,6 @@ public class Enemy : Entity
     [Range(0, 2)]
     public float moveAnimSpeedMultiplier = 1; // アニメーションスピード
 
-
     [Header("Player detection")]
     [SerializeField] private LayerMask whatIsPlayer; // 感知距離のobjectがPlayerかどうか
     [SerializeField] private Transform playerCheck; // 感知用Raycastの始点
@@ -34,6 +35,7 @@ public class Enemy : Entity
     // 攻撃されたときのplayer transform情報
     public Transform player { get; private set; }
 
+    public bool IsBoss => isBoss;
 
     protected override void Awake()
     {
