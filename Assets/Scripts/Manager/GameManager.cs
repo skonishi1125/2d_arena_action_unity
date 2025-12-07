@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     // Level, Health等を取得するためにPlayerを持たせる
     public Player Player { get; private set; }
     public EnemySpawner EnemySpawner { get; private set; }
-    public UIResult UIResult { get; private set; }
+    public UIResult ResultUi { get; private set; }
 
     private void Awake()
     {
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         Player = FindFirstObjectByType<Player>();
         EnemySpawner = FindFirstObjectByType<EnemySpawner>();
-        UIResult = FindFirstObjectByType<UIResult>();
+        ResultUi = FindFirstObjectByType<UIResult>();
 
         // ★ CameraManager の再バインド
         var cameraManager = FindFirstObjectByType<CameraManager>();
@@ -187,12 +187,12 @@ public class GameManager : MonoBehaviour
         State = GameState.Result;
         EnemySpawner.StopSpawn();
 
-        Debug.Assert(UIResult != null, "[GameManager] UIResult が見つかりません");
+        Debug.Assert(ResultUi != null, "[GameManager] UIResult が見つかりません");
         // ゲームクラッシュ対策
-        if (UIResult == null)
+        if (ResultUi == null)
             return;
 
-        UIResult.ShowResult(isClear);
+        ResultUi.ShowResult(isClear);
     }
 
     public void RetryGame()

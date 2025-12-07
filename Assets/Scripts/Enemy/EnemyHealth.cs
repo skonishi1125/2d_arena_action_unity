@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class EnemyHealth : EntityHealth
 {
     private Enemy enemy;
+
+    // 被弾時、UIMiniHealthBarを出すなど
+    public event Action OnTakeDamaged;
 
     protected override void Awake()
     {
@@ -29,6 +33,7 @@ public class EnemyHealth : EntityHealth
         if (attacker.GetComponent<Player>() != null)
             enemy.TryEnterBattleState(attacker);
 
+        OnTakeDamaged?.Invoke();
     }
 
     private void UpdateEnemyHealthBar()
