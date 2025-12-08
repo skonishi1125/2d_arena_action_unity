@@ -59,6 +59,7 @@ public class EnemyBattleState : EnemyState
         return Mathf.Abs(player.position.x - enemy.transform.position.x);
     }
 
+    // BattleStateでPlayerの向きを取るために使う
     private int DirectionToPlayer()
     {
         if (player == null)

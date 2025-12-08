@@ -740,7 +740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootWaveIntro: {fileID: 5637122248261205951}
   countdownText: {fileID: 4929688496993954141}
-  countdownTime: 1
+  countdownTime: 5
 --- !u!1 &2446975403471428271
 GameObject:
   m_ObjectHideFlags: 0
