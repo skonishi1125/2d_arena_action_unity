@@ -15,6 +15,15 @@ public class PlayerAirAttackState : PlayerAirState
         rb.gravityScale = 0f;
 
         rb.linearVelocity = Vector2.zero; // 空中攻撃したとき、慣性を完全に止める
+
+        // ダメージ倍率設定
+        float dmgMul = player.airAttackDamageMultiplier;
+        player.EntityCombat.SetDamageMultiplier(dmgMul);
+
+        // KB設定
+        Vector2 kbPower = player.airAttackKnockbackPower;
+        player.EntityCombat.SetKnockback(kbPower, player.airAttackKnockbackDuration);
+
     }
 
     public override void PhysicsUpdate()

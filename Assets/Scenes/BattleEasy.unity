@@ -10612,6 +10612,9 @@ MonoBehaviour:
   - 0.15
   - 0.15
   - 0.5
+  airAttackDamageMultiplier: 1
+  airAttackKnockbackPower: {x: 1, y: 2}
+  airAttackKnockbackDuration: 0.15
 --- !u!114 &1054026952234860205
 MonoBehaviour:
   m_ObjectHideFlags: 0

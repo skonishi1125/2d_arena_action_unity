@@ -17,10 +17,16 @@ public class PlayerBasicAttackState : PlayerState
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
         if (comboLimit != player.basicAttackVelocities.Length)
-            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とplayer.attackVelocitiesの設定値が一致していません。");
+            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とbasicAttackVelocitiesの設定値が一致していません。");
 
         if (comboLimit != player.basicAttackDamageMultipliers.Length)
-            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とplayer.attackVelocitiesの設定値が一致していません。");
+            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とbasicAttackDamageMultipliersの設定値が一致していません。");
+
+        if (comboLimit != player.basicAttackKnockbackPowers.Length)
+            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とbasicAttackKnockbackPowersの設定値が一致していません。");
+
+        if (comboLimit != player.basicAttackKnockbackDurations.Length)
+            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とbasicAttackKnockbackDurationsの設定値が一致していません。");
     }
 
     public override void Enter()

@@ -58,7 +58,9 @@ public class Player : Entity
     public float[] basicAttackKnockbackDurations; // 3コンボ攻撃のふっとばし時間
 
     [Header("Air Attack damage multipliers")]
-    // todo...
+    public float airAttackDamageMultiplier;
+    public Vector2 airAttackKnockbackPower;
+    public float airAttackKnockbackDuration;
 
 
 

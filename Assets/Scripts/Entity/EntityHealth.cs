@@ -111,7 +111,6 @@ public class EntityHealth : MonoBehaviour, IDamagable
     // ダメージの割合と最大HPを比較し、大ダメージならノックバックを高める
     private bool IsHeavyKnockback(float damage)
     {
-        Debug.Log(damage / entityStatus.GetMaxHp() > heavyDamageTreshold);
         return damage / entityStatus.GetMaxHp() > heavyDamageTreshold;
     }
 
