@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: darkknightAttack
+  m_Name: darkknightDashAttack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -45,10 +45,18 @@ AnimationClip:
     - time: 0.9166667
       value: {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - time: 1
-      value: {fileID: -4155135438839679827, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+      value: {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - time: 1.0833334
-      value: {fileID: 4783727422051513066, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+      value: {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - time: 1.1666666
+      value: {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - time: 1.25
+      value: {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - time: 1.3333334
+      value: {fileID: -4155135438839679827, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - time: 1.4166666
+      value: {fileID: 4783727422051513066, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - time: 1.5
       value: {fileID: -2569790779938362744, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     attribute: m_Sprite
     path: 
@@ -84,6 +92,10 @@ AnimationClip:
     - {fileID: 2299589306422563901, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - {fileID: 1991157460291176072, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
+    - {fileID: 9016084704949073607, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - {fileID: -4155135438839679827, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - {fileID: 4783727422051513066, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
     - {fileID: -2569790779938362744, guid: 9fc4cae8a24e3204cbeca9d82e8f0eee, type: 3}
@@ -92,7 +104,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.25
+    m_StopTime: 1.5833334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -126,14 +138,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1
+  - time: 1.3333334
     functionName: EndContinuousAttackTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.1666666
+  - time: 1.3333334
+    functionName: xVelocityZero
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.5
     functionName: CurrentStateTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

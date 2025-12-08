@@ -29,8 +29,8 @@ public class Enemy : Entity
 
     [Header("Player detection")]
     [SerializeField] private LayerMask whatIsPlayer; // 感知距離のobjectがPlayerかどうか
-    [SerializeField] private Transform playerCheck; // 感知用Raycastの始点
-    [SerializeField] private float playerCheckDistance = 10f; // 感知距離
+    [SerializeField] protected Transform playerCheck; // 感知用Raycastの始点
+    [SerializeField] protected float playerCheckDistance = 10f; // 感知距離
 
     // 攻撃されたときのplayer transform情報
     public Transform player { get; private set; }
@@ -142,20 +142,33 @@ public class Enemy : Entity
     {
         base.OnDrawGizmos();
 
+        OnDrawBattleGizmos();
+    }
+
+    protected virtual void OnDrawBattleGizmos()
+    {
+        OnDrawGroundToBattleGizmos();
+        OnDrawBattleToAttackGizmos();
+    }
+
+    protected virtual void OnDrawGroundToBattleGizmos()
+    {
         // GroundState -> Battle へと移行するための距離
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(
             playerCheck.position,
             new Vector3(playerCheck.position.x + (facingDir * playerCheckDistance), playerCheck.position.y)
         );
+    }
 
+    protected virtual void OnDrawBattleToAttackGizmos()
+    {
         // Battle -> Attack へと移行するための距離
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(
             playerCheck.position,
             new Vector3(playerCheck.position.x + (facingDir * attackDistance), playerCheck.position.y)
         );
-
     }
 
 }

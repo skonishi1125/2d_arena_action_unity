@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 684245993068890218}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,25 +306,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2f8417dd2636b428a50f9fb5354816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckDistance: 1.8
+  groundCheckDistance: 1.4
   wallCheckDistance: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 2913337970743281282}
-  isBoss: 1
+  isBoss: 0
   battleMoveSpeed: 3
-  attackDistance: 6
+  attackDistance: 5
   destroyWaitTime: 2
   idleTime: 2
   moveSpeed: 2
-  moveAnimSpeedMultiplier: 1
+  moveAnimSpeedMultiplier: 1.667
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
   playerCheck: {fileID: 8015241139203648426}
   playerCheckDistance: 10
-  stubAttackXVelocity: 15
+  dashAttackDistance: 5
+  dashAttackXVelocity: 10
 --- !u!114 &8930257670324052576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +362,7 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+  continuousInterval: 0.3
   criticalRate: 1.5
 --- !u!114 &9066781628352994402
 MonoBehaviour:

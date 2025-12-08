@@ -20,12 +20,18 @@ public class EnemyBattleState : EnemyState
     {
         base.LogicUpdate();
 
+        TryStartAttack();
+    }
+
+    // virtualとして、DarkKnightなどでオーバーライドできるようにする
+    protected virtual void TryStartAttack()
+    {
         if (WithinAttackRange())
         {
             stateMachine.ChangeState(enemy.attackState);
         }
-
     }
+
 
     public override void PhysicsUpdate()
     {
@@ -38,7 +44,7 @@ public class EnemyBattleState : EnemyState
 
 
     // Playerとの距離が、攻撃範囲より小さくなったらtrueを返す
-    private bool WithinAttackRange()
+    protected bool WithinAttackRange()
     {
         return DistanceToPlayer() < enemy.attackDistance;
     }

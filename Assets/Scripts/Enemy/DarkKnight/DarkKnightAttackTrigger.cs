@@ -14,7 +14,12 @@ public class DarkKnightAttackTrigger : EntityAnimationTrigger
     // AttackTriggerをフレームにつけて持続攻撃にする
     private void xVelocityMultiplier ()
     {
-        darkKnight.SetVelocity(darkKnight.stubAttackXVelocity * darkKnight.facingDir, 0f);
+        darkKnight.SetVelocity(darkKnight.dashAttackXVelocity * darkKnight.facingDir, 0f);
+    }
+
+    private void xVelocityZero()
+    {
+        darkKnight.SetVelocity(0f, 0f);
     }
 
 }
