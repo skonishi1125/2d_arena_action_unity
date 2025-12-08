@@ -11,6 +11,12 @@ public class EntityCombat : MonoBehaviour
     [SerializeField] private float targetCheckRadius;
     [SerializeField] private LayerMask whatIsTarget;
 
+    // 突進など持続攻撃
+    [Header("Continuous Attack")]
+    [SerializeField] private float continuousInterval = .3f; // 何秒ごとにダメージを与えるか
+    private bool isContinuousAttacking = false;
+    private float continuousTimer = 0f;
+
     // Criticalになったとき、何倍にするか
     [SerializeField] private float criticalRate = 1.5f;
 
@@ -20,6 +26,12 @@ public class EntityCombat : MonoBehaviour
         entityStatus = GetComponent<EntityStatus>();
     }
 
+    private void Update()
+    {
+        HandleContinuousAttack();
+    }
+
+    // 通常 単発攻撃
     public void PerformAttack()
     {
         foreach (Collider2D target in GetDetectedColliders())
@@ -52,6 +64,34 @@ public class EntityCombat : MonoBehaviour
 
         }
     }
+
+    // 持続攻撃中かどうかの判定
+    private void HandleContinuousAttack()
+    {
+        if (!isContinuousAttacking)
+            return;
+
+        continuousTimer -= Time.deltaTime;
+        if (continuousTimer <= 0f)
+        {
+            continuousTimer = continuousInterval;
+            PerformAttack();
+        }
+    }
+
+    // 持続攻撃開始
+    public void StartContinuousAttack()
+    {
+        continuousTimer = 0f;         // すぐ 1 発目を撃ちたければ 0
+        isContinuousAttacking = true;
+    }
+
+    // 持続攻撃終了
+    public void StopContinuousAttack()
+    {
+        isContinuousAttacking = false;
+    }
+
 
     // 回避率を計算し、その結果を返す
     private bool IsEvaded(EntityStatus attacker, EntityStatus defender)

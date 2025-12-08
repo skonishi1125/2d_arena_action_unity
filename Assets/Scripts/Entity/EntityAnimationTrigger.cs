@@ -16,8 +16,22 @@ public class EntityAnimationTrigger : MonoBehaviour
         entity.CallAnimationTrigger();
     }
 
+    // 単発攻撃
     protected virtual void AttackTrigger()
     {
         entityCombat.PerformAttack();
     }
+
+    // 持続攻撃: 開始
+    protected virtual void StartContinuousAttackTrigger()
+    {
+        entityCombat.StartContinuousAttack();
+    }
+
+    // 持続攻撃: 終了（アニメイベント用）
+    protected virtual void EndContinuousAttackTrigger()
+    {
+        entityCombat.StopContinuousAttack();
+    }
+
 }
