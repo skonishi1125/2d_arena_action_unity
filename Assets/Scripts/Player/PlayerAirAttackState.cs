@@ -32,7 +32,7 @@ public class PlayerAirAttackState : PlayerAirState
         // base.PhysicsUpdate();
 
         // 攻撃中に着地したら、Idle
-        if(player.groundDetected)
+        if (player.groundDetected)
         {
             stateMachine.ChangeState(player.idleState);
             return;
@@ -59,6 +59,8 @@ public class PlayerAirAttackState : PlayerAirState
     {
         base.Exit();
         rb.gravityScale = originalGravityScale;
+        player.EntityCombat.ResetDamageMultiplier();
+        player.EntityCombat.ResetKnockback();
     }
 
 

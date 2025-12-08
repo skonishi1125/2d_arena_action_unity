@@ -11,9 +11,9 @@ public class DarkKnightBattleState : EnemyBattleState
         Dash
     }
 
-    public DarkKnightBattleState(DarkKnight enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
+    public DarkKnightBattleState(DarkKnight darkKnight, StateMachine stateMachine, string animBoolName) : base(darkKnight, stateMachine, animBoolName)
     {
-        darkKnight = enemy;
+        this.darkKnight = darkKnight;
     }
 
     protected override void TryStartAttack()

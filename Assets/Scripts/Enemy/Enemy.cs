@@ -32,7 +32,7 @@ public class Enemy : Entity
     [SerializeField] protected Transform playerCheck; // 感知用Raycastの始点
     [SerializeField] protected float playerCheckDistance = 10f; // 感知距離
 
-    [Header("Common Attack Details")]
+    [Header("Common Attack Details(non-boss)")]
     public float commonAttackDamageMultiplier;
     public Vector2 commonAttackKnockbackPower;
     public float commonAttackKnockbackDuration;

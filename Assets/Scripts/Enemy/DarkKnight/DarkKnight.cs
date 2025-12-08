@@ -7,10 +7,16 @@ public class DarkKnight : Enemy
 
     [Header("Melee Attack")]
     [SerializeField] public float meleeAttackDistance; // 近距離攻撃感知
+    public float meleeAttackDamageMultiplier;
+    public Vector2 meleeAttackKnockbackPower;
+    public float meleeAttackKnockbackDuration;
 
     [Header("Dash Attack")]
     [SerializeField] public float dashAttackDistance; // ダッシュ攻撃感知距離
     [SerializeField] public float dashAttackXVelocity;// x加速度
+    public float dashAttackDamageMultiplier;
+    public Vector2 dashAttackKnockbackPower;
+    public float dashAttackKnockbackDuration;
 
     protected override void Awake()
     {
