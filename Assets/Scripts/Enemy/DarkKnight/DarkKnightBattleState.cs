@@ -11,16 +11,15 @@ public class DarkKnightBattleState : EnemyBattleState
     protected override void TryStartAttack()
     {
         // baseの処理は雑魚用の記載なので、呼ばない
-        base.TryStartAttack();
+        // (attackDistanceで制御しないようにする)
+        //base.TryStartAttack();
 
-        Transform player = enemy.GetPlayerReference();
+        Transform player = darkKnight.GetPlayerReference();
         if (player == null)
             return;
 
-        float distance = Mathf.Abs(player.position.x - enemy.transform.position.x);
-
         // 例：まずはダッシュ攻撃に入る条件だけ作る
-        if (distance <= darkKnight.dashAttackDistance)
+        if (WithinAttackRange())
         {
             stateMachine.ChangeState(darkKnight.dashAttackState);
         }
@@ -29,5 +28,13 @@ public class DarkKnightBattleState : EnemyBattleState
         // else if (distance <= meleeDistance) { ... }
     }
 
+    protected override bool WithinAttackRange()
+    {
+        // 先に近距離を判定(予定)
 
+        // その後、ダッシュを判定
+        // とすることで、なんとかなりそう
+        // BoolじゃなくEnumで結果を返して、ChangeStateはSwitchで分岐させるとか？
+        return DistanceToPlayer() < darkKnight.dashAttackDistance;
+    }
 }

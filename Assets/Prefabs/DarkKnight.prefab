@@ -172,7 +172,7 @@ Transform:
   m_GameObject: {fileID: 1639217629250222426}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -0.8, z: 0}
+  m_LocalPosition: {x: 1.95, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -314,7 +314,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2913337970743281282}
   isBoss: 0
   battleMoveSpeed: 3
-  attackDistance: 5
+  attackDistance: 0
   destroyWaitTime: 2
   idleTime: 2
   moveSpeed: 2
@@ -324,7 +324,7 @@ MonoBehaviour:
     m_Bits: 128
   playerCheck: {fileID: 8015241139203648426}
   playerCheckDistance: 10
-  dashAttackDistance: 5
+  dashAttackDistance: 7
   dashAttackXVelocity: 10
 --- !u!114 &8930257670324052576
 MonoBehaviour:

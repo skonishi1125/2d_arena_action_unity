@@ -44,13 +44,13 @@ public class EnemyBattleState : EnemyState
 
 
     // Playerとの距離が、攻撃範囲より小さくなったらtrueを返す
-    protected bool WithinAttackRange()
+    protected virtual bool WithinAttackRange()
     {
         return DistanceToPlayer() < enemy.attackDistance;
     }
 
     // 絶対値で、playerのx座標 - 敵のx座標の結果を返す
-    private float DistanceToPlayer()
+    protected float DistanceToPlayer()
     {
         // 感知できない場合は、遠い位置にいるため最大値を返しておく
         if (player == null)
