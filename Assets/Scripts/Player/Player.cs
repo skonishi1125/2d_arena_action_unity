@@ -51,13 +51,13 @@ public class Player : Entity
     [SerializeField] private float airAttackFallSpeed = -1.5f; // 攻撃中にゆっくり落ちる速度（負の値）
     [SerializeField] private float airAttackVerticalAccel = 10f; // どのくらいの速さでtargetVyに近づけるか
 
-    [Header("Basic Attack damage multipliers")]
+    [Header("Basic Attack Details")]
     public Vector2[] basicAttackVelocities; // 3コンボ攻撃の各種x加速度 技それぞれに持つ。
     public float[] basicAttackDamageMultipliers; // 3コンボ攻撃の攻撃倍率
     public Vector2[] basicAttackKnockbackPowers; // 3コンボ攻撃の吹っ飛ばし力
     public float[] basicAttackKnockbackDurations; // 3コンボ攻撃のふっとばし時間
 
-    [Header("Air Attack damage multipliers")]
+    [Header("Air Attack Details")]
     public float airAttackDamageMultiplier;
     public Vector2 airAttackKnockbackPower;
     public float airAttackKnockbackDuration;

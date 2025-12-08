@@ -12,5 +12,13 @@ public class EnemyAttackState : EnemyState
 
         if (triggerCalled)
             stateMachine.ChangeState(enemy.battleState);
+
+        // ダメージ倍率設定
+        float dmgMul = enemy.commonAttackDamageMultiplier;
+        enemy.EntityCombat.SetDamageMultiplier(dmgMul);
+
+        // KB設定
+        Vector2 kbPower = enemy.commonAttackKnockbackPower;
+        enemy.EntityCombat.SetKnockback(kbPower, enemy.commonAttackKnockbackDuration);
     }
 }
