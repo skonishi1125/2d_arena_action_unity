@@ -5,8 +5,10 @@ using UnityEngine;
 // 敵味方共通で使用する仕組みをまとめる
 public abstract class Entity : MonoBehaviour
 {
-    protected StateMachine stateMachine;
+    // ダメージ倍率,KBの割当てをするため、publicとする
     public EntityCombat EntityCombat;
+
+    protected StateMachine stateMachine;
 
     [Header("Components")]
     public Rigidbody2D rb { get; private set; } // moveStateがrbを使って速度を弄るため。
@@ -38,8 +40,8 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        stateMachine = new StateMachine();
         EntityCombat = GetComponent<EntityCombat>();
+        stateMachine = new StateMachine();
 
         // Components
         rb = GetComponent<Rigidbody2D>();

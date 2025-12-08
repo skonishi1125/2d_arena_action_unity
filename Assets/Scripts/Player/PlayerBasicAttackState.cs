@@ -16,7 +16,7 @@ public class PlayerBasicAttackState : PlayerState
 
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
-        if (comboLimit != player.attackVelocities.Length)
+        if (comboLimit != player.basicAttackVelocities.Length)
             Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とplayer.attackVelocitiesの設定値が一致していません。");
 
         if (comboLimit != player.basicAttackDamageMultipliers.Length)
@@ -35,9 +35,15 @@ public class PlayerBasicAttackState : PlayerState
         // アニメ設定
         anim.SetInteger("basicAttackIndex", comboIndex);
 
-        // 倍率設定
+        // ダメージ倍率設定
         float dmgMul = player.basicAttackDamageMultipliers[comboIndex - 1];
         player.EntityCombat.SetDamageMultiplier(dmgMul);
+
+        // KB設定
+        // ノックバック（大きさだけ設定。向きは受け手側で決める）
+        Vector2 kbPower = player.basicAttackKnockbackPowers[comboIndex - 1];
+        player.EntityCombat.SetKnockback(kbPower, player.basicAttackKnockbackDurations[comboIndex - 1]);
+
 
         ApplyAttackVelocity();
     }
@@ -73,8 +79,9 @@ public class PlayerBasicAttackState : PlayerState
     {
         base.Exit();
 
-        // 攻撃を抜けたので倍率をデフォルトに戻す
+        // 攻撃を抜けたのでダメージ倍率, KBをデフォルトに戻す
         player.EntityCombat.ResetDamageMultiplier();
+        player.EntityCombat.ResetKnockback();
 
         comboIndex++;
         lastTimeAttacked = Time.time;
@@ -97,7 +104,7 @@ public class PlayerBasicAttackState : PlayerState
         attackVelocityTimer = player.attackVelocityDuration;
         // プレイヤーが左右入力していたら、攻撃に横方向の加速度を加える
         if (player.moveInput.x != 0)
-            player.SetVelocity(player.attackVelocities[comboIndex - 1].x * attackDir, player.attackVelocities[comboIndex - 1].y);
+            player.SetVelocity(player.basicAttackVelocities[comboIndex - 1].x * attackDir, player.basicAttackVelocities[comboIndex - 1].y);
     }
 
     // 3回コンボが終わった後、indexが4などの値になるのを防ぐ

@@ -13,7 +13,9 @@ public class EntityHealth : MonoBehaviour, IDamagable
     [SerializeField] protected float currentHp;
     [SerializeField] protected bool isDead;
 
-    [Header("Damage Knockback")]
+    // 現在EntityCombat側で、攻撃側がKBを決定できる
+    // 攻撃側で指定されていないとき、こちらのKB設定値が考慮される。
+    [Header("Old Damage Knockback")]
     [SerializeField] private Vector2 knockbackPower = new Vector2(1.5f, 2.5f);
     [SerializeField] private Vector2 heavyKnockbackPower = new Vector2(10f, 10f);
     [SerializeField] private float knockbackDuration = .2f;
@@ -39,9 +41,10 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
         // ノックバック
         entity?.ReceiveKnockback(
-            CalculateKnockback(attacker, damage), // KB のvector
-            CalculateKnockbackDuration(damage) // KB の持続時間
+            CalculateKnockback(attacker, damage),
+            CalculateKnockbackDuration(attacker, damage)
         );
+
 
         // 白くなる演出
         entityVfx?.PlayOnDamageVfx();
@@ -49,6 +52,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
         // ダメージ計算
         ReduceHp(damage);
     }
+
 
     protected virtual void ReduceHp(float damage)
     {
@@ -72,25 +76,42 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
     private Vector2 CalculateKnockback(Transform attacker, float damage)
     {
-        // ダメージを与えた相手が、自分より右にいるなら1
-        // 左にいるなら(マイナス), -1を返すようにする
-        // 左から殴られたら + のx座標, 右から殴られたら - のx座標にKB
         int direction = transform.position.x > attacker.position.x ? 1 : -1;
 
-        Vector2 knockback = IsHeavyKnockback(damage) ? heavyKnockbackPower : knockbackPower;
-        knockback.x = knockback.x * direction;
+        // 攻撃側の EntityCombat を見る
+        var attackerCombat = attacker.GetComponent<EntityCombat>();
+        if (attackerCombat != null && attackerCombat.HasCustomKnockback)
+        {
+            Vector2 kb = attackerCombat.CurrentKnockbackPower;
+            kb.x *= direction;
+            return kb;
+        }
 
-        return knockback;
+        // それ以外は従来の heavy / normal ロジック
+        Vector2 basePower = IsHeavyKnockback(damage) ? heavyKnockbackPower : knockbackPower;
+        basePower.x *= direction;
+        return basePower;
     }
 
-    private float CalculateKnockbackDuration(float damage)
+    private float CalculateKnockbackDuration(Transform attacker, float damage)
     {
+        // 攻撃側
+        var attackerCombat = attacker.GetComponent<EntityCombat>();
+        if (attackerCombat != null && attackerCombat.HasCustomKnockback)
+        {
+            return attackerCombat.CurrentKnockbackDuration;
+        }
+
+        // それ以外は従来の heavy / normal ロジック
         return IsHeavyKnockback(damage) ? heavyKnockbackDuration : knockbackDuration;
     }
 
+
+    // 旧ロジック
     // ダメージの割合と最大HPを比較し、大ダメージならノックバックを高める
     private bool IsHeavyKnockback(float damage)
     {
+        Debug.Log(damage / entityStatus.GetMaxHp() > heavyDamageTreshold);
         return damage / entityStatus.GetMaxHp() > heavyDamageTreshold;
     }
 

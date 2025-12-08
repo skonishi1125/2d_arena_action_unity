@@ -5,6 +5,10 @@ public class EntityCombat : MonoBehaviour
     private EntityStatus entityStatus;
     private EntityVFX entityVfx;
 
+
+    // Criticalになったとき、何倍にするか
+    [SerializeField] private float criticalRate = 1.5f;
+
     // 攻撃モーション時のトリガー検知に関する情報
     [Header("Target detection")]
     [SerializeField] private Transform targetCheck;
@@ -22,14 +26,27 @@ public class EntityCombat : MonoBehaviour
     [SerializeField] private float defaultDamageMultiplier = 1f;
     private float currentDamageMultiplier = 1f; // 現在の攻撃のダメージ倍率
 
-    // Criticalになったとき、何倍にするか
-    [SerializeField] private float criticalRate = 1.5f;
+    [Header("KB Options")]
+    [SerializeField] private Vector2 defaultKnockbackPower = new Vector2(1.5f, 2.5f);
+    [SerializeField] private float defaultKnockbackDuration = 0.2f;
+
+    private Vector2 currentKnockbackPower; // 現在の攻撃のダメージ倍率
+    private float currentKnockbackDuration;
+    private bool useCustomKnockback = false;
+
+    public bool HasCustomKnockback => useCustomKnockback;
+    public Vector2 CurrentKnockbackPower => currentKnockbackPower;
+    public float CurrentKnockbackDuration => currentKnockbackDuration;
+
 
     private void Awake()
     {
         entityVfx = GetComponent<EntityVFX>();
         entityStatus = GetComponent<EntityStatus>();
+
         currentDamageMultiplier = defaultDamageMultiplier;
+        currentKnockbackPower = defaultKnockbackPower;
+        currentKnockbackDuration = defaultKnockbackDuration;
     }
 
     private void Update()
@@ -47,6 +64,21 @@ public class EntityCombat : MonoBehaviour
     public void ResetDamageMultiplier()
     {
         currentDamageMultiplier = defaultDamageMultiplier;
+    }
+
+    // ▼ 攻撃ごとに State から呼ぶ
+    public void SetKnockback(Vector2 power, float duration)
+    {
+        currentKnockbackPower = power;
+        currentKnockbackDuration = duration;
+        useCustomKnockback = true;
+    }
+
+    public void ResetKnockback()
+    {
+        currentKnockbackPower = defaultKnockbackPower;
+        currentKnockbackDuration = defaultKnockbackDuration;
+        useCustomKnockback = false;
     }
 
     // 通常 単発攻撃
