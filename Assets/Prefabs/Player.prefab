@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2732b6ba8efe45245b44ff533ccc5179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityCombat: {fileID: 0}
   groundCheckDistance: 0.9
   wallCheckDistance: 0.5
   whatIsGround:
@@ -142,6 +143,10 @@ MonoBehaviour:
   lastAttackInputTime: -Infinity
   airAttackFallSpeed: -5
   airAttackVerticalAccel: 10
+  basicAttackDamageMultipliers:
+  - 1
+  - 1.5
+  - 2
 --- !u!114 &405411518885948635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +183,8 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
+  continuousInterval: 0.3
+  defaultDamageMultiplier: 1
   criticalRate: 1.5
 --- !u!114 &5374074082265270663
 MonoBehaviour:

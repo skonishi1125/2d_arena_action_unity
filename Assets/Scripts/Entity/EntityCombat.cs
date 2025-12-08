@@ -12,10 +12,15 @@ public class EntityCombat : MonoBehaviour
     [SerializeField] private LayerMask whatIsTarget;
 
     // 突進など持続攻撃
+    // ※現状darkKnightしか使ってないので、そっちに持たせるべきかも
     [Header("Continuous Attack")]
     [SerializeField] private float continuousInterval = .3f; // 何秒ごとにダメージを与えるか
     private bool isContinuousAttacking = false;
     private float continuousTimer = 0f;
+
+    [Header("Attack Options")]
+    [SerializeField] private float defaultDamageMultiplier = 1f;
+    private float currentDamageMultiplier = 1f; // 現在の攻撃のダメージ倍率
 
     // Criticalになったとき、何倍にするか
     [SerializeField] private float criticalRate = 1.5f;
@@ -24,11 +29,24 @@ public class EntityCombat : MonoBehaviour
     {
         entityVfx = GetComponent<EntityVFX>();
         entityStatus = GetComponent<EntityStatus>();
+        currentDamageMultiplier = defaultDamageMultiplier;
     }
 
     private void Update()
     {
         HandleContinuousAttack();
+    }
+
+    // 攻撃ごとに State から呼んでもらい、現攻撃のダメージ倍率を決定
+    public void SetDamageMultiplier(float multiplier)
+    {
+        currentDamageMultiplier = multiplier;
+    }
+
+    // AttackState を抜けるときなどに元に戻す
+    public void ResetDamageMultiplier()
+    {
+        currentDamageMultiplier = defaultDamageMultiplier;
     }
 
     // 通常 単発攻撃
@@ -82,7 +100,7 @@ public class EntityCombat : MonoBehaviour
     // 持続攻撃開始
     public void StartContinuousAttack()
     {
-        continuousTimer = 0f;         // すぐ 1 発目を撃ちたければ 0
+        continuousTimer = 0f;// すぐ初回判定を出す
         isContinuousAttacking = true;
     }
 
@@ -120,6 +138,9 @@ public class EntityCombat : MonoBehaviour
         if (raw < 1f)
             raw = 1f;
 
+        // 攻撃個別に設定されている、倍率の反映
+        raw *= currentDamageMultiplier;
+
         // クリティカル判定（critical を 0〜1 の確率で扱う場合）
         if (attacker != null)
         {
@@ -131,7 +152,7 @@ public class EntityCombat : MonoBehaviour
             }
         }
 
-        //Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
+        Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
 
         return raw;
     }

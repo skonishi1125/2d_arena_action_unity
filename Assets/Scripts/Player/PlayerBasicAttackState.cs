@@ -18,6 +18,9 @@ public class PlayerBasicAttackState : PlayerState
     {
         if (comboLimit != player.attackVelocities.Length)
             Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とplayer.attackVelocitiesの設定値が一致していません。");
+
+        if (comboLimit != player.basicAttackDamageMultipliers.Length)
+            Debug.LogWarning("PlayerBasicAttackState: 攻撃の数とplayer.attackVelocitiesの設定値が一致していません。");
     }
 
     public override void Enter()
@@ -29,7 +32,13 @@ public class PlayerBasicAttackState : PlayerState
         // 左右入力を受付け、攻撃方向を切り替えられるようにする
         attackDir = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDir;
 
+        // アニメ設定
         anim.SetInteger("basicAttackIndex", comboIndex);
+
+        // 倍率設定
+        float dmgMul = player.basicAttackDamageMultipliers[comboIndex - 1];
+        player.EntityCombat.SetDamageMultiplier(dmgMul);
+
         ApplyAttackVelocity();
     }
 
@@ -63,6 +72,10 @@ public class PlayerBasicAttackState : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        // 攻撃を抜けたので倍率をデフォルトに戻す
+        player.EntityCombat.ResetDamageMultiplier();
+
         comboIndex++;
         lastTimeAttacked = Time.time;
     }

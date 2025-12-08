@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     protected StateMachine stateMachine;
+    public EntityCombat EntityCombat;
 
     [Header("Components")]
     public Rigidbody2D rb { get; private set; } // moveStateがrbを使って速度を弄るため。
@@ -38,6 +39,7 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         stateMachine = new StateMachine();
+        EntityCombat = GetComponent<EntityCombat>();
 
         // Components
         rb = GetComponent<Rigidbody2D>();

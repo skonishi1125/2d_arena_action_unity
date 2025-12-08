@@ -42,7 +42,7 @@ public class Player : Entity
     public Vector2 wallJumpDir; // 壁ジャンプ時の初期ベクトル
 
     [Header("Attack details")]
-    public Vector2[] attackVelocities; // 攻撃時の前方向の加速度 技それぞれに持つ。
+    public Vector2[] attackVelocities; // 3コンボ攻撃の各種x加速度 技それぞれに持つ。
     public float attackVelocityDuration = .1f;
     public float comboResetTime = .5f; // 攻撃時、この時間だけ何もしなければcomboIndexが1に戻る。
     private Coroutine queuedAttackCo;
@@ -51,6 +51,10 @@ public class Player : Entity
     [HideInInspector] public float lastAttackInputTime = Mathf.NegativeInfinity;
     [SerializeField] private float airAttackFallSpeed = -1.5f; // 攻撃中にゆっくり落ちる速度（負の値）
     [SerializeField] private float airAttackVerticalAccel = 10f; // どのくらいの速さでtargetVyに近づけるか
+
+    [Header("Attack damage multipliers")]
+    public float[] basicAttackDamageMultipliers; // 3コンボ攻撃の攻撃倍率 
+
 
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;
