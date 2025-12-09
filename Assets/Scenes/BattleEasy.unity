@@ -10509,6 +10509,9 @@ MonoBehaviour:
   airAttackDamageMultiplier: 1
   airAttackKnockbackPower: {x: 1, y: 2}
   airAttackKnockbackDuration: 0.15
+  dashAttackDamageMultiplier: 1
+  dashAttackKnockbackPower: {x: 5, y: 15}
+  dashAttackKnockbackDuration: 0.3
 --- !u!114 &1509190684714762175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11191,6 +11194,7 @@ GameObject:
   - component: {fileID: 8524643674304472831}
   - component: {fileID: 4277257634316995409}
   - component: {fileID: 5502532797669932105}
+  - component: {fileID: 8524643674304472832}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -11649,6 +11653,18 @@ MonoBehaviour:
     baseValue: 0.2
     additiveBonus: 0
     multiplier: 1
+--- !u!114 &8524643674304472832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419268650410001899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71cdff768829c04ea82cf58131e5790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8802960007786143122
 GameObject:
   m_ObjectHideFlags: 0

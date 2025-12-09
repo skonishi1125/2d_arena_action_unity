@@ -1,8 +1,16 @@
-﻿public class PlayerDashState : PlayerState
+﻿using UnityEngine;
+
+public class PlayerDashState : PlayerState
 {
+    [Header("Dash Based Param")]
     // ダッシュ中は重力加速度を無効にする
     private float originalGravityScale;
     private int dashDir; // ダッシュ中の向き player側を使ってもいいが、保険でこっちを使っておく
+    private bool hasAttack; // SLvが高く、攻撃判定がついているか
+
+
+
+
     public PlayerDashState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
@@ -16,6 +24,19 @@
 
         originalGravityScale = rb.gravityScale; // 既存のrbを保存しておき、0にする
         rb.gravityScale = 0;
+
+        // SLvに応じて攻撃判定を付与
+        hasAttack = player.Skill.DashHasAttack();
+        if (hasAttack)
+        {
+            // ダッシュ攻撃用のダメージ倍率＆ノックバックを設定
+            player.EntityCombat.SetDamageMultiplier(player.dashAttackDamageMultiplier);
+            player.EntityCombat.SetKnockback(
+                player.dashAttackKnockbackPower,
+                player.dashAttackKnockbackDuration
+            );
+        }
+
     }
 
     public override void LogicUpdate()
@@ -42,9 +63,14 @@
     public override void Exit()
     {
         base.Exit();
-        // DashStateから出るとき、慣性と重力加速度を戻す
+        // DashStateから出るとき、慣性と重力加速度, ダメージ,KBを戻す
         player.SetVelocity(0, 0);
         rb.gravityScale = originalGravityScale;
+        if (hasAttack)
+        {
+            player.EntityCombat.ResetDamageMultiplier();
+            player.EntityCombat.ResetKnockback();
+        }
     }
 
     // 壁にぶつかったときなどに、DashStateをキャンセルして別Stateに移行させる

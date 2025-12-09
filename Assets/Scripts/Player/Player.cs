@@ -11,6 +11,7 @@ public class Player : Entity
     // GameManagerなど、Playerを持つObjectが参照するために使う
     public PlayerHealth Health { get; private set; }
     public PlayerLevel Level { get; private set; }
+    public PlayerSkillController Skill {  get; private set; }
 
     // StateMachine
     // Playerの状態を別のコードでも見ることになるので、publicとしておくとよい
@@ -62,6 +63,10 @@ public class Player : Entity
     public Vector2 airAttackKnockbackPower;
     public float airAttackKnockbackDuration;
 
+    [Header("Dash Attack")]
+    [SerializeField] public float dashAttackDamageMultiplier;
+    [SerializeField] public Vector2 dashAttackKnockbackPower;
+    [SerializeField] public float dashAttackKnockbackDuration;
 
 
     // 公開用変数等
@@ -80,8 +85,8 @@ public class Player : Entity
         input = new PlayerInputSet();
 
         // StateMachine
-        // ※Components取得より手前に書くと、contruct上のrb割当等でnullになるので注意
-        //stateMachine = new StateMachine(); Entityに書いているので不要
+        // ※Components取得より後に書くと、contruct上のrb割当等でnullになるので注意
+        //stateMachine = new StateMachine(); は Entityに書いているので不要
         idleState = new PlayerIdleState(this, stateMachine, "idle");
         moveState = new PlayerMoveState(this, stateMachine, "move");
         jumpState = new PlayerJumpState(this, stateMachine, "jumpFall");
@@ -93,9 +98,22 @@ public class Player : Entity
         airAttackState = new PlayerAirAttackState(this, stateMachine, "airAttack");
         deadState = new PlayerDeadState(this, stateMachine, "dead");
 
+        // 必要なcomponentの取得
         Health = GetComponent<PlayerHealth>();
-        Health.OnDied += HandleDied;
+        if (!LogHelper.AssertNotNull(Health, nameof(Health), this))
+            return;
+
         Level = GetComponent<PlayerLevel>();
+        if (!LogHelper.AssertNotNull(Level, nameof(Level), this))
+            return;
+
+        Skill = GetComponent<PlayerSkillController>();
+        if (!LogHelper.AssertNotNull(Skill, nameof(Skill), this))
+            return;
+
+        // イベント購読
+        Health.OnDied += HandleDied;
+
     }
 
     protected override void Start()

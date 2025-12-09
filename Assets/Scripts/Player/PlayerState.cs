@@ -1,6 +1,9 @@
 ﻿// Stateが、Playerのrb, anim等にアクセスするための抽象クラス
 // EntityStateで用意すると、敵にEntityStateを使うときに邪魔になる
 // ただし敵にもrb, animはあるため、変数定義だけはEntityStateで済ませておく
+using System;
+using UnityEngine;
+
 public abstract class PlayerState : EntityState
 {
     protected Player player;
@@ -38,6 +41,11 @@ public abstract class PlayerState : EntityState
     // 壁が目の前, ダッシュ中はダッシュできなくする
     private bool CanDash()
     {
+        // スキルレベルが足りているか
+        if (player.Skill.CanUseDash() == false)
+            return false;
+
+        // 壁や、ダッシュ中でないか
         if (player.wallDetected)
             return false;
 
