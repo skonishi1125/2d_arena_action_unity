@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class DashSkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class KnockbackSkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private Player player;
 
@@ -15,7 +15,7 @@ public class DashSkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [TextArea]
     [SerializeField]
     private string description =
-        "Dash Lv1: ダッシュ習得\nDash Lv2: ダッシュ攻撃\nDash Lv3: 強化ダッシュ";
+        "KB Lv1: パワーKB習得\nKB Lv2: パワーKB\nKB Lv3: 強化パワーKB";
 
 
     private void Awake()
@@ -45,8 +45,8 @@ public class DashSkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (playerSkill == null || levelText == null)
             return;
 
-        int lv = playerSkill.GetLevel(SkillId.Dash);
-        levelText.text = $"Dash Lv.{lv}";
+        int lv = playerSkill.GetLevel(SkillId.KnockbackAttack);
+        levelText.text = $"KB Lv.{lv}";
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -70,7 +70,7 @@ public class DashSkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if (playerSkill == null)
             return;
 
-        playerSkill.LevelUp(SkillId.Dash);
+        playerSkill.LevelUp(SkillId.KnockbackAttack);
         UpdateView();
     }
 }

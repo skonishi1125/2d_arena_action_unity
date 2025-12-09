@@ -15,13 +15,13 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
 
     private void DashStartAttackTrigger()
     {
-        if (player.Skill.DashHasAttack())
+        if (player.Skill.DashHasStartAttack())
             entityCombat.PerformAttack();
     }
 
     private void DashEndAttackTrigger()
     {
-        if (player.Skill.DashEndHasAttack())
+        if (player.Skill.DashHasEndAttack())
             entityCombat.PerformAttack();
     }
 }

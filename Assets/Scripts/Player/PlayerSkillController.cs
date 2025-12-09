@@ -1,41 +1,170 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour
 {
-    // 0 = 未習得,
-    // 1 = ダッシュだけ,
-    // 2 = ダッシュ開始に攻撃
-    // 3 = ダッシュ終了時にも攻撃
-     public int DashSkillLevel { get; private set; } = 0;
-    public int MaxDashSkillLevel => 3;
+    [Header("Skill States (Definition + Runtime)")]
+    [SerializeField]
+    private SkillRuntimeState[] skillStates;
 
-    public void SetDashLevel(int level)
+    private readonly Dictionary<SkillId, SkillRuntimeState> skillMap
+        = new Dictionary<SkillId, SkillRuntimeState>();
+
+    private void Awake()
     {
-        DashSkillLevel = Mathf.Max(0, level);
+        skillMap.Clear();
+
+        foreach (var state in skillStates)
+        {
+            if (state == null || state.definition == null)
+                continue;
+
+            var id = state.definition.id;
+            if (id == SkillId.None)
+                continue;
+
+            if (skillMap.ContainsKey(id))
+            {
+                Debug.LogWarning($"Duplicate SkillId in PlayerSkillController: {id}");
+                continue;
+            }
+
+            skillMap.Add(id, state);
+        }
     }
 
-    public bool CanUseDash()
+    private void Update()
     {
-        return DashSkillLevel >= 1;
+        UpdateCooldowns(Time.deltaTime);
     }
 
-    public bool DashHasAttack()
+    // ========= 基本取得まわり =========
+
+    public SkillRuntimeState GetState(SkillId id)
     {
-        return DashSkillLevel >= 2;
+        if (id == SkillId.None)
+            return null;
+
+        skillMap.TryGetValue(id, out var state);
+        return state;
     }
 
-    public bool DashEndHasAttack()
+    public int GetLevel(SkillId id)
     {
-        return DashSkillLevel >= 3;
+        var state = GetState(id);
+        return state != null ? state.currentLevel : 0;
     }
 
-    public void LevelUpDash()
+    public int GetMaxLevel(SkillId id)
     {
-        if (DashSkillLevel >= MaxDashSkillLevel)
+        var state = GetState(id);
+        return state != null ? state.MaxLevel : 0;
+    }
+
+    public bool IsUnlocked(SkillId id)
+        => GetLevel(id) > 0;
+
+    // ========= レベルアップ / アンロック =========
+
+    public bool CanLevelUp(SkillId id)
+    {
+        var state = GetState(id);
+        if (state == null || state.definition == null)
+            return false;
+
+        return state.currentLevel < state.MaxLevel;
+    }
+
+    public bool LevelUp(SkillId id)
+    {
+        var state = GetState(id);
+        if (state == null || state.definition == null)
+            return false;
+
+        if (!CanLevelUp(id))
+            return false;
+
+        state.currentLevel++;
+        Debug.Log($"Skill {id} leveled up to {state.currentLevel}");
+        return true;
+    }
+
+    // ========= 使用可否 / クールダウン =========
+
+    public bool CanUse(SkillId id)
+    {
+        var state = GetState(id);
+        if (state == null || state.definition == null)
+            return false;
+
+        if (state.currentLevel <= 0)
+            return false;
+
+        if (state.cooldownRemaining > 0f)
+            return false;
+
+        // 将来的に MP などの条件もここで判定
+        return true;
+    }
+
+    public void OnUse(SkillId id)
+    {
+        var state = GetState(id);
+        if (state == null || state.definition == null)
             return;
 
-        DashSkillLevel++;
-        Debug.Log($"Dash Skill Level Up: {DashSkillLevel}");
+        var levelData = state.CurrentLevelData;
+        if (levelData == null)
+            return;
+
+        // クールダウン開始
+        state.cooldownRemaining = levelData.cooldownTime;
     }
 
+    private void UpdateCooldowns(float deltaTime)
+    {
+        foreach (var state in skillStates)
+        {
+            if (state.cooldownRemaining > 0f)
+            {
+                state.cooldownRemaining -= deltaTime;
+                if (state.cooldownRemaining < 0f)
+                    state.cooldownRemaining = 0f;
+            }
+        }
+    }
+
+    /// <summary>
+    /// UI 用。1 = クールダウン完了、0 = 使った直後
+    /// </summary>
+    public float GetCooldownRatio(SkillId id)
+    {
+        var state = GetState(id);
+        if (state == null || state.definition == null)
+            return 1f;
+
+        var levelData = state.CurrentLevelData;
+        if (levelData == null || levelData.cooldownTime <= 0f)
+            return 1f;
+
+        if (state.cooldownRemaining <= 0f)
+            return 1f;
+
+        float t = Mathf.Clamp01(1f - (state.cooldownRemaining / levelData.cooldownTime));
+        return t;
+    }
+
+    // ========= 既存ヘルパ（Dash/Knockback 用）のラッパーもここに書ける =========
+
+    public bool CanUseDash()
+        => CanUse(SkillId.Dash);
+
+    public bool DashHasStartAttack()
+        => GetLevel(SkillId.Dash) >= 2;
+
+    public bool DashHasEndAttack()
+        => GetLevel(SkillId.Dash) >= 3;
+
+    public bool CanUseKnockbackAttack()
+        => CanUse(SkillId.KnockbackAttack);
 }

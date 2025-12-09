@@ -23,8 +23,7 @@ public class PlayerDashState : PlayerState
         originalGravityScale = rb.gravityScale; // 既存のrbを保存しておき、0にする
         rb.gravityScale = 0;
 
-        // SLvに応じて攻撃判定を付与
-        hasAttack = player.Skill.DashHasAttack();
+        hasAttack = player.Skill.DashHasStartAttack();
         if (hasAttack)
         {
             // ダッシュ攻撃用のダメージ倍率＆ノックバックを設定
