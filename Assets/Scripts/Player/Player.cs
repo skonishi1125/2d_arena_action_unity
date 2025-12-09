@@ -26,6 +26,7 @@ public class Player : Entity
     public PlayerBasicAttackState basicAttackState { get; private set; }
     public PlayerAirAttackState airAttackState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
+    public PlayerKnockbackAttackState knockbackAttackState { get; private set; }
 
 
     [Header("Input Settings")]
@@ -68,6 +69,11 @@ public class Player : Entity
     [SerializeField] public Vector2 dashAttackKnockbackPower;
     [SerializeField] public float dashAttackKnockbackDuration;
 
+    [Header("Knockback Attack")]
+    [SerializeField] public float knockbackAttackDamageMultiplier;
+    [SerializeField] public Vector2 knockbackAttackKnockbackPower;
+    [SerializeField] public float knockbackAttackKnockbackDuration;
+
 
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;
@@ -96,6 +102,7 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "jumpFall");
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "basicAttack");
         airAttackState = new PlayerAirAttackState(this, stateMachine, "airAttack");
+        knockbackAttackState = new PlayerKnockbackAttackState(this, stateMachine, "knockbackAttack");
         deadState = new PlayerDeadState(this, stateMachine, "dead");
 
         // 必要なcomponentの取得

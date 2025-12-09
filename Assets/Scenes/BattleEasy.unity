@@ -10721,6 +10721,9 @@ MonoBehaviour:
   dashAttackDamageMultiplier: 1
   dashAttackKnockbackPower: {x: 5, y: 15}
   dashAttackKnockbackDuration: 0.3
+  knockbackAttackDamageMultiplier: 2
+  knockbackAttackKnockbackPower: {x: 20, y: 5}
+  knockbackAttackKnockbackDuration: 0.5
 --- !u!224 &985079395261993673
 RectTransform:
   m_ObjectHideFlags: 0

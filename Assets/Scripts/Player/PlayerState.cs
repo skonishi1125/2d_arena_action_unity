@@ -36,6 +36,10 @@ public abstract class PlayerState : EntityState
         // CanDashを満たしている、全てのStateで即遷移できる。
         if (input.Player.Dash.WasPressedThisFrame() && CanDash())
             stateMachine.ChangeState(player.dashState);
+
+        if (input.Player.KnockbackAttack.WasPerformedThisFrame())
+            stateMachine.ChangeState(player.knockbackAttackState);
+
     }
 
     // 壁が目の前, ダッシュ中はダッシュできなくする

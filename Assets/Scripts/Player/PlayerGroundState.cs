@@ -27,7 +27,6 @@ public class PlayerGroundState : PlayerState
         if (input.Player.Attack.WasPerformedThisFrame())
             stateMachine.ChangeState(player.basicAttackState);
 
-
     }
 
 }
