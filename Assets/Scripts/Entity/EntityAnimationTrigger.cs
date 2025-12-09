@@ -3,7 +3,7 @@
 public class EntityAnimationTrigger : MonoBehaviour
 {
     private Entity entity;
-    private EntityCombat entityCombat;
+    protected EntityCombat entityCombat;
 
     protected virtual void Awake()
     {

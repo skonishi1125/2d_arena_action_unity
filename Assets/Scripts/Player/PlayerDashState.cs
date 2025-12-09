@@ -9,8 +9,6 @@ public class PlayerDashState : PlayerState
     private bool hasAttack; // SLvが高く、攻撃判定がついているか
 
 
-
-
     public PlayerDashState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
@@ -84,8 +82,6 @@ public class PlayerDashState : PlayerState
                 stateMachine.ChangeState(player.wallSlideState);
         }
     }
-
-
 
 
 }
