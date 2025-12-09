@@ -39,7 +39,6 @@ public class PlayerSkillController : MonoBehaviour
     }
 
     // ========= 基本取得まわり =========
-
     public SkillRuntimeState GetState(SkillId id)
     {
         if (id == SkillId.None)
