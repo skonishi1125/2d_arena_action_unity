@@ -21,17 +21,17 @@ MonoBehaviour:
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
-    cooldownTime: 5
+    cooldownTime: 1
     manaCost: 0
   - level: 2
-    damageMultiplier: 1
-    knockbackPower: {x: 5, y: 10}
+    damageMultiplier: 0.5
+    knockbackPower: {x: 1, y: 5}
     knockbackDuration: 0.3
-    cooldownTime: 5
+    cooldownTime: 1
     manaCost: 0
   - level: 3
     damageMultiplier: 1
     knockbackPower: {x: 5, y: 10}
     knockbackDuration: 0.3
-    cooldownTime: 5
+    cooldownTime: 1
     manaCost: 0

@@ -9,12 +9,23 @@ public class PlayerKnockbackAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        // 現レベル時点でのSkillデータを取得
+        var levelData = player.Skill.GetCurrentLevelData(SkillId.KnockbackAttack);
+        if (levelData == null)
+            return;
+
         // ダメージ倍率設定
-        float dmgMul = player.knockbackAttackDamageMultiplier;
-        player.EntityCombat.SetDamageMultiplier(dmgMul);
+        player.EntityCombat.SetDamageMultiplier(levelData.damageMultiplier);
+
         // KB設定
-        Vector2 kbPower = player.knockbackAttackKnockbackPower;
-        player.EntityCombat.SetKnockback(kbPower, player.knockbackAttackKnockbackDuration);
+        player.EntityCombat.SetKnockback(
+            levelData.knockbackPower,
+            levelData.knockbackDuration
+        );
+
+        //Debug.Log($"multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
+
     }
 
     public override void LogicUpdate()

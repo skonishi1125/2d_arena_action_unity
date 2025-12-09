@@ -64,16 +64,6 @@ public class Player : Entity
     public Vector2 airAttackKnockbackPower;
     public float airAttackKnockbackDuration;
 
-    [Header("Dash Attack")]
-    [SerializeField] public float dashAttackDamageMultiplier;
-    [SerializeField] public Vector2 dashAttackKnockbackPower;
-    [SerializeField] public float dashAttackKnockbackDuration;
-
-    [Header("Knockback Attack")]
-    [SerializeField] public float knockbackAttackDamageMultiplier;
-    [SerializeField] public Vector2 knockbackAttackKnockbackPower;
-    [SerializeField] public float knockbackAttackKnockbackDuration;
-
 
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;

@@ -17,21 +17,30 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
+        // 向き先、有効時間、重力加速度無効化設定
         dashDir = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDir;
         stateTimer = player.dashDuration;
-
         originalGravityScale = rb.gravityScale; // 既存のrbを保存しておき、0にする
         rb.gravityScale = 0;
 
         hasAttack = player.Skill.DashHasStartAttack();
         if (hasAttack)
         {
-            // ダッシュ攻撃用のダメージ倍率＆ノックバックを設定
-            player.EntityCombat.SetDamageMultiplier(player.dashAttackDamageMultiplier);
+            // 現レベル時点でのSkillデータを取得
+            var levelData = player.Skill.GetCurrentLevelData(SkillId.Dash);
+            if (levelData == null)
+                return;
+
+            // ダメージ倍率設定
+            player.EntityCombat.SetDamageMultiplier(levelData.damageMultiplier);
+
+            // KB設定
             player.EntityCombat.SetKnockback(
-                player.dashAttackKnockbackPower,
-                player.dashAttackKnockbackDuration
+                levelData.knockbackPower,
+                levelData.knockbackDuration
             );
+
+            Debug.Log($"multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
         }
 
     }

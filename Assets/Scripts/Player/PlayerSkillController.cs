@@ -64,6 +64,16 @@ public class PlayerSkillController : MonoBehaviour
     public bool IsUnlocked(SkillId id)
         => GetLevel(id) > 0;
 
+    // 呼び出された時点のスキルデータを返す
+    public SkillLevelData GetCurrentLevelData(SkillId id)
+    {
+        var state = GetState(id);
+        if (state == null || state.definition == null)
+            return null;
+
+        return state.CurrentLevelData;
+    }
+
     // ========= レベルアップ / アンロック =========
 
     public bool CanLevelUp(SkillId id)

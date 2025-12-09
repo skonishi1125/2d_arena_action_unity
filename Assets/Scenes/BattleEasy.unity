@@ -7853,7 +7853,7 @@ MonoBehaviour:
   m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &597109708
@@ -10374,7 +10374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1803360209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11117,7 +11117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &579619663362886454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11359,12 +11359,6 @@ MonoBehaviour:
   airAttackDamageMultiplier: 1
   airAttackKnockbackPower: {x: 1, y: 2}
   airAttackKnockbackDuration: 0.15
-  dashAttackDamageMultiplier: 1
-  dashAttackKnockbackPower: {x: 5, y: 15}
-  dashAttackKnockbackDuration: 0.3
-  knockbackAttackDamageMultiplier: 2
-  knockbackAttackKnockbackPower: {x: 20, y: 5}
-  knockbackAttackKnockbackDuration: 0.5
 --- !u!224 &985079395261993673
 RectTransform:
   m_ObjectHideFlags: 0
