@@ -138,7 +138,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Menu"",
+                    ""name"": ""StatusMenu"",
                     ""type"": ""Button"",
                     ""id"": ""e571400e-9571-4d8b-b9c6-4a9b54d51e96"",
                     ""expectedControlType"": """",
@@ -254,7 +254,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Menu"",
+                    ""action"": ""StatusMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -270,7 +270,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_KnockbackAttack = m_Player.FindAction("KnockbackAttack", throwIfNotFound: true);
-        m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_StatusMenu = m_Player.FindAction("StatusMenu", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
@@ -356,7 +356,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_KnockbackAttack;
-    private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_StatusMenu;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -389,9 +389,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @KnockbackAttack => m_Wrapper.m_Player_KnockbackAttack;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Menu".
+        /// Provides access to the underlying input action "Player/StatusMenu".
         /// </summary>
-        public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @StatusMenu => m_Wrapper.m_Player_StatusMenu;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -433,9 +433,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @KnockbackAttack.started += instance.OnKnockbackAttack;
             @KnockbackAttack.performed += instance.OnKnockbackAttack;
             @KnockbackAttack.canceled += instance.OnKnockbackAttack;
-            @Menu.started += instance.OnMenu;
-            @Menu.performed += instance.OnMenu;
-            @Menu.canceled += instance.OnMenu;
+            @StatusMenu.started += instance.OnStatusMenu;
+            @StatusMenu.performed += instance.OnStatusMenu;
+            @StatusMenu.canceled += instance.OnStatusMenu;
         }
 
         /// <summary>
@@ -462,9 +462,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @KnockbackAttack.started -= instance.OnKnockbackAttack;
             @KnockbackAttack.performed -= instance.OnKnockbackAttack;
             @KnockbackAttack.canceled -= instance.OnKnockbackAttack;
-            @Menu.started -= instance.OnMenu;
-            @Menu.performed -= instance.OnMenu;
-            @Menu.canceled -= instance.OnMenu;
+            @StatusMenu.started -= instance.OnStatusMenu;
+            @StatusMenu.performed -= instance.OnStatusMenu;
+            @StatusMenu.canceled -= instance.OnStatusMenu;
         }
 
         /// <summary>
@@ -541,11 +541,11 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnKnockbackAttack(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "StatusMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMenu(InputAction.CallbackContext context);
+        void OnStatusMenu(InputAction.CallbackContext context);
     }
 }

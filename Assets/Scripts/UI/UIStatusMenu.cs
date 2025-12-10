@@ -22,7 +22,7 @@ public class UIStatusMenu : MonoBehaviour
 
     private void Start()
     {
-        //statusPanel.Init(entityStatus, playerLevel);
+        statusPanel.Init(entityStatus, playerLevel);
         //skillPanel.Init(skillController);
 
         rootPanel.SetActive(false);
@@ -30,7 +30,7 @@ public class UIStatusMenu : MonoBehaviour
 
     private void Update()
     {
-        if (player.input.Player.Menu.WasPressedThisFrame())
+        if (player.input.Player.StatusMenu.WasPressedThisFrame())
         {
             bool active = !rootPanel.activeSelf;
             rootPanel.SetActive(active);

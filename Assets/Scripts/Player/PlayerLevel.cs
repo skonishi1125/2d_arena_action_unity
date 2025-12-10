@@ -11,11 +11,26 @@ public class PlayerLevel : MonoBehaviour
     public int Level { get; private set; } = 1;
     public int CurrentExp { get; private set; }
 
+    // UIStatusMenu表示用
+    public int CurrentTotalExp { get; private set; } // UI表示用
+
+    public int CurrentRequiredExp
+    {
+        get
+        {
+            var entry = levelTable.GetLevelOfInfo(Level);
+            return entry.requiredExp;
+        }
+    }
+    public int NextLevelRequiredExp => GetNeedExp(Level + 1);
+
+
     // LvUP時のアクションイベント
-    // GameManagerでLvUP時のUIを出すとか。
+    // GameManagerでLvUP時のUIを出すとかStatusMenuの更新。
     public event Action<int> OnLevelUp;
 
-    // 経験値変化のイベント currentExp, reuiredExp
+    // 経験値変化のイベント
+    // currentExp, reuiredExp, StatusMenuの更新など
     public event Action<int, int> OnExpChanged;
 
     private void Awake()
@@ -82,6 +97,12 @@ public class PlayerLevel : MonoBehaviour
         var currentRequired = levelTable.GetLevelOfInfo(Level).requiredExp;
         OnExpChanged?.Invoke(CurrentExp, currentRequired);
 
+    }
+
+    public int GetNeedExp(int level)
+    {
+        var clamped = Mathf.Clamp(level, 1, levelTable.MaxLevel);
+        return levelTable.GetLevelOfInfo(clamped).requiredExp;
     }
 
 }

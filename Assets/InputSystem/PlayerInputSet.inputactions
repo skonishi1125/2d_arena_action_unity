@@ -52,7 +52,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Menu",
+                    "name": "StatusMenu",
                     "type": "Button",
                     "id": "e571400e-9571-4d8b-b9c6-4a9b54d51e96",
                     "expectedControlType": "",
@@ -168,7 +168,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Menu",
+                    "action": "StatusMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

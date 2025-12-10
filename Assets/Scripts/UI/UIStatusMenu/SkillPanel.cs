@@ -1,16 +1,17 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SkillPanel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private EntityStatus status;
+    private PlayerLevel level;
 
-    // Update is called once per frame
-    void Update()
+    public void Init(EntityStatus status, PlayerLevel level)
     {
-        
+        this.status = status;
+        this.level = level;
+
+        // skillのUIをなにか更新が必要な設計になった場合は、ここで改修
+        // スキルレベルが上がったときなどに、イベントで紐づければ良さそう。
+
     }
 }
