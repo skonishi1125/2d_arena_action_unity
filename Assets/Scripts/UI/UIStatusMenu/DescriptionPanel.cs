@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class DescriptionPanel : MonoBehaviour
 {
+    [Header("Description Row")]
+    [SerializeField] private GameObject descriptionRow;
+
+
     [Header("Top")]
     [SerializeField] private TextMeshProUGUI skillNameText;
     [SerializeField] private TextMeshProUGUI masterLevelHeaderText;
@@ -19,14 +23,14 @@ public class DescriptionPanel : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        descriptionRow.SetActive(false);
     }
 
     public void Show(SkillDefinition def, int currentLevel)
     {
         if (def == null) return;
 
-        gameObject.SetActive(true);
+        descriptionRow.SetActive(true);
 
         // 上部
         skillNameText.text = def.displayName;
@@ -92,7 +96,7 @@ public class DescriptionPanel : MonoBehaviour
 
     public void Hide()
     {
-        gameObject.SetActive(false);
+        descriptionRow.SetActive(false);
     }
 
 }
