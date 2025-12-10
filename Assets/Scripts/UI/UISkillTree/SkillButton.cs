@@ -9,11 +9,12 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     [SerializeField] private PlayerSkillController playerSkill;
     [SerializeField] private TextMeshProUGUI levelText; // ボタン上部のtext
-    [SerializeField] private GameObject descriptionPanel; // 説明用パネルの割当
-    [SerializeField] private TextMeshProUGUI descriptionText;  // パネル子要素のtext
-    [TextArea]
-    [SerializeField]
-    private string description = "TODO";
+
+    [Header("Definition")]
+    [SerializeField] private SkillDefinition skillDefinition;  // このボタンが表すスキル
+
+    [Header("Description UI")]
+    [SerializeField] private DescriptionPanel descriptionPanel;
 
     [Header("Cooldown UI")]
     [SerializeField] private Image cooldownMask;
@@ -36,12 +37,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
     }
     private void Start()
     {
-        // 最初に表示を更新
         UpdateView();
-
-        // 説明パネルはデフォルト非表示
-        if (descriptionPanel != null)
-            descriptionPanel.SetActive(false);
     }
 
     private void Update()
@@ -73,33 +69,23 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
             return;
 
         int lv = playerSkill.GetLevel(TargetSkillId);
-        levelText.text = GetLevelLabel(lv);
-    }
-
-    protected virtual string GetLevelLabel(int level)
-    {
-        return $"Lv.{level}";
-    }
-    protected virtual string GetDescription()
-    {
-        return description;
     }
 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (descriptionPanel != null)
-        {
-            descriptionPanel.SetActive(true);
-            if (descriptionText != null)
-                descriptionText.text = GetDescription();
-        }
+        if (descriptionPanel == null || playerSkill == null || skillDefinition == null)
+            return;
+
+        int lv = playerSkill.GetLevel(TargetSkillId);
+        descriptionPanel.Show(skillDefinition, lv);
     }
 
+    // マウスを外しても、表示のままでいいかも。
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (descriptionPanel != null)
-            descriptionPanel.SetActive(false);
+        //if (descriptionPanel != null)
+        //    descriptionPanel.Hide();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -107,8 +93,17 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
         if (playerSkill == null)
             return;
 
-        // 基本動作：対象スキルのレベルアップ
+        // スキルのレベルを上げた時
         if (playerSkill.LevelUp(TargetSkillId))
+        {
             UpdateView();
+
+            // パネル表示中なら、説明も更新
+            if (descriptionPanel != null && skillDefinition != null)
+            {
+                int lv = playerSkill.GetLevel(TargetSkillId);
+                descriptionPanel.Show(skillDefinition, lv);
+            }
+        }
     }
 }

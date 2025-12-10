@@ -14,6 +14,10 @@ public class SkillLevelData
     [Header("Cost / Cooldown")]
     public float cooldownTime = 1f;
     public float manaCost = 0f;
+
+    [Header("Description")]
+    [TextArea]
+    public string levelDescription;   // 「Lv1ならLv1の説明を書く
 }
 
 [CreateAssetMenu(menuName = "Game/Skill Definition", fileName = "SkillDefinition_")]
@@ -35,8 +39,11 @@ public class SkillDefinition : ScriptableObject
         if (levels == null || levels.Length == 0)
             return null;
 
-        // level は 1 始まりで運用する想定
-        int index = Mathf.Clamp(level - 1, 0, levels.Length - 1);
+        // 1〜MaxLevel の範囲だけ有効
+        int index = level - 1;
+        if (index < 0 || index >= levels.Length)
+            return null;
+
         return levels[index];
     }
 }
