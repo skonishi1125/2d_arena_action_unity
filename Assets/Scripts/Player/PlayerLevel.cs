@@ -37,10 +37,7 @@ public class PlayerLevel : MonoBehaviour
     {
         entityStatus = GetComponent<EntityStatus>();
         playerHealth = GetComponent<PlayerHealth>();
-    }
 
-    private void Start()
-    {
         ApplyLevelStatus();
     }
 
