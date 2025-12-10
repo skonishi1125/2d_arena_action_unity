@@ -19,6 +19,11 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
     [Header("Cooldown UI")]
     [SerializeField] private Image cooldownMask;
 
+    [Header("Texts")]
+    [SerializeField] private TextMeshProUGUI levelText;  // アイコンの上
+    [SerializeField] private TextMeshProUGUI keyText;    // アイコンの下
+    [SerializeField] private string keyLabel;
+
     // 子要素のボタンが操作するスキルID
     protected abstract SkillId TargetSkillId { get; }
 
@@ -36,7 +41,13 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
         // ImageにSkillDefinitionに定義したImageを割り当てる
         skillIconImage = GetComponent<Image>();
-        skillIconImage.sprite = skillDefinition.icon;
+        if (skillIconImage != null && skillDefinition != null)
+            skillIconImage.sprite = skillDefinition.icon;
+
+        // キーテキストは一度固定で設定
+        if (keyText != null)
+            keyText.text = keyLabel; // 例: "Z", "D", "V" など
+
     }
     private void Start()
     {
@@ -72,6 +83,14 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
             return;
 
         int lv = playerSkill.GetLevel(TargetSkillId);
+        
+        if (levelText != null)
+        {
+            if (lv <= 0)
+                levelText.text = "";
+            else
+                levelText.text = $"Lv {lv}";
+        }
     }
 
 
