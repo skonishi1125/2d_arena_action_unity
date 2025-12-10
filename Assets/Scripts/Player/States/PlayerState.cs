@@ -48,9 +48,9 @@ public abstract class PlayerState : EntityState
 
         // KnockbackAttack
         if (input.Player.KnockbackAttack.WasPerformedThisFrame()
-            && player.Skill.CanUse(SkillId.KnockbackAttack))
+            && player.Skill.CanUse(SkillId.HeavyKB))
         {
-            player.Skill.OnUse(SkillId.KnockbackAttack);
+            player.Skill.OnUse(SkillId.HeavyKB);
             stateMachine.ChangeState(player.knockbackAttackState);
             return;
         }

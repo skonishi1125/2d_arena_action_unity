@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private Player player;
 
@@ -12,6 +12,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     [Header("Definition")]
     [SerializeField] private SkillDefinition skillDefinition;  // このボタンが表すスキル
+    [SerializeField] private SkillId skillId;
 
     [Header("Description UI")]
     [SerializeField] private DescriptionPanel descriptionPanel;
@@ -24,8 +25,9 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] private TextMeshProUGUI keyText;    // アイコンの下
     [SerializeField] private string keyLabel;
 
-    // 子要素のボタンが操作するスキルID
-    protected abstract SkillId TargetSkillId { get; }
+    [Header("Behavior")]
+    [SerializeField] private bool canLevelUpOnClick = true;// クリックでレベルアップするか
+    [SerializeField] private bool showDescriptionOnHover = true; // ホバーで説明を出すか
 
 
     protected virtual void Awake()
@@ -67,7 +69,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
         // PlayerSkillController から 0〜1 の割合をもらう
         // ratio = 1: クール完了 / 0: 使った直後
-        float ratio = playerSkill.GetCooldownRatio(TargetSkillId);
+        float ratio = playerSkill.GetCooldownRatio(skillId);
 
         // マスクは覆っている量なので、逆にする
         float cover = 1f - ratio;
@@ -82,7 +84,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
         if (playerSkill == null)
             return;
 
-        int lv = playerSkill.GetLevel(TargetSkillId);
+        int lv = playerSkill.GetLevel(skillId);
         
         if (levelText != null)
         {
@@ -96,10 +98,13 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!showDescriptionOnHover)
+            return;
+
         if (descriptionPanel == null || playerSkill == null || skillDefinition == null)
             return;
 
-        int lv = playerSkill.GetLevel(TargetSkillId);
+        int lv = playerSkill.GetLevel(skillId);
         descriptionPanel.Show(skillDefinition, lv);
     }
 
@@ -112,18 +117,23 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        // ゲーム中に出ているスキルアイコンなどはfalseとすることで、
+        // クリックしてもレベルアップ処理が働かないようにしておく。
+        if (!canLevelUpOnClick)
+            return;
+
         if (playerSkill == null)
             return;
 
         // スキルのレベルを上げた時
-        if (playerSkill.LevelUp(TargetSkillId))
+        if (playerSkill.LevelUp(skillId))
         {
             UpdateView();
 
             // パネル表示中なら、説明も更新
             if (descriptionPanel != null && skillDefinition != null)
             {
-                int lv = playerSkill.GetLevel(TargetSkillId);
+                int lv = playerSkill.GetLevel(skillId);
                 descriptionPanel.Show(skillDefinition, lv);
             }
         }

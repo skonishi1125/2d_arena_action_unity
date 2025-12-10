@@ -175,5 +175,5 @@ public class PlayerSkillController : MonoBehaviour
         => GetLevel(SkillId.Dash) >= 3;
 
     public bool CanUseKnockbackAttack()
-        => CanUse(SkillId.KnockbackAttack);
+        => CanUse(SkillId.HeavyKB);
 }

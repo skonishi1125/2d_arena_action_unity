@@ -11,7 +11,7 @@ public class PlayerKnockbackAttackState : PlayerState
         base.Enter();
 
         // 現レベル時点でのSkillデータを取得
-        var levelData = player.Skill.GetCurrentLevelData(SkillId.KnockbackAttack);
+        var levelData = player.Skill.GetCurrentLevelData(SkillId.HeavyKB);
         if (levelData == null)
             return;
 
