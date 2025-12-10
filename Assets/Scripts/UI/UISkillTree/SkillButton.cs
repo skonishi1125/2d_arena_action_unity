@@ -8,7 +8,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
     private Player player;
 
     [SerializeField] private PlayerSkillController playerSkill;
-    [SerializeField] private TextMeshProUGUI levelText; // ボタン上部のtext
+    private Image skillIconImage;
 
     [Header("Definition")]
     [SerializeField] private SkillDefinition skillDefinition;  // このボタンが表すスキル
@@ -34,6 +34,9 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
         if (!LogHelper.AssertNotNull(playerSkill, nameof(playerSkill), this))
             return;
 
+        // ImageにSkillDefinitionに定義したImageを割り当てる
+        skillIconImage = GetComponent<Image>();
+        skillIconImage.sprite = skillDefinition.icon;
     }
     private void Start()
     {
@@ -65,7 +68,7 @@ public abstract class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private void UpdateView()
     {
-        if (playerSkill == null || levelText == null)
+        if (playerSkill == null)
             return;
 
         int lv = playerSkill.GetLevel(TargetSkillId);
