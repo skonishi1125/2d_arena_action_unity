@@ -13,14 +13,11 @@ MonoBehaviour:
   m_Name: Wave2
   m_EditorClassIdentifier: 
   waveName: 
-  startDelay: 3
+  startDelay: 0
   enemyGroups:
-  - enemyPrefab: {fileID: 633476414250764256, guid: f78cbbfd48537e041a14b14c1831fafd, type: 3}
-    spawnCount: 1
+  - enemyPrefab: {fileID: 8463614821022854828, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+    spawnCount: 5
     spawnInterval: 1
-  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 10
-    spawnInterval: 1
-  clearType: 2
+  clearType: 1
   surviveDuration: 0
-  isBossWave: 1
+  isBossWave: 0

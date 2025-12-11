@@ -30,12 +30,12 @@ public class DarkKnightBattleState : EnemyBattleState
         switch (kind)
         {
             case AttackKind.Melee:
-                FaceToPlayer(player);
+                FaceToPlayer();
                 stateMachine.ChangeState(darkKnight.meleeAttackState);
                 break;
 
             case AttackKind.Dash:
-                FaceToPlayer(player);
+                FaceToPlayer();
                 stateMachine.ChangeState(darkKnight.dashAttackState);
                 break;
 
@@ -67,14 +67,6 @@ public class DarkKnightBattleState : EnemyBattleState
         return AttackKind.None;
     }
 
-    private void FaceToPlayer(Transform player)
-    {
-        float dx = player.position.x - enemy.transform.position.x;
-        if (dx > 0 && enemy.facingDir < 0)
-            enemy.Flip();
-        else if (dx < 0 && enemy.facingDir > 0)
-            enemy.Flip();
-    }
 
 
 }

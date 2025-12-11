@@ -28,6 +28,8 @@ public class EnemyBattleState : EnemyState
     {
         if (WithinAttackRange())
         {
+            FaceToPlayer();
+
             var nextAttack = enemy.GetNextAttackState();
             if (nextAttack != null)
                 stateMachine.ChangeState(nextAttack);
@@ -58,24 +60,40 @@ public class EnemyBattleState : EnemyState
         if (player == null)
             return float.MaxValue;
 
+        Debug.Log(Mathf.Abs(player.position.x - enemy.transform.position.x));
         return Mathf.Abs(player.position.x - enemy.transform.position.x);
     }
 
-    // BattleStateでPlayerの向きを取るために使う
+    // Player方向へ移動したいときの「移動ベクトル方向」を返す。
+    // 見た目の向きを決めるためではなく、SetVelocity で使うための力学的方向判定。
+    // （敵がプレイヤーに接近したいときのみ使用する）
     private int DirectionToPlayer()
     {
         if (player == null)
             return 0;
 
         if (player.position.x > enemy.transform.position.x)
-        {
             return 1;
-        }
         else
-        {
             return -1;
-        }
 
+    }
+
+    // 見た目（Flip）の向きをプレイヤー方向へ揃える。
+    // 攻撃直前など、「移動しなくても向きを合わせたい」場面で使用する。
+    // 移動ベクトルとは独立している点に注意。
+    protected void FaceToPlayer()
+    {
+        Transform p = enemy.GetPlayerReference();
+        if (p == null)
+            return;
+        float dx = p.position.x - enemy.transform.position.x;
+        // プレイヤーが右にいて、今左を向いているなら右向きに
+        if (dx > 0 && enemy.facingDir < 0)
+            enemy.Flip();
+        // プレイヤーが左にいて、今右を向いているなら左向きに
+        else if (dx < 0 && enemy.facingDir > 0)
+            enemy.Flip();
     }
 
 }
