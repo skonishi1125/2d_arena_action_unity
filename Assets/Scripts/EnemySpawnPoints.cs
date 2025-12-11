@@ -10,6 +10,15 @@ public class EnemySpawnPoints : MonoBehaviour
             return;
 
         var point = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(enemyPrefab, point.position, Quaternion.identity);
+        var go = Instantiate(enemyPrefab, point.position, Quaternion.identity);
+
+        // どちらを向いて生まれるか、ランダムに決定
+        var enemy = go.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            int dir = Random.value < 0.5f ? -1 : 1;
+            enemy.InitializeFacing(dir);
+        }
+
     }
 }

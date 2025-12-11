@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb001916e9382743a8a75e5b07a0d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileSpawner: {fileID: 0}
 --- !u!1 &3714439288355158456
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,6 +485,8 @@ MonoBehaviour:
   battleMoveSpeed: 3
   attackDistance: 1
   destroyWaitTime: 1
+  attackVerticalRange: 5
+  verticalOutOfRangeTime: 5
   idleTime: 2
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1.36
@@ -514,6 +517,10 @@ MonoBehaviour:
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   critHitColor: {r: 1, g: 0.010103254, b: 0, a: 1}
+  projectileHitVfx: {fileID: 0}
+  projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileCritHitVfx: {fileID: 0}
+  projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
 --- !u!114 &4511374296494275134
 MonoBehaviour:

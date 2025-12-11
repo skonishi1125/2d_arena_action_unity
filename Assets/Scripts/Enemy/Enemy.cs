@@ -18,6 +18,8 @@ public class Enemy : Entity
     public float battleMoveSpeed = 3f; // battleState時のmove速度
     public float attackDistance = 2f; // 敵がAttack移行するために必要な距離
     [SerializeField] private float destroyWaitTime = 1f; // 敵が死んだときのDestroy時間
+    public float attackVerticalRange = 5f; // y軸にこの数値分離れた時、battle -> idleにする
+    public float verticalOutOfRangeTime = 3f; // battle -> idleにする際のバッファ
 
     // 移動速度などPlayer側と共有することもできるが、見やすくするため分割する
     [Header("Movement Details")]
@@ -169,6 +171,17 @@ public class Enemy : Entity
         return player;
     }
 
+    // スポーン時などに初期向きを指定するためのヘルパ
+    // 引数としてランダムに生成したdirなどを渡し、
+    // その値に応じて決める。 +1（右） or -1（左）
+    public void InitializeFacing(int dir)
+    {
+        if (dir > 0 && facingDir < 0)
+            Flip();
+        else if (dir < 0 && facingDir > 0)
+            Flip();
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -180,6 +193,7 @@ public class Enemy : Entity
     {
         OnDrawGroundToBattleGizmos();
         OnDrawBattleToAttackGizmos();
+        OnDrawVerticalToAttackGizmos();
     }
 
     protected virtual void OnDrawGroundToBattleGizmos()
@@ -199,6 +213,16 @@ public class Enemy : Entity
         Gizmos.DrawLine(
             playerCheck.position,
             new Vector3(playerCheck.position.x + (facingDir * attackDistance), playerCheck.position.y)
+        );
+    }
+
+    protected virtual void OnDrawVerticalToAttackGizmos()
+    {
+        // Battle -> idle へと移行するケースの縦の距離
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(
+            transform.position,
+            new Vector3(0.2f, attackVerticalRange * 2, 0.2f)
         );
     }
 

@@ -7993,6 +7993,71 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8781316360612311400, guid: bab87fd86577acb4c93481345184f100, type: 3}
   m_PrefabInstance: {fileID: 2065981884}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &484039620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1086279935363272859, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086279935363272859, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.11950108
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6617304518673838707, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8463614821022854828, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+      propertyPath: m_Name
+      value: DemonGunner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
 --- !u!1 &513922179
 GameObject:
   m_ObjectHideFlags: 0
@@ -17252,6 +17317,8 @@ MonoBehaviour:
   battleMoveSpeed: 3
   attackDistance: 1
   destroyWaitTime: 1
+  attackVerticalRange: 2
+  verticalOutOfRangeTime: 0.3
   idleTime: 2
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1.36
@@ -19070,3 +19137,4 @@ SceneRoots:
   - {fileID: 2074851660}
   - {fileID: 1308022964}
   - {fileID: 1425870550}
+  - {fileID: 484039620}

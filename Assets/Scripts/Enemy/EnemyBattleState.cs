@@ -3,6 +3,8 @@
 public class EnemyBattleState : EnemyState
 {
     private Transform player;
+    private float verticalOutOfRangeTimer; // ★縦に離れた時間のタイマー
+
     public EnemyBattleState(Enemy enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -20,7 +22,12 @@ public class EnemyBattleState : EnemyState
     {
         base.LogicUpdate();
 
-        TryStartAttack();
+        // 1. 縦方向のチェック
+        HandleVerticalRange();
+
+        // 2. 攻撃開始判定（縦が許容範囲内のときだけ）
+        if (IsVerticallyInRange())
+            TryStartAttack();
     }
 
     // virtualとして、DarkKnightなどでオーバーライドできるようにする
@@ -60,7 +67,6 @@ public class EnemyBattleState : EnemyState
         if (player == null)
             return float.MaxValue;
 
-        Debug.Log(Mathf.Abs(player.position.x - enemy.transform.position.x));
         return Mathf.Abs(player.position.x - enemy.transform.position.x);
     }
 
@@ -94,6 +100,33 @@ public class EnemyBattleState : EnemyState
         // プレイヤーが左にいて、今右を向いているなら左向きに
         else if (dx < 0 && enemy.facingDir > 0)
             enemy.Flip();
+    }
+
+    // プレイヤーとの縦方向の差が、許容範囲内かどうか
+    private bool IsVerticallyInRange()
+    {
+        if (player == null)
+            return false;
+
+        float dy = Mathf.Abs(player.position.y - enemy.transform.position.y);
+        return dy <= enemy.attackVerticalRange;
+    }
+
+    // 縦方向が一定時間以上離れていたら idleState へ戻す
+    private void HandleVerticalRange()
+    {
+        if (!IsVerticallyInRange())
+        {
+            verticalOutOfRangeTimer += Time.deltaTime;
+
+            if (verticalOutOfRangeTimer >= enemy.verticalOutOfRangeTime)
+                stateMachine.ChangeState(enemy.idleState);
+        }
+        else
+        {
+            // 範囲内に戻ってきたらタイマーリセット
+            verticalOutOfRangeTimer = 0f;
+        }
     }
 
 }

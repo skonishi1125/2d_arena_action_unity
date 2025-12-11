@@ -713,6 +713,8 @@ MonoBehaviour:
   battleMoveSpeed: 3
   attackDistance: 8
   destroyWaitTime: 1
+  attackVerticalRange: 5
+  verticalOutOfRangeTime: 5
   idleTime: 2
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1
