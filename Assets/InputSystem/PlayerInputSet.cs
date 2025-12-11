@@ -145,6 +145,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MagicBolt"",
+                    ""type"": ""Button"",
+                    ""id"": ""d86413b2-f8d0-47ed-b331-5b41f5052949"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -257,6 +266,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""action"": ""StatusMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f22c986-d1f7-4d42-b73d-a58e7929eae7"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MagicBolt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +291,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_KnockbackAttack = m_Player.FindAction("KnockbackAttack", throwIfNotFound: true);
         m_Player_StatusMenu = m_Player.FindAction("StatusMenu", throwIfNotFound: true);
+        m_Player_MagicBolt = m_Player.FindAction("MagicBolt", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
@@ -357,6 +378,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_KnockbackAttack;
     private readonly InputAction m_Player_StatusMenu;
+    private readonly InputAction m_Player_MagicBolt;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -392,6 +414,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/StatusMenu".
         /// </summary>
         public InputAction @StatusMenu => m_Wrapper.m_Player_StatusMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/MagicBolt".
+        /// </summary>
+        public InputAction @MagicBolt => m_Wrapper.m_Player_MagicBolt;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -436,6 +462,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @StatusMenu.started += instance.OnStatusMenu;
             @StatusMenu.performed += instance.OnStatusMenu;
             @StatusMenu.canceled += instance.OnStatusMenu;
+            @MagicBolt.started += instance.OnMagicBolt;
+            @MagicBolt.performed += instance.OnMagicBolt;
+            @MagicBolt.canceled += instance.OnMagicBolt;
         }
 
         /// <summary>
@@ -465,6 +494,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @StatusMenu.started -= instance.OnStatusMenu;
             @StatusMenu.performed -= instance.OnStatusMenu;
             @StatusMenu.canceled -= instance.OnStatusMenu;
+            @MagicBolt.started -= instance.OnMagicBolt;
+            @MagicBolt.performed -= instance.OnMagicBolt;
+            @MagicBolt.canceled -= instance.OnMagicBolt;
         }
 
         /// <summary>
@@ -547,5 +579,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStatusMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MagicBolt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMagicBolt(InputAction.CallbackContext context);
     }
 }

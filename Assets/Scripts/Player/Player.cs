@@ -27,6 +27,7 @@ public class Player : Entity
     public PlayerAirAttackState airAttackState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
     public PlayerKnockbackAttackState knockbackAttackState { get; private set; }
+    public PlayerMagicBoltState magicBoltState { get; private set; }
 
 
     [Header("Input Settings")]
@@ -93,6 +94,7 @@ public class Player : Entity
         basicAttackState = new PlayerBasicAttackState(this, stateMachine, "basicAttack");
         airAttackState = new PlayerAirAttackState(this, stateMachine, "airAttack");
         knockbackAttackState = new PlayerKnockbackAttackState(this, stateMachine, "knockbackAttack");
+        magicBoltState = new PlayerMagicBoltState(this, stateMachine, "magicBolt");
         deadState = new PlayerDeadState(this, stateMachine, "dead");
 
         // 必要なcomponentの取得

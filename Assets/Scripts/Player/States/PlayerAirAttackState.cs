@@ -50,9 +50,15 @@ public class PlayerAirAttackState : PlayerAirState
         // xを0にすることで、ジャンプ前の慣性や攻撃中の入力どちらも無効化する
         rb.linearVelocity = new Vector2(0f, newVy);
 
+
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+
         if (triggerCalled)
             stateMachine.ChangeState(player.fallState);
-
     }
 
     public override void Exit()

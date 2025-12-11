@@ -42659,6 +42659,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7116725033097353495, guid: 75676a2e81c87754ca6ea2512b3f87c0, type: 3}
   m_PrefabInstance: {fileID: 1655290390}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1998041562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998041563}
+  m_Layer: 8
+  m_Name: ProjectilePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1998041563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998041562}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1716123623285125823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &2005159053 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7116725033097353495, guid: 75676a2e81c87754ca6ea2512b3f87c0, type: 3}
@@ -43792,6 +43823,7 @@ Transform:
   - {fileID: 1893145360445751319}
   - {fileID: 38382415109853626}
   - {fileID: 544470153}
+  - {fileID: 1998041563}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1727399796353890512
@@ -44465,9 +44497,9 @@ MonoBehaviour:
   hitVfxColor: {r: 0.043137252, g: 0.9904362, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   critHitColor: {r: 1, g: 0, b: 0.041718483, a: 1}
-  projectileHitVfx: {fileID: 0}
+  projectileHitVfx: {fileID: 3999223365734403740, guid: cf6dfb9383a891a469bd4450a6122935, type: 3}
   projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
-  projectileCritHitVfx: {fileID: 0}
+  projectileCritHitVfx: {fileID: 3999223365734403740, guid: cf6dfb9383a891a469bd4450a6122935, type: 3}
   projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
 --- !u!1 &4141751149143326200
@@ -44593,6 +44625,7 @@ GameObject:
   - component: {fileID: 4277257634316995409}
   - component: {fileID: 5502532797669932105}
   - component: {fileID: 8524643674304472832}
+  - component: {fileID: 8524643674304472833}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -44771,7 +44804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff9c6d331fda0d42a9d39d076cd0d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpawner: {fileID: 0}
+  projectileSpawner: {fileID: 8524643674304472833}
 --- !u!114 &5122431366315889943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45590,6 +45623,21 @@ MonoBehaviour:
   - definition: {fileID: 11400000, guid: 18b2a82e470fb394ebb91fec4d954502, type: 2}
     currentLevel: 0
     cooldownRemaining: 0
+--- !u!114 &8524643674304472833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419268650410001899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc651e31978c5d4e844acac6e2ab2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3909016599546878838, guid: 5f984f78103e7c84b8fd2228e89ebc5f, type: 3}
+  spawnPoint: {fileID: 1998041563}
+  speed: 20
 --- !u!1 &8789066206149023570
 GameObject:
   m_ObjectHideFlags: 0

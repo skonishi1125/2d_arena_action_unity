@@ -44,8 +44,6 @@ public abstract class PlayerState : EntityState
             return;
         }
 
-
-
         // KnockbackAttack
         if (input.Player.KnockbackAttack.WasPerformedThisFrame()
             && player.Skill.CanUse(SkillId.HeavyKB))
@@ -55,34 +53,19 @@ public abstract class PlayerState : EntityState
             return;
         }
 
-        // CanDashを満たしている、全てのStateで即遷移できる。
-        //if (input.Player.Dash.WasPressedThisFrame() && CanDash())
-        //    stateMachine.ChangeState(player.dashState);
-
-        // KB攻撃
-        //if (input.Player.KnockbackAttack.WasPerformedThisFrame())
-        //    stateMachine.ChangeState(player.knockbackAttackState);
+        // MagicBolt
+        if (input.Player.MagicBolt.WasPerformedThisFrame())
+        {
+            stateMachine.ChangeState(player.magicBoltState);
+            return;
+        }
 
     }
 
+
+
+    // ダッシュ条件(クールタイム以外)
     // 壁が目の前, ダッシュ中はダッシュできなくする
-    //private bool CanDash()
-    //{
-    //    // スキルレベルが足りているか
-    //    if (player.Skill.CanUseDash() == false)
-    //        return false;
-
-    //    // 壁や、ダッシュ中でないか
-    //    if (player.wallDetected)
-    //        return false;
-
-    //    if (stateMachine.currentState == player.dashState)
-    //        return false;
-
-    //    return true;
-    //}
-
-    // ダッシュ: 物理条件だけ
     private bool CanDashMovementConditions()
     {
         if (player.wallDetected)
