@@ -2,16 +2,16 @@
 
 // 遠距離攻撃の弾などを管理するクラス
 // 敵味方に付与して、使いたい弾をPrefabでセットすればよい
-public class ProjectileSpawner : MonoBehaviour
+public class EntityProjectileSpawner : MonoBehaviour
 {
-    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private EntityProjectile projectilePrefab;
     [SerializeField] private Transform spawnPoint; // 射撃口
 
     [SerializeField] private float speed = 5f;
 
     public void Spawn(Entity entity)
     {
-        Projectile proj = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+        EntityProjectile proj = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
 
         proj.Fire(entity.facingDir, speed, entity);
     }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2629485636308119345}
   - component: {fileID: -1993376025258610626}
   m_Layer: 0
-  m_Name: TestBullet
+  m_Name: EntityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

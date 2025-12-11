@@ -103,7 +103,13 @@ public class EntityCombat : MonoBehaviour
 
             // 2. ダメージ計算
             bool isCritical = false;
-            float damage = CalculateDamage(entityStatus, targetStatus, out isCritical);
+            float damage = CalculateDamage(
+                entityStatus,
+                targetStatus,
+                currentDamageMultiplier,
+                criticalRate,
+                out isCritical
+            );
 
             damagable?.TakeDamage(damage, transform);
 
@@ -144,7 +150,7 @@ public class EntityCombat : MonoBehaviour
 
 
     // 回避率を計算し、その結果を返す
-    private bool IsEvaded(EntityStatus attacker, EntityStatus defender)
+    public static bool IsEvaded(EntityStatus attacker, EntityStatus defender)
     {
         if (defender == null)
             return false;
@@ -159,7 +165,13 @@ public class EntityCombat : MonoBehaviour
 
     // 実ダメージを返す
 
-    private float CalculateDamage(EntityStatus attacker, EntityStatus defender, out bool isCritical)
+    public static float CalculateDamage(
+        EntityStatus attacker,
+        EntityStatus defender,
+        float damageMultiplier,
+        float criticalRate,
+        out bool isCritical
+    )
     {
         isCritical = false;
 
@@ -171,7 +183,7 @@ public class EntityCombat : MonoBehaviour
             raw = 1f;
 
         // 攻撃個別に設定されている、倍率の反映
-        raw *= currentDamageMultiplier;
+        raw *= damageMultiplier;
 
         // クリティカル判定（critical を 0〜1 の確率で扱う場合）
         if (attacker != null)

@@ -4,7 +4,7 @@ public class EntityAnimationTrigger : MonoBehaviour
 {
     private Entity entity;
     protected EntityCombat entityCombat;
-    [SerializeField] private ProjectileSpawner projectileSpawner;
+    [SerializeField] private EntityProjectileSpawner projectileSpawner;
 
 
     protected virtual void Awake()
