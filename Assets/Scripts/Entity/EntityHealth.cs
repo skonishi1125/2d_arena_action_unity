@@ -45,7 +45,6 @@ public class EntityHealth : MonoBehaviour, IDamagable
             CalculateKnockbackDuration(attacker, damage)
         );
 
-
         // 白くなる演出
         entityVfx?.PlayOnDamageVfx();
 
@@ -80,30 +79,50 @@ public class EntityHealth : MonoBehaviour, IDamagable
 
         // 攻撃側の EntityCombat を見る
         var attackerCombat = attacker.GetComponent<EntityCombat>();
+        Vector2 basePower;
+
         if (attackerCombat != null && attackerCombat.HasCustomKnockback)
         {
-            Vector2 kb = attackerCombat.CurrentKnockbackPower;
-            kb.x *= direction;
-            return kb;
+            // KBを持つ技(基本こっち)
+            basePower = attackerCombat.CurrentKnockbackPower;
+        }
+        else
+        {
+            // 設定のない技は、受け手の持つ基礎KBで決める
+            basePower = IsHeavyKnockback(damage) ? heavyKnockbackPower : knockbackPower;
         }
 
-        // それ以外は従来の heavy / normal ロジック
-        Vector2 basePower = IsHeavyKnockback(damage) ? heavyKnockbackPower : knockbackPower;
+        // ★ 強さに少しばらつきを与える（例：±10%）
+        // 敵をまとめて飛ばしたときに、アニメなどの重なりを防止する
+        // (1体に見えるのに、実際は何匹も重なっているような挙動を防ぐ）
+        float randomScale = UnityEngine.Random.Range(0.9f, 1.1f);
+        basePower *= randomScale;
+
+        // 向きだけ最後に乗せる
         basePower.x *= direction;
         return basePower;
+
     }
 
     private float CalculateKnockbackDuration(Transform attacker, float damage)
     {
         // 攻撃側
         var attackerCombat = attacker.GetComponent<EntityCombat>();
+        float finalKnockbackDuration;
         if (attackerCombat != null && attackerCombat.HasCustomKnockback)
         {
-            return attackerCombat.CurrentKnockbackDuration;
+            finalKnockbackDuration = attackerCombat.CurrentKnockbackDuration;
+        } else
+        {
+            finalKnockbackDuration = IsHeavyKnockback(damage) ? heavyKnockbackDuration : knockbackDuration;
         }
 
+        // ★ 強さに少しばらつきを与える（例：±10%）
+        float randomScale = UnityEngine.Random.Range(0.9f, 1.1f);
+        finalKnockbackDuration *= randomScale;
+
         // それ以外は従来の heavy / normal ロジック
-        return IsHeavyKnockback(damage) ? heavyKnockbackDuration : knockbackDuration;
+        return finalKnockbackDuration;
     }
 
 

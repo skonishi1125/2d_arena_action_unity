@@ -707,7 +707,7 @@ MonoBehaviour:
   wallCheckDistance: 1.5
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   groundCheck: {fileID: 6842935581121348886}
   isBoss: 0
   battleMoveSpeed: 3
