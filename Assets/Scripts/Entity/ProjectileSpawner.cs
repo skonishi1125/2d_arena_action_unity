@@ -9,10 +9,11 @@ public class ProjectileSpawner : MonoBehaviour
 
     [SerializeField] private float speed = 5f;
 
-    public void Spawn()
+    public void Spawn(Entity entity)
     {
         Projectile proj = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
-        proj.Fire(spawnPoint.right, speed, GetComponentInParent<Entity>());
+
+        proj.Fire(entity.facingDir, speed, entity);
     }
 
 }

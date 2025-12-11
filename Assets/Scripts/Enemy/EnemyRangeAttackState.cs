@@ -9,7 +9,7 @@ public class EnemyRangeAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        // 射撃方向などの調整が必要なら、EnterをOverrideして敵が各々書けばよい。
+        // 射撃方向などの調整が必要なら、EnterをOverrideして敵が各々書く。
     }
 
     public override void LogicUpdate()

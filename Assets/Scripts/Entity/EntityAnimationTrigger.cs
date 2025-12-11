@@ -39,7 +39,7 @@ public class EntityAnimationTrigger : MonoBehaviour
     protected virtual void ShootProjectileTrigger()
     {
         if (projectileSpawner != null)
-            projectileSpawner.Spawn();
+            projectileSpawner.Spawn(entity);
     }
 
 }

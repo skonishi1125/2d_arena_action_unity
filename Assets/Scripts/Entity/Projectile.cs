@@ -2,16 +2,22 @@
 
 public class Projectile : MonoBehaviour
 {
+    private Rigidbody2D rb;
     private float speed;
-    private Vector2 direction;
+    private float shootDir; // 1 or -1 撃った時点での敵の向き
     private Entity owner; // 誰が撃ったか
 
     [SerializeField] private float lifeTime = 3f;
     private float timer;
 
-    public void Fire(Vector2 dir, float speed, Entity owner)
+    private void Awake()
     {
-        this.direction = dir;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void Fire(float shootDir, float speed, Entity owner)
+    {
+        this.shootDir = shootDir;
         this.speed = speed;
         this.owner = owner;
         timer = lifeTime;
@@ -19,12 +25,17 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        // entity.facingDirを使うと、
+        // entityが反転したとき、弾も同時に反転してしまう
+        rb.linearVelocity = Vector2.right * speed * shootDir;
 
         timer -= Time.deltaTime;
         if (timer <= 0f)
             Destroy(gameObject);
     }
+
+    // 弾のダメージ処理
+    // EntityCombatは、近接攻撃のダメージ処理担当
     private void OnTriggerEnter2D(Collider2D other)
     {
         // 発射主と同じ陣営には当てない
