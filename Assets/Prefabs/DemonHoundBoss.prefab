@@ -222,6 +222,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2082240096898230089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2358706112791013526}
+  m_Layer: 8
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2358706112791013526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082240096898230089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1484826910240629501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3461487312087734453
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +417,7 @@ Transform:
   - {fileID: 4298975342723962335}
   - {fileID: 3877492710178568263}
   - {fileID: 1349324878854967236}
+  - {fileID: 2358706112791013526}
   - {fileID: 3585009860207524842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -467,11 +499,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
   groundCheckDistance: 0.5
-  wallCheckDistance: 2
+  wallCheckDistance: 1.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 3877492710178568263}
+  wallCheck: {fileID: 2358706112791013526}
   isBoss: 1
   battleMoveSpeed: 3
   attackDistance: 1

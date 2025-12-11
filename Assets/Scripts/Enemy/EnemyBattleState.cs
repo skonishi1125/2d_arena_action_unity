@@ -87,6 +87,8 @@ public class EnemyBattleState : EnemyState
             }
             else
             {
+                Debug.Log("setvelocity?");
+
                 enemy.SetVelocity(
                     enemy.battleMoveSpeed * DirectionToPlayer(),
                     rb.linearVelocity.y
@@ -94,10 +96,7 @@ public class EnemyBattleState : EnemyState
             }
         }
 
-        //if (!WithinAttackRange())
-        //{
-        //    enemy.SetVelocity(enemy.battleMoveSpeed * DirectionToPlayer(), rb.linearVelocity.y);
-        //}
+        Debug.Log("battlestate update");
     }
 
 

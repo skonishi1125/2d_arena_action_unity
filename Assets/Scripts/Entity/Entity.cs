@@ -26,6 +26,7 @@ public abstract class Entity : MonoBehaviour
     // EnemyでPlayer検知時、壁ごしのチェックに使うのでprotectedとする
     [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform wallCheck;
 
     public bool groundDetected { get; private set; }
     public bool wallDetected { get; private set; }
@@ -146,7 +147,7 @@ public abstract class Entity : MonoBehaviour
         );
 
         wallDetected = Physics2D.Raycast(
-            transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround
+            wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround
         );
     }
 
@@ -174,8 +175,8 @@ public abstract class Entity : MonoBehaviour
 
         // 壁
         Gizmos.DrawLine(
-            transform.position,
-            transform.position + new Vector3(wallCheckDistance * facingDir, 0)
+            wallCheck.position,
+            wallCheck.position + new Vector3(wallCheckDistance * facingDir, 0)
         );
     }
 
