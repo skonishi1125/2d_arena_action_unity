@@ -4,6 +4,8 @@ public class EntityAnimationTrigger : MonoBehaviour
 {
     private Entity entity;
     protected EntityCombat entityCombat;
+    [SerializeField] private ProjectileSpawner projectileSpawner;
+
 
     protected virtual void Awake()
     {
@@ -32,6 +34,12 @@ public class EntityAnimationTrigger : MonoBehaviour
     protected virtual void EndContinuousAttackTrigger()
     {
         entityCombat.StopContinuousAttack();
+    }
+
+    protected virtual void ShootProjectileTrigger()
+    {
+        if (projectileSpawner != null)
+            projectileSpawner.Spawn();
     }
 
 }

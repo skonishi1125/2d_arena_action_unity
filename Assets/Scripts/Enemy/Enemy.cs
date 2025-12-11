@@ -9,6 +9,7 @@ public class Enemy : Entity
     public EnemyMoveState moveState;
     public EnemyBattleState battleState;
     public EnemyAttackState attackState;
+    public EnemyRangeAttackState rangeAttackState;
     public EnemyDeadState deadState;
 
     [SerializeField] private bool isBoss;
@@ -73,15 +74,31 @@ public class Enemy : Entity
             GameManager.Instance.Player.Health.OnDied -= HandlePlayerDeath;
     }
 
+    // BattleState から呼ばれ、次に遷移すべき攻撃ステートを返す。
+    // デフォルトは近接 → 無ければ遠距離。
+    // DemonGunnnerなど遠距離しか持たない敵は、
+    // 固有クラス側でこのメソッドをOverrideして管理すればよい。
+    public virtual EnemyState GetNextAttackState()
+    {
+        if (attackState != null)
+            return attackState;
+
+        if (rangeAttackState != null)
+            return rangeAttackState;
+
+        return null;
+    }
+
 
     // Playerから殴られたときなど、BattleStateに遷移させる為のメソッド
     public void TryEnterBattleState(Transform player)
     {
-        // 既にbattlestate, attackstateの場合はスキップ
+        // 既にbattle, attack / rangeAttackの場合はスキップ
         if (stateMachine.currentState == battleState)
             return;
 
-        if (stateMachine.currentState == attackState)
+        if (stateMachine.currentState == attackState
+            || stateMachine.currentState == rangeAttackState)
             return;
 
         this.player = player;

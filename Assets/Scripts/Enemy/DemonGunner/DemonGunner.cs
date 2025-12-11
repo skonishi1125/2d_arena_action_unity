@@ -9,8 +9,14 @@ public class DemonGunner : Enemy
         idleState = new EnemyIdleState(this, stateMachine, "idle");
         moveState = new EnemyMoveState(this, stateMachine, "move");
         battleState = new EnemyBattleState(this, stateMachine, "battle");
-        attackState = new EnemyAttackState(this, stateMachine, "attack");
+        // 遠距離攻撃
+        rangeAttackState = new EnemyRangeAttackState(this, stateMachine, "attack");
         deadState = new EnemyDeadState(this, stateMachine, "NONE");
 
+    }
+
+    public override EnemyState GetNextAttackState()
+    {
+        return rangeAttackState;
     }
 }

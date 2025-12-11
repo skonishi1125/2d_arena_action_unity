@@ -28,7 +28,9 @@ public class EnemyBattleState : EnemyState
     {
         if (WithinAttackRange())
         {
-            stateMachine.ChangeState(enemy.attackState);
+            var nextAttack = enemy.GetNextAttackState();
+            if (nextAttack != null)
+                stateMachine.ChangeState(nextAttack);
         }
     }
 
