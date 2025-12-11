@@ -3,7 +3,12 @@
 public class EnemyBattleState : EnemyState
 {
     private Transform player;
-    private float verticalOutOfRangeTimer; // ★縦に離れた時間のタイマー
+    private float verticalOutOfRangeTimer; // 縦に離れた時間のタイマー
+
+    // ジャンプ関連
+    private int wallJumpAttempts;
+    private float lastWallJumpTime;
+    private bool isWallJumping;
 
     public EnemyBattleState(Enemy enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
@@ -16,11 +21,24 @@ public class EnemyBattleState : EnemyState
         // 感知から状態に入ったケース, 後ろからplayerに殴られたケースなどを考慮
         player ??= enemy.GetPlayerReference(); // if(player == null) player = ...と同じ
 
+        wallJumpAttempts = 0;
+        isWallJumping = false;
+
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        // ① 壁ジャンプ中の処理
+        if (isWallJumping)
+        {
+            if (enemy.groundDetected)
+                isWallJumping = false;
+
+            // ジャンプ中は攻撃開始判定や縦距離チェックをしない
+            return;
+        }
 
         // 1. 縦方向のチェック
         HandleVerticalRange();
@@ -47,10 +65,39 @@ public class EnemyBattleState : EnemyState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        // ① 壁ジャンプ中の移動
+        if (isWallJumping)
+        {
+            float dir = enemy.facingDir;
+            rb.linearVelocity = new Vector2(
+                enemy.wallJumpVelocity.x * dir,
+                rb.linearVelocity.y   // Yは重力に任せる
+            );
+            return;
+        }
+
+        // ② 攻撃範囲外ならプレイヤーに近づく
         if (!WithinAttackRange())
         {
-            enemy.SetVelocity(enemy.battleMoveSpeed * DirectionToPlayer(), rb.linearVelocity.y);
+            // 壁に当たっていて、かつ地上にいるならジャンプを試す
+            if (enemy.wallDetected && enemy.groundDetected)
+            {
+                HandleWallInBattle();
+            }
+            else
+            {
+                enemy.SetVelocity(
+                    enemy.battleMoveSpeed * DirectionToPlayer(),
+                    rb.linearVelocity.y
+                );
+            }
         }
+
+        //if (!WithinAttackRange())
+        //{
+        //    enemy.SetVelocity(enemy.battleMoveSpeed * DirectionToPlayer(), rb.linearVelocity.y);
+        //}
     }
 
 
@@ -127,6 +174,40 @@ public class EnemyBattleState : EnemyState
             // 範囲内に戻ってきたらタイマーリセット
             verticalOutOfRangeTimer = 0f;
         }
+    }
+
+    // 壁ジャンプ処理
+    private void HandleWallInBattle()
+    {
+        // クールタイム中は何もしない（諦めない）
+        if (Time.time < lastWallJumpTime + enemy.wallJumpCooldown)
+            return;
+
+        // 指定回数だけジャンプを試す
+        if (wallJumpAttempts < enemy.maxWallJumpAttempts)
+        {
+            wallJumpAttempts++;
+            lastWallJumpTime = Time.time;
+            isWallJumping = true;
+
+            // いま向いている方向へジャンプ
+            float dir = enemy.facingDir;
+
+            // ジャンプ初速
+            rb.linearVelocity = new Vector2(
+                enemy.wallJumpVelocity.x * dir,
+                enemy.wallJumpVelocity.y
+            );
+
+            return;
+        }
+
+        // ここまで来たら「何度か試したけどダメ」→ 方向転換して追尾を中止
+        wallJumpAttempts = 0;
+        isWallJumping = false;
+
+        enemy.Flip();
+        stateMachine.ChangeState(enemy.idleState);
     }
 
 }

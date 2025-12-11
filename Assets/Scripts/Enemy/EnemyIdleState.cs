@@ -11,6 +11,7 @@ public class EnemyIdleState : EnemyGroundState
     {
         base.Enter();
         stateTimer = enemy.idleTime;
+
     }
 
     public override void LogicUpdate()

@@ -30,6 +30,11 @@ public class Enemy : Entity
     [Range(0, 2)]
     public float moveAnimSpeedMultiplier = 1; // アニメーションスピード
 
+    [Header("Move / WallJump")]
+    public int maxWallJumpAttempts = 2; // 壁に対して何回までジャンプを試みるか
+    public Vector2 wallJumpVelocity = new Vector2(4f, 12f); // ジャンプベクトル
+    public float wallJumpCooldown = 0.2f; // ジャンプとジャンプの間の猶予時間
+
     [Header("Player detection")]
     [SerializeField] private LayerMask whatIsPlayer; // 感知距離のobjectがPlayerかどうか
     [SerializeField] protected Transform playerCheck; // 感知用Raycastの始点
