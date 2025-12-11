@@ -22,6 +22,16 @@ public class EntityVFX : MonoBehaviour
     [SerializeField] private GameObject critHitVfx;
     [SerializeField] private Color critHitColor = Color.white;
 
+    // 共通 射撃
+    [Header("Projectile Hit VFX")]
+    [SerializeField] private GameObject projectileHitVfx;
+    [SerializeField] private Color projectileHitVfxColor = Color.white;
+
+    // 共通 射撃クリティカル
+    [Header("Projectile CritHit VFX")]
+    [SerializeField] private GameObject projectileCritHitVfx;
+    [SerializeField] private Color projectileCritHitColor = Color.white;
+
     // 共通 Evasionでよけた時
     [Header("Miss Hit VFX")]
     [SerializeField] private GameObject missHitVfx;
@@ -68,6 +78,19 @@ public class EntityVFX : MonoBehaviour
         sr.material = onDamageMaterial;
         yield return new WaitForSeconds(onDamageVfxDuration);
         sr.material = originalMaterial;
+    }
+
+    // 通常弾ヒット
+    public void CreateOnProjectileHitVfx(Transform target)
+    {
+        GameObject vfx = Instantiate(projectileHitVfx, target.position, Quaternion.identity);
+        vfx.GetComponentInChildren<SpriteRenderer>().color = projectileHitVfxColor;
+    }
+
+    public void CreateOnProjectileCritHitVfx(Transform target)
+    {
+        GameObject vfx = Instantiate(projectileCritHitVfx, target.position, Quaternion.identity);
+        vfx.GetComponentInChildren<SpriteRenderer>().color = projectileCritHitColor;
     }
 
 

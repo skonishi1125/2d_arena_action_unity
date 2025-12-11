@@ -11688,6 +11688,10 @@ MonoBehaviour:
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   critHitVfx: {fileID: 0}
   critHitColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileHitVfx: {fileID: 0}
+  projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileCritHitVfx: {fileID: 0}
+  projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
   missHitVfx: {fileID: 0}
 --- !u!1 &1496913216
 GameObject:
@@ -17158,6 +17162,10 @@ MonoBehaviour:
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   critHitColor: {r: 1, g: 0.010103254, b: 0, a: 1}
+  projectileHitVfx: {fileID: 0}
+  projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileCritHitVfx: {fileID: 0}
+  projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
 --- !u!1 &3271587297250531632
 GameObject:
@@ -17557,6 +17565,10 @@ MonoBehaviour:
   hitVfxColor: {r: 0.043137252, g: 0.9904362, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   critHitColor: {r: 1, g: 0, b: 0.041718483, a: 1}
+  projectileHitVfx: {fileID: 0}
+  projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileCritHitVfx: {fileID: 0}
+  projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
 --- !u!1 &4141751149143326200
 GameObject:
@@ -17809,7 +17821,7 @@ MonoBehaviour:
     additiveBonus: 0
     multiplier: 1
   attack:
-    baseValue: 5
+    baseValue: 1
     additiveBonus: 0
     multiplier: 1
   defense:
@@ -17821,7 +17833,7 @@ MonoBehaviour:
     additiveBonus: 0
     multiplier: 1
   critical:
-    baseValue: 0
+    baseValue: 0.5
     additiveBonus: 0
     multiplier: 1
 --- !u!1 &4575647840942315143
@@ -19482,6 +19494,10 @@ MonoBehaviour:
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   critHitColor: {r: 1, g: 0.010103254, b: 0, a: 1}
+  projectileHitVfx: {fileID: 3690044743846267362, guid: 0fe689911db46064b9bb3461625500a2, type: 3}
+  projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileCritHitVfx: {fileID: 3690044743846267362, guid: 0fe689911db46064b9bb3461625500a2, type: 3}
+  projectileCritHitColor: {r: 0.9559822, g: 1, b: 0, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
 --- !u!114 &8466543183265792268
 MonoBehaviour:

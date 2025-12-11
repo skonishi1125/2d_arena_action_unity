@@ -3,6 +3,7 @@
 public class EntityProjectile : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator anim;
     private EntityVFX entityVfx;
 
 
@@ -21,6 +22,14 @@ public class EntityProjectile : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Prefabでも動く(生成時)
+        if (!LogHelper.AssertNotNull(rb, nameof(rb), this))
+            return;
+
+        anim = GetComponentInChildren<Animator>();
+        if (!LogHelper.AssertNotNull(anim, nameof(anim), this))
+            return;
+
+        anim.SetBool("idle", true);
     }
 
     public void Fire(float shootDir, float speed, Entity owner)
@@ -98,9 +107,9 @@ public class EntityProjectile : MonoBehaviour
         {
             // 弾用のVFX(近接用は、斬撃vfxなので変えておこう)
             if (isCritical)
-                hitVfx.CreateOnCritHitVfx(target.transform);
+                hitVfx.CreateOnProjectileHitVfx(target.transform);
             else
-                hitVfx.CreateOnHitVfx(target.transform);
+                hitVfx.CreateOnProjectileCritHitVfx(target.transform);
         }
 
         Destroy(gameObject);
