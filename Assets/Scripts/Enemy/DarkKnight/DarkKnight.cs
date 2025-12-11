@@ -30,12 +30,6 @@ public class DarkKnight : Enemy
         deadState = new EnemyDeadState(this, stateMachine, "NONE");
     }
 
-    protected override void Start()
-    {
-        base.Start();
-        stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
-    }
-
     protected override void OnDrawBattleToAttackGizmos()
     {
 

@@ -52,6 +52,15 @@ public class Enemy : Entity
             return;
 
     }
+
+    protected override void Start()
+    {
+        base.Start();
+        stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
+    }
+
+
+
     private void OnEnable()
     {
         if (GameManager.Instance != null && GameManager.Instance.Player != null)
