@@ -17,7 +17,7 @@ MonoBehaviour:
   description: "\u6575\u306B\u5411\u304B\u3063\u3066\u9B54\u529B\u5F3E\u3092\u5C04\u51FA\u3059\u308B\u3002"
   icon: {fileID: 6809142818896889251, guid: cde3f56d2f3724c4d84efd6d4362493a, type: 3}
   slot: 3
-  exclusiveInSlot: 0
+  exclusiveInSlot: 1
   levels:
   - level: 1
     damageMultiplier: 1

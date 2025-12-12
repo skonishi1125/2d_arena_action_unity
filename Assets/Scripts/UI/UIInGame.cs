@@ -19,6 +19,11 @@ public class UIInGame : MonoBehaviour
     [SerializeField] private RectTransform expRect;
     [SerializeField] private Slider expSlider;
 
+    [Header("Skill Slots")]
+    [SerializeField] private SkillSlotWidget zSlot;
+    [SerializeField] private SkillSlotWidget dSlot;
+    [SerializeField] private SkillSlotWidget vSlot;
+
     private void Start()
     {
         player = FindFirstObjectByType<Player>();
@@ -42,6 +47,8 @@ public class UIInGame : MonoBehaviour
         }
 
         UpdatePlayerHealthBar();
+
+        InitSkillSlots();
     }
 
     private void OnDestroy()
@@ -95,6 +102,15 @@ public class UIInGame : MonoBehaviour
         //Debug.Log("HandleExpChanged currentExp: " + currentExp + " requiredExp: " + requiredExp + " 割合: " + currentExp / requiredExp);
 
         expSlider.value = (float)currentExp / requiredExp;
+    }
+
+    // スキルスロット呼び出し
+    private void InitSkillSlots()
+    {
+        var skill = player.Skill;
+        zSlot?.Setup(skill);
+        dSlot?.Setup(skill);
+        vSlot?.Setup(skill);
     }
 
 }
