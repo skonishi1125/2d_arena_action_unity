@@ -41,6 +41,13 @@ public abstract class PlayerState : EntityState
             return;
         }
 
+        // teleport
+        if (input.Player.Teleport.WasPerformedThisFrame())
+        {
+            stateMachine.ChangeState(player.teleportState);
+            return;
+        }
+
         // KnockbackAttack
         if (input.Player.KnockbackAttack.WasPerformedThisFrame()
             && player.Skill.CanUse(SkillId.HeavyKB))
@@ -59,12 +66,7 @@ public abstract class PlayerState : EntityState
             return;
         }
 
-        // teleport
-        if (input.Player.Teleport.WasPerformedThisFrame())
-        {
-            stateMachine.ChangeState(player.teleportState);
-            return;
-        }
+
 
     }
 

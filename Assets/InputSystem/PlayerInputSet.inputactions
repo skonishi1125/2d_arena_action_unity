@@ -34,6 +34,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Teleport",
+                    "type": "Button",
+                    "id": "f7e74289-8871-4357-87ca-cdd60863dcb0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "878ad344-3cce-47b7-849f-7730397df6f8",
@@ -64,15 +73,6 @@
                     "name": "MagicBolt",
                     "type": "Button",
                     "id": "d86413b2-f8d0-47ed-b331-5b41f5052949",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Teleport",
-                    "type": "Button",
-                    "id": "f7e74289-8871-4357-87ca-cdd60863dcb0",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",

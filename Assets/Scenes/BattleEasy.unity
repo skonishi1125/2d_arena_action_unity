@@ -45522,7 +45522,7 @@ MonoBehaviour:
   projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
   teleportVfx: {fileID: 4416121855561363331, guid: 8deebf8c3bde24d4293d2352db8bf2f7, type: 3}
-  teleportColor: {r: 0.33490568, g: 0.3731853, b: 1, a: 1}
+  teleportColor: {r: 0, g: 0.0081414, b: 0.6981132, a: 1}
 --- !u!1 &8789066206149023570
 GameObject:
   m_ObjectHideFlags: 0
