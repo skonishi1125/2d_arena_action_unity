@@ -26,14 +26,14 @@ MonoBehaviour:
     levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E02\u79D2, \u5A01\u529B100%\u306E\u30C0\u30E1\u30FC\u30B8\u3002"
   - level: 2
     damageMultiplier: 1.5
-    knockbackPower: {x: 5, y: 5}
+    knockbackPower: {x: 10, y: 10}
     knockbackDuration: 0.3
     cooldownTime: 2
     manaCost: 0
     levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E02\u79D2, \u5A01\u529B150%\u306E\u30C0\u30E1\u30FC\u30B8\u3002"
   - level: 3
     damageMultiplier: 2
-    knockbackPower: {x: 5, y: 5}
+    knockbackPower: {x: 20, y: 20}
     knockbackDuration: 0.3
     cooldownTime: 2
     manaCost: 0

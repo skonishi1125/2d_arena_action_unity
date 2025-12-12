@@ -35,13 +35,30 @@ public class EnemyHealth : EntityHealth
         UpdateEnemyHealthBar();
     }
 
-    public override void TakeDamage(float damage, Transform attacker)
+    //public override void TakeDamage(float damage, Transform attacker)
+    //{
+    //    base.TakeDamage(damage, attacker);
+
+    //    // ダメージ計算後に殴られたケースの考慮
+    //    if (isDead)
+    //        return;
+
+    //    if (attacker.GetComponent<Player>() != null)
+    //        enemy.TryEnterBattleState(attacker);
+
+    //    OnTakeDamaged?.Invoke();
+    //}
+
+    public override void TakeDamage(DamageContext ctx)
     {
-        base.TakeDamage(damage, attacker);
+        base.TakeDamage(ctx);
 
         // ダメージ計算後に殴られたケースの考慮
         if (isDead)
             return;
+
+        var attacker = ctx.attacker;
+        Debug.Log(attacker);
 
         if (attacker.GetComponent<Player>() != null)
             enemy.TryEnterBattleState(attacker);

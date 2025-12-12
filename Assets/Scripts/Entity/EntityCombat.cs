@@ -5,7 +5,6 @@ public class EntityCombat : MonoBehaviour
     private EntityStatus entityStatus;
     private EntityVFX entityVfx;
 
-
     // Criticalになったとき、何倍にするか
     [SerializeField] private float criticalRate = 1.5f;
 
@@ -111,7 +110,17 @@ public class EntityCombat : MonoBehaviour
                 out isCritical
             );
 
-            damagable?.TakeDamage(damage, transform);
+            var ctx = new DamageContext
+            {
+                attacker = transform,
+                damage = damage,
+                hasCustomKnockback = HasCustomKnockback,
+                knockbackPower = CurrentKnockbackPower,
+                knockbackDuration = CurrentKnockbackDuration,
+                source = this
+            };
+
+            damagable.TakeDamage(ctx);
 
             if (isCritical)
                 entityVfx.CreateOnCritHitVfx(target.transform);

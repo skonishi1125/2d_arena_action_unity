@@ -6,18 +6,38 @@ public class EntityProjectile : MonoBehaviour
     private Animator anim;
     private EntityVFX entityVfx;
 
+    // Criticalになったとき、何倍にするか 
+    [SerializeField] private float criticalRate = 1.5f;
 
+    // 敵などの弾丸,特にスキルなどではない攻撃の倍率
+
+    // スキルを用いた弾の威力設定用変数
+    // PlayerのMagicBoltなどはスキルSOに威力があるため、
+    // それを保持してダメージ, KB, KB Durationに適用させる。
+    // ( EntityCombat側と同じ設計:
+    //  * stateからスキル情報を呼び出し、威力とKBを設定
+    //  * stateを抜け出すとき、Exit()時にdefaultの設定値に戻す)
+    [Header("Projectile Damage")]
+    [SerializeField] private float defaultDamageMultiplier = 1f;
+    [SerializeField] private Vector2 defaultKnockbackPower = new Vector2(1.5f, 2.5f);
+    [SerializeField] private float defaultKnockbackDuration = 0.2f;
+    private float currentDamageMultiplier = 1f; // 現在の攻撃のダメージ倍率
+    private Vector2 currentKnockbackPower; // 現在の攻撃のダメージ倍率
+    private float currentKnockbackDuration;
+    private bool useCustomKnockback = false;
+
+    // 弾の管理情報
+    [Header("Projectile Setting")]
+    private Entity owner; // 誰が撃ったか
     private float speed;
     private float shootDir; // 1 or -1 撃った時点での敵の向き
-    private Entity owner; // 誰が撃ったか
-
-    [SerializeField] private float lifeTime = 3f;
     private float timer;
+    [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private LayerMask whatIsTarget; // 弾の敵対象
 
-    [Header("Projectile Damage")]
-    [SerializeField] private LayerMask whatIsTarget;
-    [SerializeField] private float damageMultiplier = 1f;   // 弾ごとの倍率
-    [SerializeField] private float criticalRate = 1.5f;     // 弾に対するクリティカル倍率
+    public bool HasCustomKnockback => useCustomKnockback;
+    public Vector2 CurrentKnockbackPower => currentKnockbackPower;
+    public float CurrentKnockbackDuration => currentKnockbackDuration;
 
     private void Awake()
     {
@@ -29,7 +49,40 @@ public class EntityProjectile : MonoBehaviour
         if (!LogHelper.AssertNotNull(anim, nameof(anim), this))
             return;
 
+        // アニメ設定(必要っぽい）
         anim.SetBool("idle", true);
+
+        currentDamageMultiplier = defaultDamageMultiplier;
+        currentKnockbackPower = defaultKnockbackPower;
+        currentKnockbackDuration = defaultKnockbackDuration;
+
+    }
+
+    // 攻撃ごとに State から呼んでもらい、現攻撃のダメージ倍率を決定
+    public void SetDamageMultiplier(float multiplier)
+    {
+        currentDamageMultiplier = multiplier;
+    }
+
+    // MagicBoltState を抜けるときなどに元に戻す
+    public void ResetDamageMultiplier()
+    {
+        currentDamageMultiplier = defaultDamageMultiplier;
+    }
+
+    // 攻撃ごとに State から呼ぶ
+    public void SetKnockback(Vector2 power, float duration)
+    {
+        currentKnockbackPower = power;
+        currentKnockbackDuration = duration;
+        useCustomKnockback = true;
+    }
+
+    public void ResetKnockback()
+    {
+        currentKnockbackPower = defaultKnockbackPower;
+        currentKnockbackDuration = defaultKnockbackDuration;
+        useCustomKnockback = false;
     }
 
     public void Fire(float shootDir, float speed, Entity owner)
@@ -43,7 +96,7 @@ public class EntityProjectile : MonoBehaviour
     private void Update()
     {
         // entity.facingDirを使うと、
-        // entityが反転したとき、弾も同時に反転してしまう
+        // entityが反転したとき、弾も同時に反転するので射撃時の向きを使う
         rb.linearVelocity = Vector2.right * speed * shootDir;
 
         timer -= Time.deltaTime;
@@ -85,7 +138,17 @@ public class EntityProjectile : MonoBehaviour
             // 現状未使用だが、
             // 万が一ステータスが無い弾（トラップなど）の場合は
             // 固定ダメージ等にフォールバック
-            damagable.TakeDamage(5f, owner.transform);
+            var defaultCtx = new DamageContext
+            {
+                attacker = transform,
+                damage = 5f,
+                hasCustomKnockback = HasCustomKnockback,
+                knockbackPower = CurrentKnockbackPower,
+                knockbackDuration = CurrentKnockbackDuration,
+                source = this
+            };
+
+            damagable.TakeDamage(defaultCtx);
             Destroy(gameObject);
             return;
         }
@@ -95,17 +158,27 @@ public class EntityProjectile : MonoBehaviour
         float damage = EntityCombat.CalculateDamage(
             ownerStatus,
             targetStatus,
-            damageMultiplier,
+            currentDamageMultiplier,
             criticalRate,
             out isCritical
         );
 
-        damagable?.TakeDamage(damage, owner.transform);
+        var ctx = new DamageContext
+        {
+            attacker = transform,
+            damage = damage,
+            hasCustomKnockback = HasCustomKnockback,
+            knockbackPower = CurrentKnockbackPower,
+            knockbackDuration = CurrentKnockbackDuration,
+            source = this
+        };
+
+        //damagable?.TakeDamage(damage, owner.transform);
+        damagable.TakeDamage(ctx);
 
         var hitVfx = owner.GetComponent<EntityVFX>();
         if (hitVfx != null)
         {
-            // 弾用のVFX(近接用は、斬撃vfxなので変えておこう)
             if (isCritical)
                 hitVfx.CreateOnProjectileHitVfx(target.transform);
             else

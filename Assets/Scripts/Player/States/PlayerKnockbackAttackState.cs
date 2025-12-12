@@ -24,7 +24,7 @@ public class PlayerKnockbackAttackState : PlayerState
             levelData.knockbackDuration
         );
 
-        //Debug.Log($"multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
+        //Debug.Log($"[KnockbackAttackState] multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
 
     }
 

@@ -43256,6 +43256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
+  EntityProjectile: {fileID: 0}
   groundCheckDistance: 0.9
   wallCheckDistance: 0.5
   whatIsGround:

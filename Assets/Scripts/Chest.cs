@@ -16,7 +16,7 @@ public class Chest : MonoBehaviour, IDamagable
 
         anim = GetComponentInChildren<Animator>();
     }
-    public void TakeDamage(float damage, Transform attacker)
+    public void TakeDamage(DamageContext ctx)
     {
         anim.SetBool("chestOpen", true);
         rb.linearVelocity = openKnockback;

@@ -34,22 +34,51 @@ public class EntityHealth : MonoBehaviour, IDamagable
         currentHp = entityStatus.GetMaxHp();
     }
 
-    public virtual void TakeDamage(float damage, Transform attacker)
+    //public virtual void TakeDamage(float damage, Transform attacker)
+    //{
+    //    if (isDead)
+    //        return;
+
+    //    // ノックバック
+    //    entity?.ReceiveKnockback(
+    //        CalculateKnockback(attacker, damage),
+    //        CalculateKnockbackDuration(attacker, damage)
+    //    );
+
+    //    // 白くなる演出
+    //    entityVfx?.PlayOnDamageVfx();
+
+    //    // ダメージ計算
+    //    ReduceHp(damage);
+    //}
+
+    public virtual void TakeDamage(DamageContext ctx)
     {
-        if (isDead)
-            return;
+        if (isDead) return;
 
-        // ノックバック
-        entity?.ReceiveKnockback(
-            CalculateKnockback(attacker, damage),
-            CalculateKnockbackDuration(attacker, damage)
-        );
+        // KBが指定されている場合、そちらを取る
+        Vector2 power = ctx.hasCustomKnockback
+            ? ctx.knockbackPower
+            : (IsHeavyKnockback(ctx.damage) ? heavyKnockbackPower : knockbackPower);
 
-        // 白くなる演出
+        float duration = ctx.hasCustomKnockback
+            ? ctx.knockbackDuration
+            : (IsHeavyKnockback(ctx.damage) ? heavyKnockbackDuration : knockbackDuration);
+
+        // 方向付け
+        int direction = transform.position.x > ctx.attacker.position.x ? 1 : -1;
+
+        float randomScale = UnityEngine.Random.Range(0.9f, 1.1f);
+        power *= randomScale;
+        power.x *= direction;
+
+        float randomDurationScale = UnityEngine.Random.Range(0.9f, 1.1f);
+        duration *= randomDurationScale;
+
+        entity?.ReceiveKnockback(power, duration);
         entityVfx?.PlayOnDamageVfx();
+        ReduceHp(ctx.damage);
 
-        // ダメージ計算
-        ReduceHp(damage);
     }
 
 
@@ -73,57 +102,61 @@ public class EntityHealth : MonoBehaviour, IDamagable
         return currentHp;
     }
 
-    private Vector2 CalculateKnockback(Transform attacker, float damage)
-    {
-        int direction = transform.position.x > attacker.position.x ? 1 : -1;
+    //private Vector2 CalculateKnockback(Transform attacker, float damage)
+    //{
+    //    int direction = transform.position.x > attacker.position.x ? 1 : -1;
 
-        // 攻撃側の EntityCombat を見る
-        var attackerCombat = attacker.GetComponent<EntityCombat>();
-        Vector2 basePower;
+    //    // 攻撃情報を見る
+    //    // 近接攻撃 EntityCombat か、遠距離弾 EntityProjectile から発生したものか。
+    //    // 現状近接攻撃のみしか考慮できていない
+ 
+    //    // 攻撃側の EntityCombat を見る
+    //    var attackerCombat = attacker.GetComponent<EntityCombat>();
+    //    Vector2 basePower;
 
-        if (attackerCombat != null && attackerCombat.HasCustomKnockback)
-        {
-            // KBを持つ技(基本こっち)
-            basePower = attackerCombat.CurrentKnockbackPower;
-        }
-        else
-        {
-            // 設定のない技は、受け手の持つ基礎KBで決める
-            basePower = IsHeavyKnockback(damage) ? heavyKnockbackPower : knockbackPower;
-        }
+    //    if (attackerCombat != null && attackerCombat.HasCustomKnockback)
+    //    {
+    //        // KBを持つ技(基本こっち)
+    //        basePower = attackerCombat.CurrentKnockbackPower;
+    //    }
+    //    else
+    //    {
+    //        // 設定のない技は、受け手の持つ基礎KBで決める
+    //        basePower = IsHeavyKnockback(damage) ? heavyKnockbackPower : knockbackPower;
+    //    }
 
-        // ★ 強さに少しばらつきを与える（例：±10%）
-        // 敵をまとめて飛ばしたときに、アニメなどの重なりを防止する
-        // (1体に見えるのに、実際は何匹も重なっているような挙動を防ぐ）
-        float randomScale = UnityEngine.Random.Range(0.9f, 1.1f);
-        basePower *= randomScale;
+    //    // ★ 強さに少しばらつきを与える（例：±10%）
+    //    // 敵をまとめて飛ばしたときに、アニメなどの重なりを防止する
+    //    // (1体に見えるのに、実際は何匹も重なっているような挙動を防ぐ）
+    //    float randomScale = UnityEngine.Random.Range(0.9f, 1.1f);
+    //    basePower *= randomScale;
 
-        // 向きだけ最後に乗せる
-        basePower.x *= direction;
-        return basePower;
+    //    // 向きだけ最後に乗せる
+    //    basePower.x *= direction;
+    //    return basePower;
 
-    }
+    //}
 
-    private float CalculateKnockbackDuration(Transform attacker, float damage)
-    {
-        // 攻撃側
-        var attackerCombat = attacker.GetComponent<EntityCombat>();
-        float finalKnockbackDuration;
-        if (attackerCombat != null && attackerCombat.HasCustomKnockback)
-        {
-            finalKnockbackDuration = attackerCombat.CurrentKnockbackDuration;
-        } else
-        {
-            finalKnockbackDuration = IsHeavyKnockback(damage) ? heavyKnockbackDuration : knockbackDuration;
-        }
+    //private float CalculateKnockbackDuration(Transform attacker, float damage)
+    //{
+    //    // 攻撃側
+    //    var attackerCombat = attacker.GetComponent<EntityCombat>();
+    //    float finalKnockbackDuration;
+    //    if (attackerCombat != null && attackerCombat.HasCustomKnockback)
+    //    {
+    //        finalKnockbackDuration = attackerCombat.CurrentKnockbackDuration;
+    //    } else
+    //    {
+    //        finalKnockbackDuration = IsHeavyKnockback(damage) ? heavyKnockbackDuration : knockbackDuration;
+    //    }
 
-        // ★ 強さに少しばらつきを与える（例：±10%）
-        float randomScale = UnityEngine.Random.Range(0.9f, 1.1f);
-        finalKnockbackDuration *= randomScale;
+    //    // ★ 強さに少しばらつきを与える（例：±10%）
+    //    float randomScale = UnityEngine.Random.Range(0.9f, 1.1f);
+    //    finalKnockbackDuration *= randomScale;
 
-        // それ以外は従来の heavy / normal ロジック
-        return finalKnockbackDuration;
-    }
+    //    // それ以外は従来の heavy / normal ロジック
+    //    return finalKnockbackDuration;
+    //}
 
 
     // 旧ロジック

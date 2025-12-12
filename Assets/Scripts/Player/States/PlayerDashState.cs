@@ -40,7 +40,7 @@ public class PlayerDashState : PlayerState
                 levelData.knockbackDuration
             );
 
-            Debug.Log($"multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
+            //Debug.Log($"[DashState]multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
         }
 
     }

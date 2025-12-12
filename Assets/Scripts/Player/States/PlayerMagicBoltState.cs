@@ -12,6 +12,25 @@ public class PlayerMagicBoltState : PlayerState
     {
         base.Enter();
         attackVelocityTimer = player.attackVelocityDuration;
+
+        // スキルSOからダメージ倍率とKB情報の取得
+        var levelData = player.Skill.GetCurrentLevelData(SkillId.MagicBolt);
+        if (levelData == null)
+            return;
+
+        Debug.Log(levelData.damageMultiplier);
+        Debug.Log(player.EntityProjectile);
+        // ダメージ倍率設定
+        player.EntityProjectile.SetDamageMultiplier(levelData.damageMultiplier);
+
+        // KB設定
+        player.EntityProjectile.SetKnockback(
+            levelData.knockbackPower,
+            levelData.knockbackDuration
+        );
+
+        Debug.Log($"[MagicBoltState] multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
+
     }
 
     public override void LogicUpdate()
@@ -42,6 +61,13 @@ public class PlayerMagicBoltState : PlayerState
         attackVelocityTimer -= Time.deltaTime;
         if (attackVelocityTimer < 0)
             player.SetVelocity(0, rb.linearVelocity.y);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        player.EntityProjectile.ResetDamageMultiplier();
+        player.EntityProjectile.ResetKnockback();
     }
 
 }
