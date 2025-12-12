@@ -38,11 +38,18 @@ public class EntityAnimationTrigger : MonoBehaviour
 
     protected virtual void ShootProjectileTrigger()
     {
-        if (projectileSpawner != null)
+        if (projectileSpawner == null)
+            return;
+
+        // State側で設定した弾の威力の取得
+        // ※Player だけ特別扱いしたくないなら Entity 側に TryConsume を置く
+        var player = entity as Player;
+        if (player != null && player.TryConsumePendingProjectileCtx(out var ctx))
         {
-            Debug.Log("spawn?");
-            projectileSpawner.Spawn(entity);
+            projectileSpawner.Spawn(entity, ctx);
+            return;
         }
+
     }
 
 }

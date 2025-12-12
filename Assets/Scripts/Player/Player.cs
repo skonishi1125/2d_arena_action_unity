@@ -29,6 +29,11 @@ public class Player : Entity
     public PlayerKnockbackAttackState knockbackAttackState { get; private set; }
     public PlayerMagicBoltState magicBoltState { get; private set; }
 
+    // MagicBoltStateや、その他の弾スキルで作ったダメージ情報を保持する場所
+    // State -> player -> Trigger(spawn())として、情報を仲介してやる。
+    public ProjectileDamageContext PendingProjectileCtx { get; private set; }
+    public bool HasPendingProjectileCtx { get; private set; }
+
 
     [Header("Input Settings")]
     public Vector2 moveInput { get; private set; } // InputSystemのdigital -1,0,1
@@ -152,6 +157,25 @@ public class Player : Entity
     private void HandleDied()
     {
         Death();
+    }
+
+    // MagicBoltState等で作った弾ダメージのセット
+    public void SetPendingProjectileCtx(ProjectileDamageContext ctx)
+    {
+        PendingProjectileCtx = ctx;
+        HasPendingProjectileCtx = true;
+    }
+
+    public bool TryConsumePendingProjectileCtx(out ProjectileDamageContext ctx)
+    {
+        if (!HasPendingProjectileCtx)
+        {
+            ctx = default;
+            return false;
+        }
+        ctx = PendingProjectileCtx;
+        HasPendingProjectileCtx = false;
+        return true;
     }
 
 

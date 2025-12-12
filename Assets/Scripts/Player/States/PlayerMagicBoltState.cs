@@ -18,16 +18,20 @@ public class PlayerMagicBoltState : PlayerState
         if (levelData == null)
             return;
 
-        Debug.Log(levelData.damageMultiplier);
-        Debug.Log(player.EntityProjectile);
-        // ダメージ倍率設定
-        player.EntityProjectile.SetDamageMultiplier(levelData.damageMultiplier);
+        // player.EntityProjectile.Set...とはできない
+        // (playerはProjectileSpawnerしか持っておらず、Projectileの参照ができない)
+        // なのでスポナーにスキルダメージ情報を送る。
+        var ctx = new ProjectileDamageContext
+        {
+            damageMultiplier = levelData.damageMultiplier,
+            hasCustomKnockback = true,
+            knockbackPower = levelData.knockbackPower,
+            knockbackDuration = levelData.knockbackDuration,
+        };
 
-        // KB設定
-        player.EntityProjectile.SetKnockback(
-            levelData.knockbackPower,
-            levelData.knockbackDuration
-        );
+        // Player側に弾情報をセット
+        // トリガー側で、Spawn()させるときにPlayerから参照できるようにしておく
+        player.SetPendingProjectileCtx(ctx);
 
         Debug.Log($"[MagicBoltState] multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
 
@@ -66,8 +70,13 @@ public class PlayerMagicBoltState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        player.EntityProjectile.ResetDamageMultiplier();
-        player.EntityProjectile.ResetKnockback();
+
+        // ここもどうしよう？
+        // 弾はDestroyで消えてしまうので、不要かも
+        // 今後ObjectPoolとしたら、
+        // 使いまわすことになるのでその際にリセットが必要になりそう
+        //player.EntityProjectile.ResetDamageMultiplier();
+        //player.EntityProjectile.ResetKnockback();
     }
 
 }
