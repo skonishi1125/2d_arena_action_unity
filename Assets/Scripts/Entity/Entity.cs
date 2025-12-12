@@ -7,7 +7,6 @@ public abstract class Entity : MonoBehaviour
 {
     // State側がダメージ倍率,KBの割当てをするため、publicとする
     public EntityCombat EntityCombat;
-    public EntityProjectile EntityProjectile;
 
     protected StateMachine stateMachine;
 
@@ -43,7 +42,6 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         EntityCombat = GetComponent<EntityCombat>();
-        EntityProjectile = GetComponent<EntityProjectile>(); // 近接のみの敵など持ってない可能性もある
         stateMachine = new StateMachine();
 
         // Components

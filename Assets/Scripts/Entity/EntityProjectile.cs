@@ -34,6 +34,7 @@ public class EntityProjectile : MonoBehaviour
     private float timer;
     [SerializeField] private float lifeTime = 3f;
     [SerializeField] private LayerMask whatIsTarget; // 弾の敵対象
+    [SerializeField] private LayerMask whatIsGround;
 
     public bool HasCustomKnockback => useCustomKnockback;
     public Vector2 CurrentKnockbackPower => currentKnockbackPower;
@@ -108,8 +109,17 @@ public class EntityProjectile : MonoBehaviour
     // EntityCombatは、近接攻撃のダメージ処理担当
     private void OnTriggerEnter2D(Collider2D target)
     {
-        // 弾のwhatIsTargetに指定した物以外とぶつかったときは無視
+        // 地面に触れた場合、消す
+        if (((1 << target.gameObject.layer) & whatIsGround) != 0)
+        {
+            Debug.Log("弾: Groundに触れたため、Destroyします。");
+            Destroy(gameObject);
+            return;
+        }
+
+        // ダメージ対象以外は無視
         // LayerMaskはビットフラグなので、加工した比較が必要になる
+        // ダメージ対象以外は無視
         if (((1 << target.gameObject.layer) & whatIsTarget) == 0)
         {
             Debug.Log("弾: target対象外。");
@@ -188,6 +198,5 @@ public class EntityProjectile : MonoBehaviour
         Destroy(gameObject);
 
     }
-
 
 }

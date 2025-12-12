@@ -4,7 +4,7 @@ public class EntityAnimationTrigger : MonoBehaviour
 {
     private Entity entity;
     protected EntityCombat entityCombat;
-    [SerializeField] private EntityProjectileSpawner projectileSpawner;
+    [SerializeField] protected EntityProjectileSpawner projectileSpawner;
 
 
     protected virtual void Awake()
@@ -36,20 +36,6 @@ public class EntityAnimationTrigger : MonoBehaviour
         entityCombat.StopContinuousAttack();
     }
 
-    protected virtual void ShootProjectileTrigger()
-    {
-        if (projectileSpawner == null)
-            return;
 
-        // State側で設定した弾の威力の取得
-        // ※Player だけ特別扱いしたくないなら Entity 側に TryConsume を置く
-        var player = entity as Player;
-        if (player != null && player.TryConsumePendingProjectileCtx(out var ctx))
-        {
-            projectileSpawner.Spawn(entity, ctx);
-            return;
-        }
-
-    }
 
 }

@@ -2,6 +2,8 @@
 
 public class DemonGunner : Enemy
 {
+    public ProjectileDamageContext PendingProjectileCtx { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();
@@ -12,6 +14,15 @@ public class DemonGunner : Enemy
         // 遠距離攻撃
         rangeAttackState = new EnemyRangeAttackState(this, stateMachine, "attack");
         deadState = new EnemyDeadState(this, stateMachine, "NONE");
+
+        // 弾技の初期設定
+        PendingProjectileCtx = new ProjectileDamageContext
+        {
+            damageMultiplier = this.commonAttackDamageMultiplier,
+            hasCustomKnockback = true,
+            knockbackPower = this.commonAttackKnockbackPower,
+            knockbackDuration = this.commonAttackKnockbackDuration,
+        };
 
     }
 

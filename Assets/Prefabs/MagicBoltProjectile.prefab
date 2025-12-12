@@ -157,12 +157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f3d4609004fbc46974820c219e9143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  criticalRate: 1.5
+  defaultDamageMultiplier: 1
+  defaultKnockbackPower: {x: 1.5, y: 2.5}
+  defaultKnockbackDuration: 0.2
   lifeTime: 3
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
-  damageMultiplier: 1
-  criticalRate: 1.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &6233040801301467940
 Rigidbody2D:
   serializedVersion: 5

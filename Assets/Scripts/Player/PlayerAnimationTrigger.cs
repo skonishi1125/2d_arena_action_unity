@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerAnimationTrigger : EntityAnimationTrigger
 {
@@ -24,5 +25,20 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
         if (player.Skill.DashHasEndAttack())
             entityCombat.PerformAttack();
     }
+
+    protected virtual void ShootProjectileTrigger()
+    {
+        if (projectileSpawner == null)
+            return;
+
+        // State側で設定した弾の威力の取得
+        if (player != null && player.TryConsumePendingProjectileCtx(out var ctx))
+        {
+            projectileSpawner.Spawn(player, ctx);
+            return;
+        }
+
+    }
+
 }
 

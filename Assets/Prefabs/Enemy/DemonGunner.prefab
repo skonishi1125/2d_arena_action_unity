@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 7450752208380165126}
   - component: {fileID: 2364053857058844416}
   - component: {fileID: 9209072852586718660}
-  - component: {fileID: 8067118964088947045}
+  - component: {fileID: 1164256540944174462}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -559,7 +559,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8067118964088947045
+--- !u!114 &1164256540944174462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6436493826720854766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dfb2bdbd933b8842ab825f0f9faadfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 55c05eb4be3c83b4dafb49df4492863e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawner: {fileID: 6691876901166095622}
