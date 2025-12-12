@@ -54,8 +54,10 @@ public abstract class PlayerState : EntityState
         }
 
         // MagicBolt
-        if (input.Player.MagicBolt.WasPerformedThisFrame())
+        if (input.Player.MagicBolt.WasPerformedThisFrame()
+            && player.Skill.CanUse(SkillId.MagicBolt)) // 取得可否の確認
         {
+            player.Skill.OnUse(SkillId.MagicBolt); // クールタイム処理
             stateMachine.ChangeState(player.magicBoltState);
             return;
         }

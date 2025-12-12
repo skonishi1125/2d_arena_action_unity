@@ -39,6 +39,8 @@ public class PlayerSkillController : MonoBehaviour
     }
 
     // ========= 基本取得まわり =========
+    // PlayerSkillControllerに設定されたDataを元に、
+    // スキルの現在状況を取得して返す。クールタイムや現時点のレベルなど
     public SkillRuntimeState GetState(SkillId id)
     {
         if (id == SkillId.None)
