@@ -24,7 +24,7 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float wallCheckDistance;
     // EnemyでPlayer検知時、壁ごしのチェックに使うのでprotectedとする
-    [SerializeField] protected LayerMask whatIsGround;
+    [SerializeField] public LayerMask whatIsGround; // teleportStateで使う
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
 

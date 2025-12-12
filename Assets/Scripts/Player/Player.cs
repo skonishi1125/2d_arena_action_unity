@@ -12,6 +12,7 @@ public class Player : Entity
     public PlayerHealth Health { get; private set; }
     public PlayerLevel Level { get; private set; }
     public PlayerSkillController Skill {  get; private set; }
+    public PlayerVFX Vfx { get; private set; }
 
     // StateMachine
     // Playerの状態を別のコードでも見ることになるので、publicとしておくとよい
@@ -28,6 +29,7 @@ public class Player : Entity
     public PlayerDeadState deadState { get; private set; }
     public PlayerKnockbackAttackState knockbackAttackState { get; private set; }
     public PlayerMagicBoltState magicBoltState { get; private set; }
+    public PlayerTeleportState teleportState { get; private set; }
 
     // MagicBoltStateや、その他の弾スキルで作ったダメージ情報を保持する場所
     // State -> player -> Trigger(spawn())として、情報を仲介してやる。
@@ -70,6 +72,11 @@ public class Player : Entity
     public Vector2 airAttackKnockbackPower;
     public float airAttackKnockbackDuration;
 
+    [Header("Teleport")]
+    public float teleportDistance = 4f;
+    public float teleportCheckStep = 0.25f; // 安全位置探索の刻み
+    public float teleportRadius = 0.2f;     // 埋まりチェック用
+
 
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;
@@ -102,6 +109,8 @@ public class Player : Entity
         magicBoltState = new PlayerMagicBoltState(this, stateMachine, "magicBolt");
         deadState = new PlayerDeadState(this, stateMachine, "dead");
 
+        teleportState = new PlayerTeleportState(this, stateMachine, "none");
+
         // 必要なcomponentの取得
         Health = GetComponent<PlayerHealth>();
         if (!LogHelper.AssertNotNull(Health, nameof(Health), this))
@@ -113,6 +122,10 @@ public class Player : Entity
 
         Skill = GetComponent<PlayerSkillController>();
         if (!LogHelper.AssertNotNull(Skill, nameof(Skill), this))
+            return;
+
+        Vfx = GetComponent<PlayerVFX>();
+        if (!LogHelper.AssertNotNull(Vfx, nameof(Vfx), this))
             return;
 
         // イベント購読

@@ -154,6 +154,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Teleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7e74289-8871-4357-87ca-cdd60863dcb0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -277,6 +286,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""action"": ""MagicBolt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e305f82-361c-42ff-bf6d-febe56b2b385"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Teleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -292,6 +312,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_KnockbackAttack = m_Player.FindAction("KnockbackAttack", throwIfNotFound: true);
         m_Player_StatusMenu = m_Player.FindAction("StatusMenu", throwIfNotFound: true);
         m_Player_MagicBolt = m_Player.FindAction("MagicBolt", throwIfNotFound: true);
+        m_Player_Teleport = m_Player.FindAction("Teleport", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
@@ -379,6 +400,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_KnockbackAttack;
     private readonly InputAction m_Player_StatusMenu;
     private readonly InputAction m_Player_MagicBolt;
+    private readonly InputAction m_Player_Teleport;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -418,6 +440,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/MagicBolt".
         /// </summary>
         public InputAction @MagicBolt => m_Wrapper.m_Player_MagicBolt;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Teleport".
+        /// </summary>
+        public InputAction @Teleport => m_Wrapper.m_Player_Teleport;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -465,6 +491,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @MagicBolt.started += instance.OnMagicBolt;
             @MagicBolt.performed += instance.OnMagicBolt;
             @MagicBolt.canceled += instance.OnMagicBolt;
+            @Teleport.started += instance.OnTeleport;
+            @Teleport.performed += instance.OnTeleport;
+            @Teleport.canceled += instance.OnTeleport;
         }
 
         /// <summary>
@@ -497,6 +526,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @MagicBolt.started -= instance.OnMagicBolt;
             @MagicBolt.performed -= instance.OnMagicBolt;
             @MagicBolt.canceled -= instance.OnMagicBolt;
+            @Teleport.started -= instance.OnTeleport;
+            @Teleport.performed -= instance.OnTeleport;
+            @Teleport.canceled -= instance.OnTeleport;
         }
 
         /// <summary>
@@ -586,5 +618,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMagicBolt(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Teleport" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTeleport(InputAction.CallbackContext context);
     }
 }

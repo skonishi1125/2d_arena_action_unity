@@ -1,9 +1,6 @@
 ﻿// Stateが、Playerのrb, anim等にアクセスするための抽象クラス
 // EntityStateで用意すると、敵にEntityStateを使うときに邪魔になる
 // ただし敵にもrb, animはあるため、変数定義だけはEntityStateで済ませておく
-using System;
-using UnityEngine;
-
 public abstract class PlayerState : EntityState
 {
     protected Player player;
@@ -59,6 +56,13 @@ public abstract class PlayerState : EntityState
         {
             player.Skill.OnUse(SkillId.MagicBolt); // クールタイム処理
             stateMachine.ChangeState(player.magicBoltState);
+            return;
+        }
+
+        // teleport
+        if (input.Player.Teleport.WasPerformedThisFrame())
+        {
+            stateMachine.ChangeState(player.teleportState);
             return;
         }
 

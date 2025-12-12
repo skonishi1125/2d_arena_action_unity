@@ -727,7 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
   groundCheckDistance: 0.4
-  wallCheckDistance: 1
+  wallCheckDistance: 1.3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
