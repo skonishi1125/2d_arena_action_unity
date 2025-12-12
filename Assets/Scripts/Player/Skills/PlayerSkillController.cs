@@ -7,13 +7,15 @@ public class PlayerSkillController : MonoBehaviour
     [SerializeField]
     private SkillRuntimeState[] skillStates;
 
+    // 指定したSkillIdの状態を知るために使う
+    // Lv, 定義など
     private readonly Dictionary<SkillId, SkillRuntimeState> skillMap
         = new Dictionary<SkillId, SkillRuntimeState>();
 
-    // キーボードの枠に度のスキルが入っているか。
+    // Z,D,Vのスキル枠に何が入っているかの確認
+    // 
     private readonly Dictionary<SkillSlot, SkillId> equipped = new();
-    public SkillId GetEquipped(SkillSlot slot)
-    => equipped.TryGetValue(slot, out var id) ? id : SkillId.None;
+
 
     private void Awake()
     {
@@ -43,22 +45,35 @@ public class PlayerSkillController : MonoBehaviour
         UpdateCooldowns(Time.deltaTime);
     }
 
+    // スロットに何のSkillIdが格納されているかを返す
+    public SkillId GetEquipped(SkillSlot slot)
+        => equipped.TryGetValue(slot, out var id) ? id : SkillId.None;
+
     // スキルスロット枠に、そのスキルを装備する
     public void Equip(SkillId id)
     {
-        var st = GetState(id);
-        if (st == null || st.definition == null) return;
+        var state = GetState(id);
+        if (state == null || state.definition == null)
+            return;
 
-        var def = st.definition;
-        if (def.slot == SkillSlot.None) return;
+        // 指定したSkillIdの、定義の確認
+        // スロットが無指定のスキル（まだ未実装だが）の場合は、何もしない
+        var def = state.definition;
+        if (def.slot == SkillSlot.None)
+            return;
 
+        // 枠を占有するスキルかどうかの確認
+        // 該当した場合、equipped[Z] = Dash というような形で入る
+        // ※同枠のスキルが来た時格納されてしまうが、LevelUp()で弾いている
         if (def.exclusiveInSlot)
-            equipped[def.slot] = id;   // ここで排他（上書き）
+            equipped[def.slot] = id; 
     }
 
     // ========= 基本取得まわり =========
+
     // PlayerSkillControllerに設定されたDataを元に、
-    // スキルの現在状況を取得して返す。クールタイムや現時点のレベルなど
+    // 引数で指定したスキルの現在状況を取得して返す（クールタイムや現時点のレベルなど）
+    // 全ての処理の基本。
     public SkillRuntimeState GetState(SkillId id)
     {
         if (id == SkillId.None)
@@ -93,8 +108,6 @@ public class PlayerSkillController : MonoBehaviour
         return state.CurrentLevelData;
     }
 
-    // ========= レベルアップ / アンロック =========
-
     public bool CanLevelUp(SkillId id)
     {
         var state = GetState(id);
@@ -106,25 +119,30 @@ public class PlayerSkillController : MonoBehaviour
 
     public bool LevelUp(SkillId id)
     {
+        // 存在するスキルかどうかの確認
         var state = GetState(id);
         if (state == null || state.definition == null)
             return false;
 
-        // 初回習得の場合、排他チェック
-        // 既存のスロット技を覚えている場合は弾く。
+        // 排他チェック
+        // 初回習得 ( level0 )かつ、そのスキルが占有スキルの場合
         if (state.currentLevel == 0 && state.definition.exclusiveInSlot)
         {
-            var slot = state.definition.slot;
-            var equippedId = GetEquipped(slot);
+            var slot = state.definition.slot; // ZかDか...等
+            var equippedId = GetEquipped(slot); // スロットに格納されているSkillId
+
+            // スロットがNoneでない場合（何かが入っている場合）
+            // && スロットのIDが今回の対象スキルと違う場合, 弾く
             if (equippedId != SkillId.None && equippedId != id)
                 return false;
         }
 
+        // 最大レベルの場合は弾く
         if (!CanLevelUp(id))
             return false;
 
         state.currentLevel++;
-        Debug.Log($"Skill {id} leveled up to {state.currentLevel}");
+        //Debug.Log($"Skill {id} leveled up to {state.currentLevel}");
 
         // 初回習得の場合、枠を確定
         if (state.currentLevel == 1 && state.definition.exclusiveInSlot)
@@ -178,9 +196,8 @@ public class PlayerSkillController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// UI 用。1 = クールダウン完了、0 = 使った直後
-    /// </summary>
+    // UI 用。
+    // 1 = クールダウン完了、0 = 使った直後
     public float GetCooldownRatio(SkillId id)
     {
         var state = GetState(id);
