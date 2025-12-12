@@ -31,21 +31,23 @@ public abstract class PlayerState : EntityState
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
 
 
-        // Dash
-        if (input.Player.Dash.WasPressedThisFrame()
-            && CanDashMovementConditions()
-            && player.Skill.CanUse(SkillId.Dash))
+        if (input.Player.SkillZ.WasPressedThisFrame()) // いまはZのInputを流用
         {
-            player.Skill.OnUse(SkillId.Dash);
-            stateMachine.ChangeState(player.dashState);
-            return;
-        }
+            var id = player.Skill.GetEquipped(SkillSlot.Z);
 
-        // teleport
-        if (input.Player.Teleport.WasPerformedThisFrame())
-        {
-            stateMachine.ChangeState(player.teleportState);
-            return;
+            if (id == SkillId.Dash && CanDashMovementConditions() && player.Skill.CanUse(id))
+            {
+                player.Skill.OnUse(id);
+                stateMachine.ChangeState(player.dashState);
+                return;
+            }
+
+            if (id == SkillId.Teleport && player.Skill.CanUse(id))
+            {
+                player.Skill.OnUse(id);
+                stateMachine.ChangeState(player.teleportState);
+                return;
+            }
         }
 
         // KnockbackAttack

@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: DASH
   description: "Z\u30AD\u30FC\u3092\u5165\u529B\u3057\u3001\u9032\u884C\u65B9\u5411\u306B\u30C0\u30C3\u30B7\u30E5\u3059\u308B\u3002\nSLv\u3092\u4E0A\u3052\u308B\u3068\u6027\u80FD\u304C\u5909\u5316\u3059\u308B\u3002\n"
   icon: {fileID: -2009764924761860104, guid: cde3f56d2f3724c4d84efd6d4362493a, type: 3}
+  slot: 1
+  exclusiveInSlot: 1
   levels:
   - level: 1
     damageMultiplier: 0

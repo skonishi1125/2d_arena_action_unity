@@ -10,6 +10,11 @@ public class PlayerSkillController : MonoBehaviour
     private readonly Dictionary<SkillId, SkillRuntimeState> skillMap
         = new Dictionary<SkillId, SkillRuntimeState>();
 
+    // キーボードの枠に度のスキルが入っているか。
+    private readonly Dictionary<SkillSlot, SkillId> equipped = new();
+    public SkillId GetEquipped(SkillSlot slot)
+    => equipped.TryGetValue(slot, out var id) ? id : SkillId.None;
+
     private void Awake()
     {
         skillMap.Clear();
@@ -36,6 +41,19 @@ public class PlayerSkillController : MonoBehaviour
     private void Update()
     {
         UpdateCooldowns(Time.deltaTime);
+    }
+
+    // スキルスロット枠に、そのスキルを装備する
+    public void Equip(SkillId id)
+    {
+        var st = GetState(id);
+        if (st == null || st.definition == null) return;
+
+        var def = st.definition;
+        if (def.slot == SkillSlot.None) return;
+
+        if (def.exclusiveInSlot)
+            equipped[def.slot] = id;   // ここで排他（上書き）
     }
 
     // ========= 基本取得まわり =========
@@ -92,11 +110,26 @@ public class PlayerSkillController : MonoBehaviour
         if (state == null || state.definition == null)
             return false;
 
+        // 初回習得の場合、排他チェック
+        // 既存のスロット技を覚えている場合は弾く。
+        if (state.currentLevel == 0 && state.definition.exclusiveInSlot)
+        {
+            var slot = state.definition.slot;
+            var equippedId = GetEquipped(slot);
+            if (equippedId != SkillId.None && equippedId != id)
+                return false;
+        }
+
         if (!CanLevelUp(id))
             return false;
 
         state.currentLevel++;
         Debug.Log($"Skill {id} leveled up to {state.currentLevel}");
+
+        // 初回習得の場合、枠を確定
+        if (state.currentLevel == 1 && state.definition.exclusiveInSlot)
+            Equip(id);
+
         return true;
     }
 

@@ -20,6 +20,14 @@ public class SkillLevelData
     public string levelDescription;   // 「Lv1ならLv1の説明を書く
 }
 
+// どのスロットのスキルに該当するのか
+public enum SkillSlot {
+    None,
+    Z,
+    D,
+    V
+}
+
 [CreateAssetMenu(menuName = "Game/Skill Definition", fileName = "SkillDefinition_")]
 public class SkillDefinition : ScriptableObject
 {
@@ -28,6 +36,8 @@ public class SkillDefinition : ScriptableObject
     public string displayName;
     [TextArea] public string description;
     public Sprite icon;
+    public SkillSlot slot = SkillSlot.None;
+    public bool exclusiveInSlot = true;
 
     [Header("Levels")]
     public SkillLevelData[] levels;

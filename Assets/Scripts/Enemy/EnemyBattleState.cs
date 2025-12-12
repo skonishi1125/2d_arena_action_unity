@@ -87,16 +87,12 @@ public class EnemyBattleState : EnemyState
             }
             else
             {
-                Debug.Log("setvelocity?");
-
                 enemy.SetVelocity(
                     enemy.battleMoveSpeed * DirectionToPlayer(),
                     rb.linearVelocity.y
                 );
             }
         }
-
-        Debug.Log("battlestate update");
     }
 
 
