@@ -48476,9 +48476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc651e31978c5d4e844acac6e2ab2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3909016599546878838, guid: 5f984f78103e7c84b8fd2228e89ebc5f, type: 3}
   spawnPoint: {fileID: 1998041563}
-  speed: 30
+  defaultSpeed: 5
 --- !u!114 &8524643674304472834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48500,7 +48499,7 @@ MonoBehaviour:
   projectileHitVfx: {fileID: 3999223365734403740, guid: cf6dfb9383a891a469bd4450a6122935, type: 3}
   projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   projectileCritHitVfx: {fileID: 3999223365734403740, guid: cf6dfb9383a891a469bd4450a6122935, type: 3}
-  projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileCritHitColor: {r: 1, g: 0, b: 0.1443119, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
   teleportVfx: {fileID: 4416121855561363331, guid: 8deebf8c3bde24d4293d2352db8bf2f7, type: 3}
   teleportColor: {r: 0, g: 0.0081414, b: 0.6981132, a: 1}

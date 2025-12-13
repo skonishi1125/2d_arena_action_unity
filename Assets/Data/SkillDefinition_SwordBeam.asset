@@ -18,7 +18,7 @@ MonoBehaviour:
   icon: {fileID: -7323526702296278062, guid: cde3f56d2f3724c4d84efd6d4362493a, type: 3}
   slot: 2
   exclusiveInSlot: 1
-  projectilePrefab: {fileID: 7979862103626190576, guid: 2e95147672afa194c8b33431f2cfc350, type: 3}
+  projectilePrefab: {fileID: 1771023668789556952, guid: 151d0823a33f6c54982da9a1cb61bba9, type: 3}
   levels:
   - level: 1
     damageMultiplier: 1

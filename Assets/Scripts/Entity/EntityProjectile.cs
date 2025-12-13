@@ -35,6 +35,8 @@ public class EntityProjectile : MonoBehaviour
     [SerializeField] private float lifeTime = 3f;
     [SerializeField] private LayerMask whatIsTarget; // 弾の敵対象
     [SerializeField] private LayerMask whatIsGround;
+    private bool pierceGround;
+    private bool pierceTargets;
 
     public bool HasCustomKnockback => useCustomKnockback;
     public Vector2 CurrentKnockbackPower => currentKnockbackPower;
@@ -86,6 +88,12 @@ public class EntityProjectile : MonoBehaviour
         useCustomKnockback = false;
     }
 
+    public void SetPierce(bool ground, bool targets)
+    {
+        pierceGround = ground;
+        pierceTargets = targets;
+    }
+
     public void Fire(float shootDir, float speed, Entity owner)
     {
         this.shootDir = shootDir;
@@ -109,17 +117,19 @@ public class EntityProjectile : MonoBehaviour
     // EntityCombatは、近接攻撃のダメージ処理担当
     private void OnTriggerEnter2D(Collider2D target)
     {
-        // 地面に触れた場合、消す
+        // 1) 地面判定
         if (((1 << target.gameObject.layer) & whatIsGround) != 0)
         {
-            Debug.Log("弾: Groundに触れたため、Destroyします。");
-            Destroy(gameObject);
+            if (!pierceGround)
+            {
+                Debug.Log("弾: Groundに触れ, pierceGroundがfalseのためDestroy");
+                Destroy(gameObject);
+            }
             return;
         }
 
-        // ダメージ対象以外は無視
+        // 2) ダメージ対象以外は無視
         // LayerMaskはビットフラグなので、加工した比較が必要になる
-        // ダメージ対象以外は無視
         if (((1 << target.gameObject.layer) & whatIsTarget) == 0)
         {
             Debug.Log("弾: target対象外。");
@@ -133,21 +143,24 @@ public class EntityProjectile : MonoBehaviour
         var ownerStatus = owner.GetComponent<EntityStatus>();
         var targetStatus = target.GetComponent<EntityStatus>();
 
-        // 1. 回避判定
+        // 3) 回避判定
         if (EntityCombat.IsEvaded(ownerStatus, targetStatus))
         {
             // 相手に付与されたmissVfxを生成する
             entityVfx = target.GetComponent<EntityVFX>();
             entityVfx.CreateOnMissHitVfx(target.transform);
-            Destroy(gameObject);
+
+            if (!pierceTargets)
+                Destroy(gameObject);
+
             return;
         }
 
+        // 4) ownerStatusが無い場合のフォールバック
+        // 現状未使用だが、
+        // 万が一ステータスが無い弾（トラップなど）の場合は固定ダメージ
         if (ownerStatus == null)
         {
-            // 現状未使用だが、
-            // 万が一ステータスが無い弾（トラップなど）の場合は
-            // 固定ダメージ等にフォールバック
             var defaultCtx = new DamageContext
             {
                 attacker = transform,
@@ -159,11 +172,14 @@ public class EntityProjectile : MonoBehaviour
             };
 
             damagable.TakeDamage(defaultCtx);
-            Destroy(gameObject);
+
+            if (!pierceTargets)
+                Destroy(gameObject);
+
             return;
         }
 
-        // 2. ダメージ計算（共通ロジック）
+        // 5) 通常ダメージ処理
         bool isCritical;
         float damage = EntityCombat.CalculateDamage(
             ownerStatus,
@@ -183,7 +199,6 @@ public class EntityProjectile : MonoBehaviour
             source = this
         };
 
-        //damagable?.TakeDamage(damage, owner.transform);
         damagable.TakeDamage(ctx);
 
         var hitVfx = owner.GetComponent<EntityVFX>();
@@ -195,7 +210,8 @@ public class EntityProjectile : MonoBehaviour
                 hitVfx.CreateOnProjectileCritHitVfx(target.transform);
         }
 
-        Destroy(gameObject);
+        if (!pierceTargets)
+            Destroy(gameObject);
 
     }
 

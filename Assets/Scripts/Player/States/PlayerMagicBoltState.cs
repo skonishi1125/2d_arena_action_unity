@@ -33,8 +33,8 @@ public class PlayerMagicBoltState : PlayerState
                 knockbackDuration = levelData.knockbackDuration,
             },
             speedOverride = 20f, // todo: 必要ならスキルに持たせる
-            destroyOnGround = true,
-            destroyOnHit = true,
+            pierceGround = false,
+            pierceTargets = false,
         };
 
         player.SetPendingProjectileRequest(req);

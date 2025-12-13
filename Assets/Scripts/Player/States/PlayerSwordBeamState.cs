@@ -32,9 +32,9 @@ public class PlayerSwordBeamState : PlayerState
                 knockbackPower = levelData.knockbackPower,
                 knockbackDuration = levelData.knockbackDuration,
             },
-            speedOverride = 10f, // todo: 必要ならスキルに持たせる
-            destroyOnGround = false,
-            destroyOnHit = false,
+            speedOverride = 20f,
+            pierceGround = true,
+            pierceTargets = true,
         };
 
         player.SetPendingProjectileRequest(req);
