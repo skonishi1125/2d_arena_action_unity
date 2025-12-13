@@ -11,14 +11,19 @@ public class PlayerGroundSlumImpactState : PlayerState
     {
         base.Enter();
 
-        // 仮で、空中攻撃の威力で殴ってみる
+        // 現レベル時点でのSkillデータを取得
+        var levelData = player.Skill.GetCurrentLevelData(SkillId.GroundSlum);
+        if (levelData == null)
+            return;
+
         // ダメージ倍率設定
-        float dmgMul = player.airAttackDamageMultiplier;
-        player.EntityCombat.SetDamageMultiplier(dmgMul);
+        player.EntityCombat.SetDamageMultiplier(levelData.damageMultiplier);
 
         // KB設定
-        Vector2 kbPower = player.airAttackKnockbackPower;
-        player.EntityCombat.SetKnockback(kbPower, player.airAttackKnockbackDuration);
+        player.EntityCombat.SetKnockback(
+            levelData.knockbackPower,
+            levelData.knockbackDuration
+        );
 
     }
 

@@ -120,6 +120,15 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SkillV"",
+                    ""type"": ""Button"",
+                    ""id"": ""efce9afc-a1c7-4fde-847a-f87454d0efc6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""878ad344-3cce-47b7-849f-7730397df6f8"",
@@ -141,24 +150,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""name"": ""StatusMenu"",
                     ""type"": ""Button"",
                     ""id"": ""e571400e-9571-4d8b-b9c6-4a9b54d51e96"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MagicBolt"",
-                    ""type"": ""Button"",
-                    ""id"": ""d86413b2-f8d0-47ed-b331-5b41f5052949"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""GroundSlum"",
-                    ""type"": ""Button"",
-                    ""id"": ""efce9afc-a1c7-4fde-847a-f87454d0efc6"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -278,23 +269,12 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0f22c986-d1f7-4d42-b73d-a58e7929eae7"",
+                    ""id"": ""671303f7-57b4-4428-9fed-f21f41fc8910"",
                     ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MagicBolt"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""671303f7-57b4-4428-9fed-f21f41fc8910"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GroundSlum"",
+                    ""action"": ""SkillV"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -308,11 +288,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_SkillZ = m_Player.FindAction("SkillZ", throwIfNotFound: true);
+        m_Player_SkillV = m_Player.FindAction("SkillV", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_KnockbackAttack = m_Player.FindAction("KnockbackAttack", throwIfNotFound: true);
         m_Player_StatusMenu = m_Player.FindAction("StatusMenu", throwIfNotFound: true);
-        m_Player_MagicBolt = m_Player.FindAction("MagicBolt", throwIfNotFound: true);
-        m_Player_GroundSlum = m_Player.FindAction("GroundSlum", throwIfNotFound: true);
     }
 
     ~@PlayerInputSet()
@@ -396,11 +375,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_SkillZ;
+    private readonly InputAction m_Player_SkillV;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_KnockbackAttack;
     private readonly InputAction m_Player_StatusMenu;
-    private readonly InputAction m_Player_MagicBolt;
-    private readonly InputAction m_Player_GroundSlum;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -425,6 +403,10 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @SkillZ => m_Wrapper.m_Player_SkillZ;
         /// <summary>
+        /// Provides access to the underlying input action "Player/SkillV".
+        /// </summary>
+        public InputAction @SkillV => m_Wrapper.m_Player_SkillV;
+        /// <summary>
         /// Provides access to the underlying input action "Player/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
@@ -436,14 +418,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/StatusMenu".
         /// </summary>
         public InputAction @StatusMenu => m_Wrapper.m_Player_StatusMenu;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/MagicBolt".
-        /// </summary>
-        public InputAction @MagicBolt => m_Wrapper.m_Player_MagicBolt;
-        /// <summary>
-        /// Provides access to the underlying input action "Player/GroundSlum".
-        /// </summary>
-        public InputAction @GroundSlum => m_Wrapper.m_Player_GroundSlum;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -479,6 +453,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @SkillZ.started += instance.OnSkillZ;
             @SkillZ.performed += instance.OnSkillZ;
             @SkillZ.canceled += instance.OnSkillZ;
+            @SkillV.started += instance.OnSkillV;
+            @SkillV.performed += instance.OnSkillV;
+            @SkillV.canceled += instance.OnSkillV;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -488,12 +465,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @StatusMenu.started += instance.OnStatusMenu;
             @StatusMenu.performed += instance.OnStatusMenu;
             @StatusMenu.canceled += instance.OnStatusMenu;
-            @MagicBolt.started += instance.OnMagicBolt;
-            @MagicBolt.performed += instance.OnMagicBolt;
-            @MagicBolt.canceled += instance.OnMagicBolt;
-            @GroundSlum.started += instance.OnGroundSlum;
-            @GroundSlum.performed += instance.OnGroundSlum;
-            @GroundSlum.canceled += instance.OnGroundSlum;
         }
 
         /// <summary>
@@ -514,6 +485,9 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @SkillZ.started -= instance.OnSkillZ;
             @SkillZ.performed -= instance.OnSkillZ;
             @SkillZ.canceled -= instance.OnSkillZ;
+            @SkillV.started -= instance.OnSkillV;
+            @SkillV.performed -= instance.OnSkillV;
+            @SkillV.canceled -= instance.OnSkillV;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -523,12 +497,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
             @StatusMenu.started -= instance.OnStatusMenu;
             @StatusMenu.performed -= instance.OnStatusMenu;
             @StatusMenu.canceled -= instance.OnStatusMenu;
-            @MagicBolt.started -= instance.OnMagicBolt;
-            @MagicBolt.performed -= instance.OnMagicBolt;
-            @MagicBolt.canceled -= instance.OnMagicBolt;
-            @GroundSlum.started -= instance.OnGroundSlum;
-            @GroundSlum.performed -= instance.OnGroundSlum;
-            @GroundSlum.canceled -= instance.OnGroundSlum;
         }
 
         /// <summary>
@@ -591,6 +559,13 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSkillZ(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "SkillV" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSkillV(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -611,19 +586,5 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnStatusMenu(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "MagicBolt" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMagicBolt(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "GroundSlum" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnGroundSlum(InputAction.CallbackContext context);
     }
 }

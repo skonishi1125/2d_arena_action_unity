@@ -34,6 +34,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SkillV",
+                    "type": "Button",
+                    "id": "efce9afc-a1c7-4fde-847a-f87454d0efc6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "878ad344-3cce-47b7-849f-7730397df6f8",
@@ -55,24 +64,6 @@
                     "name": "StatusMenu",
                     "type": "Button",
                     "id": "e571400e-9571-4d8b-b9c6-4a9b54d51e96",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MagicBolt",
-                    "type": "Button",
-                    "id": "d86413b2-f8d0-47ed-b331-5b41f5052949",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "GroundSlum",
-                    "type": "Button",
-                    "id": "efce9afc-a1c7-4fde-847a-f87454d0efc6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -192,23 +183,12 @@
                 },
                 {
                     "name": "",
-                    "id": "0f22c986-d1f7-4d42-b73d-a58e7929eae7",
+                    "id": "671303f7-57b4-4428-9fed-f21f41fc8910",
                     "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MagicBolt",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "671303f7-57b4-4428-9fed-f21f41fc8910",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GroundSlum",
+                    "action": "SkillV",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

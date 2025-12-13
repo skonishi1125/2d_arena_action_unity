@@ -30,7 +30,7 @@ public abstract class PlayerState : EntityState
         // Jump/Fallアニメの切り替えはPlayerだけなので、EntityStateには書かない。
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
 
-
+        // Zスキル
         if (input.Player.SkillZ.WasPressedThisFrame()) // いまはZのInputを流用
         {
             var id = player.Skill.GetEquipped(SkillSlot.Z);
@@ -50,7 +50,7 @@ public abstract class PlayerState : EntityState
             }
         }
 
-        // KnockbackAttack
+        // Dスキル 現状 KnockbackAttack だけ
         if (input.Player.KnockbackAttack.WasPerformedThisFrame()
             && player.Skill.CanUse(SkillId.HeavyKB))
         {
@@ -59,22 +59,25 @@ public abstract class PlayerState : EntityState
             return;
         }
 
-        // MagicBolt
-        if (input.Player.MagicBolt.WasPerformedThisFrame()
-            && player.Skill.CanUse(SkillId.MagicBolt)) // 取得可否の確認
+        // Vスキル
+        if (input.Player.SkillV.WasPressedThisFrame()) // いまはZのInputを流用
         {
-            player.Skill.OnUse(SkillId.MagicBolt); // クールタイム処理
-            stateMachine.ChangeState(player.magicBoltState);
-            return;
-        }
+            var id = player.Skill.GetEquipped(SkillSlot.V);
 
-        // GroundSlum
-        if (input.Player.GroundSlum.WasPerformedThisFrame())
-        {
-            stateMachine.ChangeState(player.groundSlumJumpState);
-            return;
-        }
+            if (id == SkillId.GroundSlum && player.Skill.CanUse(id))
+            {
+                player.Skill.OnUse(id);
+                stateMachine.ChangeState(player.groundSlumJumpState);
+                return;
+            }
 
+            if (id == SkillId.MagicBolt && player.Skill.CanUse(id))
+            {
+                player.Skill.OnUse(id);
+                stateMachine.ChangeState(player.magicBoltState);
+                return;
+            }
+        }
 
     }
 
