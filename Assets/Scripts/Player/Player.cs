@@ -40,6 +40,8 @@ public class Player : Entity
     public ProjectileDamageContext PendingProjectileCtx { get; private set; }
     public bool HasPendingProjectileCtx { get; private set; }
 
+    public ProjectileSpawnRequest PendingProjectileSpawnRequest { get; private set; }
+
 
     [Header("Input Settings")]
     public Vector2 moveInput { get; private set; } // InputSystemのdigital -1,0,1
@@ -191,23 +193,42 @@ public class Player : Entity
     }
 
     // MagicBoltState等で作った弾ダメージのセット
-    public void SetPendingProjectileCtx(ProjectileDamageContext ctx)
+    //public void SetPendingProjectileCtx(ProjectileDamageContext ctx)
+    //{
+    //    PendingProjectileCtx = ctx;
+    //    HasPendingProjectileCtx = true;
+    //}
+
+    //public bool TryConsumePendingProjectileCtx(out ProjectileDamageContext ctx)
+    //{
+    //    if (!HasPendingProjectileCtx)
+    //    {
+    //        ctx = default;
+    //        return false;
+    //    }
+    //    ctx = PendingProjectileCtx;
+    //    HasPendingProjectileCtx = false;
+    //    return true;
+    //}
+
+    // ==== 試しに追加
+    public void SetPendingProjectileRequest(ProjectileSpawnRequest req)
     {
-        PendingProjectileCtx = ctx;
+        PendingProjectileSpawnRequest = req;
         HasPendingProjectileCtx = true;
     }
-
-    public bool TryConsumePendingProjectileCtx(out ProjectileDamageContext ctx)
+    public bool TryConsumePendingProjectileRequest(out ProjectileSpawnRequest req)
     {
         if (!HasPendingProjectileCtx)
         {
-            ctx = default;
+            req = default;
             return false;
         }
-        ctx = PendingProjectileCtx;
+        req = PendingProjectileSpawnRequest;
         HasPendingProjectileCtx = false;
         return true;
     }
+    // ====追加
 
 
     private void OnEnable()

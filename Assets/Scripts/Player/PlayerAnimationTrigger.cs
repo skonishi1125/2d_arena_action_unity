@@ -26,13 +26,26 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
             entityCombat.PerformAttack();
     }
 
+    //protected virtual void ShootProjectileTrigger()
+    //{
+    //    if (projectileSpawner == null)
+    //        return;
+
+    //    // State側で設定した弾の威力の取得
+    //    if (player != null && player.TryConsumePendingProjectileCtx(out var ctx))
+    //    {
+    //        projectileSpawner.Spawn(player, ctx);
+    //        return;
+    //    }
+
+    //}
     protected virtual void ShootProjectileTrigger()
     {
         if (projectileSpawner == null)
             return;
 
         // State側で設定した弾の威力の取得
-        if (player != null && player.TryConsumePendingProjectileCtx(out var ctx))
+        if (player != null && player.TryConsumePendingProjectileRequest(out var ctx))
         {
             projectileSpawner.Spawn(player, ctx);
             return;

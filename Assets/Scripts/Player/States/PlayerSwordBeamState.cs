@@ -18,20 +18,26 @@ public class PlayerSwordBeamState : PlayerState
         if (levelData == null)
             return;
 
-        // player.EntityProjectile.Set...とはできない
-        // (playerはProjectileSpawnerしか持っておらず、Projectileの参照ができない)
-        // なのでスポナーにスキルダメージ情報を送る。
-        var ctx = new ProjectileDamageContext
+        var state = player.Skill.GetState(SkillId.SwordBeam);
+        if (state == null)
+            return;
+
+        var req = new ProjectileSpawnRequest
         {
-            damageMultiplier = levelData.damageMultiplier,
-            hasCustomKnockback = true,
-            knockbackPower = levelData.knockbackPower,
-            knockbackDuration = levelData.knockbackDuration,
+            prefab = state.definition.projectilePrefab,
+            damage =
+            {
+                damageMultiplier = levelData.damageMultiplier,
+                hasCustomKnockback = true,
+                knockbackPower = levelData.knockbackPower,
+                knockbackDuration = levelData.knockbackDuration,
+            },
+            speedOverride = 10f, // todo: 必要ならスキルに持たせる
+            destroyOnGround = false,
+            destroyOnHit = false,
         };
 
-        // Player側に弾情報をセット
-        // トリガー側で、Spawn()させるときにPlayerから参照できるようにしておく
-        player.SetPendingProjectileCtx(ctx);
+        player.SetPendingProjectileRequest(req);
 
         Debug.Log($"[SwordBeam] multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
 

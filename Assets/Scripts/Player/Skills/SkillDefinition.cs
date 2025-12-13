@@ -38,6 +38,7 @@ public class SkillDefinition : ScriptableObject
     public Sprite icon;
     public SkillSlot slot = SkillSlot.None;
     public bool exclusiveInSlot = true;
+    public EntityProjectile projectilePrefab; // 弾スキルなら持たせる。
 
     [Header("Levels")]
     public SkillLevelData[] levels;

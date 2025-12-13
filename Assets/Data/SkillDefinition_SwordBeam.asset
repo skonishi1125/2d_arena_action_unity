@@ -18,25 +18,26 @@ MonoBehaviour:
   icon: {fileID: -7323526702296278062, guid: cde3f56d2f3724c4d84efd6d4362493a, type: 3}
   slot: 2
   exclusiveInSlot: 1
+  projectilePrefab: {fileID: 7979862103626190576, guid: 2e95147672afa194c8b33431f2cfc350, type: 3}
   levels:
   - level: 1
     damageMultiplier: 1
     knockbackPower: {x: 3, y: 5}
     knockbackDuration: 0.3
-    cooldownTime: 4
+    cooldownTime: 1
     manaCost: 0
     levelDescription: "\u5A01\u529B100%\u306E\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\u3002"
   - level: 1
     damageMultiplier: 1.5
     knockbackPower: {x: 3, y: 5}
     knockbackDuration: 0.3
-    cooldownTime: 4
+    cooldownTime: 1
     manaCost: 0
     levelDescription: "\u5A01\u529B150%\u306E\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\u3002"
   - level: 1
     damageMultiplier: 2
     knockbackPower: {x: 3, y: 5}
     knockbackDuration: 0.3
-    cooldownTime: 4
+    cooldownTime: 1
     manaCost: 0
     levelDescription: "\u5A01\u529B200%\u306E\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\u3002"

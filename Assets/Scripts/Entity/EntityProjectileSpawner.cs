@@ -4,19 +4,17 @@
 // 敵味方に付与して、使いたい弾をPrefabでセットすればよい
 public class EntityProjectileSpawner : MonoBehaviour
 {
-    [SerializeField] private EntityProjectile projectilePrefab;
     [SerializeField] private Transform spawnPoint; // 射撃口
-
     [SerializeField] private float speed = 5f;
 
-    public void Spawn(Entity entity, ProjectileDamageContext ctx)
+    public void Spawn(Entity entity, ProjectileSpawnRequest req)
     {
-        EntityProjectile proj = Instantiate(projectilePrefab, spawnPoint.position, spawnPoint.rotation);
+        EntityProjectile proj = Instantiate(req.prefab, spawnPoint.position, spawnPoint.rotation);
 
         // 弾インスタンスにダメージ, KB値の設定
-        proj.SetDamageMultiplier(ctx.damageMultiplier);
-        if (ctx.hasCustomKnockback)
-            proj.SetKnockback(ctx.knockbackPower, ctx.knockbackDuration);
+        proj.SetDamageMultiplier(req.damage.damageMultiplier);
+        if (req.damage.hasCustomKnockback)
+            proj.SetKnockback(req.damage.knockbackPower, req.damage.knockbackDuration);
         else
             proj.ResetKnockback();
 
