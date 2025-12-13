@@ -2,6 +2,8 @@
 
 public class EntityCombat : MonoBehaviour
 {
+    public enum HitShape { Circle, Box }
+
     private EntityStatus entityStatus;
     private EntityVFX entityVfx;
 
@@ -10,9 +12,22 @@ public class EntityCombat : MonoBehaviour
 
     // 攻撃モーション時のトリガー検知に関する情報
     [Header("Target detection")]
+    [SerializeField] private HitShape defaultHitShape = HitShape.Circle;
     [SerializeField] private Transform targetCheck;
     [SerializeField] private float targetCheckRadius;
+    [SerializeField] private Vector2 targetCheckBoxSize = new(3f, 1f); // 追加
+    [SerializeField] private float targetCheckBoxAngle = 0f;       // 追加（基本0でOK
     [SerializeField] private LayerMask whatIsTarget;
+
+    private bool useCustomHitbox;
+    private HitShape currentHitShape;
+    private float currentRadius;
+    private Vector2 currentBoxSize;
+    private float currentBoxAngle;
+
+    // 現在の中心
+    private Transform currentTargetCheck;
+    private bool useCustomTargetCheck;
 
     // 突進など持続攻撃
     // ※現状darkKnightしか使ってないので、そっちに持たせるべきかも
@@ -210,15 +225,112 @@ public class EntityCombat : MonoBehaviour
         return raw;
     }
 
-    // 攻撃判定内にいたcollider全てを配列で返す。
-    private Collider2D[] GetDetectedColliders()
+    // 追加：中心Transformを指定できる
+    public void SetHitboxCircle(Transform centerCheck, float radius)
     {
-        return Physics2D.OverlapCircleAll(targetCheck.position, targetCheckRadius, whatIsTarget);
+        useCustomHitbox = true;
+        currentHitShape = HitShape.Circle;
+        currentRadius = radius;
+
+        useCustomTargetCheck = centerCheck != null;
+        currentTargetCheck = centerCheck;
     }
 
+    public void SetHitboxBox(Transform centerCheck, Vector2 size, float angle = 0f)
+    {
+        useCustomHitbox = true;
+        currentHitShape = HitShape.Box;
+        currentBoxSize = size;
+        currentBoxAngle = angle;
+
+        useCustomTargetCheck = centerCheck != null;
+        currentTargetCheck = centerCheck;
+    }
+
+    public void ResetHitbox()
+    {
+        useCustomHitbox = false;
+        useCustomTargetCheck = false;
+        currentTargetCheck = null;
+    }
+
+    private Collider2D[] GetDetectedColliders()
+    {
+        var shape = useCustomHitbox ? currentHitShape : defaultHitShape;
+        var center = GetHitCenter();
+
+        switch (shape)
+        {
+            case HitShape.Circle:
+                float r = useCustomHitbox ? currentRadius : targetCheckRadius;
+                return Physics2D.OverlapCircleAll(center, r, whatIsTarget);
+
+            case HitShape.Box:
+                Vector2 size = useCustomHitbox ? currentBoxSize : targetCheckBoxSize;
+                float angle = useCustomHitbox ? currentBoxAngle : targetCheckBoxAngle;
+                return Physics2D.OverlapBoxAll(center, size, angle, whatIsTarget);
+
+            default:
+                return System.Array.Empty<Collider2D>();
+        }
+    }
+
+    private Vector2 GetHitCenter()
+    {
+        var t = (useCustomTargetCheck && currentTargetCheck != null) ? currentTargetCheck : targetCheck;
+        return t != null ? (Vector2)t.position : (Vector2)transform.position;
+    }
+
+    private Transform GetCenterTransform()
+    {
+        if (useCustomTargetCheck && currentTargetCheck != null)
+            return currentTargetCheck;
+
+        return targetCheck != null ? targetCheck : transform;
+    }
+
+    private Vector3 GetCenterPosition()
+    {
+        return GetCenterTransform().position;
+    }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(targetCheck.position, targetCheckRadius);
+        // 再生中は現在の設定、停止中はデフォルト設定で描く
+        bool playing = Application.isPlaying;
+
+        var shape = playing
+            ? (useCustomHitbox ? currentHitShape : defaultHitShape)
+            : defaultHitShape;
+
+        var center = playing ? GetCenterPosition()
+                             : (targetCheck != null ? targetCheck.position : transform.position);
+
+        Gizmos.color = Color.red;
+
+        if (shape == HitShape.Circle)
+        {
+            float r = playing
+                ? (useCustomHitbox ? currentRadius : targetCheckRadius)
+                : targetCheckRadius;
+
+            Gizmos.DrawWireSphere(center, r);
+        }
+        else
+        {
+            Vector2 size2 = playing
+                ? (useCustomHitbox ? currentBoxSize : targetCheckBoxSize)
+                : targetCheckBoxSize;
+
+            float angle = playing
+                ? (useCustomHitbox ? currentBoxAngle : targetCheckBoxAngle)
+                : targetCheckBoxAngle;
+
+            var old = Gizmos.matrix;
+            Gizmos.matrix = Matrix4x4.TRS(center, Quaternion.Euler(0, 0, angle), Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, new Vector3(size2.x, size2.y, 0f));
+            Gizmos.matrix = old;
+        }
     }
+
 
 }

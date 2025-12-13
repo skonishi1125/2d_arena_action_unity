@@ -81,6 +81,8 @@ public class Player : Entity
     public float teleportRadius = 0.2f;     // 埋まりチェック用
 
     [Header("Ground Slum")]
+    [SerializeField] public Transform groundSlumCheck;
+    public Vector2 groundSlumRange = new Vector2(6f, 1.2f);
     public float groundSlumGravityScale = 7f;
     public float groundSlumJumpForce = 30f;
     public float groundSlumFallForce = -20f;

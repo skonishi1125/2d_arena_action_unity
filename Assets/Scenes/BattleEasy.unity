@@ -33484,6 +33484,46 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -7, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 35
+      m_TileSpriteIndex: 35
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -6, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 35
+      m_TileSpriteIndex: 35
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -5, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 35
+      m_TileSpriteIndex: 35
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -4, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 35
+      m_TileSpriteIndex: 35
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: -30, y: -3, z: 0}
     second:
       serializedVersion: 2
@@ -35516,7 +35556,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 46d36f5259ca4aa4cb2940d92e16e8b7, type: 2}
   - m_RefCount: 1011
     m_Data: {fileID: 11400000, guid: f730d97f6d050854db6cd84250fd2bff, type: 2}
-  - m_RefCount: 1206
+  - m_RefCount: 1210
     m_Data: {fileID: 11400000, guid: fca71229fc43b6a49a4b36e78cdb860f, type: 2}
   - m_RefCount: 1091
     m_Data: {fileID: 11400000, guid: 79b2501a03b80bd4f883636ec747c08a, type: 2}
@@ -35597,7 +35637,7 @@ Tilemap:
     m_Data: {fileID: -161232721, guid: b84c524d8d8e6534e9e2b1dcbdf5ff1a, type: 3}
   - m_RefCount: 1011
     m_Data: {fileID: 160488252, guid: b84c524d8d8e6534e9e2b1dcbdf5ff1a, type: 3}
-  - m_RefCount: 1206
+  - m_RefCount: 1210
     m_Data: {fileID: 1485807950, guid: b84c524d8d8e6534e9e2b1dcbdf5ff1a, type: 3}
   - m_RefCount: 1091
     m_Data: {fileID: -85067232, guid: b84c524d8d8e6534e9e2b1dcbdf5ff1a, type: 3}
@@ -35608,7 +35648,7 @@ Tilemap:
   - m_RefCount: 23
     m_Data: {fileID: -442850082, guid: b84c524d8d8e6534e9e2b1dcbdf5ff1a, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 3399
+  - m_RefCount: 3403
     m_Data:
       e00: 1
       e01: 0
@@ -35629,7 +35669,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
-  - m_RefCount: 3399
+  - m_RefCount: 3403
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -35794,15 +35834,7 @@ CompositeCollider2D:
         Y: -620000000
       - X: 470000000
         Y: -620000000
-    - - X: -80000000
-        Y: -33750000
-      - X: -80000000
-        Y: -33125000
-      - X: -70625000
-        Y: -33125000
-      - X: -70000000
-        Y: -31250000
-      - X: -70000000
+    - - X: -30000000
         Y: -30000000
       - X: -100000000
         Y: -30000000
@@ -35818,6 +35850,18 @@ CompositeCollider2D:
         Y: -34375000
       - X: -80625000
         Y: -34375000
+      - X: -80000000
+        Y: -33750000
+      - X: -80000000
+        Y: -33125000
+      - X: -70625000
+        Y: -33125000
+      - X: -70000000
+        Y: -31250000
+      - X: -70000000
+        Y: -40000000
+      - X: -30000000
+        Y: -40000000
     - - X: -20000000
         Y: -86250000
       - X: -20000000
@@ -35886,11 +35930,7 @@ CompositeCollider2D:
       - {x: 4, y: -29}
       - {x: 4, y: -62}
       - {x: 47, y: -62}
-    - - {x: -8, y: -3.375}
-      - {x: -8, y: -3.3125}
-      - {x: -7.0625, y: -3.3125}
-      - {x: -7, y: -3.125}
-      - {x: -7, y: -3}
+    - - {x: -3, y: -3}
       - {x: -10, y: -3}
       - {x: -10, y: -3.125}
       - {x: -9.9375, y: -3.3125}
@@ -35898,6 +35938,12 @@ CompositeCollider2D:
       - {x: -9, y: -3.375}
       - {x: -8.8125, y: -3.4375}
       - {x: -8.0625, y: -3.4375}
+      - {x: -8, y: -3.375}
+      - {x: -8, y: -3.3125}
+      - {x: -7.0625, y: -3.3125}
+      - {x: -7, y: -3.125}
+      - {x: -7, y: -4}
+      - {x: -3, y: -4}
     - - {x: -2, y: -8.625}
       - {x: -2, y: -8.3125}
       - {x: -1.9375, y: -8.3125}
@@ -40373,6 +40419,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342109799}
   m_CullTransparentMesh: 1
+--- !u!1 &1367985963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1367985964}
+  m_Layer: 7
+  m_Name: GroundSlumCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1367985964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367985963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1716123623285125823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1406287774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45489,8 +45566,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   criticalRate: 1.5
+  defaultHitShape: 0
   targetCheck: {fileID: 38382415109853626}
   targetCheckRadius: 1
+  targetCheckBoxSize: {x: 3, y: 1}
+  targetCheckBoxAngle: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
@@ -45574,6 +45654,8 @@ MonoBehaviour:
   teleportDistance: 4
   teleportCheckStep: 0.25
   teleportRadius: 0.2
+  groundSlumCheck: {fileID: 1367985964}
+  groundSlumRange: {x: 6, y: 1.2}
   groundSlumGravityScale: 7
   groundSlumJumpForce: 30
   groundSlumFallForce: -20
@@ -46146,6 +46228,7 @@ Transform:
   m_Children:
   - {fileID: 1893145360445751319}
   - {fileID: 38382415109853626}
+  - {fileID: 1367985964}
   - {fileID: 544470153}
   - {fileID: 1998041563}
   m_Father: {fileID: 0}

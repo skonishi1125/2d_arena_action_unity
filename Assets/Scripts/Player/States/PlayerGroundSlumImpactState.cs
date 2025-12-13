@@ -25,6 +25,9 @@ public class PlayerGroundSlumImpactState : PlayerState
             levelData.knockbackDuration
         );
 
+        // 横長の攻撃判定
+        player.EntityCombat.SetHitboxBox(player.groundSlumCheck, player.groundSlumRange);
+
     }
 
     public override void LogicUpdate()
@@ -41,6 +44,7 @@ public class PlayerGroundSlumImpactState : PlayerState
 
         player.EntityCombat.ResetDamageMultiplier();
         player.EntityCombat.ResetKnockback();
+        player.EntityCombat.ResetHitbox();
     }
 
 }

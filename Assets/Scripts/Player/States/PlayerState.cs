@@ -31,7 +31,7 @@ public abstract class PlayerState : EntityState
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
 
         // Zスキル
-        if (input.Player.SkillZ.WasPressedThisFrame()) // いまはZのInputを流用
+        if (input.Player.SkillZ.WasPressedThisFrame())
         {
             var id = player.Skill.GetEquipped(SkillSlot.Z);
 
@@ -60,7 +60,7 @@ public abstract class PlayerState : EntityState
         }
 
         // Vスキル
-        if (input.Player.SkillV.WasPressedThisFrame()) // いまはZのInputを流用
+        if (input.Player.SkillV.WasPressedThisFrame())
         {
             var id = player.Skill.GetEquipped(SkillSlot.V);
 
