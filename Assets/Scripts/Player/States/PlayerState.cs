@@ -27,8 +27,6 @@ public abstract class PlayerState : EntityState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        // Jump/Fallアニメの切り替えはPlayerだけなので、EntityStateには書かない。
-        anim.SetFloat("yVelocity", rb.linearVelocity.y);
 
         // Zスキル
         if (input.Player.SkillZ.WasPressedThisFrame())
@@ -64,10 +62,10 @@ public abstract class PlayerState : EntityState
         {
             var id = player.Skill.GetEquipped(SkillSlot.V);
 
-            if (id == SkillId.GroundSlum && player.Skill.CanUse(id))
+            if (id == SkillId.GroundSlam && player.Skill.CanUse(id))
             {
                 player.Skill.OnUse(id);
-                stateMachine.ChangeState(player.groundSlumJumpState);
+                stateMachine.ChangeState(player.groundSlamJumpState);
                 return;
             }
 
@@ -79,6 +77,12 @@ public abstract class PlayerState : EntityState
             }
         }
 
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
 

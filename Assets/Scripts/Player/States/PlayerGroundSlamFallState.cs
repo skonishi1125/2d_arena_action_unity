@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 
-public class PlayerGroundSlumFallState : PlayerState
+public class PlayerGroundSlamFallState : PlayerState
 {
     private float originalGravityScale;
 
-    public PlayerGroundSlumFallState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public PlayerGroundSlamFallState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocity(0f, player.groundSlumFallForce);
+        player.SetVelocity(0f, player.groundSlamFallForce);
 
         originalGravityScale = rb.gravityScale;
-        rb.gravityScale = player.groundSlumGravityScale;
+        rb.gravityScale = player.groundSlamGravityScale;
 
     }
 
@@ -23,7 +23,7 @@ public class PlayerGroundSlumFallState : PlayerState
         base.LogicUpdate();
 
         if (player.groundDetected)
-            stateMachine.ChangeState(player.groundSlumImpactState);
+            stateMachine.ChangeState(player.groundSlamImpactState);
 
     }
 

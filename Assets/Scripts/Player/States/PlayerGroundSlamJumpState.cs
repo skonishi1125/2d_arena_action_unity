@@ -1,8 +1,8 @@
-﻿public class PlayerGroundSlumJumpState : PlayerState
+﻿public class PlayerGroundSlamJumpState : PlayerState
 {
     private float originalGravityScale;
 
-    public PlayerGroundSlumJumpState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public PlayerGroundSlamJumpState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
 
@@ -11,12 +11,12 @@
         base.Enter();
 
         player.SetVelocity(
-            rb.linearVelocity.x * player.groundSlumXMovementCompensation,
-            player.groundSlumJumpForce
+            rb.linearVelocity.x * player.groundSlamXMovementCompensation,
+            player.groundSlamJumpForce
         );
 
         originalGravityScale = rb.gravityScale;
-        rb.gravityScale = player.groundSlumGravityScale;
+        rb.gravityScale = player.groundSlamGravityScale;
 
     }
 
@@ -25,7 +25,7 @@
         base.LogicUpdate();
 
         if (rb.linearVelocity.y <= 0)
-            stateMachine.ChangeState(player.groundSlumFallState);
+            stateMachine.ChangeState(player.groundSlamFallState);
     }
 
     public override void Exit()

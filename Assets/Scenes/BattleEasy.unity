@@ -40429,7 +40429,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1367985964}
   m_Layer: 7
-  m_Name: GroundSlumCheck
+  m_Name: GroundSlamCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45655,11 +45655,11 @@ MonoBehaviour:
   teleportCheckStep: 0.25
   teleportRadius: 0.2
   groundSlumCheck: {fileID: 1367985964}
-  groundSlumRange: {x: 6, y: 1.2}
-  groundSlumGravityScale: 7
-  groundSlumJumpForce: 30
-  groundSlumFallForce: -20
-  groundSlumXMovementCompensation: 0.1
+  groundSlamRange: {x: 6, y: 1.2}
+  groundSlamGravityScale: 7
+  groundSlamJumpForce: 30
+  groundSlamFallForce: -20
+  groundSlamXMovementCompensation: 0.1
 --- !u!114 &817272987460849749
 MonoBehaviour:
   m_ObjectHideFlags: 0

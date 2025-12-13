@@ -30,9 +30,9 @@ public class Player : Entity
     public PlayerKnockbackAttackState knockbackAttackState { get; private set; }
     public PlayerMagicBoltState magicBoltState { get; private set; }
     public PlayerTeleportState teleportState { get; private set; }
-    public PlayerGroundSlumJumpState groundSlumJumpState { get; private set; }
-    public PlayerGroundSlumFallState groundSlumFallState { get; private set; }
-    public PlayerGroundSlumImpactState groundSlumImpactState { get; private set; }
+    public PlayerGroundSlamJumpState groundSlamJumpState { get; private set; }
+    public PlayerGroundSlamFallState groundSlamFallState { get; private set; }
+    public PlayerGroundSlamImpactState groundSlamImpactState { get; private set; }
 
     // MagicBoltStateや、その他の弾スキルで作ったダメージ情報を保持する場所
     // State -> player -> Trigger(spawn())として、情報を仲介してやる。
@@ -82,11 +82,11 @@ public class Player : Entity
 
     [Header("Ground Slum")]
     [SerializeField] public Transform groundSlumCheck;
-    public Vector2 groundSlumRange = new Vector2(6f, 1.2f);
-    public float groundSlumGravityScale = 7f;
-    public float groundSlumJumpForce = 30f;
-    public float groundSlumFallForce = -20f;
-    public float groundSlumXMovementCompensation = .1f; // ジャンプ中のx加速度補正
+    public Vector2 groundSlamRange = new Vector2(6f, 1.2f);
+    public float groundSlamGravityScale = 7f;
+    public float groundSlamJumpForce = 30f;
+    public float groundSlamFallForce = -20f;
+    public float groundSlamXMovementCompensation = .1f; // ジャンプ中のx加速度補正
 
 
     // 公開用変数等
@@ -122,9 +122,9 @@ public class Player : Entity
 
         teleportState = new PlayerTeleportState(this, stateMachine, "none");
 
-        groundSlumJumpState = new PlayerGroundSlumJumpState(this, stateMachine, "groundSlumJumpFall");
-        groundSlumFallState = new PlayerGroundSlumFallState(this, stateMachine, "groundSlumJumpFall");
-        groundSlumImpactState = new PlayerGroundSlumImpactState(this, stateMachine, "groundSlumImpact");
+        groundSlamJumpState = new PlayerGroundSlamJumpState(this, stateMachine, "groundSlumJumpFall");
+        groundSlamFallState = new PlayerGroundSlamFallState(this, stateMachine, "groundSlumJumpFall");
+        groundSlamImpactState = new PlayerGroundSlamImpactState(this, stateMachine, "groundSlumImpact");
 
         // 必要なcomponentの取得
         Health = GetComponent<PlayerHealth>();

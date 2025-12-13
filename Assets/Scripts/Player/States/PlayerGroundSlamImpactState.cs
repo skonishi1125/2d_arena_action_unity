@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class PlayerGroundSlumImpactState : PlayerState
+public class PlayerGroundSlamImpactState : PlayerState
 {
-    public PlayerGroundSlumImpactState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public PlayerGroundSlamImpactState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
 
@@ -12,7 +12,7 @@ public class PlayerGroundSlumImpactState : PlayerState
         base.Enter();
 
         // 現レベル時点でのSkillデータを取得
-        var levelData = player.Skill.GetCurrentLevelData(SkillId.GroundSlum);
+        var levelData = player.Skill.GetCurrentLevelData(SkillId.GroundSlam);
         if (levelData == null)
             return;
 
@@ -26,7 +26,7 @@ public class PlayerGroundSlumImpactState : PlayerState
         );
 
         // 横長の攻撃判定
-        player.EntityCombat.SetHitboxBox(player.groundSlumCheck, player.groundSlumRange);
+        player.EntityCombat.SetHitboxBox(player.groundSlumCheck, player.groundSlamRange);
 
     }
 
