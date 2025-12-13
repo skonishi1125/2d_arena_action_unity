@@ -9,6 +9,6 @@ public enum SkillId
     GroundSlam = 3,// V
 
     Teleport = 4, // Z
-    // D
+    SwordBeam = 5, // D
     MagicBolt = 6,// V
 }

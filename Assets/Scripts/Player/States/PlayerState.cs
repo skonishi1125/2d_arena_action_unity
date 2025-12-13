@@ -48,14 +48,26 @@ public abstract class PlayerState : EntityState
             }
         }
 
-        // Dスキル 現状 KnockbackAttack だけ
-        if (input.Player.KnockbackAttack.WasPerformedThisFrame()
-            && player.Skill.CanUse(SkillId.HeavyKB))
+        // Dスキル
+        if (input.Player.SkillD.WasPressedThisFrame())
         {
-            player.Skill.OnUse(SkillId.HeavyKB);
-            stateMachine.ChangeState(player.knockbackAttackState);
-            return;
+            var id = player.Skill.GetEquipped(SkillSlot.D);
+
+            if (id == SkillId.HeavyKB && player.Skill.CanUse(id))
+            {
+                player.Skill.OnUse(id);
+                stateMachine.ChangeState(player.knockbackAttackState);
+                return;
+            }
+
+            if (id == SkillId.SwordBeam && player.Skill.CanUse(id))
+            {
+                player.Skill.OnUse(id);
+                stateMachine.ChangeState(player.swordBeamState);
+                return;
+            }
         }
+
 
         // Vスキル
         if (input.Player.SkillV.WasPressedThisFrame())

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerMagicBoltState : PlayerState
+public class PlayerSwordBeamState : PlayerState
 {
     private float attackVelocityTimer;
 
-    public PlayerMagicBoltState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public PlayerSwordBeamState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
 
@@ -14,7 +14,7 @@ public class PlayerMagicBoltState : PlayerState
         attackVelocityTimer = player.attackVelocityDuration;
 
         // スキルSOからダメージ倍率とKB情報の取得
-        var levelData = player.Skill.GetCurrentLevelData(SkillId.MagicBolt);
+        var levelData = player.Skill.GetCurrentLevelData(SkillId.SwordBeam);
         if (levelData == null)
             return;
 
@@ -33,9 +33,10 @@ public class PlayerMagicBoltState : PlayerState
         // トリガー側で、Spawn()させるときにPlayerから参照できるようにしておく
         player.SetPendingProjectileCtx(ctx);
 
-        Debug.Log($"[MagicBoltState] multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
+        Debug.Log($"[SwordBeam] multi: {levelData.damageMultiplier} KBp: {levelData.knockbackPower} KBd: {levelData.knockbackDuration}");
 
     }
+
 
     public override void LogicUpdate()
     {
@@ -56,7 +57,6 @@ public class PlayerMagicBoltState : PlayerState
         HandleAttackVelocity();
     }
 
-    // 攻撃中の動きの制御
     private void HandleAttackVelocity()
     {
         // たとえば.1fの時、0.1fの間だけ左右入力で滑る。
@@ -65,18 +65,6 @@ public class PlayerMagicBoltState : PlayerState
         attackVelocityTimer -= Time.deltaTime;
         if (attackVelocityTimer < 0)
             player.SetVelocity(0, rb.linearVelocity.y);
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        // ここもどうしよう？
-        // 弾はDestroyで消えてしまうので、不要かも
-        // 今後ObjectPoolとしたら、
-        // 使いまわすことになるのでその際にリセットが必要になりそう
-        //player.EntityProjectile.ResetDamageMultiplier();
-        //player.EntityProjectile.ResetKnockback();
     }
 
 }

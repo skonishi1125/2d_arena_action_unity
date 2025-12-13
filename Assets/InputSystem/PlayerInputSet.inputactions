@@ -52,7 +52,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "KnockbackAttack",
+                    "name": "SkillD",
                     "type": "Button",
                     "id": "ad46d69b-4579-4bb2-a807-9dd87a5f8050",
                     "expectedControlType": "",
@@ -166,7 +166,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "KnockbackAttack",
+                    "action": "SkillD",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
