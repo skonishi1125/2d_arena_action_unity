@@ -32,6 +32,7 @@ public class Player : Entity
     public PlayerTeleportState teleportState { get; private set; }
     public PlayerGroundSlumJumpState groundSlumJumpState { get; private set; }
     public PlayerGroundSlumFallState groundSlumFallState { get; private set; }
+    public PlayerGroundSlumImpactState groundSlumImpactState { get; private set; }
 
     // MagicBoltStateや、その他の弾スキルで作ったダメージ情報を保持する場所
     // State -> player -> Trigger(spawn())として、情報を仲介してやる。
@@ -79,6 +80,12 @@ public class Player : Entity
     public float teleportCheckStep = 0.25f; // 安全位置探索の刻み
     public float teleportRadius = 0.2f;     // 埋まりチェック用
 
+    [Header("Ground Slum")]
+    public float groundSlumGravityScale = 7f;
+    public float groundSlumJumpForce = 30f;
+    public float groundSlumFallForce = -20f;
+    public float groundSlumXMovementCompensation = .1f; // ジャンプ中のx加速度補正
+
 
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;
@@ -115,6 +122,7 @@ public class Player : Entity
 
         groundSlumJumpState = new PlayerGroundSlumJumpState(this, stateMachine, "groundSlumJumpFall");
         groundSlumFallState = new PlayerGroundSlumFallState(this, stateMachine, "groundSlumJumpFall");
+        groundSlumImpactState = new PlayerGroundSlumImpactState(this, stateMachine, "groundSlumImpact");
 
         // 必要なcomponentの取得
         Health = GetComponent<PlayerHealth>();

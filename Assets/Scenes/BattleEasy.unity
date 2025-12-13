@@ -45451,6 +45451,10 @@ MonoBehaviour:
   teleportDistance: 4
   teleportCheckStep: 0.25
   teleportRadius: 0.2
+  groundSlumGravityScale: 7
+  groundSlumJumpForce: 30
+  groundSlumFallForce: -20
+  groundSlumXMovementCompensation: 0.1
 --- !u!114 &817272987460849749
 MonoBehaviour:
   m_ObjectHideFlags: 0
