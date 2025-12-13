@@ -35,13 +35,10 @@ public class Player : Entity
     public PlayerGroundSlamImpactState groundSlamImpactState { get; private set; }
     public PlayerSwordBeamState swordBeamState { get; private set; }
 
-    // MagicBoltStateや、その他の弾スキルで作ったダメージ情報を保持する場所
-    // State -> player -> Trigger(spawn())として、情報を仲介してやる。
-    public ProjectileDamageContext PendingProjectileCtx { get; private set; }
-    public bool HasPendingProjectileCtx { get; private set; }
-
+    // MagicBoltState, SwordBeamStateで作ったダメージ情報を保持する場所
+    // State -> player -> Trigger(spawn(request))-> Projectileとして、情報を仲介してやる。
     public ProjectileSpawnRequest PendingProjectileSpawnRequest { get; private set; }
-
+    public bool HasPendingProjectileCtx { get; private set; }
 
     [Header("Input Settings")]
     public Vector2 moveInput { get; private set; } // InputSystemのdigital -1,0,1
@@ -192,26 +189,6 @@ public class Player : Entity
         Death();
     }
 
-    // MagicBoltState等で作った弾ダメージのセット
-    //public void SetPendingProjectileCtx(ProjectileDamageContext ctx)
-    //{
-    //    PendingProjectileCtx = ctx;
-    //    HasPendingProjectileCtx = true;
-    //}
-
-    //public bool TryConsumePendingProjectileCtx(out ProjectileDamageContext ctx)
-    //{
-    //    if (!HasPendingProjectileCtx)
-    //    {
-    //        ctx = default;
-    //        return false;
-    //    }
-    //    ctx = PendingProjectileCtx;
-    //    HasPendingProjectileCtx = false;
-    //    return true;
-    //}
-
-    // ==== 試しに追加
     public void SetPendingProjectileRequest(ProjectileSpawnRequest req)
     {
         PendingProjectileSpawnRequest = req;
@@ -228,8 +205,6 @@ public class Player : Entity
         HasPendingProjectileCtx = false;
         return true;
     }
-    // ====追加
-
 
     private void OnEnable()
     {
