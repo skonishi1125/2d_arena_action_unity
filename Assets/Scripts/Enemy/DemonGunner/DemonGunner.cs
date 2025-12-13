@@ -2,7 +2,10 @@
 
 public class DemonGunner : Enemy
 {
-    public ProjectileDamageContext PendingProjectileCtx { get; private set; }
+    public ProjectileSpawnRequest PendingProjectileSpawnRequest { get; private set; }
+
+    // 雑魚敵なので、自身に持たせてしまおう
+    [SerializeField] private EntityProjectile projectilePrefab;
 
     protected override void Awake()
     {
@@ -16,12 +19,19 @@ public class DemonGunner : Enemy
         deadState = new EnemyDeadState(this, stateMachine, "NONE");
 
         // 弾技の初期設定
-        PendingProjectileCtx = new ProjectileDamageContext
+        PendingProjectileSpawnRequest = new ProjectileSpawnRequest
         {
-            damageMultiplier = this.commonAttackDamageMultiplier,
-            hasCustomKnockback = true,
-            knockbackPower = this.commonAttackKnockbackPower,
-            knockbackDuration = this.commonAttackKnockbackDuration,
+            prefab = projectilePrefab,
+            damage =
+            {
+                damageMultiplier = commonAttackDamageMultiplier,
+                hasCustomKnockback = true,
+                knockbackPower = commonAttackKnockbackPower,
+                knockbackDuration = commonAttackKnockbackDuration,
+            },
+            speedOverride = 5f,
+            pierceGround = false,
+            pierceTargets = false,
         };
 
     }

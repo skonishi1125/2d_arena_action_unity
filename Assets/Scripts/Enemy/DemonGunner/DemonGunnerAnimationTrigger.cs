@@ -18,8 +18,10 @@ public class DemonGunnerAnimationTrigger : EntityAnimationTrigger
         if (projectileSpawner == null)
             return;
 
-        // todo: fix.
-        //projectileSpawner.Spawn(demonGunner, demonGunner.PendingProjectileCtx);
+        projectileSpawner.Spawn(
+            demonGunner,
+            demonGunner.PendingProjectileSpawnRequest
+        );
 
     }
 }
