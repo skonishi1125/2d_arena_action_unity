@@ -68,6 +68,12 @@ public abstract class PlayerState : EntityState
             return;
         }
 
+        // GroundSlum
+        if (input.Player.GroundSlum.WasPerformedThisFrame())
+        {
+            stateMachine.ChangeState(player.groundSlumJumpState);
+            return;
+        }
 
 
     }

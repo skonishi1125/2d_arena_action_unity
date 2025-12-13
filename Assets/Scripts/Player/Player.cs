@@ -30,6 +30,8 @@ public class Player : Entity
     public PlayerKnockbackAttackState knockbackAttackState { get; private set; }
     public PlayerMagicBoltState magicBoltState { get; private set; }
     public PlayerTeleportState teleportState { get; private set; }
+    public PlayerGroundSlumJumpState groundSlumJumpState { get; private set; }
+    public PlayerGroundSlumFallState groundSlumFallState { get; private set; }
 
     // MagicBoltStateや、その他の弾スキルで作ったダメージ情報を保持する場所
     // State -> player -> Trigger(spawn())として、情報を仲介してやる。
@@ -110,6 +112,9 @@ public class Player : Entity
         deadState = new PlayerDeadState(this, stateMachine, "dead");
 
         teleportState = new PlayerTeleportState(this, stateMachine, "none");
+
+        groundSlumJumpState = new PlayerGroundSlumJumpState(this, stateMachine, "groundSlumJumpFall");
+        groundSlumFallState = new PlayerGroundSlumFallState(this, stateMachine, "groundSlumJumpFall");
 
         // 必要なcomponentの取得
         Health = GetComponent<PlayerHealth>();
