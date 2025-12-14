@@ -1,17 +1,48 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class SkillPanel : MonoBehaviour
 {
-    private EntityStatus status;
     private PlayerLevel level;
 
-    public void Init(EntityStatus status, PlayerLevel level)
+    [Header("Skill Point UI")]
+    [SerializeField] private TextMeshProUGUI spValueText;
+    [SerializeField] private Color spZeroColor = Color.white;
+    [SerializeField] private Color spPositiveColor = Color.yellow;
+
+    public void Init(PlayerLevel level)
     {
-        this.status = status;
-        this.level = level;
+        BindLevel(level);
 
-        // skillのUIをなにか更新が必要な設計になった場合は、ここで改修
-        // スキルレベルが上がったときなどに、イベントで紐づければ良さそう。
+    }
 
+    private void BindLevel(PlayerLevel newLevel)
+    {
+        if (level != null)
+            level.OnSkillPointsChanged -= HandleSkillPointsChanged;
+
+        level = newLevel;
+
+        if (level != null)
+        {
+            level.OnSkillPointsChanged += HandleSkillPointsChanged;
+
+            // 初期表示（イベント待ちだと初回が更新されないため）
+            HandleSkillPointsChanged(level.SkillPoints);
+        }
+    }
+    private void HandleSkillPointsChanged(int sp)
+    {
+        if (spValueText == null)
+            return;
+
+        spValueText.text = sp.ToString();
+        spValueText.color = (sp <= 0) ? spZeroColor : spPositiveColor;
+    }
+
+    private void OnDestroy()
+    {
+        if (level != null)
+            level.OnSkillPointsChanged -= HandleSkillPointsChanged;
     }
 }

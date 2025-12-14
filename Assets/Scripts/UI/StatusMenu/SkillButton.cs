@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    private Player player;
+    private const int skillCost = 1; // スキル獲得、LvUpに必要なSP
 
-    [SerializeField] private PlayerSkillController playerSkill;
+    private Player player;
+    private PlayerSkillController playerSkill;
+    private PlayerLevel playerLevel;
     private Image skillIconImage;
 
     [Header("Definition")]
@@ -30,6 +32,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private bool showDescriptionOnHover = true; // ホバーで説明を出すか
 
 
+
     protected virtual void Awake()
     {
         // Prefab運用想定のため、PlayerはFindFirstObjectByTypeで取得
@@ -39,6 +42,10 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         playerSkill = player.GetComponentInChildren<PlayerSkillController>();
         if (!LogHelper.AssertNotNull(playerSkill, nameof(playerSkill), this))
+            return;
+
+        playerLevel = player.GetComponentInChildren<PlayerLevel>();
+        if (!LogHelper.AssertNotNull(playerLevel, nameof(playerLevel), this))
             return;
 
         // ImageにSkillDefinitionに定義したImageを割り当てる
@@ -119,15 +126,17 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         // ゲーム中に出ているスキルアイコンなどはfalseとすることで、
         // クリックしてもレベルアップ処理が働かないようにしておく。
+        // (-> 現在別々で運用しているので、この考慮は不要になった)
         if (!canLevelUpOnClick)
             return;
 
-        if (playerSkill == null)
+        if (playerLevel.SkillPoints < skillCost)
             return;
 
         // スキルのレベルを上げた時
         if (playerSkill.LevelUp(skillId))
         {
+            playerLevel.TrySpendSkillPoints(skillCost);
             UpdateView();
 
             // パネル表示中なら、説明も更新

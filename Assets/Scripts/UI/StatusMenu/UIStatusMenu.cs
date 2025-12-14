@@ -23,7 +23,7 @@ public class UIStatusMenu : MonoBehaviour
     private void Start()
     {
         statusPanel.Init(entityStatus, playerLevel);
-        //skillPanel.Init(skillController);
+        skillPanel.Init(playerLevel);
 
         rootPanel.SetActive(false);
     }

@@ -753,6 +753,7 @@ MonoBehaviour:
   commonAttackDamageMultiplier: 1
   commonAttackKnockbackPower: {x: 1.5, y: 2.5}
   commonAttackKnockbackDuration: 0.15
+  projectilePrefab: {fileID: 7979862103626190576, guid: 2e95147672afa194c8b33431f2cfc350, type: 3}
 --- !u!114 &2309834349971394908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,9 +789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc651e31978c5d4e844acac6e2ab2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7979862103626190576, guid: 2e95147672afa194c8b33431f2cfc350, type: 3}
   spawnPoint: {fileID: 5303205442726684927}
-  speed: 4
+  defaultSpeed: 5
 --- !u!114 &8577696163584030266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,8 +804,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   criticalRate: 1.5
+  defaultHitShape: 0
   targetCheck: {fileID: 1007272004634349073}
   targetCheckRadius: 0.1
+  targetCheckBoxSize: {x: 3, y: 1}
+  targetCheckBoxAngle: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128

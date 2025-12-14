@@ -7,6 +7,7 @@ public class PlayerLevel : MonoBehaviour
     private PlayerHealth playerHealth;
 
     [SerializeField] private PlayerLevelTable levelTable;
+    public int SkillPoints {  get; private set; }
 
     public int Level { get; private set; } = 1;
     public int CurrentExp { get; private set; }
@@ -32,6 +33,9 @@ public class PlayerLevel : MonoBehaviour
     // 経験値変化のイベント
     // currentExp, reuiredExp, StatusMenuの更新など
     public event Action<int, int> OnExpChanged;
+
+    // UI更新
+    public event Action<int> OnSkillPointsChanged;
 
     private void Awake()
     {
@@ -79,6 +83,9 @@ public class PlayerLevel : MonoBehaviour
                 CurrentExp -= entry.requiredExp;
                 Level++;
 
+                // SP獲得
+                AddSkillPoint(1);
+
                 ApplyLevelStatus();
                 playerHealth.FullHeal();
                 OnLevelUp?.Invoke(Level);
@@ -100,6 +107,30 @@ public class PlayerLevel : MonoBehaviour
     {
         var clamped = Mathf.Clamp(level, 1, levelTable.MaxLevel);
         return levelTable.GetLevelOfInfo(clamped).requiredExp;
+    }
+
+
+    // SPの獲得
+    private void AddSkillPoint(int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        SkillPoints += amount;
+        OnSkillPointsChanged?.Invoke(SkillPoints);
+    }
+
+    public bool TrySpendSkillPoints(int cost)
+    {
+        if (cost <= 0)
+            return true;
+
+        if (SkillPoints < cost)
+            return false;
+
+        SkillPoints -= cost;
+        OnSkillPointsChanged?.Invoke(SkillPoints);
+        return true;
     }
 
 }
