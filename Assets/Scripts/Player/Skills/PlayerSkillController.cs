@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour
@@ -18,6 +19,10 @@ public class PlayerSkillController : MonoBehaviour
     // Z,D,Vのスキル枠に何が入っているかの確認
     // equipped["Z"] = 3 みたいに、連想配列みたいなイメージで使える
     private readonly Dictionary<SkillSlot, SkillId> equipped = new();
+
+    // パッシブ用 ステータス変化時に呼ぶアクション
+    // UIのステータス更新用途など。
+    public event Action OnStatusChangedBySkill;
 
 
     private void Awake()
@@ -154,6 +159,7 @@ public class PlayerSkillController : MonoBehaviour
 
         // パッシブ適用
         ApplyPassiveDelta(state, oldLevel, newLevel);
+        OnStatusChangedBySkill?.Invoke();
 
         // 初回習得の場合、枠を確定
         if (state.currentLevel == 1 && state.definition.exclusiveInSlot)
@@ -238,6 +244,8 @@ public class PlayerSkillController : MonoBehaviour
             StatusParam.MaxHp => entityStatus.maxHp,
             StatusParam.Attack => entityStatus.attack,
             StatusParam.Defense => entityStatus.defense,
+            StatusParam.Evasion => entityStatus.evasion,
+            StatusParam.Critical => entityStatus.critical,
             _ => null
         };
     }

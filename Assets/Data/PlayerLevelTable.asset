@@ -21,8 +21,8 @@ MonoBehaviour:
     regenMp: 1
     attack: 5
     defense: 0
-    evasion: 0.1
-    critical: 0.35
+    evasion: 0
+    critical: 0
   - level: 2
     requiredExp: 50
     maxHp: 40
@@ -31,8 +31,8 @@ MonoBehaviour:
     regenMp: 1
     attack: 7
     defense: 1
-    evasion: 0.1
-    critical: 0.1
+    evasion: 0
+    critical: 0
   - level: 3
     requiredExp: 100
     maxHp: 50

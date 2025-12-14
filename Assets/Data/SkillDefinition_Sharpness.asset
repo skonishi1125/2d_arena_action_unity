@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7526e571fb98ac8499814881c6a5c128, type: 3}
-  m_Name: SkillDefinition_Lively
+  m_Name: SkillDefinition_Sharpness
   m_EditorClassIdentifier: 
-  id: 11
-  displayName: Lively
-  description: "\u8EAB\u4F53\u3092\u6D3B\u6C17\u3065\u3051\u3001\u6700\u5927HP\u3092\u5F37\u5316\u3059\u308B\u3002"
-  icon: {fileID: -751097492, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
+  id: 15
+  displayName: Sharpness
+  description: "\u6B66\u5177\u306E\u7FD2\u719F\u3092\u9AD8\u3081\u3001\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u3092\u4E0A\u6607\u3002"
+  icon: {fileID: -203003508, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 0
   exclusiveInSlot: 0
   projectilePrefab: {fileID: 0}
@@ -26,33 +26,33 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C10%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u304C\u6C38\u7D9A\u7684\u306B5%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
-    - param: 0
-      mode: 1
-      value: 0.1
+    - param: 4
+      mode: 0
+      value: 0.05
   - level: 2
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C15%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u304C\u6C38\u7D9A\u7684\u306B7%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
-    - param: 0
-      mode: 1
-      value: 0.15
+    - param: 4
+      mode: 0
+      value: 0.07
   - level: 3
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C20%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u304C\u6C38\u7D9A\u7684\u306B9%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
-    - param: 0
-      mode: 1
-      value: 0.2
+    - param: 4
+      mode: 0
+      value: 0.09

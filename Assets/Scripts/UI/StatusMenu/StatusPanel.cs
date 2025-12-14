@@ -13,19 +13,27 @@ public class StatusPanel : MonoBehaviour
 
     private EntityStatus status;
     private PlayerLevel level;
+    private PlayerSkillController skill;
 
-    public void Init(EntityStatus status, PlayerLevel level)
+    public void Init(EntityStatus status, PlayerLevel level, PlayerSkillController skill)
     {
         this.status = status;
         this.level = level;
+        this.skill = skill;
 
         RefreshAll();
 
         // レベルアップ時に自動で更新
-        level.OnLevelUp += _ => RefreshAll();
-        level.OnExpChanged += (_, __) => RefreshAll();
+        if (level != null)
+        {
+            level.OnLevelUp += _ => RefreshAll();
+            level.OnExpChanged += (_, __) => RefreshAll();
+        }
 
-        // 装備やパッシブでも変わるなら、別イベントからも呼び出す
+        // パッシブスキルで変わった場合
+        if (skill != null)
+            skill.OnStatusChangedBySkill += RefreshAll;
+
     }
 
     private void RefreshAll()
@@ -39,6 +47,18 @@ public class StatusPanel : MonoBehaviour
         defenseText.text = $"DEFENSE: {status.GetDefense():0}";
         critText.text = $"CRITICAL: {(status.GetCritical() * 100f):0}%";
         evasionText.text = $"EVASION: {(status.GetEvasion() * 100f):0}%";
+    }
+
+    private void OnDestroy()
+    {
+        if (level != null)
+        {
+            level.OnLevelUp -= _ => RefreshAll();
+            level.OnExpChanged -= (_, __) => RefreshAll();
+        }
+
+        if (skill != null)
+            skill.OnStatusChangedBySkill -= RefreshAll;
     }
 
 }

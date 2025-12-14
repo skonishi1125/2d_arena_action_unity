@@ -8,6 +8,7 @@ public class UIStatusMenu : MonoBehaviour
 
     private Player player;
     private PlayerLevel playerLevel;
+    private PlayerSkillController playerSkill;
     private EntityStatus entityStatus;
     private PlayerSkillController skillController;
 
@@ -15,13 +16,14 @@ public class UIStatusMenu : MonoBehaviour
     {
         player = FindFirstObjectByType<Player>();
         entityStatus = player.GetComponent<EntityStatus>();
+        playerSkill = player.GetComponent<PlayerSkillController>();
         playerLevel = player.GetComponent<PlayerLevel>();
         skillController = player.GetComponentInChildren<PlayerSkillController>();
     }
 
     private void Start()
     {
-        statusPanel.Init(entityStatus, playerLevel);
+        statusPanel.Init(entityStatus, playerLevel, playerSkill);
         skillPanel.Init(playerLevel);
 
         rootPanel.SetActive(false);

@@ -14,4 +14,8 @@ public enum SkillId
 
     // Passive
     Lively = 11,
+    Force = 12,
+    Protection = 13,
+    SixthSense = 14,
+    Sharpness = 15,
 }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7526e571fb98ac8499814881c6a5c128, type: 3}
-  m_Name: SkillDefinition_Lively
+  m_Name: SkillDefinition_Protection
   m_EditorClassIdentifier: 
-  id: 11
-  displayName: Lively
-  description: "\u8EAB\u4F53\u3092\u6D3B\u6C17\u3065\u3051\u3001\u6700\u5927HP\u3092\u5F37\u5316\u3059\u308B\u3002"
-  icon: {fileID: -751097492, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
+  id: 13
+  displayName: Protection
+  description: "\u8EAB\u306E\u8B77\u308A\u3092\u935B\u3048\u3001\u9632\u5FA1\u529B\u3092\u5411\u4E0A\u3059\u308B\u3002"
+  icon: {fileID: 1878927005, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 0
   exclusiveInSlot: 0
   projectilePrefab: {fileID: 0}
@@ -26,33 +26,33 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C10%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "Defense\u304C\u5408\u8A08\u30672\u4E0A\u304C\u308B\u3002"
     isPassive: 1
     passiveModifiers:
-    - param: 0
-      mode: 1
-      value: 0.1
+    - param: 2
+      mode: 0
+      value: 2
   - level: 2
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C15%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "Defense\u304C\u5408\u8A08\u30673\u4E0A\u304C\u308B\u3002"
     isPassive: 1
     passiveModifiers:
-    - param: 0
-      mode: 1
-      value: 0.15
-  - level: 3
+    - param: 2
+      mode: 0
+      value: 3
+  - level: 2
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C20%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "Defense\u304C\u5408\u8A08\u30674\u4E0A\u304C\u308B\u3002"
     isPassive: 1
     passiveModifiers:
-    - param: 0
-      mode: 1
-      value: 0.2
+    - param: 2
+      mode: 0
+      value: 4

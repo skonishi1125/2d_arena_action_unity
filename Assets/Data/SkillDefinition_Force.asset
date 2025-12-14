@@ -12,11 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7526e571fb98ac8499814881c6a5c128, type: 3}
   m_Name: SkillDefinition_Force
   m_EditorClassIdentifier: 
-  id: 0
-  displayName: 
-  description: 
-  icon: {fileID: 0}
+  id: 12
+  displayName: Force
+  description: "\u8155\u529B\u3092\u9AD8\u3081\u3001\u57FA\u790E\u653B\u6483\u529B\u3092\u5F37\u5316\u3059\u308B\u3002"
+  icon: {fileID: -1965969530, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 0
-  exclusiveInSlot: 1
+  exclusiveInSlot: 0
   projectilePrefab: {fileID: 0}
-  levels: []
+  levels:
+  - level: 1
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B10%\u4E0A\u6607\u3002"
+    isPassive: 1
+    passiveModifiers:
+    - param: 1
+      mode: 1
+      value: 0.1
+  - level: 2
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B20%\u4E0A\u6607\u3002"
+    isPassive: 1
+    passiveModifiers:
+    - param: 1
+      mode: 1
+      value: 0.2
+  - level: 2
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B30%\u4E0A\u6607\u3002"
+    isPassive: 1
+    passiveModifiers:
+    - param: 1
+      mode: 1
+      value: 0.3
