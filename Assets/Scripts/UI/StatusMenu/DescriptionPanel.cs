@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DescriptionPanel : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class DescriptionPanel : MonoBehaviour
 
 
     [Header("Top")]
+    [SerializeField] private Image skillIcon;
     [SerializeField] private TextMeshProUGUI skillNameText;
     [SerializeField] private TextMeshProUGUI masterLevelHeaderText;
     [SerializeField] private TextMeshProUGUI summaryText;
@@ -33,6 +35,7 @@ public class DescriptionPanel : MonoBehaviour
         descriptionRow.SetActive(true);
 
         // 上部
+        skillIcon.sprite = def.icon;
         skillNameText.text = def.displayName;
         masterLevelHeaderText.text = $"[マスターレベル:{def.MaxLevel}]";
         summaryText.text = def.description;
