@@ -49285,6 +49285,7 @@ MonoBehaviour:
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
   teleportVfx: {fileID: 4416121855561363331, guid: 8deebf8c3bde24d4293d2352db8bf2f7, type: 3}
   teleportColor: {r: 0, g: 0.0081414, b: 0.6981132, a: 1}
+  levelUpVfx: {fileID: 7141587425839467445, guid: ea6d496c8631d7d488ad5feb8f5fa2de, type: 3}
 --- !u!1 &8789066206149023570
 GameObject:
   m_ObjectHideFlags: 0
