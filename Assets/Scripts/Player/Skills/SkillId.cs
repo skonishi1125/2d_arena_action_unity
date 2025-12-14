@@ -11,4 +11,7 @@ public enum SkillId
     Teleport = 4, // Z
     SwordBeam = 5, // D
     MagicBolt = 6,// V
+
+    // Passive
+    Lively = 11,
 }

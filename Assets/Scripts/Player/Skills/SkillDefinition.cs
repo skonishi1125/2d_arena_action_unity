@@ -1,5 +1,29 @@
 ﻿using UnityEngine;
 
+// パッシブスキル用
+public enum StatusParam
+{
+    MaxHp,
+    Attack,
+    Defense,
+    // 必要に応じて追加
+}
+public enum ModifyMode
+{
+    AddBonus,      // +10 など
+    AddMultiplier, // +0.1 (=+10%) など
+}
+
+[System.Serializable]
+public struct PassiveModifier
+{
+    public StatusParam param;
+    public ModifyMode mode;
+    public float value;// AddBonusなら10, AddMultiplierなら0.1など
+}
+
+// SLv1, SLv2...など
+// レベルごとのデータを記載する場所
 [System.Serializable]
 public class SkillLevelData
 {
@@ -18,6 +42,10 @@ public class SkillLevelData
     [Header("Description")]
     [TextArea]
     public string levelDescription;   // 「Lv1ならLv1の説明を書く
+
+    [Header("Passive")]
+    public bool isPassive = false;
+    public PassiveModifier[] passiveModifiers;
 }
 
 // どのスロットのスキルに該当するのか
@@ -28,6 +56,8 @@ public enum SkillSlot {
     V
 }
 
+// スキル全体の情報(名前, スロット)等を格納する場所
+// 上記で書いたスキルごとの性能は、配列としてlevels[]へ格納
 [CreateAssetMenu(menuName = "Game/Skill Definition", fileName = "SkillDefinition_")]
 public class SkillDefinition : ScriptableObject
 {

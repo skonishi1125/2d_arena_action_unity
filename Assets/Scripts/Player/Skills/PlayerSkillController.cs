@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour
 {
+    // パッシブ適用のために使う
+    private EntityStatus entityStatus;
+
     [Header("Skill States (Definition + Runtime)")]
     [SerializeField]
     private SkillRuntimeState[] skillStates;
@@ -13,7 +16,7 @@ public class PlayerSkillController : MonoBehaviour
         = new Dictionary<SkillId, SkillRuntimeState>();
 
     // Z,D,Vのスキル枠に何が入っているかの確認
-    // 
+    // equipped["Z"] = 3 みたいに、連想配列みたいなイメージで使える
     private readonly Dictionary<SkillSlot, SkillId> equipped = new();
 
 
@@ -38,6 +41,10 @@ public class PlayerSkillController : MonoBehaviour
 
             skillMap.Add(id, state);
         }
+
+        entityStatus = GetComponent<EntityStatus>();
+        if (!LogHelper.AssertNotNull(entityStatus, nameof(entityStatus), this))
+            return;
     }
 
     private void Update()
@@ -66,7 +73,7 @@ public class PlayerSkillController : MonoBehaviour
         // 該当した場合、equipped[Z] = Dash というような形で入る
         // ※同枠のスキルが来た時格納されてしまうが、LevelUp()で弾いている
         if (def.exclusiveInSlot)
-            equipped[def.slot] = id; 
+            equipped[def.slot] = id;
     }
 
     // ========= 基本取得まわり =========
@@ -141,14 +148,98 @@ public class PlayerSkillController : MonoBehaviour
         if (!CanLevelUp(id))
             return false;
 
+        int oldLevel = state.currentLevel;
         state.currentLevel++;
-        //Debug.Log($"Skill {id} leveled up to {state.currentLevel}");
+        int newLevel = state.currentLevel;
+
+        // パッシブ適用
+        ApplyPassiveDelta(state, oldLevel, newLevel);
 
         // 初回習得の場合、枠を確定
         if (state.currentLevel == 1 && state.definition.exclusiveInSlot)
             Equip(id);
 
         return true;
+    }
+
+    // パッシブで上昇するステータスの適用
+    // delta: 差分ということ
+    private void ApplyPassiveDelta(SkillRuntimeState state, int oldLevel, int newLevel)
+    {
+        if (entityStatus == null)
+            return;
+
+        var def = state.definition;
+        if (def == null)
+            return;
+
+        var newData = def.GetLevelData(newLevel);
+        if (newData == null || !newData.isPassive)
+            return; // アクティブスキルはここで弾く。
+
+        var oldData = def.GetLevelData(oldLevel);
+
+        // 差分の確認と適用
+        ApplyPassiveDeltaByModifiers(oldData, newData);
+    }
+
+    // スキルレベルアップ前後を比較して、差分を足す
+    // 10% -> 15%とそのまま上げていくと、25%とどんどん上がっていくので。
+    // ex) SLv1で10%, SLv2で15%なら、5%分引き上げる
+    private void ApplyPassiveDeltaByModifiers(SkillLevelData oldData, SkillLevelData newData)
+    {
+        if (entityStatus == null)
+            return;
+
+        if (newData == null || !newData.isPassive || newData.passiveModifiers == null)
+            return;
+
+        // newDataに書かれている modifier を基準に差分を計算して適用する
+        foreach (var mod in newData.passiveModifiers)
+        {
+            var status = GetStatusRef(mod.param);
+            if (status == null) continue;
+
+            float oldValue = FindTotalValue(oldData, mod.param, mod.mode);
+            float newValue = FindTotalValue(newData, mod.param, mod.mode);
+            float delta = newValue - oldValue;
+
+            if (Mathf.Approximately(delta, 0f))
+                continue;
+
+            if (mod.mode == ModifyMode.AddBonus)
+                status.AddBonus(delta);
+            else
+                status.AddMultiplier(delta);
+        }
+    }
+
+
+    // SkillDefinition側で定義する、
+    // 「何のパラメータを上げるのか」という情報を取ってくる
+    private static float FindTotalValue(SkillLevelData data, StatusParam param, ModifyMode mode)
+    {
+        if (data == null || !data.isPassive || data.passiveModifiers == null)
+            return 0f;
+
+        float sum = 0f;
+        foreach (var m in data.passiveModifiers)
+        {
+            if (m.param == param && m.mode == mode)
+                sum += m.value;
+        }
+        return sum;
+    }
+
+    private Status GetStatusRef(StatusParam param)
+    {
+        return param switch
+        {
+            StatusParam.MaxHp => entityStatus.maxHp,
+            StatusParam.Attack => entityStatus.attack,
+            StatusParam.Defense => entityStatus.defense,
+            _ => null
+        };
     }
 
     // ========= 使用可否 / クールダウン =========
