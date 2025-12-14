@@ -16,7 +16,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 
     [Header("Definition")]
-    [SerializeField] private SkillDefinition skillDefinition;  // このボタンが表すスキル
+    [SerializeField] public SkillDefinition skillDefinition;  // このボタンが表すスキル
     [SerializeField] private SkillId skillId;
 
     [Header("Description UI")]
@@ -217,6 +217,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // スキルロックの表示をイベント購読するためのメソッド
     private void HandleSpChanged(int sp) => RefreshLockVisual();
 
+
     public void RefreshLockVisual()
     {
         if (lockOverlay == null || playerLevel == null || playerSkill == null)
@@ -226,12 +227,16 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         bool locked = false;
 
-        if (lv <= 0)
+        // パッシブスキルはロックしない。
+        if (skillDefinition.slot != SkillSlot.None)
         {
-            if (playerLevel.SkillPoints < skillCost) // SP不足
-                locked = true;
-            else if (skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId)) // スロット重複
-                locked = true;
+            if (lv <= 0)
+            {
+                if (playerLevel.SkillPoints < skillCost) // SP不足
+                    locked = true;
+                else if (skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId)) // スロット重複
+                    locked = true;
+            }
         }
 
         lockOverlay.enabled = locked;

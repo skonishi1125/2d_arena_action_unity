@@ -87,11 +87,12 @@ public class SkillPanel : MonoBehaviour
         {
             if (button == null)
                 continue;
+            if (button.skillDefinition.exclusiveInSlot == false)
+                continue; // スロット占有フラグのないスキルは通す
             if (button.SkillId == exceptSkillId)
-                continue;
+                continue; // 既に格納されているスキルと同じIDだったら通す
             if (button.SlotKey != slotKey)
-                continue;
-
+                continue; // スロットの異なるスキルだったら通す
             if (button.GetCurrentLevel() > 0)
                 return true;
         }
