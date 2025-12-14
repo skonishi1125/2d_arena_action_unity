@@ -540,6 +540,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDamageMaterial: {fileID: 2100000, guid: fcb8dbf81218fa84384c638054b8d35a, type: 2}
   onDamageVfxDuration: 0.15
+  damageNumberVfx: {fileID: 2480261083496303989, guid: 12b40b6e273a2604eb2ad9a7a122b39a, type: 3}
+  damageNumberVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  critDamageNumberVfx: {fileID: 2480261083496303989, guid: 12b40b6e273a2604eb2ad9a7a122b39a, type: 3}
+  critDamageNumberVfxColor: {r: 1, g: 1, b: 1, a: 1}
   hitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
   hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   critHitVfx: {fileID: 7832193046710643133, guid: f66741c4120754443a79a6c368debcf6, type: 3}
@@ -562,8 +566,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   criticalRate: 1.5
+  defaultHitShape: 0
   targetCheck: {fileID: 1349324878854967236}
   targetCheckRadius: 0.5
+  targetCheckBoxSize: {x: 3, y: 1}
+  targetCheckBoxAngle: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128

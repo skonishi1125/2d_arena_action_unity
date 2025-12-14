@@ -137,10 +137,17 @@ public class EntityCombat : MonoBehaviour
 
             damagable.TakeDamage(ctx);
 
+
             if (isCritical)
+            {
                 entityVfx.CreateOnCritHitVfx(target.transform);
+                entityVfx.CreateOnCritDamageNumberVfx(target.transform, damage);
+            }
             else
+            {
                 entityVfx.CreateOnHitVfx(target.transform);
+                entityVfx.CreateOnDamageNumberVfx(target.transform, damage);
+            }
 
         }
     }

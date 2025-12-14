@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class EntityVFX : MonoBehaviour
@@ -12,27 +13,35 @@ public class EntityVFX : MonoBehaviour
     private Material originalMaterial;
     private Coroutine onDamageVfxCo;
 
-    // 共通 斬撃(などのダメージ)
-    [Header("Attack Hit VFX")]
-    [SerializeField] private GameObject hitVfx; // 斬撃Prefab
-    [SerializeField] private Color hitVfxColor = Color.white; // vfxの割当カラー
+    // ダメージ数値
+    [Header("Attack Damage Number Vfx")]
+    [SerializeField] private GameObject damageNumberVfx;
+    [SerializeField] private Color damageNumberVfxColor = Color.white;
 
-    // 共通 斬撃(などのダメージ) クリティカル
+    [Header("Attack CritDamage Number Vfx")]
+    [SerializeField] private GameObject critDamageNumberVfx;
+    [SerializeField] private Color critDamageNumberVfxColor = Color.white;
+
+    // 斬撃(などのダメージ)
+    [Header("Attack Hit VFX")]
+    [SerializeField] private GameObject hitVfx;
+    [SerializeField] private Color hitVfxColor = Color.white;
+    // 斬撃(などのダメージ) クリティカル
     [Header("Attack CritHit VFX")]
     [SerializeField] private GameObject critHitVfx;
     [SerializeField] private Color critHitColor = Color.white;
 
-    // 共通 射撃
+    // 射撃
     [Header("Projectile Hit VFX")]
     [SerializeField] private GameObject projectileHitVfx;
     [SerializeField] private Color projectileHitVfxColor = Color.white;
 
-    // 共通 射撃クリティカル
+    // 射撃クリティカル
     [Header("Projectile CritHit VFX")]
     [SerializeField] private GameObject projectileCritHitVfx;
     [SerializeField] private Color projectileCritHitColor = Color.white;
 
-    // 共通 Evasionでよけた時
+    // Evasionでよけた時
     [Header("Miss Hit VFX")]
     [SerializeField] private GameObject missHitVfx;
 
@@ -40,6 +49,20 @@ public class EntityVFX : MonoBehaviour
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         originalMaterial = sr.material;
+    }
+
+    public void CreateOnDamageNumberVfx(Transform target, float damage)
+    {
+        var go = Instantiate(damageNumberVfx, target.position, Quaternion.identity);
+        var vfx = go.GetComponent<DamageNumberVfx>();
+        vfx.Init(damage, damageNumberVfxColor);
+    }
+
+    public void CreateOnCritDamageNumberVfx(Transform target, float damage)
+    {
+        var go = Instantiate(critDamageNumberVfx, target.position, Quaternion.identity);
+        var vfx = go.GetComponent<DamageNumberVfx>();
+        vfx.Init(damage, critDamageNumberVfxColor);
     }
 
     // Player, Enemy 通常斬撃などのVFX

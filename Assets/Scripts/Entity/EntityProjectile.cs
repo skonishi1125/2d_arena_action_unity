@@ -205,9 +205,15 @@ public class EntityProjectile : MonoBehaviour
         if (hitVfx != null)
         {
             if (isCritical)
-                hitVfx.CreateOnProjectileHitVfx(target.transform);
-            else
+            {
                 hitVfx.CreateOnProjectileCritHitVfx(target.transform);
+                hitVfx.CreateOnCritDamageNumberVfx(target.transform, damage);
+            }
+            else
+            {
+                hitVfx.CreateOnProjectileHitVfx(target.transform);
+                hitVfx.CreateOnDamageNumberVfx(target.transform, damage);
+            }
         }
 
         if (!pierceTargets)
