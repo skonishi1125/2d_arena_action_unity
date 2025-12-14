@@ -21,6 +21,12 @@ public class SkillPanel : MonoBehaviour
 
     private SkillButton[] cachedButtons;
 
+    // 親のUIStatusMenuから実行してもらう
+    // PlayerLevelが渡されるので、以下を実行
+    // * 自身の持つスキルボタンの所持(chysicならそれを, magicならそれを。）
+    // * PlayerLevelのSP増減イベントの購読(SPの更新に必要。）
+    // * エラーテキストを空白に(disableとすると、表示したときにレイアウトがずれる)
+    // * スキルにlockのグレー枠を被せる
     public void Init(PlayerLevel level)
     {
         CacheButtons();
@@ -31,30 +37,62 @@ public class SkillPanel : MonoBehaviour
 
         errorText.text = " ";
 
-        // ロックImageの表示
         RefreshAllLockVisuals();
     }
 
+    // xxxRowの持つ全スキルボタンの取得（Inactiveも含めるためtrue）
     private void CacheButtons()
     {
-        // SkillPanel配下の全ボタンをキャッシュ（Inactiveも含めたい場合 true）
         cachedButtons = GetComponentsInChildren<SkillButton>(true);
     }
 
-    // 「同じスロットに別スキルが既に取得済みか」を判定
-    public bool IsSlotOccupied(string slotKey, SkillId exceptSkillId)
+    // スキルポイント増減イベントへの購読
+    // パネルにcurrent SPを表示する場所があるので、それを動的に更新するために必要
+    private void BindLevel(PlayerLevel newLevel)
+    {
+        if (level != null)
+            level.OnSkillPointsChanged -= HandleSkillPointsChanged;
+
+        level = newLevel;
+
+        if (level != null)
+        {
+            level.OnSkillPointsChanged += HandleSkillPointsChanged;
+
+            // 初回更新（イベント待ちだと初回が更新されないため）
+            HandleSkillPointsChanged(level.SkillPoints);
+        }
+    }
+
+    // 各ボタンでlockOverrayを表示させるかどうかの判断をする
+    public void RefreshAllLockVisuals()
     {
         if (cachedButtons == null || cachedButtons.Length == 0)
             CacheButtons();
 
         foreach (var b in cachedButtons)
-        {
-            if (b == null) continue;
-            if (b.SkillId == exceptSkillId) continue;
-            if (b.SlotKey != slotKey) continue;
+            b?.RefreshLockVisual();
+    }
 
-            // Lv>0なら「取得済み」とみなす
-            if (b.GetCurrentLevel() > 0)
+    // 同じスロットに別スキルが既に取得済みかどうかを返す
+    // スキルクリック時にこのメソッドで判断する
+    public bool IsSlotOccupied(string slotKey, SkillId exceptSkillId)
+    {
+        if (cachedButtons == null || cachedButtons.Length == 0)
+            CacheButtons();
+
+        // 各ボタンで、IDを持っているか、スロットに値があるか
+        // レベルが1以上かどうかを確認
+        foreach (var button in cachedButtons)
+        {
+            if (button == null)
+                continue;
+            if (button.SkillId == exceptSkillId)
+                continue;
+            if (button.SlotKey != slotKey)
+                continue;
+
+            if (button.GetCurrentLevel() > 0)
                 return true;
         }
 
@@ -92,22 +130,7 @@ public class SkillPanel : MonoBehaviour
             });
     }
 
-
-    private void BindLevel(PlayerLevel newLevel)
-    {
-        if (level != null)
-            level.OnSkillPointsChanged -= HandleSkillPointsChanged;
-
-        level = newLevel;
-
-        if (level != null)
-        {
-            level.OnSkillPointsChanged += HandleSkillPointsChanged;
-
-            // 初期表示（イベント待ちだと初回が更新されないため）
-            HandleSkillPointsChanged(level.SkillPoints);
-        }
-    }
+    // パネルに出す現在所持中のSP表示を管理する
     private void HandleSkillPointsChanged(int sp)
     {
         if (spValueText == null)
@@ -117,14 +140,7 @@ public class SkillPanel : MonoBehaviour
         spValueText.color = (sp <= 0) ? spZeroColor : spPositiveColor;
     }
 
-    public void RefreshAllLockVisuals()
-    {
-        if (cachedButtons == null || cachedButtons.Length == 0)
-            CacheButtons();
 
-        foreach (var b in cachedButtons)
-            b?.RefreshLockVisual();
-    }
 
     private void OnDestroy()
     {

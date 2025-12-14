@@ -77,6 +77,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (skillPanel == null)
             skillPanel = GetComponentInParent<SkillPanel>();
 
+        // SP増減イベントの購読
         playerLevel.OnSkillPointsChanged += HandleSpChanged;
 
     }
@@ -93,7 +94,6 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         UpdateCooldownMask();
     }
 
-    private void HandleSpChanged(int sp) => RefreshLockVisual();
 
     // スキル使用後、暗い表記から回復していく描写
     private void UpdateCooldownMask()
@@ -174,7 +174,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         int currentLv = GetCurrentLevel();
 
-        // 「未取得」かつ「同スロットに別スキル取得済み」なら弾く
+        // 「未取得」かつ「同スロットに別スキル取得済み」の場合
         if (currentLv <= 0 && skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId))
         {
             skillPanel.ShowError(SkillUpgradeFailReason.SlotAlreadyOccupied);
@@ -188,9 +188,10 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             return;
         }
 
-        // レベルアップ成功時
+        // 問題なければスキルレベルアップ処理。
         if (playerSkill.LevelUp(skillId))
         {
+            // スキルポイント減算処理
             playerLevel.TrySpendSkillPoints(skillCost);
             UpdateView();
 
@@ -213,6 +214,9 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         return playerSkill.GetLevel(skillId);
     }
 
+    // スキルロックの表示をイベント購読するためのメソッド
+    private void HandleSpChanged(int sp) => RefreshLockVisual();
+
     public void RefreshLockVisual()
     {
         if (lockOverlay == null || playerLevel == null || playerSkill == null)
@@ -229,8 +233,6 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             else if (skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId)) // スロット重複
                 locked = true;
         }
-
-        Debug.Log(locked);
 
         lockOverlay.enabled = locked;
     }

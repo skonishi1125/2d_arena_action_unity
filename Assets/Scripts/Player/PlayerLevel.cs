@@ -34,7 +34,8 @@ public class PlayerLevel : MonoBehaviour
     // currentExp, reuiredExp, StatusMenuの更新など
     public event Action<int, int> OnExpChanged;
 
-    // UI更新
+    // スキルポイント増減のイベント
+    // UIStatusMenuのSkillPanel, SkillButtonをグレーにするなど
     public event Action<int> OnSkillPointsChanged;
 
     private void Awake()
