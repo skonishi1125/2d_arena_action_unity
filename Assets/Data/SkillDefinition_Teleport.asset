@@ -15,9 +15,10 @@ MonoBehaviour:
   id: 4
   displayName: Teleport
   description: "Z\u30AD\u30FC\u3067\u9032\u884C\u65B9\u5411\u306B\u30C6\u30EC\u30DD\u30FC\u30C8\u304C\u53EF\u80FD\u3068\u306A\u308B\u3002"
-  icon: {fileID: 2404529227273236743, guid: cde3f56d2f3724c4d84efd6d4362493a, type: 3}
+  icon: {fileID: 1981856397, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 1
   exclusiveInSlot: 1
+  projectilePrefab: {fileID: 0}
   levels:
   - level: 1
     damageMultiplier: 0

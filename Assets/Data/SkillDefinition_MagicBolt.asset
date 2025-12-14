@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 6
   displayName: Magic Bolt
   description: "\u6575\u306B\u5411\u304B\u3063\u3066\u9B54\u529B\u5F3E\u3092\u5C04\u51FA\u3059\u308B\u3002"
-  icon: {fileID: 6809142818896889251, guid: cde3f56d2f3724c4d84efd6d4362493a, type: 3}
+  icon: {fileID: 847282687, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 3
   exclusiveInSlot: 1
   projectilePrefab: {fileID: 3909016599546878838, guid: 5f984f78103e7c84b8fd2228e89ebc5f, type: 3}

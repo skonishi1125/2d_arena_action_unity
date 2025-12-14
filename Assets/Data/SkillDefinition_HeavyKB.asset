@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2
   displayName: Heavy KB
   description: "D\u30AD\u30FC\u3067\u5263\u3092\u632F\u308A\u6255\u3044\u6575\u3092\u5439\u304D\u98DB\u3070\u3059\u3002\nSLv\u304C\u9AD8\u3044\u307B\u3069\u5439\u3063\u98DB\u3073\u7387\u304C\u4E0A\u6607\u3002"
-  icon: {fileID: 3934082604808941605, guid: f45050a198a31ec4b84aea282d4feeec, type: 3}
+  icon: {fileID: 1469954616, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 2
   exclusiveInSlot: 1
   projectilePrefab: {fileID: 0}
