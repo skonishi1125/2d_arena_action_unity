@@ -31,6 +31,15 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private bool canLevelUpOnClick = true;// クリックでレベルアップするか
     [SerializeField] private bool showDescriptionOnHover = true; // ホバーで説明を出すか
 
+    [SerializeField] private SkillPanel skillPanel;
+    public enum SkillUpgradeFailReason
+    {
+        NotEnoughSkillPoints,
+        SlotAlreadyOccupied,
+    }
+
+    public SkillId SkillId => skillId;
+    public string SlotKey => keyLabel;
 
 
     protected virtual void Awake()
@@ -56,6 +65,9 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // キーテキストは一度固定で設定
         if (keyText != null)
             keyText.text = keyLabel; // 例: "Z", "D", "V" など
+
+        if (skillPanel == null)
+            skillPanel = GetComponentInParent<SkillPanel>();
 
     }
     private void Start()
@@ -124,27 +136,43 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // ゲーム中に出ているスキルアイコンなどはfalseとすることで、
-        // クリックしてもレベルアップ処理が働かないようにしておく。
-        // (-> 現在別々で運用しているので、この考慮は不要になった)
         if (!canLevelUpOnClick)
             return;
 
-        if (playerLevel.SkillPoints < skillCost)
-            return;
+        int currentLv = GetCurrentLevel();
 
-        // スキルのレベルを上げた時
+        // 「未取得」かつ「同スロットに別スキル取得済み」なら弾く
+        if (currentLv <= 0 && skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId))
+        {
+            skillPanel.ShowError(SkillUpgradeFailReason.SlotAlreadyOccupied);
+            return;
+        }
+
+        // SP不足
+        if (playerLevel.SkillPoints < skillCost)
+        {
+            skillPanel?.ShowError(SkillUpgradeFailReason.NotEnoughSkillPoints);
+            return;
+        }
+
+        // レベルアップ成功時
         if (playerSkill.LevelUp(skillId))
         {
             playerLevel.TrySpendSkillPoints(skillCost);
             UpdateView();
 
-            // パネル表示中なら、説明も更新
             if (descriptionPanel != null && skillDefinition != null)
             {
                 int lv = playerSkill.GetLevel(skillId);
                 descriptionPanel.Show(skillDefinition, lv);
             }
         }
+    }
+
+    // SkillPanelが参照するための現在Lv取得口
+    public int GetCurrentLevel()
+    {
+        if (playerSkill == null) return 0;
+        return playerSkill.GetLevel(skillId);
     }
 }
