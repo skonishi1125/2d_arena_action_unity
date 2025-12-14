@@ -16,8 +16,8 @@ MonoBehaviour:
   startDelay: 1
   enemyGroups:
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 3
+    spawnCount: 20
     spawnInterval: 0.5
-  clearType: 1
-  surviveDuration: 0
+  clearType: 0
+  surviveDuration: 20
   isBossWave: 0

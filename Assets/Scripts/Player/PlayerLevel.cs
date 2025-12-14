@@ -7,7 +7,7 @@ public class PlayerLevel : MonoBehaviour
     private PlayerHealth playerHealth;
 
     [SerializeField] private PlayerLevelTable levelTable;
-    public int SkillPoints {  get; private set; }
+    public int SkillPoints { get; private set; }
 
     public int Level { get; private set; } = 1;
     public int CurrentExp { get; private set; }

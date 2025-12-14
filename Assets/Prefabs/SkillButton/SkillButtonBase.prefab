@@ -483,7 +483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd4523a643dd224085bb4299b892e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSkill: {fileID: 0}
   skillDefinition: {fileID: 0}
   skillId: 0
   descriptionPanel: {fileID: 0}
@@ -493,3 +492,4 @@ MonoBehaviour:
   keyLabel: 
   canLevelUpOnClick: 1
   showDescriptionOnHover: 1
+  skillPanel: {fileID: 0}

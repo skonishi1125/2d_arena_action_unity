@@ -22,7 +22,7 @@ MonoBehaviour:
   levels:
   - level: 1
     damageMultiplier: 1
-    knockbackPower: {x: 0, y: 15}
+    knockbackPower: {x: 5, y: 15}
     knockbackDuration: 0.5
     cooldownTime: 1
     manaCost: 0

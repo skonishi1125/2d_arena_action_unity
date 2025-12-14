@@ -30,6 +30,9 @@ public class SkillPanel : MonoBehaviour
             return;
 
         errorText.text = " ";
+
+        // ロックImageの表示
+        RefreshAllLockVisuals();
     }
 
     private void CacheButtons()
@@ -112,6 +115,15 @@ public class SkillPanel : MonoBehaviour
 
         spValueText.text = sp.ToString();
         spValueText.color = (sp <= 0) ? spZeroColor : spPositiveColor;
+    }
+
+    public void RefreshAllLockVisuals()
+    {
+        if (cachedButtons == null || cachedButtons.Length == 0)
+            CacheButtons();
+
+        foreach (var b in cachedButtons)
+            b?.RefreshLockVisual();
     }
 
     private void OnDestroy()
