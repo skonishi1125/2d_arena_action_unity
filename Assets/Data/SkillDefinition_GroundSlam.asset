@@ -22,22 +22,28 @@ MonoBehaviour:
   levels:
   - level: 1
     damageMultiplier: 1
-    knockbackPower: {x: 5, y: 15}
+    knockbackPower: {x: 10, y: 20}
     knockbackDuration: 0.5
     cooldownTime: 1
     manaCost: 0
     levelDescription: "\u5A01\u529B100%\u306E\u30C0\u30E1\u30FC\u30B8\u3067\u5468\u56F2\u3092\u653B\u6483\u3002"
+    isPassive: 0
+    passiveModifiers: []
   - level: 1
     damageMultiplier: 1.5
-    knockbackPower: {x: 0, y: 20}
+    knockbackPower: {x: 10, y: 20}
     knockbackDuration: 0.5
     cooldownTime: 1
     manaCost: 0
     levelDescription: "\u5A01\u529B150%\u306E\u30C0\u30E1\u30FC\u30B8\u3067\u5468\u56F2\u3092\u653B\u6483\u3002"
+    isPassive: 0
+    passiveModifiers: []
   - level: 1
     damageMultiplier: 1.5
-    knockbackPower: {x: 0, y: 25}
+    knockbackPower: {x: 10, y: 20}
     knockbackDuration: 0.5
     cooldownTime: 1
     manaCost: 0
     levelDescription: "\u5A01\u529B200%\u306E\u30C0\u30E1\u30FC\u30B8\u3067\u5468\u56F2\u3092\u653B\u6483\u3002"
+    isPassive: 0
+    passiveModifiers: []

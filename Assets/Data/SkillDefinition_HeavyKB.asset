@@ -14,30 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   displayName: Heavy KB
-  description: "D\u30AD\u30FC\u3067\u5263\u3092\u632F\u308A\u6255\u3044\u6575\u3092\u5439\u304D\u98DB\u3070\u3059\u3002\nSLv\u304C\u9AD8\u3044\u307B\u3069\u5439\u3063\u98DB\u3073\u7387\u304C\u4E0A\u6607\u3002"
+  description: "D\u30AD\u30FC\u3067\u76EE\u306E\u524D\u306E\u6575\u3092\u5439\u304D\u98DB\u3070\u3059\u3002\nSLv\u304C\u9AD8\u3044\u307B\u3069\u5A01\u529B\u3068\u5439\u3063\u98DB\u3070\u3057\u304C\u4E0A\u6607\u3002"
   icon: {fileID: 1469954616, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 2
   exclusiveInSlot: 1
   projectilePrefab: {fileID: 0}
   levels:
   - level: 1
-    damageMultiplier: 1
-    knockbackPower: {x: 10, y: 3}
+    damageMultiplier: 2
+    knockbackPower: {x: 10, y: 5}
     knockbackDuration: 0.3
     cooldownTime: 1
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B100%\u306E\u30C0\u30E1\u30FC\u30B8\u3002\n"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B200%\u306E\u30C0\u30E1\u30FC\u30B8\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B
+      15"
+    isPassive: 0
+    passiveModifiers: []
   - level: 2
-    damageMultiplier: 1.5
-    knockbackPower: {x: 15, y: 3}
+    damageMultiplier: 4
+    knockbackPower: {x: 20, y: 10}
     knockbackDuration: 0.4
     cooldownTime: 1
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B150%\u306E\u30C0\u30E1\u30FC\u30B8\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B400%\u306E\u30C0\u30E1\u30FC\u30B8\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B:
+      30"
+    isPassive: 0
+    passiveModifiers: []
   - level: 3
-    damageMultiplier: 2
-    knockbackPower: {x: 20, y: 3}
-    knockbackDuration: 0.5
+    damageMultiplier: 6
+    knockbackPower: {x: 30, y: 15}
+    knockbackDuration: 1
     cooldownTime: 1
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B200%\u306E\u30C0\u30E1\u30FC\u30B8\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B600%\u306E\u30C0\u30E1\u30FC\u30B8\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B:
+      45"
+    isPassive: 0
+    passiveModifiers: []
