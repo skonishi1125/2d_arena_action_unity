@@ -41,8 +41,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        CacheSceneObjects();
         InitGameForCurrentScene();
+        if (!IsBattleScene())
+            return;
+
+        // BattleSceneなら、Player等の情報を保持するようにする
+        CacheSceneObjects();
     }
 
     private void OnEnable()
@@ -99,9 +103,12 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        InitGameForCurrentScene();
+        if (!IsBattleScene())
+            return;
+
         // Player等を取り直す
         CacheSceneObjects();
-        InitGameForCurrentScene();
     }
 
     private void InitGameForCurrentScene()
@@ -112,11 +119,17 @@ public class GameManager : MonoBehaviour
 
         // Battle シーンではロード後すぐにゲームを開始
         // 後でReadyを実装したとき、いろいろ挟むようにすればOK
-        var scene = SceneManager.GetActiveScene();
-        if (scene.name == "BattleEasy")
+        if (IsBattleScene())
         {
+            CacheSceneObjects();
             StartGame();
         }
+    }
+
+    private bool IsBattleScene()
+    {
+        var name = SceneManager.GetActiveScene().name;
+        return name.StartsWith("Battle"); // 例：BattleEasy / BattleNormal / BattleHard
     }
 
     private void HandleLevelUp(int newLevel)
@@ -150,6 +163,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         State = GameState.WaveIntro;
+        Debug.Log(WaveIntroUi);
         WaveIntroUi.Play();
     }
 
