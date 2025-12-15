@@ -58,7 +58,6 @@ public class EnemyHealth : EntityHealth
             return;
 
         var attacker = ctx.attacker;
-        Debug.Log(attacker);
 
         if (attacker.GetComponent<Player>() != null)
             enemy.TryEnterBattleState(attacker);

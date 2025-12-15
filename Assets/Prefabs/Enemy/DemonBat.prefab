@@ -362,9 +362,9 @@ Transform:
   m_GameObject: {fileID: 6193397719667879029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3657697013976701651}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -729,7 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
-  groundCheckDistance: 1
+  groundCheckDistance: 5
   wallCheckDistance: 1.2
   whatIsGround:
     serializedVersion: 2
@@ -738,7 +738,7 @@ MonoBehaviour:
   wallCheck: {fileID: 7894264287360057576}
   isBoss: 0
   battleMoveSpeed: 8
-  attackDistance: 2
+  attackDistance: 1.5
   destroyWaitTime: 1
   attackVerticalRange: 5
   verticalOutOfRangeTime: 3
@@ -798,7 +798,7 @@ MonoBehaviour:
   criticalRate: 1.5
   defaultHitShape: 0
   targetCheck: {fileID: 856451615427118118}
-  targetCheckRadius: 0.5
+  targetCheckRadius: 1
   targetCheckBoxSize: {x: 3, y: 1}
   targetCheckBoxAngle: 0
   whatIsTarget:

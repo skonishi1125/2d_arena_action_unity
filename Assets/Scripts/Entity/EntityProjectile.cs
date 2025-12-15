@@ -203,7 +203,9 @@ public class EntityProjectile : MonoBehaviour
 
         var ctx = new DamageContext
         {
-            attacker = transform,
+            // 弾の保持者をownerとすることで、
+            // MagicBoltなどで殴ったとき、PlayerにめがけてBattleStateに入るようにする。
+            attacker = owner.transform,
             damage = damage,
             hasCustomKnockback = HasCustomKnockback,
             knockbackPower = CurrentKnockbackPower,
