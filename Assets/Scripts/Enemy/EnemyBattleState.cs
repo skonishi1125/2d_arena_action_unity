@@ -61,7 +61,6 @@ public class EnemyBattleState : EnemyState
         }
     }
 
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
