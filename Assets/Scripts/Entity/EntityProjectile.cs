@@ -38,6 +38,9 @@ public class EntityProjectile : MonoBehaviour
     private bool pierceGround;
     private bool pierceTargets;
 
+    private EntityStatus ownerStatus;
+    private EntityVFX ownerVfx;
+
     public bool HasCustomKnockback => useCustomKnockback;
     public Vector2 CurrentKnockbackPower => currentKnockbackPower;
     public float CurrentKnockbackDuration => currentKnockbackDuration;
@@ -99,6 +102,16 @@ public class EntityProjectile : MonoBehaviour
         this.shootDir = shootDir;
         this.speed = speed;
         this.owner = owner;
+
+        // 弾生成時に、Spawnerから渡される情報でownerの情報を埋める
+        ownerVfx = owner.GetComponent<EntityVFX>();
+        if (!LogHelper.AssertNotNull(ownerVfx, nameof(ownerVfx), this))
+            return;
+
+        ownerStatus = owner.GetComponent<EntityStatus>();
+        if (!LogHelper.AssertNotNull(ownerStatus, nameof(ownerStatus), this))
+            return;
+
         timer = lifeTime;
     }
 
@@ -140,7 +153,6 @@ public class EntityProjectile : MonoBehaviour
         if (damagable == null)
             return;
 
-        var ownerStatus = owner.GetComponent<EntityStatus>();
         var targetStatus = target.GetComponent<EntityStatus>();
 
         // 3) 回避判定
@@ -159,25 +171,25 @@ public class EntityProjectile : MonoBehaviour
         // 4) ownerStatusが無い場合のフォールバック
         // 現状未使用だが、
         // 万が一ステータスが無い弾（トラップなど）の場合は固定ダメージ
-        if (ownerStatus == null)
-        {
-            var defaultCtx = new DamageContext
-            {
-                attacker = transform,
-                damage = 5f,
-                hasCustomKnockback = HasCustomKnockback,
-                knockbackPower = CurrentKnockbackPower,
-                knockbackDuration = CurrentKnockbackDuration,
-                source = this
-            };
+        //if (ownerStatus == null)
+        //{
+        //    var defaultCtx = new DamageContext
+        //    {
+        //        attacker = transform,
+        //        damage = 5f,
+        //        hasCustomKnockback = HasCustomKnockback,
+        //        knockbackPower = CurrentKnockbackPower,
+        //        knockbackDuration = CurrentKnockbackDuration,
+        //        source = this
+        //    };
 
-            damagable.TakeDamage(defaultCtx);
+        //    damagable.TakeDamage(defaultCtx);
 
-            if (!pierceTargets)
-                Destroy(gameObject);
+        //    if (!pierceTargets)
+        //        Destroy(gameObject);
 
-            return;
-        }
+        //    return;
+        //}
 
         // 5) 通常ダメージ処理
         bool isCritical;
@@ -201,19 +213,16 @@ public class EntityProjectile : MonoBehaviour
 
         damagable.TakeDamage(ctx);
 
-        var hitVfx = owner.GetComponent<EntityVFX>();
-        if (hitVfx != null)
+
+        if (isCritical)
         {
-            if (isCritical)
-            {
-                hitVfx.CreateOnProjectileCritHitVfx(target.transform);
-                hitVfx.CreateOnCritDamageNumberVfx(target.transform, damage);
-            }
-            else
-            {
-                hitVfx.CreateOnProjectileHitVfx(target.transform);
-                hitVfx.CreateOnDamageNumberVfx(target.transform, damage);
-            }
+            ownerVfx.CreateOnProjectileCritHitVfx(target.transform);
+            ownerVfx.CreateOnCritDamageNumberVfx(target.transform, damage);
+        }
+        else
+        {
+            ownerVfx.CreateOnProjectileHitVfx(target.transform);
+            ownerVfx.CreateOnDamageNumberVfx(target.transform, damage);
         }
 
         if (!pierceTargets)
