@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class UITitleMenu : MonoBehaviour
@@ -7,9 +8,27 @@ public class UITitleMenu : MonoBehaviour
     [SerializeField] private GameObject dimmer;
     [SerializeField] private GameObject difficultyModal;
     [SerializeField] private GameObject quitConfirmModal;
+
+    // キーボード入力するときの、初期選択の指定
+    [Header("Selection")]
+    [SerializeField] private GameObject firstSelectedOnTitle;
+
     private void Awake()
     {
         HideAllModals();
+    }
+
+    private void Start()
+    {
+        Select(firstSelectedOnTitle);
+    }
+
+    private void Select(GameObject go)
+    {
+        if (go == null || EventSystem.current == null)
+            return;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(go);
     }
 
     public void OnClickPlay()
