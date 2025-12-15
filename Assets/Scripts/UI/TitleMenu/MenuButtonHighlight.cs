@@ -14,7 +14,7 @@ public class MenuButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandl
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = Color.yellow;
 
-    private bool _selected;
+    private bool isSelected;
 
     private void Awake()
     {
@@ -22,13 +22,13 @@ public class MenuButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandl
     }
     public void OnSelect(BaseEventData eventData)
     {
-        _selected = true;
+        isSelected = true;
         Apply(true);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        _selected = false;
+        isSelected = false;
         Apply(false);
     }
 
@@ -39,7 +39,7 @@ public class MenuButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Apply(_selected);
+        Apply(isSelected);
     }
 
     private void Apply(bool highlight)
