@@ -1,20 +1,22 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TMPro;
 
 public class MenuButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandler,
     IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Targets")]
-    [SerializeField] private Image frame;     // 枠 or 背景
-    [SerializeField] private TMP_Text label;  // テキスト
+    [SerializeField] private Image frame; // 枠 or 背景
+    [SerializeField] private TMP_Text label; // テキスト
 
     [Header("Colors")]
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = Color.yellow;
 
     private bool isSelected;
+
+    // 選択、決定のSEは UITitleMenu に任せた
 
     private void Awake()
     {
@@ -42,6 +44,7 @@ public class MenuButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandl
         Apply(isSelected);
     }
 
+    // 選ばれたときボタンフレーム、テキストの色を変える
     private void Apply(bool highlight)
     {
         if (frame != null) frame.color = highlight ? selectedColor : normalColor;

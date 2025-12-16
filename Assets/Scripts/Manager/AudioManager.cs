@@ -29,20 +29,27 @@ public class AudioManager : MonoBehaviour
 
     public void PlayUI(AudioClip clip)
     {
-        if (clip == null || uiSource == null) return;
+        if (clip == null || uiSource == null)
+            return;
+
         uiSource.PlayOneShot(clip, master * ui);
     }
 
     public void PlaySfx(AudioClip clip, float volume = 1f)
     {
-        if (clip == null || sfxSource == null) return;
+        if (clip == null || sfxSource == null)
+            return;
+
         sfxSource.PlayOneShot(clip, master * sfx * Mathf.Clamp01(volume));
     }
 
     public void PlayBgm(AudioClip clip, bool loop = true)
     {
-        if (clip == null || bgmSource == null) return;
-        if (bgmSource.clip == clip && bgmSource.isPlaying) return;
+        if (clip == null || bgmSource == null)
+            return;
+
+        if (bgmSource.clip == clip && bgmSource.isPlaying)
+            return;
 
         bgmSource.loop = loop;
         bgmSource.clip = clip;
@@ -52,7 +59,9 @@ public class AudioManager : MonoBehaviour
 
     public void StopBgm()
     {
-        if (bgmSource == null) return;
+        if (bgmSource == null)
+            return;
+
         bgmSource.Stop();
         bgmSource.clip = null;
     }

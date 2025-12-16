@@ -16,74 +16,94 @@ public class UITitleMenu : MonoBehaviour
     [SerializeField] private GameObject firstSelectedOnQuitConfirm;
 
     [Header("UI Sounds")]
-    [SerializeField] private AudioClip selectClip;
-    [SerializeField] private AudioClip submitClip;
+    [SerializeField] private AudioClip selectClip; // 操作SE
+    [SerializeField] private AudioClip submitClip; // 決定SE
 
-    private GameObject _lastSelected;
-    private bool _suppressNextSelectSfx;
-
+    private GameObject lastSelectedObject; // 直近で選ばれた選択肢
+    private bool suppressNextSelectSfx;
 
     private void Awake()
     {
         HideAllModals();
     }
 
+    private void HideAllModals()
+    {
+        dimmer.SetActive(false);
+        difficultyModal.SetActive(false);
+        quitConfirmModal.SetActive(false);
+    }
+
     private void Start()
     {
-        Focus(firstSelectedOnTitle, playSelectSfx: false); // 初期選択は鳴らさない
+        // ゲーム開始時の初期選択
+        Focus(firstSelectedOnTitle, false); 
     }
 
     private void Update()
     {
+        // EventSystemから選択中のObjectを監視しておく
         var es = EventSystem.current;
-        if (es == null) return;
+        if (es == null)
+            return;
 
         var current = es.currentSelectedGameObject;
-        if (current == null || current == _lastSelected) return;
+        if (current == null || current == lastSelectedObject)
+            return;
 
-        if (!_suppressNextSelectSfx)
-        {
+        // 抑止フラグがfalseなら鳴らす。
+        if (!suppressNextSelectSfx)
             AudioManager.Instance?.PlayUI(selectClip);
-        }
 
-        _suppressNextSelectSfx = false;
-        _lastSelected = current;
+        // 初期選択以外は鳴らすので、固定でfalse
+        suppressNextSelectSfx = false;
+        lastSelectedObject = current;
     }
 
+    // 引数で渡したGameObjectを初期選択状態とする
+    // (ゲーム開始時のPlay, 難易度選択のTutorialなど）
+    // boolの値で音を鳴らすか、鳴らさないかを指定できる
+    // （デフォルトで指定されるボタンで、音が鳴らないようにするため。）
     private void Focus(GameObject target, bool playSelectSfx)
     {
-        if (target == null || EventSystem.current == null) return;
+        if (target == null || EventSystem.current == null)
+            return;
 
-        _suppressNextSelectSfx = !playSelectSfx;
-        _lastSelected = target;
+        // Update()側でボタン変更時に音を鳴らすように監視している
+        // Focusで選択させたときも同様に検知してSEをが鳴る。
+        // falseを指定したとき（鳴らさない）、抑止フラグをtrueとして立てる
+        // trueのとき（鳴らすとき）、抑止フラグはfalseとしておけばよい
+        suppressNextSelectSfx = !playSelectSfx;
+        lastSelectedObject = target;
 
+        // 念のためクリアしてから改めてセットしておく
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(target);
     }
 
+    // ========= UIのボタン関連 ========= 
 
     public void OnClickPlay()
     {
         AudioManager.Instance?.PlayUI(submitClip);
         ShowModal(difficultyModal);
-        Focus(firstSelectedOnDifficulty, playSelectSfx: false);
+        Focus(firstSelectedOnDifficulty, false);
     }
 
     public void OnClickQuit()
     {
         AudioManager.Instance?.PlayUI(submitClip);
         ShowModal(quitConfirmModal);
-        Focus(firstSelectedOnQuitConfirm, playSelectSfx: false);
+        Focus(firstSelectedOnQuitConfirm, false);
     }
 
     public void OnClickCloseModal()
     {
         AudioManager.Instance?.PlayUI(submitClip);
         HideAllModals();
-        Focus(firstSelectedOnTitle, playSelectSfx: false);
+        Focus(firstSelectedOnTitle, false);
     }
 
-    // Difficulty buttons
     public void OnChooseTutorial()
     {
         AudioManager.Instance?.PlayUI(submitClip);
@@ -107,24 +127,23 @@ public class UITitleMenu : MonoBehaviour
         LoadBattle("BattleHard");
     }
 
-    // Quit confirm
+    private void LoadBattle(string sceneName)
+    {
+        HideAllModals();
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void OnQuitYes()
     {
         Application.Quit();
         #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 
     public void OnQuitNo()
     {
         HideAllModals();
-    }
-
-    private void LoadBattle(string sceneName)
-    {
-        HideAllModals();
-        SceneManager.LoadScene(sceneName);
     }
 
     private void ShowModal(GameObject modal)
@@ -134,12 +153,7 @@ public class UITitleMenu : MonoBehaviour
         quitConfirmModal.SetActive(modal == quitConfirmModal);
     }
 
-    private void HideAllModals()
-    {
-        dimmer.SetActive(false);
-        difficultyModal.SetActive(false);
-        quitConfirmModal.SetActive(false);
-    }
+
 
 
 }
