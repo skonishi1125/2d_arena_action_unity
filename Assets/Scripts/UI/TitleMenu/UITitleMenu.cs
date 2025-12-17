@@ -3,9 +3,33 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using System.Collections;
+using DG.Tweening;
+using UnityEngine.UI;
+
 
 public class UITitleMenu : MonoBehaviour
 {
+    [Header("Intro Animation (DOTween)")]
+    [SerializeField] private RectTransform titleTextRect;
+    [SerializeField] private CanvasGroup titleTextCanvasGroup;
+
+    [SerializeField] private CanvasGroup pressEnterCanvasGroup;
+
+    [SerializeField] private Vector2 titleStartOffset = new Vector2(0f, 40f);
+    [SerializeField] private float titleFadeDuration = 0.6f;
+    [SerializeField] private float titleMoveDuration = 0.6f;
+
+    [SerializeField] private float pressBlinkDuration = 0.6f;
+    [SerializeField, Range(0f, 1f)] private float pressBlinkMinAlpha = 0.25f;
+
+    private Vector2 _titleBasePos;
+    private Tween _pressBlinkTween;
+
+    // PRESS ENTER
+    [SerializeField] private GameObject pressEnterRoot;
+    [SerializeField] private GameObject mainMenuRoot;
+
     [Header("Overlays")]
     [SerializeField] private GameObject dimmer;
     [SerializeField] private GameObject dimmerMessage;
@@ -25,7 +49,10 @@ public class UITitleMenu : MonoBehaviour
     private GameObject lastSelectedObject; // 直近で選ばれた選択肢
     private bool suppressNextSelectSfx;
 
+    private InputAction _submitAction; // press to enter用
     private InputAction _cancelAction;
+
+    private bool _isPressEnterPhase = true;
 
     private void Awake()
     {
@@ -42,8 +69,56 @@ public class UITitleMenu : MonoBehaviour
 
     private void Start()
     {
-        // ゲーム開始時の初期選択
-        Focus(firstSelectedOnTitle, false); 
+        HideAllModals();
+
+        pressEnterRoot.SetActive(true);
+        mainMenuRoot.SetActive(false);
+
+        // PressEnter待ち中は「選択なし」にしておく
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        lastSelectedObject = null;
+        _isPressEnterPhase = true;
+
+
+        // 開始時にタイトルを出す。(DOTween)
+        PlayIntro();
+
+    }
+
+    private void PlayIntro()
+    {
+        // タイトル：初期位置を記録
+        if (titleTextRect != null)
+            _titleBasePos = titleTextRect.anchoredPosition;
+
+        // タイトル：上から少し下がりつつフェードイン
+        if (titleTextCanvasGroup != null)
+            titleTextCanvasGroup.alpha = 0f;
+
+        if (titleTextRect != null)
+            titleTextRect.anchoredPosition = _titleBasePos + titleStartOffset;
+
+        var seq = DOTween.Sequence();
+
+        if (titleTextCanvasGroup != null)
+            seq.Join(titleTextCanvasGroup.DOFade(1f, titleFadeDuration).SetEase(Ease.OutQuad));
+
+        if (titleTextRect != null)
+            seq.Join(titleTextRect.DOAnchorPos(_titleBasePos, titleMoveDuration).SetEase(Ease.OutCubic));
+
+        // PRESS ENTER：点滅（Yoyo）
+        if (pressEnterCanvasGroup != null)
+        {
+            pressEnterCanvasGroup.alpha = 1f;
+
+            _pressBlinkTween?.Kill();
+            _pressBlinkTween = pressEnterCanvasGroup
+                .DOFade(pressBlinkMinAlpha, pressBlinkDuration)
+                .SetEase(Ease.InOutSine)
+                .SetLoops(-1, LoopType.Yoyo);
+        }
     }
 
     private void Update()
@@ -105,22 +180,60 @@ public class UITitleMenu : MonoBehaviour
         // EventSystem の UI Input Module から Cancel Action を取って購読する
         // esがあって、esのCancelに振られたキーがあるときの挙動
         if (EventSystem.current != null &&
-            EventSystem.current.TryGetComponent<InputSystemUIInputModule>(out var ui) &&
-            ui.cancel != null)
+            EventSystem.current.TryGetComponent<InputSystemUIInputModule>(out var ui))
         {
-            // キャンセルアクションに、指定した関数の挙動を登録する
-            _cancelAction = ui.cancel.action;
-            _cancelAction.performed += OnCancelPerformed;
-            _cancelAction.Enable(); // 念のため
+            if (ui.cancel != null)
+            {
+                _cancelAction = ui.cancel.action;
+                _cancelAction.performed += OnCancelPerformed;
+                _cancelAction.Enable();
+            }
+
+            if (ui.submit != null)
+            {
+                _submitAction = ui.submit.action;
+                _submitAction.performed += OnSubmitPerformed;
+                _submitAction.Enable();
+            }
         }
     }
 
     private void OnDisable()
     {
         if (_cancelAction != null)
-        {
             _cancelAction.performed -= OnCancelPerformed;
-        }
+
+        if (_submitAction != null)
+            _submitAction.performed -= OnSubmitPerformed;
+    }
+
+    private void OnSubmitPerformed(InputAction.CallbackContext _)
+    {
+        if (!_isPressEnterPhase)
+            return;
+
+        AudioManager.Instance?.PlayUI(submitClip);
+
+        // 点滅停止
+        _pressBlinkTween?.Kill();
+
+        pressEnterRoot.SetActive(false);
+        mainMenuRoot.SetActive(true);
+
+        _isPressEnterPhase = false;
+
+        // PRESS ENTER時は選択しない
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        // 次フレームにフォーカス（＝同じEnterでPlayが押されない）
+        StartCoroutine(FocusNextFrame(firstSelectedOnTitle, false));
+
+    }
+    private IEnumerator FocusNextFrame(GameObject target, bool playSelectSfx)
+    {
+        yield return null;
+        Focus(target, playSelectSfx);
     }
 
     private void OnCancelPerformed(InputAction.CallbackContext _)
@@ -138,6 +251,7 @@ public class UITitleMenu : MonoBehaviour
 
     public void OnClickPlay()
     {
+        Debug.Log("OnClickPlay");
         AudioManager.Instance?.PlayUI(submitClip);
         ShowModal(difficultyModal);
         Focus(firstSelectedOnDifficulty, false);
@@ -201,6 +315,7 @@ public class UITitleMenu : MonoBehaviour
 
     private void ShowModal(GameObject modal)
     {
+        Debug.Log("awawa");
         dimmer.SetActive(true);
         dimmerMessage.SetActive(true);
         difficultyModal.SetActive(modal == difficultyModal);

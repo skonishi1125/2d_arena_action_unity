@@ -37,6 +37,7 @@ public class MenuButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         Apply(true);
+        Debug.Log("onpointer.enter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
