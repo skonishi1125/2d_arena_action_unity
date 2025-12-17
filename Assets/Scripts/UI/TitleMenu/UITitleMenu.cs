@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class UITitleMenu : MonoBehaviour
 {
     [Header("Overlays")]
     [SerializeField] private GameObject dimmer;
+    [SerializeField] private GameObject dimmerMessage;
     [SerializeField] private GameObject difficultyModal;
     [SerializeField] private GameObject quitConfirmModal;
 
@@ -22,6 +25,8 @@ public class UITitleMenu : MonoBehaviour
     private GameObject lastSelectedObject; // 直近で選ばれた選択肢
     private bool suppressNextSelectSfx;
 
+    private InputAction _cancelAction;
+
     private void Awake()
     {
         HideAllModals();
@@ -30,6 +35,7 @@ public class UITitleMenu : MonoBehaviour
     private void HideAllModals()
     {
         dimmer.SetActive(false);
+        dimmerMessage.SetActive(false);
         difficultyModal.SetActive(false);
         quitConfirmModal.SetActive(false);
     }
@@ -79,6 +85,41 @@ public class UITitleMenu : MonoBehaviour
         // 念のためクリアしてから改めてセットしておく
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(target);
+
+    }
+
+    private void OnEnable()
+    {
+        // EventSystem の UI Input Module から Cancel Action を取って購読する
+        // esがあって、esのCancelに振られたキーがあるときの挙動
+        if (EventSystem.current != null &&
+            EventSystem.current.TryGetComponent<InputSystemUIInputModule>(out var ui) &&
+            ui.cancel != null)
+        {
+            // キャンセルアクションに、指定した関数の挙動を登録する
+            _cancelAction = ui.cancel.action;
+            _cancelAction.performed += OnCancelPerformed;
+            _cancelAction.Enable(); // 念のため
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_cancelAction != null)
+        {
+            _cancelAction.performed -= OnCancelPerformed;
+        }
+    }
+
+    private void OnCancelPerformed(InputAction.CallbackContext _)
+    {
+        // モーダルが開いてる時だけ閉じる（Title通常時は何もしない）
+        if (difficultyModal.activeSelf || quitConfirmModal.activeSelf)
+            OnClickCloseModal(); // 既存の「閉じる」処理を再利用
+
+        // Focusの色替えを止める
+        Debug.Log("cancel");
+
     }
 
     // ========= UIのボタン関連 ========= 
@@ -143,12 +184,13 @@ public class UITitleMenu : MonoBehaviour
 
     public void OnQuitNo()
     {
-        HideAllModals();
+        OnClickCloseModal();
     }
 
     private void ShowModal(GameObject modal)
     {
         dimmer.SetActive(true);
+        dimmerMessage.SetActive(true);
         difficultyModal.SetActive(modal == difficultyModal);
         quitConfirmModal.SetActive(modal == quitConfirmModal);
     }
