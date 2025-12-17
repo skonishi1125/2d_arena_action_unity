@@ -45,7 +45,7 @@ public class MenuButtonHighlight : MonoBehaviour, ISelectHandler, IDeselectHandl
     }
 
     // 選ばれたときボタンフレーム、テキストの色を変える
-    private void Apply(bool highlight)
+    public void Apply(bool highlight)
     {
         if (frame != null) frame.color = highlight ? selectedColor : normalColor;
         if (label != null) label.color = highlight ? selectedColor : normalColor;

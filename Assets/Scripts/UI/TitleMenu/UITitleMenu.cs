@@ -80,6 +80,18 @@ public class UITitleMenu : MonoBehaviour
         // falseを指定したとき（鳴らさない）、抑止フラグをtrueとして立てる
         // trueのとき（鳴らすとき）、抑止フラグはfalseとしておけばよい
         suppressNextSelectSfx = !playSelectSfx;
+
+        // 初回Focus以外の場合のケース
+        // Easyを選んでキャンセルしたとき、targetが黄色のままになっているのを防ぐ
+        if (lastSelectedObject != null)
+        {
+            var component = lastSelectedObject.GetComponent<MenuButtonHighlight>();
+
+            if (component != null)
+                component.Apply(false);
+
+        }
+
         lastSelectedObject = target;
 
         // 念のためクリアしてから改めてセットしておく
