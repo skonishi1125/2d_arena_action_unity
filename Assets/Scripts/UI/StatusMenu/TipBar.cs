@@ -1,14 +1,22 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TipBar : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI tipText;
+    [SerializeField] private Button closeButton;
 
     [Header("Fade")]
     [SerializeField] private float fadeDuration = 0.25f;
+
+    [Header("Dismiss")]
+    [SerializeField] private bool disableAfterDismissInThisScene = true;
+    private static int cachedSceneHandle = -1;
+    private static bool dismissedInThisScene = false;
 
     Coroutine routine;
 
@@ -20,8 +28,29 @@ public class TipBar : MonoBehaviour
         if (tipText == null)
             tipText = GetComponentInChildren<TextMeshProUGUI>(true);
 
+        ResetDismissIfSceneChanged();
+        if (closeButton != null)
+            closeButton.onClick.AddListener(OnCloseClicked);
+
         canvasGroup.alpha = 0f;
+        canvasGroup.blocksRaycasts = false;
         gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        if (closeButton != null)
+            closeButton.onClick.RemoveListener(OnCloseClicked);
+    }
+
+    private static void ResetDismissIfSceneChanged()
+    {
+        int handle = SceneManager.GetActiveScene().handle;
+        if (cachedSceneHandle != handle)
+        {
+            cachedSceneHandle = handle;
+            dismissedInThisScene = false;
+        }
     }
 
     private void Reset()
@@ -30,19 +59,33 @@ public class TipBar : MonoBehaviour
         tipText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void Show(string message, float autoHideSeconds = -1f)
+    public void Show(float autoHideSeconds = -1f)
     {
-        tipText.text = message;
-        gameObject.SetActive(true);
+        ResetDismissIfSceneChanged();
+        if (disableAfterDismissInThisScene && dismissedInThisScene)
+            return;
 
-        if (routine != null) StopCoroutine(routine);
+        gameObject.SetActive(true);
+        canvasGroup.blocksRaycasts = true;
+
+        if (routine != null)
+            StopCoroutine(routine);
         routine = StartCoroutine(ShowRoutine(autoHideSeconds));
     }
 
     public void Hide()
     {
-        if (routine != null) StopCoroutine(routine);
+        if (routine != null)
+            StopCoroutine(routine);
+
         routine = StartCoroutine(FadeOutAndDisable());
+    }
+
+    private void OnCloseClicked()
+    {
+        ResetDismissIfSceneChanged();
+        dismissedInThisScene = true;
+        Hide();
     }
 
     IEnumerator ShowRoutine(float autoHideSeconds)

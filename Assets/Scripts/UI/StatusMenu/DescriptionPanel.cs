@@ -129,12 +129,12 @@ public class DescriptionPanel : MonoBehaviour
     }
 
     // TipBar操作用のAPI
-    public void ShowTip(string message, float seconds = 4f)
+    public void ShowTip(float seconds = 4f)
     {
         if (tipBar == null)
            return;
 
-        tipBar.Show(message, seconds);
+        tipBar.Show(seconds);
     }
 
     public void HideTip()

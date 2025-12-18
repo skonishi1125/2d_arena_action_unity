@@ -14,6 +14,9 @@ public class UIStatusMenu : MonoBehaviour
     [SerializeField] private SkillPanel skillPanel;
     [SerializeField] private DescriptionPanel descriptionPanel;
 
+    [Header("Tip Showtime")]
+    [SerializeField] private float tipsShowTime = 15f;
+
     private void Awake()
     {
         player = FindFirstObjectByType<Player>();
@@ -40,7 +43,7 @@ public class UIStatusMenu : MonoBehaviour
             Time.timeScale = active ? 0f : 1f;
 
             if (active)
-                descriptionPanel.ShowTip("TIP: テストメッセージ", 2f);
+                descriptionPanel.ShowTip(tipsShowTime);
         }
     }
 
