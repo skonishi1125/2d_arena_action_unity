@@ -390,7 +390,6 @@ public class UITitleMenu : MonoBehaviour
 
     private void ShowModal(GameObject modal)
     {
-        Debug.Log("awawa");
         dimmer.SetActive(true);
         dimmerMessage.SetActive(true);
         difficultyModal.SetActive(modal == difficultyModal);

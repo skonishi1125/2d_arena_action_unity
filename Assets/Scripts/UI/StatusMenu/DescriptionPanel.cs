@@ -7,6 +7,8 @@ public class DescriptionPanel : MonoBehaviour
     [Header("Description Row")]
     [SerializeField] private GameObject descriptionRow;
 
+    [Header("TipBar")]
+    [SerializeField] private TipBar tipBar;
 
     [Header("Top")]
     [SerializeField] private Image skillIcon;
@@ -30,7 +32,12 @@ public class DescriptionPanel : MonoBehaviour
 
     public void Show(SkillDefinition def, int currentLevel)
     {
-        if (def == null) return;
+        if (def == null)
+        {
+            // 何も指定がないときは、説明チップを出す
+            ShowDefaultHelp();
+            return;
+        }
 
         descriptionRow.SetActive(true);
 
@@ -97,9 +104,45 @@ public class DescriptionPanel : MonoBehaviour
         }
     }
 
+    public void ShowDefaultHelp()
+    {
+        descriptionRow.SetActive(true);
+
+        // 上部：適当に「未選択」状態を表現
+        skillIcon.sprite = null;
+        skillNameText.text = "HELP";
+        masterLevelHeaderText.text = "";
+        summaryText.text =
+            "LvUPしたら [ESC] でスキル選択\n" +
+            "Physical / Magic は排他\n" +
+            "Passive は基礎ステータスを永続強化";
+
+        currentLevelHeaderText.text = "";
+        currentLevelBodyText.text = "";
+
+        nextLevelGroup.SetActive(false);
+    }
+
     public void Hide()
     {
         descriptionRow.SetActive(false);
+    }
+
+    // TipBar操作用のAPI
+    public void ShowTip(string message, float seconds = 4f)
+    {
+        if (tipBar == null)
+           return;
+
+        tipBar.Show(message, seconds);
+    }
+
+    public void HideTip()
+    {
+        if (tipBar == null)
+            return;
+
+        tipBar.Hide();
     }
 
 }
