@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.UI;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class UITitleMenu : MonoBehaviour
@@ -54,9 +55,22 @@ public class UITitleMenu : MonoBehaviour
 
     private bool _isPressEnterPhase = true;
 
+    [Header("Loading Overlay")]
+    [SerializeField] private GameObject loadingRoot;
+    [SerializeField] private TMP_Text loadingPointText; // LoadingPoint の TMP
+    [SerializeField] private float loadingPointInterval = 0.1f;
+    [SerializeField] private int loadingPointMax = 3;
+
+    private bool isLoading;
+    private Coroutine LoadBattleAsyncCo;
+
+
     private void Awake()
     {
         HideAllModals();
+
+        if (loadingRoot != null)
+            loadingRoot.SetActive(false);
     }
 
     private void HideAllModals()
@@ -294,10 +308,71 @@ public class UITitleMenu : MonoBehaviour
         LoadBattle("BattleHard");
     }
 
+    // battleシーン移行時の処理
     private void LoadBattle(string sceneName)
     {
+        if (isLoading)
+            return;
+
+        if (LoadBattleAsyncCo != null)
+            StopCoroutine(LoadBattleAsyncCo);
+
+        LoadBattleAsyncCo = StartCoroutine(LoadBattleAsync(sceneName));
+    }
+
+    private IEnumerator LoadBattleAsync(string sceneName)
+    {
+        isLoading = true;
+
+        // モーダルを閉じ、関連するオブジェクトのactiveを全てfalse
         HideAllModals();
-        SceneManager.LoadScene(sceneName);
+        if (mainMenuRoot != null)
+            mainMenuRoot.SetActive(false);
+
+        if (pressEnterRoot != null)
+            pressEnterRoot.SetActive(false);
+
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(null);
+
+        lastSelectedObject = null;
+
+        // Loading表示ON
+        if (loadingRoot != null)
+            loadingRoot.SetActive(true);
+
+        if (loadingPointText != null)
+            loadingPointText.text = "";
+
+        // 1フレーム待って「Loading...」を確実に描画してからロード開始
+        yield return null;
+
+        var op = SceneManager.LoadSceneAsync(sceneName);
+        if (op == null)
+        {
+            isLoading = false;
+            if (loadingRoot != null) loadingRoot.SetActive(false);
+            yield break;
+        }
+
+        int dots = 0;
+        float timer = 0f;
+
+        while (!op.isDone)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            if (timer >= loadingPointInterval)
+            {
+                timer = 0f;
+                dots = (dots % loadingPointMax) + 1;
+
+                if (loadingPointText != null)
+                    loadingPointText.text = new string('.', dots);
+            }
+
+            yield return null;
+        }
     }
 
     public void OnQuitYes()
