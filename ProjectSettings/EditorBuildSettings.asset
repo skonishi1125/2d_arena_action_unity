@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: bb4cc3655f811724b82a98f5743c36ef
   - enabled: 1
-    path: Assets/Scenes/BattleEasy.unity
+    path: Assets/Scenes/Tutorial.unity
     guid: 90c1e307be625e345a17761107d40f82
+  - enabled: 1
+    path: Assets/Scenes/BattleEasy.unity
+    guid: 2097ecc5e99689547979d5e7821b66d0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

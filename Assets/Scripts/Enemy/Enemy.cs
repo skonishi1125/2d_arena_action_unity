@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -47,8 +48,10 @@ public class Enemy : Entity
 
     // 攻撃されたときのplayer transform情報
     public Transform player { get; private set; }
-
     public bool IsBoss => isBoss;
+
+    // 経験値増加処理
+    public static event Action<int> OnExpGained;
 
     protected override void Awake()
     {
@@ -121,7 +124,7 @@ public class Enemy : Entity
         base.Death();
 
         if (enemyReward != null)
-            GameManager.Instance.Player.Level.AddExp(enemyReward.Exp);
+            OnExpGained?.Invoke(enemyReward.Exp);
 
         stateMachine.ChangeState(deadState);
     }

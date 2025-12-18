@@ -7,7 +7,6 @@ public enum GameState
     Ready,
     WaveIntro, // 3 2 1...と、カウントダウン
     Playing,
-    LevelUp,
     GameOverSlowing,
     Result
 }
@@ -93,12 +92,14 @@ public class GameManager : MonoBehaviour
         WaveManager.OnStageCleared -= HandleClearGame;
         WaveManager.OnBossWaveStarted -= HandleBossWaveStarted;
         WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
+        Enemy.OnExpGained -= AddExp;
 
         Player.Level.OnLevelUp += HandleLevelUp;
         Player.Health.OnDied += SlowMotion;
         WaveManager.OnStageCleared += HandleClearGame;
         WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
         WaveIntroUi.OnFinished += HandleWaveIntroFinished;
+        Enemy.OnExpGained += AddExp;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -134,32 +135,10 @@ public class GameManager : MonoBehaviour
 
     private void HandleLevelUp(int newLevel)
     {
-        // 例：スキル選択 State へ
-        //State = GameState.LevelUp;
-
-        // TODO: Lv UPUI を出す、入力を止める、など
-        //Debug.Log($"Level Up! New Level: {newLevel}");
-        //Time.timeScale = .01f;
         Player.Vfx.CreateOnLevelUpVfx(Player.transform);
 
     }
 
-    private void Update()
-    {
-
-//        if (State == GameState.LevelUp)
-//        {
-//#if UNITY_EDITOR
-//            Debug.Log("Levelup.. U を押すとPlayingに戻ります");
-//            if (Input.GetKeyDown(KeyCode.U))
-//            {
-//                Time.timeScale = 1f;
-//                State = GameState.Playing;
-//            }
-//#endif
-//        }
-
-    }
     public void StartGame()
     {
         State = GameState.WaveIntro;
@@ -175,6 +154,11 @@ public class GameManager : MonoBehaviour
 
         State = GameState.Playing;
         WaveManager.BeginStage();
+    }
+
+    private void AddExp(int exp)
+    {
+        Player.Level.AddExp(exp);
     }
 
     private void HandleBossWaveStarted(WaveConfig wave)
