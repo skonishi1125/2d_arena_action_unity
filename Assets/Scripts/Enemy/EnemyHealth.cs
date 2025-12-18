@@ -1,9 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : EntityHealth
 {
     private Enemy enemy;
+    protected Slider healthBar;
 
     // Enemy.csに持たせたIsBossを扱う
     public bool IsBoss;
@@ -23,6 +25,11 @@ public class EnemyHealth : EntityHealth
         enemy = GetComponent<Enemy>();
         if (!LogHelper.AssertNotNull(enemy, nameof(enemy), this))
             return;
+
+        healthBar = GetComponentInChildren<Slider>(true);
+        if (!LogHelper.AssertNotNull(healthBar, nameof(healthBar), this))
+            return;
+
 
         IsBoss = enemy.IsBoss;
         UpdateEnemyHealthBar();
@@ -76,6 +83,8 @@ public class EnemyHealth : EntityHealth
     {
         if (healthBar == null)
             return;
+
+        Debug.Log("updatehealth");
 
         healthBar.value = currentHp / entityStatus.GetMaxHp();
     }

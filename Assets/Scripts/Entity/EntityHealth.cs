@@ -8,8 +8,6 @@ public class EntityHealth : MonoBehaviour, IDamagable
     private EntityVFX entityVfx;
     protected EntityStatus entityStatus;
 
-    protected Slider healthBar; // using UnityEngine.UI;が必要。体力バー
-
     [SerializeField] protected float currentHp;
     [SerializeField] protected bool isDead;
 
@@ -27,30 +25,20 @@ public class EntityHealth : MonoBehaviour, IDamagable
     protected virtual void Awake()
     {
         entity = GetComponent<Entity>();
+        if (!LogHelper.AssertNotNull(entity, nameof(entity), this))
+            return;
+
         entityVfx = GetComponent<EntityVFX>();
+        if (!LogHelper.AssertNotNull(entityVfx, nameof(entityVfx), this))
+            return;
+
         entityStatus = GetComponent<EntityStatus>();
-        healthBar = GetComponentInChildren<Slider>();
+        if (!LogHelper.AssertNotNull(entityStatus, nameof(entityStatus), this))
+            return;
 
         currentHp = entityStatus.GetMaxHp();
     }
 
-    //public virtual void TakeDamage(float damage, Transform attacker)
-    //{
-    //    if (isDead)
-    //        return;
-
-    //    // ノックバック
-    //    entity?.ReceiveKnockback(
-    //        CalculateKnockback(attacker, damage),
-    //        CalculateKnockbackDuration(attacker, damage)
-    //    );
-
-    //    // 白くなる演出
-    //    entityVfx?.PlayOnDamageVfx();
-
-    //    // ダメージ計算
-    //    ReduceHp(damage);
-    //}
 
     public virtual void TakeDamage(DamageContext ctx)
     {
