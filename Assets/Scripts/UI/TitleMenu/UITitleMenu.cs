@@ -288,7 +288,7 @@ public class UITitleMenu : MonoBehaviour
     public void OnChooseTutorial()
     {
         AudioManager.Instance?.PlayUI(submitClip);
-        LoadBattle("BattleTutorial");
+        LoadBattle("Tutorial");
     }
 
     public void OnChooseEasy()
