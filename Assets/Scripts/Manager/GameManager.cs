@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleLevelUp(int newLevel)
     {
+        Debug.Log("player: " + Player);
         Player.Vfx.CreateOnLevelUpVfx(Player.transform);
 
     }

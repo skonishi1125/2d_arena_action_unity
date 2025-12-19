@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UIStatusMenu : MonoBehaviour
 {
@@ -15,8 +16,13 @@ public class UIStatusMenu : MonoBehaviour
     [SerializeField] private SkillPanel skillPanel;
     [SerializeField] private DescriptionPanel descriptionPanel;
 
-    [Header("Tip Showtime")]
+    [Header("TipBar Setting")]
+    [SerializeField] private GameObject tipRoot;
+    [SerializeField] private Selectable tipCloseSelectable;
     [SerializeField] private float tipsShowTime = 15f;
+    [SerializeField] private Selectable[] leftEdge;
+    [SerializeField] private Selectable[] rightEdge;
+    private bool _lastTipActive;
 
     // キーボード操作関連
     [SerializeField] private GameObject firstSelectedInMenu;
@@ -75,28 +81,68 @@ public class UIStatusMenu : MonoBehaviour
                 Close();
         }
 
-        //if (player.input.Player.StatusMenu.WasPressedThisFrame())
-        //{
-        //    bool active = !rootPanel.activeSelf;
-        //    rootPanel.SetActive(active);
-        //    Time.timeScale = active ? 0f : 1f;
+        // チップ表示状態の変化を検知し、差し替える
 
-        //    if (active)
-        //        descriptionPanel.ShowTip(tipsShowTime);
-        //}
+        bool tipActive = IsTipActive();
+        if (tipActive != _lastTipActive)
+        {
+            _lastTipActive = tipActive;
+            RefreshDynamicNavigation(tipActive);
+            FixSelectionIfTipHidden(tipActive);
+        }
     }
 
-
-    // 開閉時のTimeScale, Object表示可否などの調整、
-    private void SetPanelStatus()
+    private bool IsTipActive()
     {
-        bool active = !rootPanel.activeSelf;
-        rootPanel.SetActive(active);
-        Time.timeScale = active ? 0f : 1f;
-
-        if (active)
-            descriptionPanel.ShowTip(tipsShowTime);
+        return tipRoot != null && tipRoot.activeInHierarchy;
     }
+
+    private void RefreshDynamicNavigation(bool hasTip)
+    {
+        int n = Mathf.Min(
+            leftEdge != null ? leftEdge.Length : 0,
+            rightEdge != null ? rightEdge.Length : 0
+        );
+
+        for (int i = 0; i < n; i++)
+        {
+            var left = leftEdge[i];
+            var right = rightEdge[i];
+            if (left == null || right == null) continue;
+
+            // 左端：←
+            {
+                var nav = left.navigation;
+                nav.mode = Navigation.Mode.Explicit;
+                nav.selectOnLeft = hasTip ? tipCloseSelectable : right;
+                left.navigation = nav;
+            }
+
+            // 右端：→
+            {
+                var nav = right.navigation;
+                nav.mode = Navigation.Mode.Explicit;
+                nav.selectOnRight = hasTip ? tipCloseSelectable : left;
+                right.navigation = nav;
+            }
+        }
+    }
+
+    private void FixSelectionIfTipHidden(bool hasTip)
+    {
+        if (hasTip) return;
+
+        var es = EventSystem.current;
+        if (es == null) return;
+
+        var cur = es.currentSelectedGameObject;
+        if (cur == null || cur.activeInHierarchy) return;
+
+        // 逃がし先（好みで firstSelectedInMenu でもOK）
+        if (firstSelectedInMenu != null)
+            es.SetSelectedGameObject(firstSelectedInMenu);
+    }
+
 
     // メニューを開く際に、InputSetやEventSystem等を管理する処理
     private void Open()
@@ -117,6 +163,10 @@ public class UIStatusMenu : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(firstSelectedInMenu);
         }
+
+        _lastTipActive = IsTipActive();
+        RefreshDynamicNavigation(_lastTipActive);
+
     }
 
     private void Close()
