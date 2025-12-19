@@ -63,14 +63,11 @@ public class Enemy : Entity
             return;
 
     }
-
     protected override void Start()
     {
         base.Start();
         stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
     }
-
-
 
     private void OnEnable()
     {
@@ -84,73 +81,12 @@ public class Enemy : Entity
             GameManager.Instance.Player.Health.OnDied -= HandlePlayerDeath;
     }
 
-    // BattleState から呼ばれ、次に遷移すべき攻撃ステートを返す。
-    // デフォルトは近接 → 無ければ遠距離。
-    // DemonGunnnerなど遠距離しか持たない敵は、
-    // 固有クラス側でこのメソッドをOverrideして管理すればよい。
-    public virtual EnemyState GetNextAttackState()
-    {
-        if (attackState != null)
-            return attackState;
-
-        if (rangeAttackState != null)
-            return rangeAttackState;
-
-        return null;
-    }
 
 
-    // Playerから殴られたときなど、BattleStateに遷移させる為のメソッド
-    public void TryEnterBattleState(Transform player)
-    {
-        // 既にbattle, attack / rangeAttackの場合はスキップ
-        if (stateMachine.currentState == battleState)
-            return;
+    // =======  敵の行動関連 ===========
 
-        if (stateMachine.currentState == attackState
-            || stateMachine.currentState == rangeAttackState)
-            return;
-
-        this.player = player;
-        stateMachine.ChangeState(battleState);
-    }
-
-    // Enemy死亡時の責務
-    // * deadstateへ遷移できるようにする
-    // * 経験値の付与
-    // ※expbarの更新は、PlayerLevel, UIInGameの責務
-    public override void Death()
-    {
-        base.Death();
-
-        if (enemyReward != null)
-            OnExpGained?.Invoke(enemyReward.Exp);
-
-        stateMachine.ChangeState(deadState);
-    }
-
-    public void DiedDestroy()
-    {
-        StartCoroutine(DiedDestroyCo());
-    }
-
-    private IEnumerator DiedDestroyCo()
-    {
-        yield return new WaitForSeconds(destroyWaitTime);
-        Destroy(gameObject);
-    }
-
-    // Player側の死亡時のActionEventにsubscribeしているので、
-    // Playerが倒れた時、BattleState / AttackStateなどからidleStateに戻る。
-    private void HandlePlayerDeath()
-    {
-        stateMachine.ChangeState(idleState);
-    }
-
-
-
-    // GroundStateで使うので、publicとする
-    // 感知したPlayer | Groundの各種情報を返す。
+    // 前方を見て、感知したPlayer | Groundの各種情報を返す。
+    // GroundStateで使う。感知したとき、BattleStateへ遷移させている
     public RaycastHit2D PlayerDetection()
     {
         RaycastHit2D hit = Physics2D.Raycast(
@@ -168,6 +104,23 @@ public class Enemy : Entity
 
     }
 
+    // Playerから殴られたときなどに、BattleStateに遷移させる
+    // BattleState側で、Playerのほうを振り向かせたりしている。
+    public void TryEnterBattleState(Transform player)
+    {
+        // 既にbattle, attack / rangeAttackの場合はスキップ
+        if (stateMachine.currentState == battleState)
+            return;
+
+        if (stateMachine.currentState == attackState
+            || stateMachine.currentState == rangeAttackState)
+            return;
+
+        this.player = player;
+        stateMachine.ChangeState(battleState);
+    }
+
+
     // playerのtransform情報を返す
     // 後ろから殴られた場合などは、TryEnterBattleState()でplayerを格納しているのでそのまま返す。
     // 感知から発見した場合は、感知対象のPlayerのtransform情報を返す。
@@ -178,6 +131,63 @@ public class Enemy : Entity
 
         return player;
     }
+
+    // BattleState から呼ばれ、次に遷移すべき攻撃ステートを返す。
+    // デフォルトは近接 → 無ければ遠距離。
+    // DemonGunnnerなど遠距離しか持たない敵は、
+    // 固有クラス側でこのメソッドをOverrideして管理すればよい。
+    public virtual EnemyState GetNextAttackState()
+    {
+        if (attackState != null)
+            return attackState;
+
+        if (rangeAttackState != null)
+            return rangeAttackState;
+
+        return null;
+    }
+
+    // Playerが倒れた時、BattleState / AttackStateなどからidleStateに戻る。
+    // Player側の死亡時のActionEventにsubscribeしているのでそちらで検知する。
+    private void HandlePlayerDeath()
+    {
+        stateMachine.ChangeState(idleState);
+    }
+
+    // Enemy死亡時の責務
+    // * deadstateへ遷移できるようにする
+    // * 経験値の付与
+    // ※expbarの更新は、PlayerLevel, UIInGameの責務
+    public override void Death()
+    {
+        base.Death();
+
+        if (enemyReward != null)
+            OnExpGained?.Invoke(enemyReward.Exp);
+
+        stateMachine.ChangeState(deadState);
+    }
+
+
+    // ==================================
+
+
+
+
+
+
+    public void DiedDestroy()
+    {
+        StartCoroutine(DiedDestroyCo());
+    }
+
+    private IEnumerator DiedDestroyCo()
+    {
+        yield return new WaitForSeconds(destroyWaitTime);
+        Destroy(gameObject);
+    }
+
+
 
     // スポーン時などに初期向きを指定するためのヘルパ
     // 引数としてランダムに生成したdirなどを渡し、
