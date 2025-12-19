@@ -679,7 +679,7 @@ MonoBehaviour:
   targetCheckBoxAngle: 0
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   continuousInterval: 0.3
   defaultDamageMultiplier: 1
   defaultKnockbackPower: {x: 1.5, y: 2.5}

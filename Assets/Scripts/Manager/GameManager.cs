@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameState State { get; private set; } = GameState.Ready;
 
     public Player Player { get; private set; }
+    public Objective Objective { get; private set; }
     public UIWaveIntro WaveIntroUi { get; private set; }
     public UIBossAlert BossAlertUi { get; private set; }
     public UIResult ResultUi { get; private set; }
@@ -122,6 +124,10 @@ public class GameManager : MonoBehaviour
         if (!LogHelper.AssertNotNull(Player, nameof(Player), this))
             return;
 
+        Objective = FindFirstObjectByType<Objective>();
+        if (!LogHelper.AssertNotNull(Objective, nameof(Objective), this))
+            return;
+
         WaveIntroUi = FindFirstObjectByType<UIWaveIntro>();
         if (!LogHelper.AssertNotNull(WaveIntroUi, nameof(WaveIntroUi), this))
             return;
@@ -147,6 +153,7 @@ public class GameManager : MonoBehaviour
         // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
         Player.Level.OnLevelUp -= HandleLevelUp;
         Player.Health.OnDied -= SlowMotion;
+        Objective.Health.OnDestroyed -= _ => SlowMotion();
         WaveManager.OnStageCleared -= HandleClearGame;
         WaveManager.OnBossWaveStarted -= HandleBossWaveStarted;
         WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
@@ -154,6 +161,7 @@ public class GameManager : MonoBehaviour
 
         Player.Level.OnLevelUp += HandleLevelUp;
         Player.Health.OnDied += SlowMotion;
+        Objective.Health.OnDestroyed += _ => SlowMotion();
         WaveManager.OnStageCleared += HandleClearGame;
         WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
         WaveIntroUi.OnFinished += HandleWaveIntroFinished;
