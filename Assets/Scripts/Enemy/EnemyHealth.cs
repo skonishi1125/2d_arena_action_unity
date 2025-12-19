@@ -84,7 +84,7 @@ public class EnemyHealth : EntityHealth
         if (healthBar == null)
             return;
 
-        Debug.Log("updatehealth");
+        //Debug.Log("updatehealth");
 
         healthBar.value = currentHp / entityStatus.GetMaxHp();
     }

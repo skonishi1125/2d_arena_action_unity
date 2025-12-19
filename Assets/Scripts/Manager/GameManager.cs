@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public UIResult ResultUi { get; private set; }
     public WaveManager WaveManager { get; private set; }
 
+    private int _initializedSceneHandle = -1;
+
     private void Awake()
     {
         // Scene遷移したとき、そのSceneにGameManagerがあったときの配慮
@@ -40,12 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        InitGameForCurrentScene();
-        if (!IsBattleScene())
-            return;
-
-        // BattleSceneなら、Player等の情報を保持するようにする
-        CacheSceneObjects();
+        HandleSceneChanged(SceneManager.GetActiveScene());
     }
 
     private void OnEnable()
@@ -58,8 +55,45 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Additiveロード等でアクティブシーンが変わってないなら何もしない
+        if (scene != SceneManager.GetActiveScene())
+            return;
+
+        HandleSceneChanged(scene);
+    }
+
+    private void HandleSceneChanged(Scene scene)
+    {
+        // Startでのキャッシュ、Battleシーン遷移時のキャッシュの2重処理を防ぐ
+        if (_initializedSceneHandle == scene.handle)
+            return;
+        _initializedSceneHandle = scene.handle;
+
+        Time.timeScale = 1f;
+        State = GameState.Ready;
+
+        if (!scene.name.StartsWith("Battle"))
+        {
+            // バトル外では参照を切っておく（Destroyed参照事故を減らす）
+            Enemy.OnExpGained -= AddExp;
+            Player = null;
+            WaveManager = null;
+            WaveIntroUi = null;
+            BossAlertUi = null;
+            ResultUi = null;
+            return;
+        }
+
+        CacheSceneObjects();
+        StartGame();
+    }
+
     private void CacheSceneObjects()
     {
+        Debug.Log("CacheSceneObjects");
+
         Player = FindFirstObjectByType<Player>();
         if (!LogHelper.AssertNotNull(Player, nameof(Player), this))
             return;
@@ -102,40 +136,9 @@ public class GameManager : MonoBehaviour
         Enemy.OnExpGained += AddExp;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        InitGameForCurrentScene();
-        if (!IsBattleScene())
-            return;
-
-        // Player等を取り直す
-        CacheSceneObjects();
-    }
-
-    private void InitGameForCurrentScene()
-    {
-        // 開始時、リトライ時共通の初期化
-        Time.timeScale = 1f;
-        State = GameState.Ready;
-
-        // Battle シーンではロード後すぐにゲームを開始
-        // 後でReadyを実装したとき、いろいろ挟むようにすればOK
-        if (IsBattleScene())
-        {
-            CacheSceneObjects();
-            StartGame();
-        }
-    }
-
-    private bool IsBattleScene()
-    {
-        var name = SceneManager.GetActiveScene().name;
-        return name.StartsWith("Battle"); // 例：BattleEasy / BattleNormal / BattleHard
-    }
 
     private void HandleLevelUp(int newLevel)
     {
-        Debug.Log("player: " + Player);
         Player.Vfx.CreateOnLevelUpVfx(Player.transform);
 
     }
@@ -158,6 +161,11 @@ public class GameManager : MonoBehaviour
 
     private void AddExp(int exp)
     {
+        if (Player == null)
+        {
+            Debug.LogWarning("GameManager:AddExp(): Playerがnullです。");
+            return;
+        }
         Player.Level.AddExp(exp);
     }
 

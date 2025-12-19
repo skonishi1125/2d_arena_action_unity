@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - level: 1
-    requiredExp: 20
+    requiredExp: 5
     maxHp: 30
     regenHp: 5
     maxMp: 10
