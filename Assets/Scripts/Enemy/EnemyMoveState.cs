@@ -105,7 +105,7 @@ public class EnemyMoveState : EnemyGroundState
         isWallJumping = false;
 
         enemy.Flip(); // 反対方向へ歩き出す
-        Debug.Log("change!");
+        //Debug.Log("change!");
         stateMachine.ChangeState(enemy.idleState);
     }
 

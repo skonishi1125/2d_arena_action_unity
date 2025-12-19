@@ -1380,7 +1380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6222216243565780958
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7454,6 +7454,7 @@ GameObject:
   - component: {fileID: 3834082630952616002}
   - component: {fileID: 1731590244505568957}
   - component: {fileID: 3624427069963957292}
+  - component: {fileID: 3424471333915897492}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -7562,7 +7563,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1731590244505568957}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5947593650739901501}
+        m_TargetAssemblyTypeName: UIResult, Assembly-CSharp
+        m_MethodName: RetryGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3424471333915897492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791392500444790629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b52c3322bf60747a2d186e38898656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frame: {fileID: 1731590244505568957}
+  label: {fileID: 7820244637729506681}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &5892317428556392494
 GameObject:
   m_ObjectHideFlags: 0
@@ -8749,6 +8778,7 @@ GameObject:
   - component: {fileID: 112003768043937563}
   - component: {fileID: 641583497328931238}
   - component: {fileID: 5385949671468227003}
+  - component: {fileID: 4858449592097456712}
   m_Layer: 5
   m_Name: ReturnToTitleButton
   m_TagString: Untagged
@@ -8857,7 +8887,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 641583497328931238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5947593650739901501}
+        m_TargetAssemblyTypeName: UIResult, Assembly-CSharp
+        m_MethodName: ReturnToTitle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4858449592097456712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934248099653438882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b52c3322bf60747a2d186e38898656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frame: {fileID: 641583497328931238}
+  label: {fileID: 8623985894824884478}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &7016557335299170700
 GameObject:
   m_ObjectHideFlags: 0
@@ -8949,6 +9007,7 @@ MonoBehaviour:
   resultText: {fileID: 5394741970095576246}
   retryButton: {fileID: 3624427069963957292}
   returnToTitleButton: {fileID: 5385949671468227003}
+  firstSelectedResultButton: {fileID: 5791392500444790629}
 --- !u!1 &7645810844625958892
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public UIResult ResultUi { get; private set; }
     public WaveManager WaveManager { get; private set; }
 
+    // Player等の初回キャッシュフラグ
     private int _initializedSceneHandle = -1;
 
     private void Awake()
@@ -76,8 +77,16 @@ public class GameManager : MonoBehaviour
 
         if (!scene.name.StartsWith("Battle"))
         {
-            // バトル外では参照を切っておく（Destroyed参照事故を減らす）
+            // Battle外：Playerが存在する保証がないので、ここで切替はしない（またはガード付き）
             Enemy.OnExpGained -= AddExp;
+
+            // もし「直前のBattleのPlayer参照が残っている」ケースだけ安全に落とすなら
+            if (Player != null)
+            {
+                Player.input.Player.Disable();
+                Player.input.UI.Disable();
+            }
+
             Player = null;
             WaveManager = null;
             WaveIntroUi = null;
@@ -87,8 +96,23 @@ public class GameManager : MonoBehaviour
         }
 
         CacheSceneObjects();
+        ApplyPlayerInput();// キャッシュして、Playerが取れてから切り替える
         StartGame();
     }
+
+    private void ApplyPlayerInput()
+    {
+        if (Player == null) return;
+        Player.input.UI.Disable();
+        Player.input.Player.Enable();
+    }
+
+    //private void ApplyUIInput()
+    //{
+    //    if (Player == null) return;
+    //    Player.input.Player.Disable();
+    //    Player.input.UI.Enable();
+    //}
 
     private void CacheSceneObjects()
     {
