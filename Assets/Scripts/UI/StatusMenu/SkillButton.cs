@@ -1,10 +1,13 @@
 ﻿using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class SkillButton : MonoBehaviour,
+    IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, // マウス回り
+    ISelectHandler, IDeselectHandler, ISubmitHandler // キー操作でセレクトしたときの動作回り
 {
     private const int skillCost = 1; // スキル獲得、LvUpに必要なSP
 
@@ -48,6 +51,9 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public SkillId SkillId => skillId;
     public string SlotKey => keyLabel;
+
+    // キーボード操作周り
+    private Tween _hoverTween;
 
 
     protected virtual void Awake()
@@ -119,7 +125,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             return;
 
         int lv = playerSkill.GetLevel(skillId);
-        
+
         if (levelText != null)
         {
             if (lv <= 0)
@@ -129,8 +135,29 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }
 
+    // キーボード選択時
+    public void OnSelect(BaseEventData eventData)
+    {
+        ApplyHover(true);
+    }
 
+    public void OnDeselect(BaseEventData eventData)
+    {
+        ApplyHover(false);
+    }
+
+    // マウス選択時
     public void OnPointerEnter(PointerEventData eventData)
+    {
+        ApplyHover(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ApplyHover(false);
+    }
+
+    private void ApplyHover(bool on)
     {
         if (!showDescriptionOnHover)
             return;
@@ -138,36 +165,47 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (descriptionPanel == null || playerSkill == null || skillDefinition == null)
             return;
 
+        // 説明はロック中でも表示
         int lv = playerSkill.GetLevel(skillId);
         descriptionPanel.Show(skillDefinition, lv);
 
-        // アンロックの場合は、外枠を光らせない
-        if (lockOverlay.enabled)
-            return;
+        // ロック中は枠は光らせない...と思ったけど、キー操作なら光らせてもよさそう
+        //if (lockOverlay != null && lockOverlay.enabled)
+        //    return;
 
         if (hoverFrame == null)
             return;
 
-        hoverFrame.enabled = true;
-        hoverFrame.color = new Color(1f, 1f, 0f, 0f);
-        hoverFrame.DOFade(1f, 0.15f).SetUpdate(true);
+        // Tweenが積み重ならないようにKill
+        _hoverTween?.Kill();
+
+        if (on)
+        {
+            hoverFrame.enabled = true;
+            hoverFrame.color = new Color(1f, 1f, 0f, 0f);
+            _hoverTween = hoverFrame.DOFade(1f, 0.15f).SetUpdate(true);
+        }
+        else
+        {
+            _hoverTween = hoverFrame.DOFade(0f, 0.15f)
+                .SetUpdate(true)
+                .OnComplete(() => hoverFrame.enabled = false);
+        }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void OnSubmit(BaseEventData eventData)
     {
-        // アンロックの場合は何もしない
-        if (lockOverlay.enabled)
-            return;
-
-        if (hoverFrame == null)
-            return;
-
-        hoverFrame.DOFade(0f, 0.15f)
-            .SetUpdate(true)
-            .OnComplete(() => hoverFrame.enabled = false);
+        Activate();
+        eventData.Use();
     }
 
     public void OnPointerClick(PointerEventData eventData)
+    {
+        Activate();
+        eventData.Use();
+    }
+
+    public void Activate()
     {
         if (!canLevelUpOnClick)
             return;
@@ -206,6 +244,8 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
         }
     }
+
+
 
     // SkillPanelが参照するための現在Lv取得口
     public int GetCurrentLevel()

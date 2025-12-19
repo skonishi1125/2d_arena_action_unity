@@ -142,7 +142,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         State = GameState.WaveIntro;
-        Debug.Log(WaveIntroUi);
         WaveIntroUi.Play();
     }
 
