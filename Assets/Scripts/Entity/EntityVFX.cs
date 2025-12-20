@@ -45,7 +45,7 @@ public class EntityVFX : MonoBehaviour
     [Header("Miss Hit VFX")]
     [SerializeField] private GameObject missHitVfx;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         originalMaterial = sr.material;
