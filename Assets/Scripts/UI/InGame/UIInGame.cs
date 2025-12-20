@@ -4,16 +4,23 @@ using UnityEngine.UI;
 
 public class UIInGame : MonoBehaviour
 {
+    private Objective objective;
+
     private Player player;
     private EntityStatus entityStatus;
     private PlayerHealth playerHealth;
     private PlayerLevel playerLevel;
     [SerializeField] private PlayerLevelTable levelTable;
 
+    [Header("Objective Health Bar")]
+    [SerializeField] private RectTransform objectiveHealthRect;
+    [SerializeField] private Slider objectiveHealthSlider;
+    [SerializeField] private TextMeshProUGUI objectiveHealthText;
+
     [Header("Player Health Bar")]
-    [SerializeField] private RectTransform healthRect;
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private RectTransform playerHealthRect;
+    [SerializeField] private Slider playerHealthSlider;
+    [SerializeField] private TextMeshProUGUI playerHealthText;
 
     [Header("EXP Bar")]
     [SerializeField] private RectTransform expRect;
@@ -26,33 +33,54 @@ public class UIInGame : MonoBehaviour
 
     private void Start()
     {
+        // ========== objective ========== 
+        // FindAnyObjectByTypeで取ってみる
+        // (高速らしいが, 呼び出しごとに同じinstanceとは限らない)
+        objective = FindAnyObjectByType<Objective>();
+        if (!LogHelper.AssertNotNull(objective, nameof(objective), this))
+            return;
+
+        objective.Health.OnHealthUpdate += UpdateObjectiveHealthBar;
+
+        //  ========== player ========== 
         player = FindFirstObjectByType<Player>();
-        if (player != null)
-        {
-            // Health
-            entityStatus = player.GetComponent<EntityStatus>();
-            playerHealth = player.GetComponent<PlayerHealth>();
-            // EXP
-            playerLevel = player.GetComponent<PlayerLevel>();
+        if (!LogHelper.AssertNotNull(player, nameof(player), this))
+            return;
 
+        entityStatus = player.GetComponent<EntityStatus>();
+        if (!LogHelper.AssertNotNull(entityStatus, nameof(entityStatus), this))
+            return;
 
-            // Health Actionイベントに、体力バー更新の購読
-            playerHealth.OnHealthUpdate += UpdatePlayerHealthBar;
+        playerHealth = player.GetComponent<PlayerHealth>();
+        if (!LogHelper.AssertNotNull(playerHealth, nameof(playerHealth), this))
+            return;
 
-            // Level Actionイベントに、体力バー更新の購読
-            playerLevel.OnLevelUp += HandlePlayerLevelUp;
+        playerLevel = player.GetComponent<PlayerLevel>();
+        if (!LogHelper.AssertNotNull(playerLevel, nameof(playerLevel), this))
+            return;
 
-            // Level 経験値返還時のイベント
-            playerLevel.OnExpChanged += HandleExpChanged;
-        }
+        // ========= 購読 ========== 
+        // Health Actionイベントに、体力バー更新の購読
+        playerHealth.OnHealthUpdate += UpdatePlayerHealthBar;
 
+        // Level Actionイベントに、体力バー更新の購読
+        playerLevel.OnLevelUp += HandlePlayerLevelUp;
+
+        // Level 経験値返還時のイベント
+        playerLevel.OnExpChanged += HandleExpChanged;
+
+        // ========= 初期化 ========== 
+        // 画面のSAMPLEなどのテキストを、Awake時点の設定にする
+        UpdateObjectiveHealthBar();
         UpdatePlayerHealthBar();
-
         InitSkillSlots();
     }
 
     private void OnDestroy()
     {
+        if (objective != null)
+            objective.Health.OnHealthUpdate -= UpdateObjectiveHealthBar;
+
         if (playerHealth != null)
         {
             playerHealth.OnHealthUpdate -= UpdatePlayerHealthBar;
@@ -67,6 +95,15 @@ public class UIInGame : MonoBehaviour
 
     }
 
+    private void UpdateObjectiveHealthBar()
+    {
+        float currentHp = objective.Health.GetCurrentHp();
+        float maxHp = objective.Health.GetMaxHp();
+
+        objectiveHealthText.text = currentHp + "/" + maxHp;
+        objectiveHealthSlider.value = currentHp / maxHp;
+
+    }
 
 
     private void UpdatePlayerHealthBar()
@@ -74,10 +111,8 @@ public class UIInGame : MonoBehaviour
         float currentHp = playerHealth.GetCurrentHp();
         float maxHp = entityStatus.GetMaxHp();
 
-        //Debug.Log("currentHp: " + currentHp + " maxHp: " + maxHp);
-
-        healthText.text = currentHp + "/" + maxHp;
-        healthSlider.value = currentHp / maxHp;
+        playerHealthText.text = currentHp + "/" + maxHp;
+        playerHealthSlider.value = currentHp / maxHp;
     }
 
     // レベルが上がった時に体力バーの更新を行う

@@ -10,7 +10,7 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
     [SerializeField] private bool isDestroyed;
 
     // HPバーの更新とかに使う
-    public event Action<float, float> OnHpChanged; // current, max
+    public event Action OnHealthUpdate;
 
     // ゲームオーバー通知とかに使う
     public event Action<ObjectiveHealth> OnDestroyed;
@@ -26,7 +26,7 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
             return;
 
         currentHp = maxHp;
-        OnHpChanged?.Invoke(currentHp, maxHp);
+        OnHealthUpdate?.Invoke();
     }
 
     public void TakeDamage(DamageContext ctx)
@@ -37,7 +37,7 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
         currentHp -= ctx.damage;
         objective.entityVfx.PlayOnDamageVfx();
 
-        OnHpChanged?.Invoke(currentHp, maxHp);
+        OnHealthUpdate?.Invoke();
 
         if (currentHp <= 0)
         {
@@ -46,4 +46,16 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
             OnDestroyed?.Invoke(this);
         }
     }
+
+    public float GetCurrentHp()
+    {
+        return currentHp;
+    }
+
+    public float GetMaxHp()
+    {
+        return maxHp;
+    }
+
+
 }
