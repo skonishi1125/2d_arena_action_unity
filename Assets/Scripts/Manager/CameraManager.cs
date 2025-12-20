@@ -4,6 +4,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     private PlayerHealth playerHealth;
+    private ObjectiveHealth objectiveHealth;
 
     public static CameraManager Instance;
     private CinemachineImpulseSource impulse;
@@ -20,7 +21,7 @@ public class CameraManager : MonoBehaviour
     // playerHealth.OnDied += HandleDeathShake; とできるが、
     // GameObject側はこちらのOnEnable実行時点ではPlayerを所持していない。
     // そのためこのメソッドを用意し、GameManagerの準備が出来次第割り当てる。
-    public void Bind(PlayerHealth newPlayerHealth)
+    public void BindPlayerHealth(PlayerHealth newPlayerHealth)
     {
         // 古い購読を解除
         if (playerHealth != null)
@@ -31,6 +32,19 @@ public class CameraManager : MonoBehaviour
 
         if (playerHealth != null)
             playerHealth.OnDied += HandleDeathShake;
+    }
+
+    public void BindObjectiveHealth(ObjectiveHealth newObjectiveHealth)
+    {
+        // 古い購読を解除
+        if (objectiveHealth != null)
+            objectiveHealth.OnDestroyed -= _ => HandleDeathShake();
+
+        // 新しく設定
+        objectiveHealth = newObjectiveHealth;
+
+        if (objectiveHealth != null)
+            objectiveHealth.OnDestroyed += _ => HandleDeathShake();
     }
 
     // 死亡時、画面を揺らす処理

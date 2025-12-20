@@ -148,7 +148,8 @@ public class GameManager : MonoBehaviour
         if (!LogHelper.AssertNotNull(cameraManager, nameof(CameraManager), this))
             return;
 
-        cameraManager.Bind(Player.Health);
+        cameraManager.BindPlayerHealth(Player.Health);
+        cameraManager.BindObjectiveHealth(Objective.Health);
 
         // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
         Player.Level.OnLevelUp -= HandleLevelUp;

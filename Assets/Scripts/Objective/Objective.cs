@@ -2,10 +2,12 @@
 
 public class Objective : MonoBehaviour
 {
-    private Animator anim;
     private Rigidbody2D rb;
 
+    public Animator anim { get; private set; }
+    public EntityVFX entityVfx { get; private set; }
     public ObjectiveHealth Health { get; private set; }
+
 
     private void Awake()
     {
@@ -14,11 +16,16 @@ public class Objective : MonoBehaviour
             return;
 
         anim = GetComponentInChildren<Animator>();
+        if (!LogHelper.AssertNotNull(anim, nameof(anim), this))
+            return;
 
         Health = GetComponent<ObjectiveHealth>();
         if (!LogHelper.AssertNotNull(Health, nameof(Health), this))
             return;
 
+        entityVfx = GetComponent<EntityVFX>();
+        if (!LogHelper.AssertNotNull(entityVfx, nameof(entityVfx), this))
+            return;
     }
 
 
