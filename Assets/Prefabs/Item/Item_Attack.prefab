@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7410899373390090205}
   - component: {fileID: 4624706999168570494}
   - component: {fileID: 8296016214510280020}
-  m_Layer: 11
+  - component: {fileID: 190865052035715337}
+  m_Layer: 0
   m_Name: Item_Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +97,23 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &190865052035715337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183933178722660271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9f29d948a0e34428ab334708af762a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hopHeight: 0.4
+  hopDuration: 0.25
+  randomX: 0.4
+  hoverAmplitude: 0.12
+  hoverHalfPeriod: 0.45
 --- !u!1 &5678021073500375254
 GameObject:
   m_ObjectHideFlags: 0

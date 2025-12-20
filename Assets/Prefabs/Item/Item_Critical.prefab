@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 1548486011625149489}
   - component: {fileID: 7146896742093034822}
   - component: {fileID: 7585794107001639689}
-  m_Layer: 11
+  - component: {fileID: -5764500726744886577}
+  m_Layer: 0
   m_Name: Item_Critical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +97,23 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &-5764500726744886577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442896978618282227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9f29d948a0e34428ab334708af762a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hopHeight: 0.4
+  hopDuration: 0.25
+  randomX: 0.4
+  hoverAmplitude: 0.12
+  hoverHalfPeriod: 0.45
 --- !u!1 &1993556913649672037
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377995732303523688}
   - component: {fileID: 7583582215014106733}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: SpriteRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
