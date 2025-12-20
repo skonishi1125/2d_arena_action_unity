@@ -30,12 +30,12 @@ public class DarkKnightBattleState : EnemyBattleState
         switch (kind)
         {
             case AttackKind.Melee:
-                FaceToPlayer();
+                FaceToTarget();
                 stateMachine.ChangeState(darkKnight.meleeAttackState);
                 break;
 
             case AttackKind.Dash:
-                FaceToPlayer();
+                FaceToTarget();
                 stateMachine.ChangeState(darkKnight.dashAttackState);
                 break;
 

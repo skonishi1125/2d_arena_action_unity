@@ -2,7 +2,7 @@
 
 public class EnemyBattleState : EnemyState
 {
-    private Transform player;
+    private Transform target;
     private float verticalOutOfRangeTimer; // 縦に離れた時間のタイマー
 
     // ジャンプ関連
@@ -18,19 +18,28 @@ public class EnemyBattleState : EnemyState
     {
         base.Enter();
 
-        // 感知から状態に入ったケース, 後ろからplayerに殴られたケースなどを考慮
-        player ??= enemy.GetPlayerReference(); // if(player == null) player = ...と同じ
+        // 今狙うべき相手のTransformを取得
+        // Playerなのか、Objectiveなのか。
+        target = enemy.GetCurrentTarget();
 
         wallJumpAttempts = 0;
         isWallJumping = false;
-
+        verticalOutOfRangeTimer = 0f;
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        // ① 壁ジャンプ中の処理
+        // ターゲット更新（Aggro切替に追従）
+        target = enemy.GetCurrentTarget();
+        if (target == null)
+        {
+            stateMachine.ChangeState(enemy.idleState);
+            return;
+        }
+
+        // 壁ジャンプ中の処理
         if (isWallJumping)
         {
             if (enemy.groundDetected)
@@ -40,12 +49,19 @@ public class EnemyBattleState : EnemyState
             return;
         }
 
-        // 1. 縦方向のチェック
-        HandleVerticalRange();
-
-        // 2. 攻撃開始判定（縦が許容範囲内のときだけ）
-        if (IsVerticallyInRange())
+        // ターゲット対象がPlayerなら、縦判定の見逃し処理を使う
+        bool targetIsPlayer = enemy.IsTargetPlayer(target);
+        if (targetIsPlayer)
+        {
+            HandleVerticalRange();
+            if (IsVerticallyInRange())
+                TryStartAttack();
+        }
+        else
+        {
             TryStartAttack();
+        }
+
     }
 
     // virtualとして、DarkKnightなどでオーバーライドできるようにする
@@ -53,7 +69,7 @@ public class EnemyBattleState : EnemyState
     {
         if (WithinAttackRange())
         {
-            FaceToPlayer();
+            FaceToTarget();
 
             var nextAttack = enemy.GetNextAttackState();
             if (nextAttack != null)
@@ -65,7 +81,12 @@ public class EnemyBattleState : EnemyState
     {
         base.PhysicsUpdate();
 
-        // ① 壁ジャンプ中の移動
+        // ターゲット更新
+        target = enemy.GetCurrentTarget();
+        if (target == null)
+            return;
+
+        // 壁ジャンプ中の移動
         if (isWallJumping)
         {
             float dir = enemy.facingDir;
@@ -76,7 +97,7 @@ public class EnemyBattleState : EnemyState
             return;
         }
 
-        // ② 攻撃範囲外ならプレイヤーに近づく
+        // 攻撃範囲外ならプレイヤーに近づく
         if (!WithinAttackRange())
         {
             // 壁に当たっていて、かつ地上にいるならジャンプを試す
@@ -87,7 +108,7 @@ public class EnemyBattleState : EnemyState
             else
             {
                 enemy.SetVelocity(
-                    enemy.battleMoveSpeed * DirectionToPlayer(),
+                    enemy.battleMoveSpeed * DirectionToTarget(),
                     rb.linearVelocity.y
                 );
             }
@@ -105,51 +126,51 @@ public class EnemyBattleState : EnemyState
     protected float DistanceToPlayer()
     {
         // 感知できない場合は、遠い位置にいるため最大値を返しておく
-        if (player == null)
+        if (target == null)
             return float.MaxValue;
 
-        return Mathf.Abs(player.position.x - enemy.transform.position.x);
+        return Mathf.Abs(target.position.x - enemy.transform.position.x);
     }
 
     // Player方向へ移動したいときの「移動ベクトル方向」を返す。
     // 見た目の向きを決めるためではなく、SetVelocity で使うための力学的方向判定。
     // （敵がプレイヤーに接近したいときのみ使用する）
-    private int DirectionToPlayer()
+    private int DirectionToTarget()
     {
-        if (player == null)
+        if (target == null)
             return 0;
 
-        if (player.position.x > enemy.transform.position.x)
+        if (target.position.x > enemy.transform.position.x)
             return 1;
         else
             return -1;
 
     }
 
-    // 見た目（Flip）の向きをプレイヤー方向へ揃える。
-    // 攻撃直前など、「移動しなくても向きを合わせたい」場面で使用する。
-    // 移動ベクトルとは独立している点に注意。
-    protected void FaceToPlayer()
+    // 現在の向いているほうをtarget方向にする
+    protected void FaceToTarget()
     {
-        Transform p = enemy.GetPlayerReference();
-        if (p == null)
+
+        if (target == null)
             return;
-        float dx = p.position.x - enemy.transform.position.x;
-        // プレイヤーが右にいて、今左を向いているなら右向きに
+        float dx = target.position.x - enemy.transform.position.x;
+
+        // targetが右にいて、今左を向いているなら右向きに
         if (dx > 0 && enemy.facingDir < 0)
             enemy.Flip();
-        // プレイヤーが左にいて、今右を向いているなら左向きに
+        // targetが左にいて、今右を向いているなら左向きに
         else if (dx < 0 && enemy.facingDir > 0)
             enemy.Flip();
     }
 
-    // プレイヤーとの縦方向の差が、許容範囲内かどうか
+    // targetとの縦方向の差が、許容範囲内かどうか
+    // (※targetがPlayerの時しか走らせないように、呼び出し側で分岐している）
     private bool IsVerticallyInRange()
     {
-        if (player == null)
+        if (target == null)
             return false;
 
-        float dy = Mathf.Abs(player.position.y - enemy.transform.position.y);
+        float dy = Mathf.Abs(target.position.y - enemy.transform.position.y);
         return dy <= enemy.attackVerticalRange;
     }
 
@@ -196,7 +217,7 @@ public class EnemyBattleState : EnemyState
             return;
         }
 
-        // ここまで来たら「何度か試したけどダメ」→ 方向転換して追尾を中止
+        // 何度か試したけどダメだったら、 諦めて方向転換
         wallJumpAttempts = 0;
         isWallJumping = false;
 

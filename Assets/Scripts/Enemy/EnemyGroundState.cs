@@ -11,9 +11,10 @@ public class EnemyGroundState : EnemyState
     {
         base.LogicUpdate();
 
-        if (enemy.PlayerDetection())
+        var hit = enemy.PlayerDetection();
+        if (hit)
         {
-            stateMachine.ChangeState(enemy.battleState);
+            enemy.TryEnterBattleState(hit.transform);
         }
 
     }

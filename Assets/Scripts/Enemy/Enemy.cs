@@ -2,6 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
+public enum EnemyRole
+{
+    Wanderer, // 既存（徘徊→Player検知でBattle）
+    Raider    // Objectiveへ向かう（Aggro中のみPlayer）
+}
+
 public class Enemy : Entity
 {
     private EnemyReward enemyReward;
@@ -12,6 +18,8 @@ public class Enemy : Entity
     public EnemyAttackState attackState;
     public EnemyRangeAttackState rangeAttackState;
     public EnemyDeadState deadState;
+
+    [SerializeField] private EnemyRole role = EnemyRole.Wanderer;
 
     [SerializeField] private bool isBoss;
 
@@ -46,12 +54,24 @@ public class Enemy : Entity
     public Vector2 commonAttackKnockbackPower;
     public float commonAttackKnockbackDuration;
 
+    [Header("Objective Targeting")]// Objectiveを狙うときの設定値
+    [SerializeField] private float aggroDuration = 3f; // プレイヤーに釣られる時間
+    private float aggroUntil;
+    private Transform objective;
+
     // 攻撃されたときのplayer transform情報
     public Transform player { get; private set; }
     public bool IsBoss => isBoss;
+    public EnemyRole Role => role;
+    public Transform Objective => objective;
 
     // 経験値増加処理
     public static event Action<int> OnExpGained;
+
+
+
+
+
 
     protected override void Awake()
     {
@@ -66,7 +86,26 @@ public class Enemy : Entity
     protected override void Start()
     {
         base.Start();
-        stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
+        //stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
+
+
+        // EnemyRoleに応じて、初期stateを変更する
+        if (role == EnemyRole.Raider && objective == null)
+        {
+            var obj = FindFirstObjectByType<Objective>();
+            if (obj != null)
+                objective = obj.transform;
+        }
+
+        //var initial = (role == EnemyRole.Raider && objective != null) ? battleState : idleState;
+
+        if (role == EnemyRole.Raider && objective != null)
+            stateMachine.Initialize(battleState);
+        else
+            stateMachine.Initialize(idleState);
+
+
+
     }
 
     private void OnEnable()
@@ -83,7 +122,37 @@ public class Enemy : Entity
 
 
 
+
+
+
     // =======  敵の行動関連 ===========
+
+    // プレイヤーを追っている最中かどうか
+    public bool IsAggroingPlayer => player != null && Time.time < aggroUntil;
+
+    // 敵の狙うターゲットの指定
+    // Raiderは画面にObjectiveがあって、Playerを追っていなければ、Objectiveへ
+    // Wanderer / Raider(怒り状態)は、Playerへ
+    // * (ただし、WandererはPlayer情報を保持しているだけで、感知しなければ襲ってはこない)
+    public Transform GetCurrentTarget()
+    {
+        if (role == EnemyRole.Raider && objective != null && !IsAggroingPlayer)
+            return objective;
+
+        return GetPlayerReference();
+    }
+
+    // 追跡対象がPlayerかどうか（BattleState側の分岐用）
+    public bool IsTargetPlayer(Transform t)
+    {
+        return t != null && t.gameObject.layer == LayerMask.NameToLayer("Player");
+    }
+
+    // 可能ならSpawner側で呼ぶのが理想（後でOK）
+    public void SetObjective(Transform t)
+    {
+        objective = t;
+    }
 
     // 前方を見て、感知したPlayer | Groundの各種情報を返す。
     // GroundStateで使う。感知したとき、BattleStateへ遷移させている
@@ -104,20 +173,20 @@ public class Enemy : Entity
 
     }
 
-    // Playerから殴られたときなどに、BattleStateに遷移させる
+    // Playerから殴られたときなどに、Playerのほうに向かわせる
     // BattleState側で、Playerのほうを振り向かせたりしている。
     public void TryEnterBattleState(Transform player)
     {
-        // 既にbattle, attack / rangeAttackの場合はスキップ
-        if (stateMachine.currentState == battleState)
-            return;
+        this.player = player;
+        aggroUntil = Time.time + aggroDuration; // Player側を向く時間のリセット
 
+        // 攻撃中は状態遷移しない
         if (stateMachine.currentState == attackState
             || stateMachine.currentState == rangeAttackState)
             return;
 
-        this.player = player;
-        stateMachine.ChangeState(battleState);
+        if (stateMachine.currentState != battleState)
+            stateMachine.ChangeState(battleState);
     }
 
 
