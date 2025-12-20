@@ -10,6 +10,10 @@ public class EnemyBattleState : EnemyState
     private float lastWallJumpTime;
     private bool isWallJumping;
 
+    // Raider用 Playerを感知したら、その間Targetを更新
+    private float nextSenseTime;
+    private const float SenseInterval = 0.2f;
+
     public EnemyBattleState(Enemy enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -17,6 +21,7 @@ public class EnemyBattleState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        nextSenseTime = Time.time;
 
         // 今狙うべき相手のTransformを取得
         // Playerなのか、Objectiveなのか。
@@ -30,6 +35,16 @@ public class EnemyBattleState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        // RaiderがObjectiveを追っている間だけ、定期的にPlayer検知してAggroへ
+        if (enemy.Role == EnemyRole.Raider && !enemy.IsAggroingPlayer && Time.time >= nextSenseTime)
+        {
+            nextSenseTime = Time.time + SenseInterval;
+
+            var hit = enemy.PlayerDetection();
+            if (hit)
+                enemy.TryEnterBattleState(hit.transform); // battle中でもplayer更新＆aggro延長できる
+        }
 
         // ターゲット更新（Aggro切替に追従）
         target = enemy.GetCurrentTarget();
@@ -116,14 +131,14 @@ public class EnemyBattleState : EnemyState
     }
 
 
-    // Playerとの距離が、攻撃範囲より小さくなったらtrueを返す
+    // Targetとの距離が、攻撃範囲より小さくなったらtrueを返す
     protected virtual bool WithinAttackRange()
     {
-        return DistanceToPlayer() < enemy.attackDistance;
+        return DistanceToTarget() < enemy.attackDistance;
     }
 
-    // 絶対値で、playerのx座標 - 敵のx座標の結果を返す
-    protected float DistanceToPlayer()
+    // 絶対値で、targetのx座標 - 敵のx座標の結果を返す
+    protected float DistanceToTarget()
     {
         // 感知できない場合は、遠い位置にいるため最大値を返しておく
         if (target == null)
@@ -132,7 +147,7 @@ public class EnemyBattleState : EnemyState
         return Mathf.Abs(target.position.x - enemy.transform.position.x);
     }
 
-    // Player方向へ移動したいときの「移動ベクトル方向」を返す。
+    // Target方向へ移動したいときの「移動ベクトル方向」を返す。
     // 見た目の向きを決めるためではなく、SetVelocity で使うための力学的方向判定。
     // （敵がプレイヤーに接近したいときのみ使用する）
     private int DirectionToTarget()

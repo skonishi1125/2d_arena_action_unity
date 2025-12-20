@@ -69,10 +69,6 @@ public class Enemy : Entity
     public static event Action<int> OnExpGained;
 
 
-
-
-
-
     protected override void Awake()
     {
         base.Awake();
@@ -88,10 +84,10 @@ public class Enemy : Entity
         base.Start();
         //stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
 
-
         // EnemyRoleに応じて、初期stateを変更する
         if (role == EnemyRole.Raider && objective == null)
         {
+            // Spawnerとかで注入したほうがいいが、暫定対応
             var obj = FindFirstObjectByType<Objective>();
             if (obj != null)
                 objective = obj.transform;
@@ -146,12 +142,6 @@ public class Enemy : Entity
     public bool IsTargetPlayer(Transform t)
     {
         return t != null && t.gameObject.layer == LayerMask.NameToLayer("Player");
-    }
-
-    // 可能ならSpawner側で呼ぶのが理想（後でOK）
-    public void SetObjective(Transform t)
-    {
-        objective = t;
     }
 
     // 前方を見て、感知したPlayer | Groundの各種情報を返す。
