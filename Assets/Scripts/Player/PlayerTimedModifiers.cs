@@ -12,6 +12,7 @@ public class PlayerTimedModifiers : MonoBehaviour
     [Header("Buff Colors")]
     [SerializeField] private Color attackBuffColor = new Color(1f, 0.3f, 0.3f, 1f);
     [SerializeField] private Color defenseBuffColor = new Color(0.3f, 0.6f, 1f, 1f);
+    [SerializeField] private Color evasionBuffColor = new Color(0.3f, 1f, 0.3f, 1f);
     [SerializeField] private Color critBuffColor = new Color(1f, 1f, 0.3f, 1f);
 
     // ステータス変化時のイベント
@@ -43,6 +44,7 @@ public class PlayerTimedModifiers : MonoBehaviour
         {
             StatusParam.Attack => attackBuffColor,
             StatusParam.Defense => defenseBuffColor,
+            StatusParam.Evasion => evasionBuffColor,
             StatusParam.Critical => critBuffColor,
             _ => Color.white
         };
@@ -105,12 +107,12 @@ public class PlayerTimedModifiers : MonoBehaviour
         {
             StatusParam.Attack => entityStatus.attack,
             StatusParam.Defense => entityStatus.defense,
-            StatusParam.MaxHp => entityStatus.maxHp,
+            StatusParam.Evasion => entityStatus.evasion,
+            StatusParam.Critical => entityStatus.critical,
+            //StatusParam.MaxHp => entityStatus.maxHp,
             //StatusParam.RegenHp => entityStatus.regenHp,
             //StatusParam.MaxMp => entityStatus.maxMp,
             //StatusParam.RegenMp => entityStatus.regenMp,
-            StatusParam.Evasion => entityStatus.evasion,
-            StatusParam.Critical => entityStatus.critical,
             _ => null
         };
     }
