@@ -29,4 +29,5 @@ public class EnemyGroup
     public GameObject enemyPrefab;
     public int spawnCount;         // 何体出すか
     public float spawnInterval;    // 何秒おきに出すか
+    public EnemyRole enemyRole;    // Wanderer or Raider
 }

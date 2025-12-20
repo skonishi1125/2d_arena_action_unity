@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705fad165e1661b4a872dac21141e130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 15
+  maxHp: 1000
   currentHp: 0
   isDestroyed: 0
 --- !u!114 &201819024
@@ -34047,79 +34047,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1001 &389133417
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_Name
-      value: DemonHound
-      objectReference: {fileID: 0}
-    - target: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3937552173338374477, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: role
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.11950108
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5332226410416699297, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281736820924878318, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8281736820924878318, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
 --- !u!1 &513922179
 GameObject:
   m_ObjectHideFlags: 0
@@ -36140,7 +36067,6 @@ SceneRoots:
   - {fileID: 1812940011}
   - {fileID: 810323475}
   - {fileID: 1862546362}
-  - {fileID: 389133417}
   - {fileID: 1446153642}
   - {fileID: 862081953}
   - {fileID: 2074851660}

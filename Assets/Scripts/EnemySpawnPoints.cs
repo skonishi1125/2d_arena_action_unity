@@ -4,7 +4,7 @@ public class EnemySpawnPoints : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
 
-    public void Spawn(GameObject enemyPrefab)
+    public void Spawn(GameObject enemyPrefab, EnemyRole role)
     {
         if (spawnPoints.Length == 0 || enemyPrefab == null)
             return;
@@ -17,6 +17,7 @@ public class EnemySpawnPoints : MonoBehaviour
         if (enemy != null)
         {
             int dir = Random.value < 0.5f ? -1 : 1;
+            enemy.role = role;
             enemy.InitializeFacing(dir);
         }
 

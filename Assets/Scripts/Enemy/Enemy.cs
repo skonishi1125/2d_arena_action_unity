@@ -19,7 +19,7 @@ public class Enemy : Entity
     public EnemyRangeAttackState rangeAttackState;
     public EnemyDeadState deadState;
 
-    [SerializeField] private EnemyRole role = EnemyRole.Wanderer;
+    [SerializeField] public EnemyRole role = EnemyRole.Wanderer;
 
     [SerializeField] private bool isBoss;
 

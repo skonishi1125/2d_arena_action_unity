@@ -129,7 +129,7 @@ public class WaveManager : MonoBehaviour
             if (!LogHelper.AssertNotNull(enemyPrefab, nameof(enemyPrefab), this))
                 yield break;
 
-            enemySpawnPoints.Spawn(group.enemyPrefab);
+            enemySpawnPoints.Spawn(group.enemyPrefab, group.enemyRole);
             aliveEnemyCount++;
 
             yield return new WaitForSeconds(group.spawnInterval);
