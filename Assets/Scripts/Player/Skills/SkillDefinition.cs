@@ -1,21 +1,5 @@
 ﻿using UnityEngine;
 
-// パッシブスキル用
-public enum StatusParam
-{
-    MaxHp,
-    Attack,
-    Defense,
-    Evasion,
-    Critical,
-    // 必要に応じて追加
-}
-public enum ModifyMode
-{
-    AddBonus,      // +10 など
-    AddMultiplier, // +0.1 (=+10%) など
-}
-
 [System.Serializable]
 public struct PassiveModifier
 {

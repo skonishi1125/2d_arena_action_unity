@@ -16,7 +16,7 @@ TagManager:
   - Enemy
   - Objective
   - Chest
-  - 
+  - Item
   - 
   - 
   - 
@@ -46,6 +46,12 @@ TagManager:
     locked: 0
   - name: Chest
     uniqueID: 1376215105
+    locked: 0
+  - name: Item
+    uniqueID: 3675947149
+    locked: 0
+  - name: Objective
+    uniqueID: 1917116699
     locked: 0
   - name: Enemy
     uniqueID: 1956590931

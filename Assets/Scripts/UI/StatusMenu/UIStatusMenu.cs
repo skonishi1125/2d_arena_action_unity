@@ -8,6 +8,7 @@ public class UIStatusMenu : MonoBehaviour
     private Player player;
     private PlayerLevel playerLevel;
     private PlayerSkillController playerSkill;
+    private PlayerTimedModifiers playerTimedModifiers;
     private EntityStatus entityStatus;
     private PlayerSkillController skillController;
 
@@ -51,6 +52,10 @@ public class UIStatusMenu : MonoBehaviour
         if (!LogHelper.AssertNotNull(playerLevel, nameof(playerLevel), this))
             return;
 
+        playerTimedModifiers = player.GetComponent<PlayerTimedModifiers >();
+        if (!LogHelper.AssertNotNull(playerTimedModifiers, nameof(playerTimedModifiers), this))
+            return;
+
         skillController = player.GetComponentInChildren<PlayerSkillController>();
         if (!LogHelper.AssertNotNull(skillController, nameof(skillController), this))
             return;
@@ -60,7 +65,7 @@ public class UIStatusMenu : MonoBehaviour
         player.input.Player.Enable();
 
         // ステータスパネルなどの準備
-        statusPanel.Init(entityStatus, playerLevel, playerSkill);
+        statusPanel.Init(entityStatus, playerLevel, playerSkill, playerTimedModifiers);
         skillPanel.Init(playerLevel);
 
         rootPanel.SetActive(false);

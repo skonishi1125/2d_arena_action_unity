@@ -97,7 +97,7 @@ public class EntityHealth : MonoBehaviour, IDamagable
     //    // 攻撃情報を見る
     //    // 近接攻撃 EntityCombat か、遠距離弾 EntityProjectile から発生したものか。
     //    // 現状近接攻撃のみしか考慮できていない
- 
+
     //    // 攻撃側の EntityCombat を見る
     //    var attackerCombat = attacker.GetComponent<EntityCombat>();
     //    Vector2 basePower;

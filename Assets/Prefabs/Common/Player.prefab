@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 4953783495460416331}
   - component: {fileID: 5728190401651403911}
   - component: {fileID: 1064059733593565200}
+  - component: {fileID: 8565690001906540101}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -519,6 +520,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 7652370069691784716}
   defaultSpeed: 5
+--- !u!114 &8565690001906540101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311999036730397486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edbc931488e10ae42992e7ef1a5a6df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityStatus: {fileID: 3105119050201740821}
 --- !u!1 &7124893137942985129
 GameObject:
   m_ObjectHideFlags: 0

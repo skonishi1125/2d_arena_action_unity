@@ -14,12 +14,17 @@ public class StatusPanel : MonoBehaviour
     private EntityStatus status;
     private PlayerLevel level;
     private PlayerSkillController skill;
+    private PlayerTimedModifiers timed;
 
-    public void Init(EntityStatus status, PlayerLevel level, PlayerSkillController skill)
+    public void Init(
+        EntityStatus status, PlayerLevel level,
+        PlayerSkillController skill, PlayerTimedModifiers timed
+    )
     {
         this.status = status;
         this.level = level;
         this.skill = skill;
+        this.timed = timed;
 
         RefreshAll();
 
@@ -33,6 +38,10 @@ public class StatusPanel : MonoBehaviour
         // パッシブスキルで変わった場合
         if (skill != null)
             skill.OnStatusChangedBySkill += RefreshAll;
+
+        // アイテムで変わった場合
+        if (timed != null)
+            timed.OnStatusChangedByItem += RefreshAll;
 
     }
 
@@ -51,6 +60,7 @@ public class StatusPanel : MonoBehaviour
 
     private void OnDestroy()
     {
+        // TODO: 購読が消えていない懸念がある
         if (level != null)
         {
             level.OnLevelUp -= _ => RefreshAll();
@@ -59,6 +69,9 @@ public class StatusPanel : MonoBehaviour
 
         if (skill != null)
             skill.OnStatusChangedBySkill -= RefreshAll;
+
+        if (timed != null)
+            timed.OnStatusChangedByItem -= RefreshAll;
     }
 
 }

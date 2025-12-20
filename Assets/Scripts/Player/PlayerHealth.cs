@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class PlayerHealth : EntityHealth
 {
@@ -40,10 +41,23 @@ public class PlayerHealth : EntityHealth
         // GameManagerから購読し、OnDiedのイベント処理として進めたほうが綺麗。
     }
 
+    // 回復(アイテムなど)
+    public void Heal(float amount)
+    {
+        if (isDead)
+            return;
+
+        currentHp = Mathf.Min(currentHp + amount, entityStatus.GetMaxHp());
+        OnHealthUpdate?.Invoke(); // 体力が回復したことの通知
+    }
+
     // 体力全回復(LevelUp時など)
     public void FullHeal()
     {
         currentHp = entityStatus.GetMaxHp();
         OnHealthUpdate?.Invoke(); // 体力が全回復したことの通知
     }
+
+
+
 }
