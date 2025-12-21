@@ -25,7 +25,8 @@ MonoBehaviour:
     def: 2
     eva: 2
     crit: 2
+    exp: 2
   clearType: 0
-  surviveDuration: 5
+  surviveDuration: 20
   isBossWave: 0
-  spawnRewardChestOnClear: 1
+  spawnRewardChestOnClear: 0
