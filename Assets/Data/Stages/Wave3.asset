@@ -18,6 +18,14 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 1388535888265352816, guid: e8852fde68767db4ba02efe0ad21d48c, type: 3}
     spawnCount: 1
     spawnInterval: 0
+    enemyRole: 0
+  enemyStatMultiplier:
+    hp: 1
+    atk: 1
+    def: 1
+    eva: 1
+    crit: 1
   clearType: 2
   surviveDuration: 0
   isBossWave: 1
+  spawnRewardChestOnClear: 0

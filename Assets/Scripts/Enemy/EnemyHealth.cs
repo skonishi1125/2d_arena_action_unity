@@ -89,4 +89,13 @@ public class EnemyHealth : EntityHealth
         healthBar.value = currentHp / entityStatus.GetMaxHp();
     }
 
+    // 体力のリセット
+    // Spawn時に体力にmulをかけたとき、currentHpがそのままになる。
+    public void ResetHpToMax()
+    {
+        // entityStatus は Awake で取得済み
+        currentHp = entityStatus.GetMaxHp();
+        isDead = false;
+    }
+
 }

@@ -52,9 +52,9 @@ public class PlayerLevel : MonoBehaviour
 
         // Status 側の基礎値をアップデート
         entityStatus.maxHp.SetBaseValue(levelInfo.maxHp);
-        entityStatus.regenHp.SetBaseValue(levelInfo.regenHp);
-        entityStatus.maxMp.SetBaseValue(levelInfo.maxMp);
-        entityStatus.regenMp.SetBaseValue(levelInfo.regenMp);
+        //entityStatus.regenHp.SetBaseValue(levelInfo.regenHp);
+        //entityStatus.maxMp.SetBaseValue(levelInfo.maxMp);
+        //entityStatus.regenMp.SetBaseValue(levelInfo.regenMp);
 
         entityStatus.attack.SetBaseValue(levelInfo.attack);
         entityStatus.defense.SetBaseValue(levelInfo.defense);

@@ -10,9 +10,9 @@ public class PlayerLevelTable : ScriptableObject
         public int level;
         public int requiredExp;
         public float maxHp;
-        public float regenHp;
-        public float maxMp;
-        public float regenMp;
+        //public float regenHp;
+        //public float maxMp;
+        //public float regenMp;
         public float attack;
         public float defense;
         public float evasion;

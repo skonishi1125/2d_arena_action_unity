@@ -5,9 +5,9 @@
 public class EntityStatus : MonoBehaviour
 {
     public Status maxHp;
-    public Status regenHp;
-    public Status maxMp;
-    public Status regenMp;
+    //public Status regenHp;
+    //public Status maxMp;
+    //public Status regenMp;
     public Status attack;
     public Status defense;
     public Status evasion;
@@ -18,19 +18,19 @@ public class EntityStatus : MonoBehaviour
         return maxHp.GetValue();
     }
 
-    public float GetRegenHp()
-    {
-        return regenHp.GetValue();
-    }
+    //public float GetRegenHp()
+    //{
+    //    return regenHp.GetValue();
+    //}
 
-    public float GetMaxMp()
-    {
-        return maxMp.GetValue();
-    }
-    public float GetRegenMp()
-    {
-        return regenMp.GetValue();
-    }
+    //public float GetMaxMp()
+    //{
+    //    return maxMp.GetValue();
+    //}
+    //public float GetRegenMp()
+    //{
+    //    return regenMp.GetValue();
+    //}
 
     public float GetAttack()
     {

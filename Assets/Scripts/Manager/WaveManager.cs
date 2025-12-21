@@ -88,13 +88,15 @@ public class WaveManager : MonoBehaviour
 
         aliveEnemyCount = 0;
 
+        var mul = wave.enemyStatMultiplier;
+
         // Waveに持たせている敵情報の数だけ回す
         foreach (var group in wave.enemyGroups)
         {
             if (!isRunning)
                 yield break;
 
-            yield return StartCoroutine(SpawnGroup(group));
+            yield return StartCoroutine(SpawnGroup(group, mul));
         }
 
         switch (wave.clearType)
@@ -127,7 +129,7 @@ public class WaveManager : MonoBehaviour
     }
 
     // Waveに持たせた、敵配列自体のスポーン処理
-    private IEnumerator SpawnGroup(EnemyGroup group)
+    private IEnumerator SpawnGroup(EnemyGroup group, EnemyStatMultiplier mul)
     {
         for (int i = 0; i < group.spawnCount; i++)
         {
@@ -138,7 +140,7 @@ public class WaveManager : MonoBehaviour
             if (!LogHelper.AssertNotNull(enemyPrefab, nameof(enemyPrefab), this))
                 yield break;
 
-            enemySpawnPoints.Spawn(group.enemyPrefab, group.enemyRole);
+            enemySpawnPoints.Spawn(group.enemyPrefab, group.enemyRole, mul); // multiplier追加？
             aliveEnemyCount++;
 
             yield return new WaitForSeconds(group.spawnInterval);
