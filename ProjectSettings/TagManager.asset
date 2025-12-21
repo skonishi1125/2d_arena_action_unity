@@ -47,6 +47,12 @@ TagManager:
   - name: BG_Near
     uniqueID: 306686859
     locked: 0
+  - name: BG_Tile
+    uniqueID: 170630947
+    locked: 0
+  - name: BG_Sighboard
+    uniqueID: 3364986719
+    locked: 0
   - name: Ground
     uniqueID: 2843193245
     locked: 0
