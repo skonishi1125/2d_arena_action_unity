@@ -9,6 +9,8 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
     [SerializeField] private float currentHp;
     [SerializeField] private bool isDestroyed;
 
+    [SerializeField] private Collider2D damageCollider; // ←殴られる用だけ
+
     // HPバーの更新とかに使う
     public event Action OnHealthUpdate;
 
@@ -29,24 +31,6 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
         OnHealthUpdate?.Invoke();
     }
 
-    public void TakeDamage(DamageContext ctx)
-    {
-        if (isDestroyed)
-            return;
-
-        currentHp -= ctx.damage;
-        objective.entityVfx.PlayOnDamageVfx();
-
-        OnHealthUpdate?.Invoke();
-
-        if (currentHp <= 0)
-        {
-            objective.anim.SetBool("objectiveDestroy", true);
-            isDestroyed = true;
-            OnDestroyed?.Invoke(this);
-        }
-    }
-
     public float GetCurrentHp()
     {
         return currentHp;
@@ -57,5 +41,29 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
         return maxHp;
     }
 
+    public void TakeDamage(DamageContext ctx)
+    {
+        if (isDestroyed)
+            return;
+
+        currentHp -= ctx.damage;
+        objective.entityVfx.PlayOnDamageVfx();
+
+
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            objective.anim.SetBool("objectiveDestroy", true);
+            isDestroyed = true;
+
+            if (damageCollider != null)
+                damageCollider.enabled = false;
+
+            OnDestroyed?.Invoke(this);
+        }
+
+        OnHealthUpdate?.Invoke();
+
+    }
 
 }

@@ -8,7 +8,6 @@ public class Objective : MonoBehaviour
     public EntityVFX entityVfx { get; private set; }
     public ObjectiveHealth Health { get; private set; }
 
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +27,10 @@ public class Objective : MonoBehaviour
             return;
     }
 
-
+    // Animation Eventで呼ぶ
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 
 }
