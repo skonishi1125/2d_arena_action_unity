@@ -12,12 +12,22 @@ public enum GameState
     Result
 }
 
+public enum GameOverCause
+{
+    None = 0,
+    PlayerDied,
+    ObjectiveDestroyed,
+    // Future: TimeUp, etc...
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     // ゲーム画面全体の状態
     public GameState State { get; private set; } = GameState.Ready;
+    // ゲームオーバー理由
+    private GameOverCause pendingGameOverCause = GameOverCause.None;
 
     public Player Player { get; private set; }
     public Objective Objective { get; private set; }
@@ -153,21 +163,23 @@ public class GameManager : MonoBehaviour
 
         // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
         Player.Level.OnLevelUp -= HandleLevelUp;
-        Player.Health.OnDied -= SlowMotion;
-        Objective.Health.OnDestroyed -= _ => SlowMotion();
+        Player.Health.OnDied -= () => TriggerGameOver(GameOverCause.PlayerDied);
+        Objective.Health.OnDestroyed -= _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
         WaveManager.OnStageCleared -= HandleClearGame;
         WaveManager.OnBossWaveStarted -= HandleBossWaveStarted;
         WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
         Enemy.OnExpGained -= AddExp;
 
         Player.Level.OnLevelUp += HandleLevelUp;
-        Player.Health.OnDied += SlowMotion;
-        Objective.Health.OnDestroyed += _ => SlowMotion();
+        Player.Health.OnDied += () => TriggerGameOver(GameOverCause.PlayerDied);
+        Objective.Health.OnDestroyed += _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
         WaveManager.OnStageCleared += HandleClearGame;
         WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
         WaveIntroUi.OnFinished += HandleWaveIntroFinished;
         Enemy.OnExpGained += AddExp;
     }
+
+
 
 
     private void HandleLevelUp(int newLevel)
@@ -211,6 +223,15 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private void TriggerGameOver(GameOverCause cause)
+    {
+        if (State != GameState.Playing)
+            return;
+
+        pendingGameOverCause = cause;
+        StartCoroutine(SlowMotionCo());
+    }
+
     // Dieに、まずSlowMotionを購読させて呼び出す。
     // スローになって倒れた後、GameOverのSceneに遷移。
     private void SlowMotion()
@@ -235,7 +256,7 @@ public class GameManager : MonoBehaviour
         if (State != GameState.GameOverSlowing)
             return;
 
-        EndGame(false);
+        EndGame(false, pendingGameOverCause);
     }
 
     // イベント購読用
@@ -254,11 +275,11 @@ public class GameManager : MonoBehaviour
     }
 
     // Clear, GameOver共通処理
-    private void EndGame(bool isClear)
+    private void EndGame(bool isClear, GameOverCause cause = GameOverCause.None)
     {
         State = GameState.Result;
         WaveManager?.StopStage();
-        ResultUi.ShowResult(isClear);
+        ResultUi.ShowResult(isClear, cause);
     }
 
     public void RetryGame()

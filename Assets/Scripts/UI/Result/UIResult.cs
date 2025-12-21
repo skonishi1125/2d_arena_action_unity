@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class UIResult : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class UIResult : MonoBehaviour
 
     }
 
-    public void ShowResult(bool isClear)
+    public void ShowResult(bool isClear, GameOverCause cause)
     {
         // InputSetをUI用に変える
         player.input.Player.Disable();
@@ -43,18 +44,19 @@ public class UIResult : MonoBehaviour
             component.Apply(true);
 
         rootPanel.SetActive(true);
-        resultText.text = isClear ? "GAME CLEAR!" : "EXHAUSTED!";
 
-        //retryButton.onClick.AddListener(() =>
-        //{
-        //    GameManager.Instance.RetryGame();
-        //});
+        if (isClear)
+        {
+            resultText.text = "GOOD ON YOU!";
+            return;
+        }
 
-        //returnToTitleButton.onClick.AddListener(() =>
-        //{
-        //    // タイトル画面がないので暫定
-        //    Debug.Log("Titleへ");
-        //});
+        resultText.text = cause switch
+        {
+            GameOverCause.ObjectiveDestroyed => "DESTROYED!",
+            GameOverCause.PlayerDied => "EXHAUSTED!",
+            _ => "GAME OVER",
+        };
     }
 
     // リトライボタンに割り当てる
