@@ -611,6 +611,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 7286822956785895495}
   wallCheck: {fileID: 5235569745034622540}
+  role: 1
   isBoss: 1
   battleMoveSpeed: 3
   attackDistance: 1
@@ -631,6 +632,7 @@ MonoBehaviour:
   commonAttackDamageMultiplier: 1
   commonAttackKnockbackPower: {x: 5, y: 10}
   commonAttackKnockbackDuration: 0.5
+  aggroDuration: 3
   chargeAttackXVelocity: 2.5
 --- !u!114 &3915359817709933696
 MonoBehaviour:
