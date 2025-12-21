@@ -38,6 +38,13 @@ public class EntityProjectile : MonoBehaviour
     private bool pierceGround;
     private bool pierceTargets;
 
+    // 弾を打った後に倒れるとか,
+    // OwnerがDestroyされるパターンがあるのでパラメータを保管
+    private float ownerAttackSnapshot;
+    private float ownerCritSnapshot;
+    private bool hasOwnerSnapshot;
+
+
     private EntityStatus ownerStatus;
     private EntityVFX ownerVfx;
 
@@ -97,13 +104,18 @@ public class EntityProjectile : MonoBehaviour
         pierceTargets = targets;
     }
 
+    // 弾生成時に、Spawnerから渡される情報でownerの情報を埋める
+    // ※ここでowner情報を保持しているが、
+    //   GetComponentは対象がDestroyされると破棄済みの参照情報に代わる
+    //   なのでownerがDestroyされた時点で MissingReferenceException が発生する
+    //   この時点ではnullチェックを通過していても、気を付けよう
     public void Fire(float shootDir, float speed, Entity owner)
     {
         this.shootDir = shootDir;
         this.speed = speed;
         this.owner = owner;
 
-        // 弾生成時に、Spawnerから渡される情報でownerの情報を埋める
+
         ownerVfx = owner.GetComponent<EntityVFX>();
         if (!LogHelper.AssertNotNull(ownerVfx, nameof(ownerVfx), this))
             return;
@@ -201,11 +213,15 @@ public class EntityProjectile : MonoBehaviour
             out isCritical
         );
 
+        // ownerがDestroy済みなら、弾自身のtransformにする
+        // attacker.transformの MissingReferenceException を防止
+        var attackerTr = (owner != null) ? owner.transform : transform; 
+
         var ctx = new DamageContext
         {
             // 弾の保持者をownerとすることで、
             // MagicBoltなどで殴ったとき、PlayerにめがけてBattleStateに入るようにする。
-            attacker = owner.transform,
+            attacker = attackerTr,
             damage = damage,
             hasCustomKnockback = HasCustomKnockback,
             knockbackPower = CurrentKnockbackPower,

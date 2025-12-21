@@ -126,6 +126,11 @@ public class Enemy : Entity
     // GameManagerのStateを監視する
     private bool IsGameplayActive()
     {
+        // 検証用...
+        //#if UNITY_EDITOR
+        //    return true;
+        //#endif
+
         return GameManager.Instance != null
             && GameManager.Instance.State == GameState.Playing;
     }
