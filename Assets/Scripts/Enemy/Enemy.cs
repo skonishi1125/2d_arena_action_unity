@@ -123,6 +123,13 @@ public class Enemy : Entity
 
     // =======  敵の行動関連 ===========
 
+    // GameManagerのStateを監視する
+    private bool IsGameplayActive()
+    {
+        return GameManager.Instance != null
+            && GameManager.Instance.State == GameState.Playing;
+    }
+
     // プレイヤーを追っている最中かどうか
     public bool IsAggroingPlayer => player != null && Time.time < aggroUntil;
 
@@ -132,6 +139,9 @@ public class Enemy : Entity
     // * (ただし、WandererはPlayer情報を保持しているだけで、感知しなければ襲ってはこない)
     public Transform GetCurrentTarget()
     {
+        if (!IsGameplayActive())
+            return null;
+
         if (role == EnemyRole.Raider && objective != null && !IsAggroingPlayer)
             return objective;
 
@@ -148,6 +158,9 @@ public class Enemy : Entity
     // GroundStateで使う。感知したとき、BattleStateへ遷移させている
     public RaycastHit2D PlayerDetection()
     {
+        if (!IsGameplayActive())
+            return default;
+
         RaycastHit2D hit = Physics2D.Raycast(
             playerCheck.position, Vector2.right * facingDir, playerCheckDistance, whatIsPlayer | whatIsGround
         );
@@ -167,6 +180,9 @@ public class Enemy : Entity
     // BattleState側で、Playerのほうを振り向かせたりしている。
     public void TryEnterBattleState(Transform player)
     {
+        if (!IsGameplayActive())
+            return;
+
         this.player = player;
         aggroUntil = Time.time + aggroDuration; // Player側を向く時間のリセット
 
