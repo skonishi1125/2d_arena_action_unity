@@ -17,13 +17,15 @@ public class EnemyGroup
 }
 
 [System.Serializable]
-public struct EnemyStatMultiplier
+public class EnemyStatMultiplier
 {
-    public float hp;   // 1.0 = 等倍
-    public float atk;
-    public float def;
-    public float eva;
-    public float crit;
+    public float hp = 1f;   // 1.0 = 等倍
+    public float atk = 1f;
+    public float def = 1f;
+    public float eva = 1f;
+    public float crit = 1f;
+
+    public float exp = 1f; // 1.0 = 等倍
 
     public static EnemyStatMultiplier One => new EnemyStatMultiplier
     {

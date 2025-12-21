@@ -12,10 +12,16 @@ public class EnemySpawnPoints : MonoBehaviour
         var point = spawnPoints[Random.Range(0, spawnPoints.Length)];
         var go = Instantiate(enemyPrefab, point.position, Quaternion.identity);
 
+        // Wave倍率設定
+        // maxHpだけ上がっているのでcurrentHpも合わせる。
+        // 経験値も指定の倍数だけ再設定。
         ApplyMultiplier(go, mul);
         var health = go.GetComponent<EnemyHealth>();
         if (health != null)
             health.ResetHpToMax();
+        var reward = go.GetComponent<EnemyReward>();
+        if (reward != null)
+            reward.ApplyExpMultiplier(mul.exp);
 
         // どちらを向いて生まれるか、ランダムに決定
         var enemy = go.GetComponent<Enemy>();
