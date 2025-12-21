@@ -163,23 +163,45 @@ public class GameManager : MonoBehaviour
 
         // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
         Player.Level.OnLevelUp -= HandleLevelUp;
-        Player.Health.OnDied -= () => TriggerGameOver(GameOverCause.PlayerDied);
-        Objective.Health.OnDestroyed -= _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
+
+        // ラムダ購読解除（学習メモを書いとく）
+        // コメントアウトした書き方だと、線用メソッドでなく使い捨てメソッド(ラムダ)として購読している
+        // なので、度のメソッドを購読したのか or 解除したのかが分からないので、解除できない
+        // HandleXXXとしておくと、HandleXXXの 購読 or 解除 ができるようになる
+        // なので、購読するときは購読専用のメソッドを作っておくとよい
+        Player.Health.OnDied -= HandlePlayerDied;
+        Objective.Health.OnDestroyed -= HandleObjectiveDestroyed;
+        // Player.Health.OnDied -= () => TriggerGameOver(GameOverCause.PlayerDied);
+        // Objective.Health.OnDestroyed -= _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
+
         WaveManager.OnStageCleared -= HandleClearGame;
         WaveManager.OnBossWaveStarted -= HandleBossWaveStarted;
         WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
         Enemy.OnExpGained -= AddExp;
 
+        // 購読の開始
         Player.Level.OnLevelUp += HandleLevelUp;
-        Player.Health.OnDied += () => TriggerGameOver(GameOverCause.PlayerDied);
-        Objective.Health.OnDestroyed += _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
+
+        Player.Health.OnDied += HandlePlayerDied;
+        Objective.Health.OnDestroyed += HandleObjectiveDestroyed;
+        //Player.Health.OnDied += () => TriggerGameOver(GameOverCause.PlayerDied);
+        //Objective.Health.OnDestroyed += _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
+
         WaveManager.OnStageCleared += HandleClearGame;
         WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
         WaveIntroUi.OnFinished += HandleWaveIntroFinished;
         Enemy.OnExpGained += AddExp;
     }
 
+    private void HandlePlayerDied()
+    {
+        TriggerGameOver(GameOverCause.PlayerDied);
+    }
 
+    private void HandleObjectiveDestroyed(ObjectiveHealth _)
+    {
+        TriggerGameOver(GameOverCause.ObjectiveDestroyed);
+    }
 
 
     private void HandleLevelUp(int newLevel)
