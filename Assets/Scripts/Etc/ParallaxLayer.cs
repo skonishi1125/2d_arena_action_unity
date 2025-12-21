@@ -25,12 +25,23 @@ public class ParallaxLayer
 
     public void LoopBackground(float cameraLeftEdge, float cameraRightEdge)
     {
-        float imageRightEdge = (background.position.x + imageHalfWidth) - imageWidthOffset;
-        float imageLeftEdge = (background.position.x - imageHalfWidth) + imageWidthOffset;
+        while (true)
+        {
+            float imageRightEdge = (background.position.x + imageHalfWidth) - imageWidthOffset;
+            float imageLeftEdge = (background.position.x - imageHalfWidth) + imageWidthOffset;
 
-        if (imageRightEdge < cameraLeftEdge)
-            background.position += Vector3.right * imageFullWidth;
-        else if (imageLeftEdge > cameraRightEdge)
-            background.position += Vector3.right * -imageFullWidth;
+            if (imageRightEdge < cameraLeftEdge)
+            {
+                background.position += Vector3.right * imageFullWidth;
+                continue;
+            }
+            if (imageLeftEdge > cameraRightEdge)
+            {
+                background.position -= Vector3.right * imageFullWidth;
+                continue;
+            }
+            break;
+        }
     }
+
 }

@@ -542,6 +542,7 @@ MonoBehaviour:
   playerVfx: {fileID: 497707092828696756}
   attackBuffColor: {r: 1, g: 0.3, b: 0.3, a: 1}
   defenseBuffColor: {r: 0.3, g: 0.6, b: 1, a: 1}
+  evasionBuffColor: {r: 0.3, g: 1, b: 0.3, a: 1}
   critBuffColor: {r: 1, g: 1, b: 0.3, a: 1}
 --- !u!1 &5057036140705593264
 GameObject:
