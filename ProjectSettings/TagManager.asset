@@ -38,8 +38,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
+  - name: BG_Sky
     uniqueID: 3402947653
+    locked: 0
+  - name: BG_Far
+    uniqueID: 1998641233
+    locked: 0
+  - name: BG_Near
+    uniqueID: 306686859
     locked: 0
   - name: Ground
     uniqueID: 2843193245

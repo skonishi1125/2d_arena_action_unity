@@ -1,0 +1,36 @@
+﻿using UnityEngine;
+
+[System.Serializable]
+public class ParallaxLayer
+{
+    [SerializeField] private Transform background;
+    // 全く動かしたくない場合は1, 動かす場合は0に近づける
+    [SerializeField] private float parallaxMultiplier;
+    [SerializeField] private float imageWidthOffset = 10;
+
+    private float imageFullWidth;
+    private float imageHalfWidth;
+
+    public void CalculateImageWidth()
+    {
+        imageFullWidth = background.GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+        imageHalfWidth = imageFullWidth / 2;
+    }
+
+    public void Move(float distanceToMove)
+    {
+        // background.position = background.position + new Vector3(distanceToMove * parallaxMultiplier, 0);
+        background.position += Vector3.right * (distanceToMove * parallaxMultiplier);
+    }
+
+    public void LoopBackground(float cameraLeftEdge, float cameraRightEdge)
+    {
+        float imageRightEdge = (background.position.x + imageHalfWidth) - imageWidthOffset;
+        float imageLeftEdge = (background.position.x - imageHalfWidth) + imageWidthOffset;
+
+        if (imageRightEdge < cameraLeftEdge)
+            background.position += Vector3.right * imageFullWidth;
+        else if (imageLeftEdge > cameraRightEdge)
+            background.position += Vector3.right * -imageFullWidth;
+    }
+}
