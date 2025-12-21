@@ -6,6 +6,8 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private StageConfig stageConfig;
     [SerializeField] private EnemySpawnPoints enemySpawnPoints;
+    [SerializeField] private ChestDropPoints rewardChestDropPoints;
+    [SerializeField] private GameObject defaultRewardChestPrefab;
 
     private int currentWaveIndex = -1; // なぜかハイライトされていないが使ってる
     private int aliveEnemyCount;
@@ -74,9 +76,12 @@ public class WaveManager : MonoBehaviour
     // Wave単体の進行を担当
     private IEnumerator RunWave(WaveConfig wave)
     {
-        // ボス戦なら、通知を入れる
+        // ボスWave時 フラグをリセットしてWARNING等の表示
         if (wave.isBossWave)
+        {
+            isBossDefeated = false;
             OnBossWaveStarted?.Invoke(wave);
+        }
 
         // Wave開始前待機時間
         yield return new WaitForSeconds(wave.startDelay);
@@ -115,6 +120,10 @@ public class WaveManager : MonoBehaviour
                     yield return null;
                 break;
         }
+
+        // Wave終了後のチェストスポーン判定
+        TrySpawnRewardChestOnWaveClear(wave);
+
     }
 
     // Waveに持たせた、敵配列自体のスポーン処理
@@ -151,6 +160,37 @@ public class WaveManager : MonoBehaviour
             OnStageCleared?.Invoke();
         }
 
+    }
+
+    // Wave終了時の救済チェスト出現処理
+    private void TrySpawnRewardChestOnWaveClear(WaveConfig wave)
+    {
+        if (!isRunning)
+            return;
+
+        if (wave == null)
+            return;
+
+        if (!wave.spawnRewardChestOnClear)
+            return;
+
+        // チェストを出す確率をつけるなら、こちらで管理する
+        //if (wave.rewardChestChance < 1f && UnityEngine.Random.value > wave.rewardChestChance)
+        //    return;
+
+        var prefab = defaultRewardChestPrefab;
+
+        if (prefab == null)
+            return;
+
+        if (rewardChestDropPoints == null)
+            return;
+
+        var p = rewardChestDropPoints.GetRandomPoint();
+        if (p == null)
+            return;
+
+        Instantiate(prefab, p.position, Quaternion.identity);
     }
 
 }

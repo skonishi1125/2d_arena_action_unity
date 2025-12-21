@@ -16,13 +16,11 @@ MonoBehaviour:
   startDelay: 1
   enemyGroups:
   - enemyPrefab: {fileID: 8915588882732984533, guid: a063f786848735d4fa7ef88f9110d78e, type: 3}
-    spawnCount: 5
+    spawnCount: 2
     spawnInterval: 1
     enemyRole: 1
-  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 20
-    spawnInterval: 0.5
-    enemyRole: 0
   clearType: 0
-  surviveDuration: 20
+  surviveDuration: 5
   isBossWave: 0
+  spawnRewardChestOnClear: 1
+  rewardChestChance: 1

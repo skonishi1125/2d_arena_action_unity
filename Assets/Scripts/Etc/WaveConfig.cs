@@ -21,6 +21,13 @@ public class WaveConfig : ScriptableObject
     // SurviveTime 用
     public float surviveDuration = 30f;
     public bool isBossWave;
+
+    // 救済Chestの有無
+    [Header("Reward Chest (on clear)")]
+    public bool spawnRewardChestOnClear = false;
+    //[Range(0f, 1f)]
+    //public float rewardChestChance = 1f; // 確率
+
 }
 
 [System.Serializable]
