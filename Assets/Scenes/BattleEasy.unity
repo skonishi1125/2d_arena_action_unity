@@ -56894,6 +56894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4953783495460416331, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
+      propertyPath: debugChangeLevel
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5146616458025720666, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.2
@@ -56933,6 +56937,18 @@ PrefabInstance:
     - target: {fileID: 5146616458025720666, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086258954224569265, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
+      propertyPath: 'basicAttackDamageMultipliers.Array.data[0]'
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086258954224569265, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
+      propertyPath: 'basicAttackDamageMultipliers.Array.data[1]'
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086258954224569265, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
+      propertyPath: 'basicAttackDamageMultipliers.Array.data[2]'
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

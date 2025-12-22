@@ -6,8 +6,12 @@ public class PlayerLevel : MonoBehaviour
     private EntityStatus entityStatus;
     private PlayerHealth playerHealth;
 
+    // デバッグ用
+    [Header("Debug Skill")]
+    [SerializeField] private bool debugChangeLevel = false;
+
     [SerializeField] private PlayerLevelTable levelTable;
-    public int SkillPoints { get; private set; } = 20; // test用
+    public int SkillPoints { get; private set; }
 
     public int Level { get; private set; } = 1;
     public int CurrentExp { get; private set; }
@@ -60,6 +64,16 @@ public class PlayerLevel : MonoBehaviour
         entityStatus.defense.SetBaseValue(levelInfo.defense);
         entityStatus.evasion.SetBaseValue(levelInfo.evasion);
         entityStatus.critical.SetBaseValue(levelInfo.critical);
+
+
+        // skill性能確認デバッグ用
+#if UNITY_EDITOR
+        if (debugChangeLevel)
+        {
+            SkillPoints = 20;
+            Level = 30;
+        }
+#endif
 
     }
 

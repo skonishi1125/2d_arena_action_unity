@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7200f800d58eb94bacacaa70fabb48e, type: 3}
-  m_Name: e_Wave3
+  m_Name: e_Wave7
   m_EditorClassIdentifier: 
   waveName: 
   startDelay: 0
@@ -26,12 +26,12 @@ MonoBehaviour:
     enemyRole: 0
     countForWaveClear: 0
   enemyStatMultiplier:
-    hp: 1.2
-    atk: 1.2
+    hp: 2
+    atk: 2
     def: 1
     eva: 1
     crit: 1
-    exp: 1.5
+    exp: 3
   clearType: 0
   surviveDuration: 5
   isBossWave: 0

@@ -14,37 +14,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - level: 1
-    requiredExp: 2
+    requiredExp: 10
     maxHp: 30
-    attack: 2
+    attack: 4
     defense: 0
     evasion: 0
     critical: 0
   - level: 2
-    requiredExp: 4
+    requiredExp: 12
     maxHp: 33
-    attack: 2
+    attack: 4
     defense: 0
     evasion: 0
     critical: 0
   - level: 3
-    requiredExp: 5
+    requiredExp: 14
     maxHp: 35
-    attack: 2
-    defense: 0
+    attack: 5
+    defense: 1
     evasion: 0
     critical: 0
   - level: 4
-    requiredExp: 18
+    requiredExp: 17
     maxHp: 37
-    attack: 2
-    defense: 0
+    attack: 5
+    defense: 1
     evasion: 0
     critical: 0
   - level: 5
     requiredExp: 20
-    maxHp: 35
-    attack: 2
-    defense: 0
-    evasion: 0
-    critical: 0
+    maxHp: 40
+    attack: 6
+    defense: 1
+    evasion: 1
+    critical: 1
