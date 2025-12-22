@@ -195,6 +195,7 @@ public class EntityCombat : MonoBehaviour
     }
 
     // 実ダメージを返す
+    // 弾、物理攻撃どちらもこれで管理している
 
     public static float CalculateDamage(
         EntityStatus attacker,
@@ -226,6 +227,10 @@ public class EntityCombat : MonoBehaviour
                 isCritical = true;
             }
         }
+
+        // 四捨五入して、4.0 など、綺麗な整数(ただし、float)の形にする
+        raw = Mathf.Floor(raw + 0.5f);
+        raw = Mathf.Max(1f, raw); // 最低ダメージ保障
 
         Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
 
