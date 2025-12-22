@@ -88,7 +88,7 @@ public class PlayerLevel : MonoBehaviour
                 AddSkillPoint(1);
 
                 ApplyLevelStatus();
-                playerHealth.FullHeal();
+                //playerHealth.FullHeal(); // 体力全回復は一旦やめる(サクサクlvが上がるから）
                 OnLevelUp?.Invoke(Level);
             }
             else

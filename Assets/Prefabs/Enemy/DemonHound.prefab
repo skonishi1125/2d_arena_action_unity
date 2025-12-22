@@ -425,6 +425,8 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 6863061273056700301}
   wallCheck: {fileID: 9069328689343767878}
+  enemyHealth: {fileID: 0}
+  role: 0
   isBoss: 0
   battleMoveSpeed: 3
   attackDistance: 1
@@ -445,6 +447,7 @@ MonoBehaviour:
   commonAttackDamageMultiplier: 1
   commonAttackKnockbackPower: {x: 1.5, y: 2.5}
   commonAttackKnockbackDuration: 0.15
+  aggroDuration: 3
   chargeAttackXVelocity: 2.5
 --- !u!114 &3253678872713585659
 MonoBehaviour:
@@ -534,20 +537,8 @@ MonoBehaviour:
     baseValue: 15
     additiveBonus: 0
     multiplier: 1
-  regenHp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  maxMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  regenMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
   attack:
-    baseValue: 5
+    baseValue: 2
     additiveBonus: 0
     multiplier: 1
   defense:
@@ -574,7 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp: 2
+  baseExp: 2
 --- !u!1 &4831607760275357490
 GameObject:
   m_ObjectHideFlags: 0
