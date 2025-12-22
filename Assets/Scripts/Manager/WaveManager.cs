@@ -6,8 +6,16 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] private StageConfig stageConfig;
     [SerializeField] private EnemySpawnPoints enemySpawnPoints;
-    [SerializeField] private ChestDropPoints rewardChestDropPoints;
-    [SerializeField] private GameObject defaultRewardChestPrefab;
+
+    [SerializeField] private ChestDropPoints healChestDropPoints;   // Objective周り等
+    [SerializeField] private ChestDropPoints statChestDropPoints;   // 探索ご褒美等
+
+    [SerializeField] private GameObject healChestPrefab;
+    [SerializeField] private GameObject attackChestPrefab;
+    [SerializeField] private GameObject defenseChestPrefab;
+
+    //[SerializeField] private ChestDropPoints rewardChestDropPoints;
+    //[SerializeField] private GameObject defaultRewardChestPrefab;
 
     private int currentWaveIndex = -1; // なぜかハイライトされていないが使ってる
     private int aliveEnemyCount;
@@ -173,24 +181,28 @@ public class WaveManager : MonoBehaviour
         if (wave == null)
             return;
 
-        if (!wave.spawnRewardChestOnClear)
-            return;
+        // HealChest
+        if (wave.spawnHealChestOnClear)
+            SpawnChest(healChestPrefab, healChestDropPoints);
 
-        // チェストを出す確率をつけるなら、こちらで管理する
-        //if (wave.rewardChestChance < 1f && UnityEngine.Random.value > wave.rewardChestChance)
-        //    return;
+        // AttackChest
+        if (wave.spawnAttackChestOnClear)
+            SpawnChest(attackChestPrefab, statChestDropPoints);
 
-        var prefab = defaultRewardChestPrefab;
+        // DefenseChest
+        if (wave.spawnDefenseChestOnClear)
+            SpawnChest(defenseChestPrefab, statChestDropPoints);
 
-        if (prefab == null)
-            return;
 
-        if (rewardChestDropPoints == null)
-            return;
+    }
 
-        var p = rewardChestDropPoints.GetRandomPoint();
-        if (p == null)
-            return;
+    private void SpawnChest(GameObject prefab, ChestDropPoints points)
+    {
+        if (prefab == null) return;
+        if (points == null) return;
+
+        var p = points.GetRandomPoint();
+        if (p == null) return;
 
         Instantiate(prefab, p.position, Quaternion.identity);
     }
