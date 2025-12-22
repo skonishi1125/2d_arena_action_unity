@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 8282488515797139030}
   - component: {fileID: 2556606920781899104}
   m_Layer: 10
-  m_Name: NormalChest
+  m_Name: DefenseChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,11 +280,8 @@ MonoBehaviour:
   openKnockback: {x: 0, y: 3}
   dropPoint: {fileID: 6215346800207569791}
   itemPrefabs:
-  - {fileID: 2062355968897412820, guid: bbec6b7c203211a4b8144e7714432ccd, type: 3}
-  - {fileID: 2183933178722660271, guid: 5cf66303903549e42b9bd47d598d2d3f, type: 3}
   - {fileID: 1957123631800769074, guid: ae166c772de5d03459bfbeaada92118a, type: 3}
   - {fileID: 6698334244728527634, guid: d7e5934f3d8a62d4996bae2d025ebc41, type: 3}
-  - {fileID: 1442896978618282227, guid: 83821f6511af3014ab2dd86e91e5646d, type: 3}
 --- !u!114 &2556606920781899104
 MonoBehaviour:
   m_ObjectHideFlags: 0
