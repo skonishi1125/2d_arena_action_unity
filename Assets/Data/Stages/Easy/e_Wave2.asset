@@ -17,7 +17,7 @@ MonoBehaviour:
   enemyGroups:
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
     spawnCount: 2
-    spawnInterval: 10
+    spawnInterval: 8
     enemyRole: 1
     countForWaveClear: 1
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
@@ -26,7 +26,7 @@ MonoBehaviour:
     enemyRole: 0
     countForWaveClear: 0
   enemyStatMultiplier:
-    hp: 1.2
+    hp: 1
     atk: 1.2
     def: 1
     eva: 1

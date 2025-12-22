@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class PlayerHealth : EntityHealth
 {
@@ -42,12 +43,20 @@ public class PlayerHealth : EntityHealth
     }
 
     // 回復(アイテムなど)
-    public void Heal(float amount)
+    public void Heal(float healMultiplier)
     {
         if (isDead)
             return;
 
-        currentHp = Mathf.Min(currentHp + amount, entityStatus.GetMaxHp());
+        //currentHp = Mathf.Min(currentHp + amount, entityStatus.GetMaxHp());
+
+        float healPoint = entityStatus.GetMaxHp() * healMultiplier;
+        healPoint = Mathf.Floor(healPoint + 0.5f);
+
+        currentHp += healPoint;
+        // 四捨五入して、4.0 など、綺麗な整数(ただし、float)の形にする
+        if (currentHp >= entityStatus.GetMaxHp())
+            currentHp = entityStatus.GetMaxHp();
         OnHealthUpdate?.Invoke(); // 体力が回復したことの通知
     }
 

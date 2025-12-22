@@ -21,6 +21,12 @@ public class WaveManager : MonoBehaviour
     private bool isRunning;
     private bool isBossDefeated = false;
 
+    public int CurrentWaveNumber => currentWaveIndex + 1;
+    public int TotalWaves => stageConfig != null && stageConfig.waves != null ? stageConfig.waves.Length : 0;
+
+    // ウェーブが変わったことの通知
+    public event Action<int, int> OnWaveChanged;
+
     // ボスウェーブであることの通知
     public event Action<WaveConfig> OnBossWaveStarted;
 
@@ -70,6 +76,10 @@ public class WaveManager : MonoBehaviour
                 yield break;
 
             currentWaveIndex = i;
+
+            // Wave変更通知
+            OnWaveChanged?.Invoke(CurrentWaveNumber, TotalWaves);
+
             var wave = stageConfig.waves[i];
             yield return StartCoroutine(RunWave(wave));
         }

@@ -14,30 +14,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   displayName: Teleport
-  description: "Z\u30AD\u30FC\u3067\u9032\u884C\u65B9\u5411\u306B\u30C6\u30EC\u30DD\u30FC\u30C8\u304C\u53EF\u80FD\u3068\u306A\u308B\u3002"
+  description: "Z\u30AD\u30FC\u3067\u9032\u884C\u65B9\u5411\u306B\u30C6\u30EC\u30DD\u30FC\u30C8\u3002\nSLv\u3067\u30AF\u30FC\u30EB\u30BF\u30A4\u30E0\u304C\u6975\u7AEF\u306B\u77ED\u304F\u306A\u308B\u3002"
   icon: {fileID: 1981856397, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 1
   exclusiveInSlot: 1
   projectilePrefab: {fileID: 0}
   levels:
   - level: 1
+    minPlayerLevel: 1
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
-    cooldownTime: 1
+    cooldownTime: 10
     manaCost: 0
-    levelDescription: "\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3059\u308B\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E010\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    isPassive: 0
+    passiveModifiers: []
   - level: 2
+    minPlayerLevel: 1
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
-    cooldownTime: 1
+    cooldownTime: 8
     manaCost: 0
-    levelDescription: "\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3059\u308B\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E08\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    isPassive: 0
+    passiveModifiers: []
   - level: 3
+    minPlayerLevel: 1
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 5
+    manaCost: 0
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E05\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    isPassive: 0
+    passiveModifiers: []
+  - level: 4
+    minPlayerLevel: 15
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 3
+    manaCost: 0
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    isPassive: 0
+    passiveModifiers: []
+  - level: 5
+    minPlayerLevel: 15
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 1
     manaCost: 0
-    levelDescription: "\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3059\u308B\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E01\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    isPassive: 0
+    passiveModifiers: []

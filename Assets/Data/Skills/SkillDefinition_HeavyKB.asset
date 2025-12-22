@@ -21,32 +21,32 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   levels:
   - level: 1
+    minPlayerLevel: 1
     damageMultiplier: 2
     knockbackPower: {x: 10, y: 5}
     knockbackDuration: 0.3
-    cooldownTime: 1
+    cooldownTime: 8
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B200%\u306E\u30C0\u30E1\u30FC\u30B8\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B
-      15"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E08\u79D2\u3002\u5439\u3063\u98DB\u3070\u3057\u529B15\u3002\n\u524D\u65B9\u306B\u5A01\u529B200%\u306E\u653B\u6483\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 2
-    damageMultiplier: 4
-    knockbackPower: {x: 20, y: 10}
-    knockbackDuration: 0.4
-    cooldownTime: 1
+    minPlayerLevel: 1
+    damageMultiplier: 3
+    knockbackPower: {x: 13, y: 5}
+    knockbackDuration: 0.35
+    cooldownTime: 7
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B400%\u306E\u30C0\u30E1\u30FC\u30B8\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B:
-      30"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E07\u79D2\u3002\u5439\u3063\u98DB\u3070\u3057\u529B18\u3002\n\u524D\u65B9\u306B\u5A01\u529B300%\u306E\u653B\u6483\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 3
-    damageMultiplier: 6
-    knockbackPower: {x: 30, y: 15}
+    minPlayerLevel: 1
+    damageMultiplier: 4
+    knockbackPower: {x: 18, y: 8}
     knockbackDuration: 1
-    cooldownTime: 1
+    cooldownTime: 6
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3001\u5A01\u529B600%\u306E\u30C0\u30E1\u30FC\u30B8\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B:
-      45"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E06\u79D2\u3002\u5439\u3063\u98DB\u3070\u3057\u529B26\u3002\n\u524D\u65B9\u306B\u5A01\u529B400%\u306E\u653B\u6483\u3002"
     isPassive: 0
     passiveModifiers: []

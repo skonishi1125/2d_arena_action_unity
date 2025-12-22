@@ -26,12 +26,12 @@ MonoBehaviour:
     enemyRole: 0
     countForWaveClear: 0
   enemyStatMultiplier:
-    hp: 1
+    hp: 0.5
     atk: 1
     def: 1
     eva: 1
     crit: 1
-    exp: 1
+    exp: 1.5
   clearType: 0
   surviveDuration: 5
   isBossWave: 0

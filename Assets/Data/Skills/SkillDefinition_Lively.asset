@@ -21,38 +21,41 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   levels:
   - level: 1
+    minPlayerLevel: 1
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C10%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "\u6700\u5927HP\u304C\u6C38\u7D9A\u7684\u306B10%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 0
       mode: 1
       value: 0.1
   - level: 2
+    minPlayerLevel: 5
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C15%\u4E0A\u6607\u3059\u308B\u3002"
-    isPassive: 1
-    passiveModifiers:
-    - param: 0
-      mode: 1
-      value: 0.15
-  - level: 3
-    damageMultiplier: 0
-    knockbackPower: {x: 0, y: 0}
-    knockbackDuration: 0
-    cooldownTime: 0
-    manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C20%\u4E0A\u6607\u3059\u308B\u3002"
+    levelDescription: "\u6700\u5927HP\u304C\u6C38\u7D9A\u7684\u306B20%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 0
       mode: 1
       value: 0.2
+  - level: 3
+    minPlayerLevel: 10
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "\u6700\u5927HP\u304C\u6C38\u7D9A\u7684\u306B30%\u4E0A\u6607\u3002"
+    isPassive: 1
+    passiveModifiers:
+    - param: 0
+      mode: 1
+      value: 0.3

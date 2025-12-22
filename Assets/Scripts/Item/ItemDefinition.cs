@@ -13,7 +13,8 @@ public class ItemDefinition : ScriptableObject
     public ItemEffectKind kind;
 
     [Tooltip("HealHp のとき使用")]
-    public float healAmount = 20f;
+    //public float healAmount = 20f;
+    public float healMultiplier = .3f;
 
     [Tooltip("TimedStatusDelta のとき使用")]
     public StatusParam statusParam = StatusParam.Attack;
@@ -34,7 +35,7 @@ public class ItemDefinition : ScriptableObject
                     var health = picker.GetComponentInParent<PlayerHealth>();
                     if (health != null)
                     {
-                        health.Heal(healAmount);
+                        health.Heal(healMultiplier);
                     }
                     break;
                 }

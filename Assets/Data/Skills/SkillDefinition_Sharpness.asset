@@ -21,38 +21,67 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   levels:
   - level: 1
+    minPlayerLevel: 1
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u304C\u6C38\u7D9A\u7684\u306B5%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B10%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.05
+      value: 0.1
   - level: 2
+    minPlayerLevel: 5
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u304C\u6C38\u7D9A\u7684\u306B7%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B20%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.07
+      value: 0.2
   - level: 3
+    minPlayerLevel: 10
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u304C\u6C38\u7D9A\u7684\u306B9%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B35%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.09
+      value: 0.35
+  - level: 4
+    minPlayerLevel: 15
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B50%\u4E0A\u6607\u3002"
+    isPassive: 1
+    passiveModifiers:
+    - param: 4
+      mode: 0
+      value: 0.5
+  - level: 5
+    minPlayerLevel: 20
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B70%\u4E0A\u6607\u3002"
+    isPassive: 1
+    passiveModifiers:
+    - param: 4
+      mode: 0
+      value: 0.7

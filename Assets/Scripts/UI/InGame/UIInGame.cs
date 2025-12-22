@@ -1,21 +1,28 @@
-﻿using TMPro;
+﻿using DG.Tweening.Core.Easing;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIInGame : MonoBehaviour
 {
+    private WaveManager waveManager;
+
     private Objective objective;
 
     private Player player;
     private EntityStatus entityStatus;
     private PlayerHealth playerHealth;
     private PlayerLevel playerLevel;
+
     [SerializeField] private PlayerLevelTable levelTable;
 
     [Header("Objective Health Bar")]
     [SerializeField] private RectTransform objectiveHealthRect;
     [SerializeField] private Slider objectiveHealthSlider;
     [SerializeField] private TextMeshProUGUI objectiveHealthText;
+
+    [Header("Wave Text")]
+    [SerializeField] private TextMeshProUGUI waveText;
 
     [Header("Player Health Bar")]
     [SerializeField] private RectTransform playerHealthRect;
@@ -33,6 +40,11 @@ public class UIInGame : MonoBehaviour
 
     private void Start()
     {
+        // WaveManager
+        waveManager = FindFirstObjectByType<WaveManager>();
+        if (!LogHelper.AssertNotNull(waveManager, nameof(waveManager), this))
+            return;
+
         // ========== objective ========== 
         // FindAnyObjectByTypeで取ってみる
         // (高速らしいが, 呼び出しごとに同じinstanceとは限らない)
@@ -59,7 +71,13 @@ public class UIInGame : MonoBehaviour
         if (!LogHelper.AssertNotNull(playerLevel, nameof(playerLevel), this))
             return;
 
-        // ========= 購読 ========== 
+
+        // ========= 購読 ==========
+        // WaveManager
+        waveManager.OnWaveChanged += HandleWaveChanged;
+        // すでにWaveが開始済みの場合に備えて一度反映
+        HandleWaveChanged(waveManager.CurrentWaveNumber, waveManager.TotalWaves);
+
         // Health Actionイベントに、体力バー更新の購読
         playerHealth.OnHealthUpdate += UpdatePlayerHealthBar;
 
@@ -78,6 +96,9 @@ public class UIInGame : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (waveManager != null)
+            waveManager.OnWaveChanged -= HandleWaveChanged;
+
         if (objective != null)
             objective.Health.OnHealthUpdate -= UpdateObjectiveHealthBar;
 
@@ -146,6 +167,16 @@ public class UIInGame : MonoBehaviour
         zSlot?.Setup(skill);
         dSlot?.Setup(skill);
         vSlot?.Setup(skill);
+    }
+
+    private void HandleWaveChanged(int waveNumber, int totalWaves)
+    {
+        SetWaveText(waveNumber, totalWaves);
+    }
+    private void SetWaveText(int waveNumber, int totalWaves)
+    {
+        // 表示は好みで
+        waveText.text = $"Wave: {waveNumber}/{totalWaves}";
     }
 
 }
