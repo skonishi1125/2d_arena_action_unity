@@ -100,12 +100,14 @@ public class SkillPanel : MonoBehaviour
         return false;
     }
 
-    public void ShowError(SkillUpgradeFailReason reason)
+    public void ShowError(SkillUpgradeFailReason reason, int requiredLevel = 0)
     {
         string msg = reason switch
         {
             SkillUpgradeFailReason.NotEnoughSkillPoints => "スキルポイントが不足しています。",
             SkillUpgradeFailReason.SlotAlreadyOccupied => "同じスロットの技は複数取得できません。",
+            SkillUpgradeFailReason.PlayerLevelTooLow => $"プレイヤーレベル{requiredLevel}以上が必要です。",
+            SkillUpgradeFailReason.MaxLevel => "このスキルは最大レベルです。",
             _ => "取得できません。"
         };
 

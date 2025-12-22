@@ -16,6 +16,10 @@ public class SkillLevelData
     [Min(1)]
     public int level = 1;
 
+    [Header("Requirement")]
+    [Min(1)]
+    public int minPlayerLevel = 1;
+
     [Header("Combat")]
     public float damageMultiplier = 1f;
     public Vector2 knockbackPower = Vector2.zero;

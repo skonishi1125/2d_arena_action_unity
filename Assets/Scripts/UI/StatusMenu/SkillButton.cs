@@ -47,6 +47,8 @@ public class SkillButton : MonoBehaviour,
     {
         NotEnoughSkillPoints,
         SlotAlreadyOccupied,
+        PlayerLevelTooLow,
+        MaxLevel,
     }
 
     public SkillId SkillId => skillId;
@@ -211,11 +213,28 @@ public class SkillButton : MonoBehaviour,
             return;
 
         int currentLv = GetCurrentLevel();
+        int nextLv = currentLv + 1;
+
+        // 最大Lv
+        int maxLv = playerSkill.GetMaxLevel(skillId);
+        if (currentLv >= maxLv)
+        {
+            skillPanel?.ShowError(SkillUpgradeFailReason.MaxLevel);
+            return;
+        }
 
         // 「未取得」かつ「同スロットに別スキル取得済み」の場合
         if (currentLv <= 0 && skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId))
         {
             skillPanel.ShowError(SkillUpgradeFailReason.SlotAlreadyOccupied);
+            return;
+        }
+
+        // ★PlayerLv条件（次レベルのminPlayerLevelを見る）
+        var nextData = skillDefinition != null ? skillDefinition.GetLevelData(nextLv) : null;
+        if (nextData != null && playerLevel.Level < nextData.minPlayerLevel)
+        {
+            skillPanel?.ShowError(SkillUpgradeFailReason.PlayerLevelTooLow, nextData.minPlayerLevel);
             return;
         }
 
@@ -263,14 +282,28 @@ public class SkillButton : MonoBehaviour,
         if (lockOverlay == null || playerLevel == null || playerSkill == null)
             return;
 
-        int lv = GetCurrentLevel();
+        int skillLv = GetCurrentLevel();
+        int maxSkillLv = playerSkill.GetMaxLevel(skillId);
+        int nextSkillLv = skillLv + 1;
 
         bool locked = false;
 
-        // パッシブスキルはロックしない。
+        // 最大skillLv
+        if (skillLv >= maxSkillLv)
+        {
+            locked = true;
+            lockOverlay.enabled = locked;
+            return;
+        }
+
         if (skillDefinition.slot != SkillSlot.None)
         {
-            if (lv <= 0)
+            // ★ PlayerLv条件（次レベルのminPlayerLevel）
+            var nextData = skillDefinition.GetLevelData(nextSkillLv);
+            if (nextData != null && playerLevel.Level < nextData.minPlayerLevel)
+                locked = true;
+
+            if (skillLv <= 0)
             {
                 if (playerLevel.SkillPoints < skillCost) // SP不足
                     locked = true;

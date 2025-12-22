@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerSkillController : MonoBehaviour
 {
+    private PlayerLevel playerLevel;
     // パッシブ適用のために使う
     private EntityStatus entityStatus;
 
@@ -50,6 +51,11 @@ public class PlayerSkillController : MonoBehaviour
         entityStatus = GetComponent<EntityStatus>();
         if (!LogHelper.AssertNotNull(entityStatus, nameof(entityStatus), this))
             return;
+
+        playerLevel = GetComponent<PlayerLevel>();
+        if (!LogHelper.AssertNotNull(playerLevel, nameof(playerLevel), this))
+            return;
+
     }
 
     private void Update()
@@ -151,6 +157,15 @@ public class PlayerSkillController : MonoBehaviour
 
         // 最大レベルの場合は弾く
         if (!CanLevelUp(id))
+            return false;
+
+        // Playerのレベルが満たしているか
+        int nextLevel = state.currentLevel + 1;
+        var nextData = state.definition.GetLevelData(nextLevel);
+        if (nextData == null)
+            return false;
+
+        if (playerLevel != null && playerLevel.Level < nextData.minPlayerLevel)
             return false;
 
         int oldLevel = state.currentLevel;
