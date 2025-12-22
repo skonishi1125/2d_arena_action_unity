@@ -5,7 +5,8 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private StageConfig stageConfig;
-    [SerializeField] private EnemySpawnPoints enemySpawnPoints;
+    [SerializeField] private EnemySpawnPoints enemyWandererSpawnPoints;
+    [SerializeField] private EnemySpawnPoints enemyRaiderSpawnPoints;
 
     [SerializeField] private ChestDropPoints healChestDropPoints;   // Objective周り等
     [SerializeField] private ChestDropPoints statChestDropPoints;   // 探索ご褒美等
@@ -13,9 +14,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject healChestPrefab;
     [SerializeField] private GameObject attackChestPrefab;
     [SerializeField] private GameObject defenseChestPrefab;
-
-    //[SerializeField] private ChestDropPoints rewardChestDropPoints;
-    //[SerializeField] private GameObject defaultRewardChestPrefab;
 
     private int currentWaveIndex = -1; // なぜかハイライトされていないが使ってる
     private int aliveEnemyCount;
@@ -148,21 +146,43 @@ public class WaveManager : MonoBehaviour
             if (!LogHelper.AssertNotNull(enemyPrefab, nameof(enemyPrefab), this))
                 yield break;
 
-            enemySpawnPoints.Spawn(group.enemyPrefab, group.enemyRole, mul); // multiplier追加？
-            aliveEnemyCount++;
+            var spawner = GetSpawnPoints(group.enemyRole);
+            if (spawner == null)
+                yield break;
+
+            spawner.Spawn(group.enemyPrefab, group.enemyRole, mul, group.countForWaveClear);
+
+            // Wandererは生存敵としてカウントしない
+            if (group.countForWaveClear)
+                aliveEnemyCount++;
 
             yield return new WaitForSeconds(group.spawnInterval);
         }
     }
+    private EnemySpawnPoints GetSpawnPoints(EnemyRole role)
+    {
+        switch (role)
+        {
+            case EnemyRole.Wanderer:
+                return enemyWandererSpawnPoints;
+
+            case EnemyRole.Raider:
+                return enemyRaiderSpawnPoints;
+
+            default:
+                return enemyRaiderSpawnPoints;
+        }
+    }
+
+
 
     // 敵のカウントを減らす処理
-    // 現状まだ使っていないが、使う場合はEnemyHealthイベントに購読させる。
     public void HandleEnemyDied(EnemyHealth enemyHealth)
     {
-        if (!isRunning)
-            return;
+        if (!isRunning) return;
 
-        aliveEnemyCount--;
+        if (enemyHealth != null && enemyHealth.CountForWaveClear)
+            aliveEnemyCount--;
 
         if (enemyHealth.IsBoss)
         {

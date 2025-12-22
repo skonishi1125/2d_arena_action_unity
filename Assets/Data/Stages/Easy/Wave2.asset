@@ -19,6 +19,7 @@ MonoBehaviour:
     spawnCount: 5
     spawnInterval: 1
     enemyRole: 1
+    countForWaveClear: 1
   enemyStatMultiplier:
     hp: 2
     atk: 2
@@ -29,4 +30,6 @@ MonoBehaviour:
   clearType: 0
   surviveDuration: 20
   isBossWave: 0
-  spawnRewardChestOnClear: 0
+  spawnHealChestOnClear: 0
+  spawnAttackChestOnClear: 1
+  spawnDefenseChestOnClear: 0

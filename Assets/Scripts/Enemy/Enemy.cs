@@ -10,6 +10,7 @@ public enum EnemyRole
 
 public class Enemy : Entity
 {
+    public EnemyHealth enemyHealth;
     private EnemyReward enemyReward;
 
     public EnemyIdleState idleState; // Playerと違い、さらに子要素で使うためpublic
@@ -72,6 +73,7 @@ public class Enemy : Entity
     protected override void Awake()
     {
         base.Awake();
+        enemyHealth = GetComponent<EnemyHealth>();
         enemyReward = GetComponent<EnemyReward>();
 
         // 設定されるべき値のチェック

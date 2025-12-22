@@ -4,7 +4,7 @@ public class EnemySpawnPoints : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
 
-    public void Spawn(GameObject enemyPrefab, EnemyRole role, EnemyStatMultiplier mul)
+    public void Spawn(GameObject enemyPrefab, EnemyRole role, EnemyStatMultiplier mul, bool countForWaveClear)
     {
         if (spawnPoints.Length == 0 || enemyPrefab == null)
             return;
@@ -18,7 +18,10 @@ public class EnemySpawnPoints : MonoBehaviour
         ApplyMultiplier(go, mul);
         var health = go.GetComponent<EnemyHealth>();
         if (health != null)
+        {
+            health.SetCountForWaveClear(countForWaveClear);
             health.ResetHpToMax();
+        }
         var reward = go.GetComponent<EnemyReward>();
         if (reward != null)
             reward.ApplyExpMultiplier(mul.exp);

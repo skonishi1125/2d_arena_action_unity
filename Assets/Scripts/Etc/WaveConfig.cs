@@ -14,6 +14,7 @@ public class EnemyGroup
     public int spawnCount;         // 何体出すか
     public float spawnInterval;    // 何秒おきに出すか
     public EnemyRole enemyRole;    // Wanderer or Raider
+    public bool countForWaveClear = true; // Wanderer は false
 }
 
 [System.Serializable]

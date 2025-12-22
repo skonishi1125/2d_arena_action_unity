@@ -7,6 +7,8 @@ public class EnemyHealth : EntityHealth
     private Enemy enemy;
     protected Slider healthBar;
 
+    public bool CountForWaveClear { get; private set; }
+
     // Enemy.csに持たせたIsBossを扱う
     public bool IsBoss;
 
@@ -78,6 +80,9 @@ public class EnemyHealth : EntityHealth
         base.Die();
         OnAnyEnemyDied?.Invoke(this);
     }
+
+    public void SetCountForWaveClear(bool v) => CountForWaveClear = v;
+
 
     private void UpdateEnemyHealthBar()
     {
