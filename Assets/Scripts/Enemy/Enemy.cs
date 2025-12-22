@@ -244,6 +244,9 @@ public class Enemy : Entity
     {
         base.Death();
 
+        // ミニマップの赤い点の削除
+        MinimapController.Instance?.Unregister(transform);
+
         if (enemyReward != null)
             OnExpGained?.Invoke(enemyReward.Exp);
 

@@ -12,6 +12,9 @@ public class EnemySpawnPoints : MonoBehaviour
         var point = spawnPoints[Random.Range(0, spawnPoints.Length)];
         var go = Instantiate(enemyPrefab, point.position, Quaternion.identity);
 
+        // ミニマップへの登録
+        MinimapController.Instance?.RegisterEnemy(go.transform);
+
         // Wave倍率設定
         // maxHpだけ上がっているのでcurrentHpも合わせる。
         // 経験値も指定の倍数だけ再設定。
