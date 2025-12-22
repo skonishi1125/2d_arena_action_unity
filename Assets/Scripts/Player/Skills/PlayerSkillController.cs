@@ -331,15 +331,9 @@ public class PlayerSkillController : MonoBehaviour
 
     // ========= 既存ヘルパ（Dash/Knockback 用）のラッパーもここに書ける =========
 
-    public bool CanUseDash()
-        => CanUse(SkillId.Dash);
-
     public bool DashHasStartAttack()
         => GetLevel(SkillId.Dash) >= 2;
 
     public bool DashHasEndAttack()
-        => GetLevel(SkillId.Dash) >= 3;
-
-    public bool CanUseKnockbackAttack()
-        => CanUse(SkillId.HeavyKB);
+        => GetLevel(SkillId.Dash) >= 4;
 }

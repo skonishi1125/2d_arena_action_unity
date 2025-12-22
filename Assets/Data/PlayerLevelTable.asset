@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - level: 1
-    requiredExp: 10
+    requiredExp: 2
     maxHp: 30
     attack: 2
     defense: 0
     evasion: 0
     critical: 0
   - level: 2
-    requiredExp: 12
+    requiredExp: 4
     maxHp: 33
     attack: 2
     defense: 0
     evasion: 0
     critical: 0
   - level: 3
-    requiredExp: 14
+    requiredExp: 5
     maxHp: 35
     attack: 2
     defense: 0

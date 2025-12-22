@@ -56890,14 +56890,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2176897828092602909, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
-      propertyPath: m_Size.y
-      value: 1.5827508
-      objectReference: {fileID: 0}
-    - target: {fileID: 2176897828092602909, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.008624554
-      objectReference: {fileID: 0}
     - target: {fileID: 2311999036730397486, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: m_Name
       value: Player
@@ -57491,34 +57483,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 663071527262422811, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.30156827
-      objectReference: {fileID: 0}
-    - target: {fileID: 663071527262422811, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.7229686
-      objectReference: {fileID: 0}
-    - target: {fileID: 1933286879951796430, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
-      propertyPath: Lens.OrthographicSize
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1933286879951796430, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 567165582}
-    - target: {fileID: 4008670401211877184, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
-      propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336442929464871839, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.30156827
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336442929464871839, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.7229686
-      objectReference: {fileID: 0}
     - target: {fileID: 6647507333539890614, guid: 5e8277540ffb907429e436f584506ba3, type: 3}
       propertyPath: m_Name
       value: Camera
