@@ -38,6 +38,11 @@ public class UIInGame : MonoBehaviour
     [SerializeField] private SkillSlotWidget dSlot;
     [SerializeField] private SkillSlotWidget vSlot;
 
+    [Header("Menu Text")]
+    [SerializeField] private TextMeshProUGUI menuText;
+    [SerializeField] private Color menuNormalColor = Color.white;
+    [SerializeField] private Color menuAlertColor = Color.yellow;
+
     private void Start()
     {
         // WaveManager
@@ -87,6 +92,9 @@ public class UIInGame : MonoBehaviour
         // Level 経験値返還時のイベント
         playerLevel.OnExpChanged += HandleExpChanged;
 
+        // SP変更時の購読
+        playerLevel.OnSkillPointsChanged += HandleSkillPointsChanged;
+
         // ========= 初期化 ========== 
         // 画面のSAMPLEなどのテキストを、Awake時点の設定にする
         UpdateObjectiveHealthBar();
@@ -112,6 +120,7 @@ public class UIInGame : MonoBehaviour
         {
             playerLevel.OnLevelUp -= HandlePlayerLevelUp;
             playerLevel.OnExpChanged -= HandleExpChanged;
+            playerLevel.OnSkillPointsChanged -= HandleSkillPointsChanged;
         }
 
     }
@@ -158,6 +167,14 @@ public class UIInGame : MonoBehaviour
         //Debug.Log("HandleExpChanged currentExp: " + currentExp + " requiredExp: " + requiredExp + " 割合: " + currentExp / requiredExp);
 
         expSlider.value = (float)currentExp / requiredExp;
+    }
+
+    // [ESC]: MENU の文字の色変更
+    private void HandleSkillPointsChanged(int skillPoints)
+    {
+        if (menuText == null)
+            return;
+        menuText.color = (skillPoints > 0) ? menuAlertColor : menuNormalColor;
     }
 
     // スキルスロット呼び出し
