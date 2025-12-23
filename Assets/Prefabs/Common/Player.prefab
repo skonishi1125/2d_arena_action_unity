@@ -359,8 +359,8 @@ MonoBehaviour:
   critHitColor: {r: 1, g: 0.9411765, b: 0, a: 1}
   projectileHitVfx: {fileID: 3999223365734403740, guid: cf6dfb9383a891a469bd4450a6122935, type: 3}
   projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
-  projectileCritHitVfx: {fileID: 3999223365734403740, guid: cf6dfb9383a891a469bd4450a6122935, type: 3}
-  projectileCritHitColor: {r: 1, g: 0, b: 0.1443119, a: 1}
+  projectileCritHitVfx: {fileID: 1003673438635462287, guid: 2bca4fe4277e78e489a946b3d22a0983, type: 3}
+  projectileCritHitColor: {r: 0.97323865, g: 1, b: 0.33490568, a: 1}
   missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
   teleportVfx: {fileID: 4416121855561363331, guid: 8deebf8c3bde24d4293d2352db8bf2f7, type: 3}
   teleportColor: {r: 0, g: 0.0081414, b: 0.6981132, a: 1}
@@ -446,6 +446,8 @@ MonoBehaviour:
   knockbackDuration: 0.2
   heavyKnockbackDuration: 0.7
   heavyDamageTreshold: 0.3
+  regenInterval: 5
+  regenPercent: 0.01
 --- !u!114 &4953783495460416331
 MonoBehaviour:
   m_ObjectHideFlags: 0
