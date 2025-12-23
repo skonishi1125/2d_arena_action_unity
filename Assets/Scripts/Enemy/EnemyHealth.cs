@@ -44,22 +44,23 @@ public class EnemyHealth : EntityHealth
         UpdateEnemyHealthBar();
     }
 
-    //public override void TakeDamage(float damage, Transform attacker)
-    //{
-    //    base.TakeDamage(damage, attacker);
-
-    //    // ダメージ計算後に殴られたケースの考慮
-    //    if (isDead)
-    //        return;
-
-    //    if (attacker.GetComponent<Player>() != null)
-    //        enemy.TryEnterBattleState(attacker);
-
-    //    OnTakeDamaged?.Invoke();
-    //}
 
     public override void TakeDamage(DamageContext ctx)
     {
+        // 個別 KBとKBDurationの 調整
+        if (ctx.hasCustomKnockback && enemy != null)
+        {
+            float mul = enemy.KnockbackMultiplier;
+
+            // パワーと時間を同じ倍率で減衰
+            ctx.knockbackPower *= mul;
+            ctx.knockbackDuration *= mul;
+
+            // 0(想定外の値だが)、ならデフォルトを使う
+            if (mul <= 0f)
+                ctx.hasCustomKnockback = false;
+        }
+
         base.TakeDamage(ctx);
 
         // ダメージ計算後に殴られたケースの考慮

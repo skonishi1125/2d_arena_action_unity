@@ -60,6 +60,12 @@ public class Enemy : Entity
     private float aggroUntil;
     private Transform objective;
 
+    [Header("Knockback Resistance")]
+    [SerializeField, Range(0.1f, 1f)]
+    private float knockbackMultiplier = 1f; // 1:通常 / 0.1:10%
+
+    public float KnockbackMultiplier => knockbackMultiplier;
+
     // 攻撃されたときのplayer transform情報
     public Transform player { get; private set; }
     public bool IsBoss => isBoss;

@@ -2,6 +2,7 @@
 
 public class DemonHound : Enemy
 {
+    [Header("Attack Velocity")]
     [SerializeField] public float chargeAttackXVelocity = 2.5f;
     protected override void Awake()
     {
