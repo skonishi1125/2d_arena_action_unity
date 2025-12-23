@@ -307,9 +307,9 @@ MonoBehaviour:
   - {x: 5, y: 0}
   - {x: 10, y: 5}
   basicAttackDamageMultipliers:
+  - 0.5
+  - 0.75
   - 1
-  - 1.5
-  - 2
   basicAttackKnockbackPowers:
   - {x: 1, y: 2}
   - {x: 1, y: 2}
@@ -325,11 +325,16 @@ MonoBehaviour:
   teleportCheckStep: 0.25
   teleportRadius: 0.2
   groundSlumCheck: {fileID: 5135899857297449238}
-  groundSlamRange: {x: 6, y: 1.2}
+  groundSlamRange: {x: 7, y: 2.5}
   groundSlamGravityScale: 7
-  groundSlamJumpForce: 30
+  groundSlamJumpForce: 23
   groundSlamFallForce: -20
-  groundSlamXMovementCompensation: 0.1
+  groundSlamXMovementCompensation: 0
+  chestCheck: {fileID: 5146616458025720666}
+  chestCheckDistance: 0.9
+  whatIsChest:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &497707092828696756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8e3984aee9f494787ee0146d6f87cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugChangeLevel: 1
   levelTable: {fileID: 11400000, guid: d4d9ffa0e477a8843b05b0fec1e8fab7, type: 2}
 --- !u!114 &5728190401651403911
 MonoBehaviour:
