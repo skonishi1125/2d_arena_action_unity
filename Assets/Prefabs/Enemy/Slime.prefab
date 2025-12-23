@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
-  groundCheckDistance: 0.5
+  groundCheckDistance: 0.3
   wallCheckDistance: 0.9
   whatIsGround:
     serializedVersion: 2
@@ -605,7 +605,7 @@ Transform:
   m_GameObject: {fileID: 6609335432161965068}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.29, z: 0}
+  m_LocalPosition: {x: 0.856, y: -0.082, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
