@@ -57236,6 +57236,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 360847895747205627, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
+      propertyPath: RegenPercentPerSecond
+      value: 0.002
+      objectReference: {fileID: 0}
     - target: {fileID: 497707092828696756, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: projectileCritHitVfx
       value: 

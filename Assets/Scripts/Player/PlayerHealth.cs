@@ -4,9 +4,47 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class PlayerHealth : EntityHealth
 {
+    [Header("HP Regen")]
+    [SerializeField] private float regenInterval = 5f;   // 5秒ごと
+    [SerializeField] private float regenPercent = 0.01f; // 最大HPの1%
+    private float regenTimer = 0f;
 
     public event Action OnHealthUpdate;// 体力変化時 HealthbarUI 更新が主。
     public event Action OnDied; // 死亡時 画面シェイク,PlayerのState変更,GameOverUI他。
+
+    protected virtual void Update()
+    {
+        ApplyRegen(Time.deltaTime);
+    }
+
+    private void ApplyRegen(float dt)
+    {
+        if (isDead) return;
+
+        float maxHp = entityStatus.GetMaxHp();
+        if (currentHp >= maxHp)
+        {
+            regenTimer = 0f;
+            return;
+        }
+
+        regenTimer += dt;
+        if (regenTimer < regenInterval) return;
+
+        // dtが大きくても取りこぼさない
+        bool healed = false;
+        while (regenTimer >= regenInterval && currentHp < maxHp)
+        {
+            regenTimer -= regenInterval;
+
+            float heal = Mathf.Max(1.0f, Mathf.Floor(maxHp * regenPercent)); // 1%が小数なら1
+            currentHp = Mathf.Min(currentHp + heal, maxHp);
+            healed = true;
+        }
+
+        if (healed)
+            OnHealthUpdate?.Invoke();
+    }
 
     protected override void ReduceHp(float damage)
     {
