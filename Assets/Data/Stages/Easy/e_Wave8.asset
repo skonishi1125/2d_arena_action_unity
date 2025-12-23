@@ -15,16 +15,11 @@ MonoBehaviour:
   waveName: 
   startDelay: 0
   enemyGroups:
-  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 5
-    spawnInterval: 2
+  - enemyPrefab: {fileID: 3714439288355158456, guid: f78cbbfd48537e041a14b14c1831fafd, type: 3}
+    spawnCount: 1
+    spawnInterval: 0
     enemyRole: 1
     countForWaveClear: 1
-  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 5
-    spawnInterval: 2
-    enemyRole: 0
-    countForWaveClear: 0
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
     spawnCount: 10
     spawnInterval: 2
@@ -32,7 +27,12 @@ MonoBehaviour:
     countForWaveClear: 1
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
     spawnCount: 10
-    spawnInterval: 2
+    spawnInterval: 4
+    enemyRole: 1
+    countForWaveClear: 1
+  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
+    spawnCount: 5
+    spawnInterval: 6
     enemyRole: 1
     countForWaveClear: 1
   enemyStatMultiplier:
@@ -41,10 +41,10 @@ MonoBehaviour:
     def: 1
     eva: 1
     crit: 1
-    exp: 1.8
-  clearType: 0
-  surviveDuration: 5
-  isBossWave: 0
-  spawnHealChestOnClear: 1
-  spawnAttackChestOnClear: 1
+    exp: 2
+  clearType: 2
+  surviveDuration: 0
+  isBossWave: 1
+  spawnHealChestOnClear: 0
+  spawnAttackChestOnClear: 0
   spawnDefenseChestOnClear: 0

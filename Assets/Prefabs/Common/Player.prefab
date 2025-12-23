@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c8e3984aee9f494787ee0146d6f87cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugChangeLevel: 1
+  debugChangeLevel: 0
   levelTable: {fileID: 11400000, guid: d4d9ffa0e477a8843b05b0fec1e8fab7, type: 2}
 --- !u!114 &5728190401651403911
 MonoBehaviour:

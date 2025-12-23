@@ -30,11 +30,6 @@ MonoBehaviour:
     spawnInterval: 3
     enemyRole: 1
     countForWaveClear: 1
-  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 10
-    spawnInterval: 3
-    enemyRole: 1
-    countForWaveClear: 1
   enemyStatMultiplier:
     hp: 1.2
     atk: 1.5
@@ -43,7 +38,7 @@ MonoBehaviour:
     crit: 1
     exp: 1.5
   clearType: 0
-  surviveDuration: 5
+  surviveDuration: 0
   isBossWave: 0
   spawnHealChestOnClear: 1
   spawnAttackChestOnClear: 1

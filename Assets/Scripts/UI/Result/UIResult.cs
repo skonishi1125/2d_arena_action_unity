@@ -47,7 +47,7 @@ public class UIResult : MonoBehaviour
 
         if (isClear)
         {
-            resultText.text = "GOOD ON YOU!";
+            resultText.text = "GAME CLEAR!";
             return;
         }
 
