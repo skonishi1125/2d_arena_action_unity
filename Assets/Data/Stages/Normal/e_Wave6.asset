@@ -41,7 +41,7 @@ MonoBehaviour:
     enemyRole: 1
     countForWaveClear: 1
   enemyStatMultiplier:
-    hp: 2.5
+    hp: 1.8
     atk: 2.5
     def: 1
     eva: 1
@@ -51,5 +51,5 @@ MonoBehaviour:
   surviveDuration: 0
   isBossWave: 0
   spawnHealChestOnClear: 1
-  spawnAttackChestOnClear: 0
+  spawnAttackChestOnClear: 1
   spawnDefenseChestOnClear: 1

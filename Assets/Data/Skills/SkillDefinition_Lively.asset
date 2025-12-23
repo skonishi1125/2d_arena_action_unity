@@ -27,12 +27,13 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C\u6C38\u7D9A\u7684\u306B10%\u4E0A\u6607\u3002"
+    levelDescription: "\u6700\u5927HP\u3092\u6C38\u7D9A\u7684\u306B20\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      20\u30DD\u30A4\u30F3\u30C8)"
     isPassive: 1
     passiveModifiers:
     - param: 0
-      mode: 1
-      value: 0.1
+      mode: 0
+      value: 20
   - level: 2
     minPlayerLevel: 5
     damageMultiplier: 0
@@ -40,12 +41,13 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C\u6C38\u7D9A\u7684\u306B20%\u4E0A\u6607\u3002"
+    levelDescription: "\u6700\u5927HP\u3092\u6C38\u7D9A\u7684\u306B20\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      40\u30DD\u30A4\u30F3\u30C8)"
     isPassive: 1
     passiveModifiers:
     - param: 0
-      mode: 1
-      value: 0.2
+      mode: 0
+      value: 40
   - level: 3
     minPlayerLevel: 10
     damageMultiplier: 0
@@ -53,9 +55,38 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "\u6700\u5927HP\u304C\u6C38\u7D9A\u7684\u306B30%\u4E0A\u6607\u3002"
+    levelDescription: "\u6700\u5927HP\u3092\u6C38\u7D9A\u7684\u306B30\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      70\u30DD\u30A4\u30F3\u30C8)"
     isPassive: 1
     passiveModifiers:
     - param: 0
-      mode: 1
-      value: 0.3
+      mode: 0
+      value: 70
+  - level: 4
+    minPlayerLevel: 15
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "\u6700\u5927HP\u3092\u6C38\u7D9A\u7684\u306B30\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      100\u30DD\u30A4\u30F3\u30C8)"
+    isPassive: 1
+    passiveModifiers:
+    - param: 0
+      mode: 0
+      value: 100
+  - level: 5
+    minPlayerLevel: 20
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "\u6700\u5927HP\u3092\u6C38\u7D9A\u7684\u306B50\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      150\u30DD\u30A4\u30F3\u30C8)"
+    isPassive: 1
+    passiveModifiers:
+    - param: 0
+      mode: 0
+      value: 150

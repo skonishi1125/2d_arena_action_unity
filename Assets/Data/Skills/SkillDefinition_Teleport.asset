@@ -25,9 +25,9 @@ MonoBehaviour:
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
-    cooldownTime: 10
+    cooldownTime: 5
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E010\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E05\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 2
@@ -35,9 +35,9 @@ MonoBehaviour:
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
-    cooldownTime: 8
+    cooldownTime: 4
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E08\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 3
@@ -45,9 +45,9 @@ MonoBehaviour:
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
-    cooldownTime: 5
+    cooldownTime: 3
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E05\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 4
@@ -55,9 +55,9 @@ MonoBehaviour:
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
     knockbackDuration: 0
-    cooldownTime: 3
+    cooldownTime: 2
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E02\u79D2\u3002\u9032\u884C\u65B9\u5411\u3078\u30C6\u30EC\u30DD\u30FC\u30C8\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 5
