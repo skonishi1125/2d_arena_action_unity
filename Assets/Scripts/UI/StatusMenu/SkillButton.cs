@@ -95,12 +95,15 @@ public class SkillButton : MonoBehaviour,
     {
         UpdateView();
         RefreshLockVisual();
+
+        cooldownMask.enabled = false;
     }
 
-    private void Update()
-    {
-        UpdateCooldownMask();
-    }
+    // UI側は、クールダウンを付けなくてもいいと思ったので外した
+    //private void Update()
+    //{
+    //    // UpdateCooldownMask();
+    //}
 
 
     // スキル使用後、暗い表記から回復していく描写
@@ -110,14 +113,13 @@ public class SkillButton : MonoBehaviour,
             return;
 
         // PlayerSkillController から 0〜1 の割合をもらう
-        // ratio = 1: クール完了 / 0: 使った直後
         float ratio = playerSkill.GetCooldownRatio(skillId);
 
         // マスクは覆っている量なので、逆にする
         float cover = 1f - ratio;
         cooldownMask.fillAmount = cover;
 
-        // 完全に準備完了のときだけマスクを消す（好み）
+        // 完全に準備完了のときだけマスクを消す
         cooldownMask.enabled = cover > 0f;
     }
 
