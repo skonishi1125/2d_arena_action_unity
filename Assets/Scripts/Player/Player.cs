@@ -87,15 +87,16 @@ public class Player : Entity
     public float groundSlamJumpForce = 30f;
     public float groundSlamFallForce = -20f;
     public float groundSlamXMovementCompensation = .1f; // ジャンプ中のx加速度補正
+    [SerializeField] private Transform chestCheck;
+    [SerializeField] private float chestCheckDistance;
+    [SerializeField] private LayerMask whatIsChest;
+    public bool chestDetected { get; private set; } // チェストに着地したときのバグ対策用
 
 
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;
     public float AirAttackFallSpeed => airAttackFallSpeed;
     public float AirAttackVerticalAccel => airAttackVerticalAccel;
-
-    //// Action Event
-    //public static event Action OnPlayerDeath;
 
 
     protected override void Awake()
@@ -156,6 +157,18 @@ public class Player : Entity
         stateMachine.Initialize(idleState); // 初期状態の設定 + 入口処理
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        HandleChestCollisionDetection();
+    }
+
+    private void HandleChestCollisionDetection()
+    {
+        chestDetected = Physics2D.Raycast(
+            chestCheck.position, Vector2.down, chestCheckDistance, whatIsChest
+        );
+    }
 
     public void EnterAttackStateWithDelay()
     {

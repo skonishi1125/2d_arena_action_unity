@@ -25,6 +25,9 @@ public class PlayerGroundSlamFallState : PlayerState
         if (player.groundDetected)
             stateMachine.ChangeState(player.groundSlamImpactState);
 
+        if (player.chestDetected)
+            stateMachine.ChangeState(player.groundSlamImpactState);
+
     }
 
     public override void Exit()

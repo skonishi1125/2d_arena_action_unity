@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ace2ae8ab883d40b4653d53d6d3756, type: 3}
   m_Name: ItemDefinition_Heal
   m_EditorClassIdentifier: 
-  displayName: Heal
-  worldSprite: {fileID: 0}
-  icon: {fileID: 0}
   kind: 0
-  healAmount: 20
+  healMultiplier: 0.5
   statusParam: 0
   modifyMode: 0
   delta: 0

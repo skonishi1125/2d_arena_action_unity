@@ -16,6 +16,10 @@ public class DescriptionPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI masterLevelHeaderText;
     [SerializeField] private TextMeshProUGUI summaryText;
 
+    [Header("Requirement")]
+    [SerializeField] private GameObject requirementLevelRow;
+    [SerializeField] private TextMeshProUGUI levelValueText; // 例: SPValueText → LevelValueText
+
     // "-------" はObject側で静的な文字列を入れて管理
 
     [Header("Details")]
@@ -40,6 +44,17 @@ public class DescriptionPanel : MonoBehaviour
         }
 
         descriptionRow.SetActive(true);
+
+        if (requirementLevelRow == null || levelValueText == null)
+            return;
+
+        // 次に上げるレベル（未習得なら1、習得済みなら+1）
+        int nextLevel = (currentLevel <= 0) ? 1 : currentLevel + 1;
+        var nextData = def.GetLevelData(nextLevel);
+        if (nextData != null)
+            levelValueText.text = nextData.minPlayerLevel.ToString();
+        else
+            levelValueText.text = def.GetLevelData(currentLevel).minPlayerLevel.ToString();
 
         // 上部
         skillIcon.sprite = def.icon;
