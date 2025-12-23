@@ -437,7 +437,7 @@ MonoBehaviour:
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1.36
   maxWallJumpAttempts: 2
-  wallJumpVelocity: {x: 4, y: 12}
+  wallJumpVelocity: {x: 6, y: 12}
   wallJumpCooldown: 0.2
   whatIsPlayer:
     serializedVersion: 2
@@ -448,6 +448,7 @@ MonoBehaviour:
   commonAttackKnockbackPower: {x: 1.5, y: 2.5}
   commonAttackKnockbackDuration: 0.15
   aggroDuration: 3
+  knockbackMultiplier: 1
   chargeAttackXVelocity: 2.5
 --- !u!114 &3253678872713585659
 MonoBehaviour:

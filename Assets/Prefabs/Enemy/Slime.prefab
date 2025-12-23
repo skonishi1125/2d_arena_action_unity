@@ -312,15 +312,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 30
+    baseValue: 50
     additiveBonus: 0
     multiplier: 1
   attack:
-    baseValue: 5
+    baseValue: 3
     additiveBonus: 0
     multiplier: 1
   defense:
-    baseValue: 3
+    baseValue: 2
     additiveBonus: 0
     multiplier: 1
   evasion:
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseExp: 1
+  baseExp: 5
 --- !u!1 &2353468879728897398
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,29 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7200f800d58eb94bacacaa70fabb48e, type: 3}
-  m_Name: e_Wave8
+  m_Name: e_Wave9
   m_EditorClassIdentifier: 
   waveName: 
   startDelay: 0
   enemyGroups:
-  - enemyPrefab: {fileID: 3714439288355158456, guid: f78cbbfd48537e041a14b14c1831fafd, type: 3}
+  - enemyPrefab: {fileID: 2270201892672900070, guid: 1fec7dda837a15f469b2246762ae64f9, type: 3}
     spawnCount: 1
-    spawnInterval: 0
+    spawnInterval: 1
     enemyRole: 1
     countForWaveClear: 1
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 10
-    spawnInterval: 2
+    spawnCount: 2
+    spawnInterval: 5
     enemyRole: 1
     countForWaveClear: 1
-  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 10
-    spawnInterval: 4
+  - enemyPrefab: {fileID: 2270201892672900070, guid: 1fec7dda837a15f469b2246762ae64f9, type: 3}
+    spawnCount: 1
+    spawnInterval: 5
+    enemyRole: 1
+    countForWaveClear: 1
+  - enemyPrefab: {fileID: 4581665048904097675, guid: 64e08da70bcc5cb41873031204bf1d16, type: 3}
+    spawnCount: 3
+    spawnInterval: 1
     enemyRole: 1
     countForWaveClear: 1
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
     spawnCount: 5
-    spawnInterval: 6
+    spawnInterval: 5
     enemyRole: 1
     countForWaveClear: 1
   enemyStatMultiplier:
@@ -42,9 +47,9 @@ MonoBehaviour:
     eva: 1
     crit: 1
     exp: 2
-  clearType: 2
+  clearType: 0
   surviveDuration: 0
-  isBossWave: 1
-  spawnHealChestOnClear: 0
+  isBossWave: 0
+  spawnHealChestOnClear: 1
   spawnAttackChestOnClear: 0
-  spawnDefenseChestOnClear: 0
+  spawnDefenseChestOnClear: 1

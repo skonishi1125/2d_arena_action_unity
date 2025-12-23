@@ -78,78 +78,78 @@ MonoBehaviour:
     critical: 0.05
   - level: 10
     requiredExp: 51
+    maxHp: 52
+    attack: 6
+    defense: 1
+    evasion: 0.05
+    critical: 0.05
+  - level: 11
+    requiredExp: 61
     maxHp: 55
     attack: 6
     defense: 1
-    evasion: 0.1
-    critical: 0.1
-  - level: 11
-    requiredExp: 61
+    evasion: 0.05
+    critical: 0.05
+  - level: 12
+    requiredExp: 74
+    maxHp: 57
+    attack: 6
+    defense: 1
+    evasion: 0.05
+    critical: 0.05
+  - level: 13
+    requiredExp: 89
     maxHp: 60
     attack: 6
     defense: 1
-    evasion: 0.1
-    critical: 0.1
-  - level: 12
-    requiredExp: 74
-    maxHp: 65
-    attack: 6
-    defense: 1
-    evasion: 0.1
-    critical: 0.1
-  - level: 13
-    requiredExp: 89
-    maxHp: 70
-    attack: 6
-    defense: 1
-    evasion: 0.1
-    critical: 0.1
+    evasion: 0.05
+    critical: 0.05
   - level: 14
     requiredExp: 106
-    maxHp: 75
+    maxHp: 62
     attack: 6
     defense: 1
-    evasion: 0.1
-    critical: 0.1
+    evasion: 0.05
+    critical: 0.05
   - level: 15
     requiredExp: 128
-    maxHp: 80
-    attack: 8
-    defense: 2
+    maxHp: 65
+    attack: 7
+    defense: 1
     evasion: 0.1
     critical: 0.1
   - level: 16
     requiredExp: 154
-    maxHp: 85
-    attack: 8
-    defense: 2
+    maxHp: 67
+    attack: 7
+    defense: 1
     evasion: 0.1
     critical: 0.1
   - level: 17
     requiredExp: 184
-    maxHp: 90
-    attack: 8
-    defense: 2
+    maxHp: 70
+    attack: 7
+    defense: 1
     evasion: 0.1
     critical: 0.1
   - level: 18
     requiredExp: 221
-    maxHp: 95
-    attack: 8
-    defense: 2
+    maxHp: 73
+    attack: 7
+    defense: 1
     evasion: 0.1
     critical: 0.1
   - level: 19
     requiredExp: 266
-    maxHp: 100
-    attack: 8
-    defense: 2
+    maxHp: 75
+    attack: 7
+    defense: 1
     evasion: 0.1
     critical: 0.1
   - level: 20
     requiredExp: 319
-    maxHp: 110
-    attack: 10
-    defense: 3
-    evasion: 0.1
+    maxHp: 77
+    attack: 8
+    defense: 2
+    evasion: 0.15
     critical: 0.1

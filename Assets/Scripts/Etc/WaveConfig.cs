@@ -51,7 +51,7 @@ public class WaveConfig : ScriptableObject
     public WaveClearType clearType;
 
     // SurviveTime 用
-    public float surviveDuration = 30f;
+    public float surviveDuration = 0f;
     public bool isBossWave;
 
     // Wave終了後のChestスポーン

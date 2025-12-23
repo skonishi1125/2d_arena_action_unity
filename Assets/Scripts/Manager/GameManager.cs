@@ -58,6 +58,11 @@ public class GameManager : MonoBehaviour
         HandleSceneChanged(SceneManager.GetActiveScene());
     }
 
+    private void Update()
+    {
+        Debug.Log(Player);
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
