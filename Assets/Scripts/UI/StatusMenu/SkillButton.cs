@@ -230,7 +230,7 @@ public class SkillButton : MonoBehaviour,
             return;
         }
 
-        // ★PlayerLv条件（次レベルのminPlayerLevelを見る）
+        // Player Level不足
         var nextData = skillDefinition != null ? skillDefinition.GetLevelData(nextLv) : null;
         if (nextData != null && playerLevel.Level < nextData.minPlayerLevel)
         {
@@ -296,20 +296,17 @@ public class SkillButton : MonoBehaviour,
             return;
         }
 
-        if (skillDefinition.slot != SkillSlot.None)
-        {
-            // ★ PlayerLv条件（次レベルのminPlayerLevel）
-            var nextData = skillDefinition.GetLevelData(nextSkillLv);
-            if (nextData != null && playerLevel.Level < nextData.minPlayerLevel)
-                locked = true;
+        // ★ PlayerLv条件（次レベルのminPlayerLevel）
+        var nextData = skillDefinition.GetLevelData(nextSkillLv);
+        if (nextData != null && playerLevel.Level < nextData.minPlayerLevel)
+            locked = true;
 
-            if (skillLv <= 0)
-            {
-                if (playerLevel.SkillPoints < skillCost) // SP不足
-                    locked = true;
-                else if (skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId)) // スロット重複
-                    locked = true;
-            }
+        if (skillLv <= 0)
+        {
+            if (playerLevel.SkillPoints < skillCost) // SP不足
+                locked = true;
+            else if (skillPanel != null && skillPanel.IsSlotOccupied(SlotKey, skillId)) // スロット重複
+                locked = true;
         }
 
         lockOverlay.enabled = locked;
