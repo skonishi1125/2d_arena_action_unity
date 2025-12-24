@@ -6,6 +6,7 @@ public class UIStatusMenu : MonoBehaviour
 {
 
     private Player player;
+    private PlayerHealth playerHealth;
     private PlayerLevel playerLevel;
     private PlayerSkillController playerSkill;
     private PlayerTimedModifiers playerTimedModifiers;
@@ -40,6 +41,10 @@ public class UIStatusMenu : MonoBehaviour
         if (!LogHelper.AssertNotNull(player, nameof(player), this))
             return;
 
+        playerHealth = player.Health;
+        if (!LogHelper.AssertNotNull(playerHealth, nameof(playerHealth), this))
+            return;
+
         entityStatus = player.GetComponent<EntityStatus>();
         if (!LogHelper.AssertNotNull(entityStatus, nameof(entityStatus), this))
             return;
@@ -65,7 +70,7 @@ public class UIStatusMenu : MonoBehaviour
         player.input.Player.Enable();
 
         // ステータスパネルなどの準備
-        statusPanel.Init(entityStatus, playerLevel, playerSkill, playerTimedModifiers);
+        statusPanel.Init(entityStatus, playerHealth, playerLevel, playerSkill, playerTimedModifiers);
         skillPanel.Init(playerLevel);
 
         rootPanel.SetActive(false);

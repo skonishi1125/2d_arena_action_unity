@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 15
   displayName: Sharpness
-  description: "\u6B66\u5177\u306E\u7FD2\u719F\u3092\u9AD8\u3081\u3001\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u3092\u4E0A\u6607\u3002"
+  description: "\u6B66\u5177\u306E\u7FD2\u719F\u3092\u9AD8\u3081\u3001\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u7387\u304C\u4E0A\u6607\u3002"
   icon: {fileID: -203003508, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 0
   exclusiveInSlot: 0

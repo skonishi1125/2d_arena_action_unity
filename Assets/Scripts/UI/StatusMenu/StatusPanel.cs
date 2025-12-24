@@ -12,21 +12,29 @@ public class StatusPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI evasionText;
 
     private EntityStatus status;
+    private PlayerHealth health;
     private PlayerLevel level;
     private PlayerSkillController skill;
     private PlayerTimedModifiers timed;
 
+
+
     public void Init(
-        EntityStatus status, PlayerLevel level,
+        EntityStatus status, PlayerHealth health, PlayerLevel level,
         PlayerSkillController skill, PlayerTimedModifiers timed
     )
     {
         this.status = status;
+        this.health = health;
         this.level = level;
         this.skill = skill;
         this.timed = timed;
 
         RefreshAll();
+
+        // ダメージ / 回復時に自動更新
+        if (health != null)
+            health.OnHealthUpdate += RefreshAll;
 
         // レベルアップ時に自動で更新
         if (level != null)
@@ -47,11 +55,12 @@ public class StatusPanel : MonoBehaviour
 
     private void RefreshAll()
     {
-        if (status == null || level == null) return;
+        if (status == null || level == null)
+            return;
 
-        levelText.text = $"LV: {level.Level}";
+        levelText.text = $"Player Lv: {level.Level}";
         expText.text = $"EXP: {level.CurrentExp} / {level.CurrentRequiredExp}";
-        hpText.text = $"HP: {status.GetMaxHp():0}";
+        hpText.text = $"HP: {health.GetCurrentHp()} / {status.GetMaxHp():0}";
         attackText.text = $"ATTACK: {status.GetAttack():0}";
         defenseText.text = $"DEFENSE: {status.GetDefense():0}";
         critText.text = $"CRITICAL: {(status.GetCritical() * 100f):0}%";
