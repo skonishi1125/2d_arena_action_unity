@@ -37220,9 +37220,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageConfig: {fileID: 11400000, guid: b4c6405fff002784d81df82ccc082dc1, type: 2}
-  enemySpawnPoints: {fileID: 1308022963}
-  rewardChestDropPoints: {fileID: 0}
-  defaultRewardChestPrefab: {fileID: 0}
+  enemyWandererSpawnPoints: {fileID: 0}
+  enemyRaiderSpawnPoints: {fileID: 0}
+  healChestDropPoints: {fileID: 0}
+  statChestDropPoints: {fileID: 0}
+  healChestPrefab: {fileID: 0}
+  attackChestPrefab: {fileID: 0}
+  defenseChestPrefab: {fileID: 0}
 --- !u!4 &1425870550
 Transform:
   m_ObjectHideFlags: 0
@@ -131161,6 +131165,52 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1721708743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1721708745}
+  - component: {fileID: 1721708744}
+  m_Layer: 0
+  m_Name: SceneBgm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1721708744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721708743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e975b1048498b149b115305ed9e3d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgm: {fileID: 8300000, guid: febd2d25f7669914db250e7d03fc5e4c, type: 3}
+  loop: 1
+--- !u!4 &1721708745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721708743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.9956007, y: 4.226819, z: -0.024618205}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1735609043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8987238367999379416, guid: c740f2614a9d3564ba91a270d8616013, type: 3}
@@ -133232,3 +133282,4 @@ SceneRoots:
   - {fileID: 1932879902}
   - {fileID: 2074851660}
   - {fileID: 1775412925507167992}
+  - {fileID: 1721708745}

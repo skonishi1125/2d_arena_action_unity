@@ -1,0 +1,69 @@
+﻿using UnityEngine;
+
+public class PlayerSFX : MonoBehaviour
+{
+    private PlayerHealth health;
+
+    [Header("Player SE Clips")]
+    [SerializeField] private AudioClip attackSfx;
+    [SerializeField] private AudioClip magicSfx;
+    [SerializeField] private AudioClip itemSfx;
+    [SerializeField] private AudioClip hittedSfx; // 被弾
+    [SerializeField] private AudioClip diedSfx; // ドガンみたいな音
+
+    private void Awake()
+    {
+        health = GetComponent<PlayerHealth>();
+        if (!LogHelper.AssertNotNull(health, nameof(health), this))
+            return;
+    }
+
+    private void OnEnable()
+    {
+        if (health == null)
+            return;
+        health.OnTakeDamage += PlayHitted;
+
+        ItemPickup.OnTakeItem += PlayItem;
+    }
+
+    private void OnDisable()
+    {
+        if (health == null)
+            return;
+        health.OnTakeDamage -= PlayHitted;
+
+        ItemPickup.OnTakeItem += PlayItem;
+    }
+
+
+    public void PlayAttack()
+    {
+        AudioManager.Instance?.PlaySfx(attackSfx);
+    }
+
+    public void PlayMagic()
+    {
+        AudioManager.Instance?.PlaySfx(magicSfx);
+    }
+
+    public void PlayItem()
+    {
+        AudioManager.Instance?.PlaySfx(itemSfx);
+    }
+
+    public void PlayHitted()
+    {
+        AudioManager.Instance?.PlaySfx(hittedSfx);
+    }
+
+    public void PlayDied()
+    {
+        AudioManager.Instance?.PlaySfx(diedSfx);
+
+    }
+
+
+
+
+}

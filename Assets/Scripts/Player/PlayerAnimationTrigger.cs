@@ -4,6 +4,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class PlayerAnimationTrigger : EntityAnimationTrigger
 {
     private Player player;
+    private PlayerSFX sfx;
 
     protected override void Awake()
     {
@@ -12,6 +13,16 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
         if (!LogHelper.AssertNotNull(player, nameof(player), this))
             return;
 
+        sfx = GetComponentInParent<PlayerSFX>();
+        if (!LogHelper.AssertNotNull(sfx, nameof(sfx), this))
+            return;
+
+    }
+
+    protected override void AttackTrigger()
+    {
+        sfx?.PlayAttack();
+        base.AttackTrigger();
     }
 
     private void DashStartAttackTrigger()
@@ -37,6 +48,8 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
             projectileSpawner.Spawn(player, ctx);
             return;
         }
+        sfx?.PlayMagic();
+
 
     }
 

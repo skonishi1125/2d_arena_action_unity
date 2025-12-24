@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 3233765682014922670}
   - component: {fileID: 1433693459424396891}
   - component: {fileID: 6675938353086696162}
+  - component: {fileID: -7870173448697212625}
   m_Layer: 8
   m_Name: T_DemonHound
   m_TagString: Untagged
@@ -288,6 +289,8 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 2427352890057551327}
   wallCheck: {fileID: 1736822693005519500}
+  enemyHealth: {fileID: 0}
+  role: 0
   isBoss: 0
   battleMoveSpeed: 3
   attackDistance: 1
@@ -308,6 +311,8 @@ MonoBehaviour:
   commonAttackDamageMultiplier: 1
   commonAttackKnockbackPower: {x: 1.5, y: 2.5}
   commonAttackKnockbackDuration: 0.15
+  aggroDuration: 3
+  knockbackMultiplier: 1
   chargeAttackXVelocity: 2.5
 --- !u!114 &8752305634746855515
 MonoBehaviour:
@@ -397,18 +402,6 @@ MonoBehaviour:
     baseValue: 30
     additiveBonus: 0
     multiplier: 1
-  regenHp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  maxMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  regenMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
   attack:
     baseValue: 1
     additiveBonus: 0
@@ -437,7 +430,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp: 15
+  baseExp: 1
+--- !u!114 &-7870173448697212625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443332665150937478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91939c69b4a308e48bce394fd9f3c4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedSfx: {fileID: 8300000, guid: 5d8337738c607fc48903d31df30e6ca4, type: 3}
 --- !u!1 &3637945205206453568
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class PlayerHealth : EntityHealth
     [SerializeField] private float regenPercent = 0.01f; // 最大HPの1%
     private float regenTimer = 0f;
 
+    public event Action OnTakeDamage;
     public event Action OnHealthUpdate;// 体力変化時 HealthbarUI 更新が主。
     public event Action OnDied; // 死亡時 画面シェイク,PlayerのState変更,GameOverUI他。
 
@@ -44,6 +45,13 @@ public class PlayerHealth : EntityHealth
 
         if (healed)
             OnHealthUpdate?.Invoke();
+    }
+
+
+    public override void TakeDamage(DamageContext ctx)
+    {
+        base.TakeDamage(ctx);
+        OnTakeDamage?.Invoke();
     }
 
     protected override void ReduceHp(float damage)
