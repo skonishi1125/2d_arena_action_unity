@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ItemDefinition_Evasion
   m_EditorClassIdentifier: 
   kind: 1
-  healAmount: 0
+  healMultiplier: 0
   statusParam: 3
   modifyMode: 0
   delta: 0.5

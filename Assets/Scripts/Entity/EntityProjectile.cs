@@ -147,7 +147,7 @@ public class EntityProjectile : MonoBehaviour
         {
             if (!pierceGround)
             {
-                Debug.Log("弾: Groundに触れ, pierceGroundがfalseのためDestroy");
+                //Debug.Log("弾: Groundに触れ, pierceGroundがfalseのためDestroy");
                 Destroy(gameObject);
             }
             return;
@@ -157,7 +157,7 @@ public class EntityProjectile : MonoBehaviour
         // LayerMaskはビットフラグなので、加工した比較が必要になる
         if (((1 << target.gameObject.layer) & whatIsTarget) == 0)
         {
-            Debug.Log("弾: target対象外。");
+            //Debug.Log("弾: target対象外。");
             return;
         }
 

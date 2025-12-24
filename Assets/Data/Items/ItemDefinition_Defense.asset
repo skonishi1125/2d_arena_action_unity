@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ItemDefinition_Defense
   m_EditorClassIdentifier: 
   kind: 1
-  healAmount: 0
+  healMultiplier: 0
   statusParam: 2
   modifyMode: 0
-  delta: 3
+  delta: 7
   duration: 20

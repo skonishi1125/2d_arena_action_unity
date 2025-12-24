@@ -232,7 +232,7 @@ public class EntityCombat : MonoBehaviour
         raw = Mathf.Floor(raw + 0.5f);
         raw = Mathf.Max(1f, raw); // 最低ダメージ保障
 
-        Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
+        //Debug.Log("Damage: " + raw + " attack: " + attack + " defense: " + defense + " isCritical: " + isCritical);
 
         return raw;
     }

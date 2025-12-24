@@ -41,7 +41,7 @@ public class EnemyMoveState : EnemyGroundState
         // 通常移動中：足場が消えたら idle へ（落下扱い）
         if (!enemy.groundDetected)
         {
-            Debug.Log("moveState: groundDetectedでidle");
+            //Debug.Log("moveState: groundDetectedでidle");
             stateMachine.ChangeState(enemy.idleState);
             return;
         }

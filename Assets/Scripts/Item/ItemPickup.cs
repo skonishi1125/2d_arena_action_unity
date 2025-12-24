@@ -17,7 +17,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & whatIsTarget) == 0)
         {
-            Debug.Log("playerではないのでスキップ");
+            //Debug.Log("playerではないのでスキップ");
             return;
         }
 

@@ -58,11 +58,6 @@ public class GameManager : MonoBehaviour
         HandleSceneChanged(SceneManager.GetActiveScene());
     }
 
-    private void Update()
-    {
-        Debug.Log(Player);
-    }
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -84,6 +79,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleSceneChanged(Scene scene)
     {
+        StopAllCoroutines();
+
         // Startでのキャッシュ、Battleシーン遷移時のキャッシュの2重処理を防ぐ
         if (_initializedSceneHandle == scene.handle)
             return;
@@ -94,16 +91,8 @@ public class GameManager : MonoBehaviour
 
         if (!scene.name.StartsWith("Battle"))
         {
-            // Battle外：Playerが存在する保証がないので、ここで切替はしない（またはガード付き）
+            // Battle外：Playerが存在する保証がないので外しておく
             Enemy.OnExpGained -= AddExp;
-
-            // もし「直前のBattleのPlayer参照が残っている」ケースだけ安全に落とすなら
-            if (Player != null)
-            {
-                Player.input.Player.Disable();
-                Player.input.UI.Disable();
-            }
-
             Player = null;
             WaveManager = null;
             WaveIntroUi = null;
@@ -112,9 +101,26 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        CacheSceneObjects();
+        if (!CacheSceneObjects())
+        {
+            // キャッシュが失敗したら、1フレーム後に再試行
+            Debug.Log("キャッシュ失敗したので再試行");
+            StartCoroutine(RetryCacheNextFrame(scene));
+            return;
+        }
+
+        _initializedSceneHandle = scene.handle;
+
         ApplyPlayerInput();// キャッシュして、Playerが取れてから切り替える
         StartGame();
+    }
+
+    private IEnumerator RetryCacheNextFrame(Scene scene)
+    {
+        yield return null;
+        // まだ同じアクティブシーンなら再試行
+        if (scene == SceneManager.GetActiveScene())
+            HandleSceneChanged(scene);
     }
 
     private void ApplyPlayerInput()
@@ -131,37 +137,37 @@ public class GameManager : MonoBehaviour
     //    Player.input.UI.Enable();
     //}
 
-    private void CacheSceneObjects()
+    private bool CacheSceneObjects()
     {
-        Debug.Log("CacheSceneObjects");
-
         Player = FindFirstObjectByType<Player>();
         if (!LogHelper.AssertNotNull(Player, nameof(Player), this))
-            return;
+            return false;
 
         Objective = FindFirstObjectByType<Objective>();
         if (!LogHelper.AssertNotNull(Objective, nameof(Objective), this))
-            return;
+            return false;
 
         WaveIntroUi = FindFirstObjectByType<UIWaveIntro>();
         if (!LogHelper.AssertNotNull(WaveIntroUi, nameof(WaveIntroUi), this))
-            return;
+            return false;
 
         BossAlertUi = FindFirstObjectByType<UIBossAlert>();
         if (!LogHelper.AssertNotNull(BossAlertUi, nameof(BossAlertUi), this))
-            return;
+            return false;
 
         ResultUi = FindFirstObjectByType<UIResult>();
         if (!LogHelper.AssertNotNull(ResultUi, nameof(ResultUi), this))
-            return;
+            return false;
 
         WaveManager = FindFirstObjectByType<WaveManager>();
         if (!LogHelper.AssertNotNull(WaveManager, nameof(WaveManager), this))
-            return;
+            return false;
 
         CameraManager cameraManager = FindFirstObjectByType<CameraManager>();
         if (!LogHelper.AssertNotNull(cameraManager, nameof(CameraManager), this))
-            return;
+            return false;
+
+        // キャッシュがうまくいったときは、購読を進める
 
         cameraManager.BindPlayerHealth(Player.Health);
         cameraManager.BindObjectiveHealth(Objective.Health);
@@ -169,7 +175,7 @@ public class GameManager : MonoBehaviour
         // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
         Player.Level.OnLevelUp -= HandleLevelUp;
 
-        // ラムダ購読解除（学習メモを書いとく）
+        // ============= ラムダ購読解除（学習メモを書いとく）
         // コメントアウトした書き方だと、線用メソッドでなく使い捨てメソッド(ラムダ)として購読している
         // なので、度のメソッドを購読したのか or 解除したのかが分からないので、解除できない
         // HandleXXXとしておくと、HandleXXXの 購読 or 解除 ができるようになる
@@ -184,7 +190,7 @@ public class GameManager : MonoBehaviour
         WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
         Enemy.OnExpGained -= AddExp;
 
-        // 購読の開始
+        // ============= ラムダ購読の開始
         Player.Level.OnLevelUp += HandleLevelUp;
 
         Player.Health.OnDied += HandlePlayerDied;
@@ -196,6 +202,8 @@ public class GameManager : MonoBehaviour
         WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
         WaveIntroUi.OnFinished += HandleWaveIntroFinished;
         Enemy.OnExpGained += AddExp;
+
+        return true;
     }
 
     private void HandlePlayerDied()
@@ -211,8 +219,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleLevelUp(int newLevel)
     {
+        if (Player == null)
+        {
+            Debug.LogWarning("GameManager:HandleLevelUp(): Playerがnullです。");
+            return;
+        }
         Player.Vfx.CreateOnLevelUpVfx(Player.transform);
-
     }
 
     public void StartGame()
