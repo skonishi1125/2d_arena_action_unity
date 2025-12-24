@@ -18,6 +18,7 @@ public class PlayerHealth : EntityHealth
         ApplyRegen(Time.deltaTime);
     }
 
+    // HP自動回復(リジェネでregen)
     private void ApplyRegen(float dt)
     {
         if (isDead) return;
@@ -32,7 +33,6 @@ public class PlayerHealth : EntityHealth
         regenTimer += dt;
         if (regenTimer < regenInterval) return;
 
-        // dtが大きくても取りこぼさない
         bool healed = false;
         while (regenTimer >= regenInterval && currentHp < maxHp)
         {

@@ -23,6 +23,7 @@ public class PlayerSFX : MonoBehaviour
         if (health == null)
             return;
         health.OnTakeDamage += PlayHitted;
+        health.OnDied += PlayDied;
 
         ItemPickup.OnTakeItem += PlayItem;
     }
@@ -32,6 +33,8 @@ public class PlayerSFX : MonoBehaviour
         if (health == null)
             return;
         health.OnTakeDamage -= PlayHitted;
+        health.OnDied -= PlayDied;
+
 
         ItemPickup.OnTakeItem += PlayItem;
     }
@@ -59,6 +62,8 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayDied()
     {
+        // 一旦ここでBGMも止めているが、責務外かも。
+        AudioManager.Instance?.StopBgm();
         AudioManager.Instance?.PlaySfx(diedSfx);
 
     }

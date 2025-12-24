@@ -37,6 +37,10 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
             entityCombat.PerformAttack();
     }
 
+    private void PlayMagicSfxTrigger()
+    {
+        sfx.PlayMagic();
+    }
     protected virtual void ShootProjectileTrigger()
     {
         if (projectileSpawner == null)
@@ -48,7 +52,6 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
             projectileSpawner.Spawn(player, ctx);
             return;
         }
-        sfx?.PlayMagic();
 
 
     }

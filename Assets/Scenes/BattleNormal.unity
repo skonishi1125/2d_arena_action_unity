@@ -55837,9 +55837,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSfx: {fileID: 8300000, guid: f261f35201c80cc4e8a9c0d8604c8232, type: 3}
-  magicSfx: {fileID: 8300000, guid: ca4b05b33497e1842a86e5f8cbfaffbb, type: 3}
+  magicSfx: {fileID: 8300000, guid: 4bc8643f7ff19a64396720fc74ae560f, type: 3}
   itemSfx: {fileID: 8300000, guid: 58dbe35d34333e446bb896fd1ce2c76c, type: 3}
-  hittedSfx: {fileID: 8300000, guid: 9d5acb515f119a34c89a6532c885d11c, type: 3}
+  hittedSfx: {fileID: 8300000, guid: 72680c2968bfd92458a4a8d8ced16153, type: 3}
+  diedSfx: {fileID: 8300000, guid: 287fc9056aced8740b3de8f7ef91a641, type: 3}
 --- !u!1 &572890338
 GameObject:
   m_ObjectHideFlags: 0
@@ -61264,7 +61265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4953783495460416331, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: debugChangeLevel
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5146616458025720666, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: m_LocalPosition.x
