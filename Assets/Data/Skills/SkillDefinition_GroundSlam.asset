@@ -51,7 +51,7 @@ MonoBehaviour:
     isPassive: 0
     passiveModifiers: []
   - level: 4
-    minPlayerLevel: 15
+    minPlayerLevel: 25
     damageMultiplier: 3
     knockbackPower: {x: 7, y: 15}
     knockbackDuration: 0.4
@@ -61,7 +61,7 @@ MonoBehaviour:
     isPassive: 0
     passiveModifiers: []
   - level: 5
-    minPlayerLevel: 15
+    minPlayerLevel: 25
     damageMultiplier: 3.5
     knockbackPower: {x: 10, y: 20}
     knockbackDuration: 0.5

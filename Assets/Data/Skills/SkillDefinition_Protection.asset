@@ -44,13 +44,13 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B2\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\n(\u5408\u8A08:
-      ATK3 / DEF2)"
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      ATK2 / DEF2)"
     isPassive: 1
     passiveModifiers:
     - param: 1
       mode: 0
-      value: 3
+      value: 2
     - param: 2
       mode: 0
       value: 2
@@ -61,8 +61,42 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B3\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B2\u4E0A\u6607\u3002\n(\u5408\u8A08:
-      ATK6 / DEF4)"
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      ATK3 / DEF3)"
+    isPassive: 1
+    passiveModifiers:
+    - param: 1
+      mode: 0
+      value: 3
+    - param: 2
+      mode: 0
+      value: 3
+  - level: 4
+    minPlayerLevel: 25
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B2\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      ATK5 / DEF4)"
+    isPassive: 1
+    passiveModifiers:
+    - param: 1
+      mode: 0
+      value: 5
+    - param: 2
+      mode: 0
+      value: 4
+  - level: 5
+    minPlayerLevel: 25
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B2\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      ATK6 / DEF6)"
     isPassive: 1
     passiveModifiers:
     - param: 1
@@ -70,38 +104,4 @@ MonoBehaviour:
       value: 6
     - param: 2
       mode: 0
-      value: 4
-  - level: 4
-    minPlayerLevel: 15
-    damageMultiplier: 0
-    knockbackPower: {x: 0, y: 0}
-    knockbackDuration: 0
-    cooldownTime: 0
-    manaCost: 0
-    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B4\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B1\u4E0A\u6607\u3002\n(\u5408\u8A08:
-      ATK10 / DEF5)"
-    isPassive: 1
-    passiveModifiers:
-    - param: 1
-      mode: 0
-      value: 10
-    - param: 2
-      mode: 0
-      value: 5
-  - level: 5
-    minPlayerLevel: 20
-    damageMultiplier: 0
-    knockbackPower: {x: 0, y: 0}
-    knockbackDuration: 0
-    cooldownTime: 0
-    manaCost: 0
-    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B5\u4E0A\u6607\u3002\nDefense\u3092\u6C38\u7D9A\u7684\u306B5\u4E0A\u6607\u3002\n(\u5408\u8A08:
-      ATK15 / DEF10)"
-    isPassive: 1
-    passiveModifiers:
-    - param: 1
-      mode: 0
-      value: 15
-    - param: 2
-      mode: 0
-      value: 10
+      value: 6
