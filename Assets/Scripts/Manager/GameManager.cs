@@ -8,7 +8,7 @@ public enum GameState
     Ready,
     WaveIntro, // 3 2 1...と、カウントダウン
     Playing,
-    GameOverSlowing,
+    Slowing,
     Result
 }
 
@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviour
         // Player.Health.OnDied -= () => TriggerGameOver(GameOverCause.PlayerDied);
         // Objective.Health.OnDestroyed -= _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
 
-        WaveManager.OnStageCleared -= HandleClearGame;
+        WaveManager.OnStageCleared -= TriggerGameClear;
         WaveManager.OnBossWaveStarted -= HandleBossWaveStarted;
         WaveIntroUi.OnFinished -= HandleWaveIntroFinished;
         Enemy.OnExpGained -= AddExp;
@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
         //Player.Health.OnDied += () => TriggerGameOver(GameOverCause.PlayerDied);
         //Objective.Health.OnDestroyed += _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
 
-        WaveManager.OnStageCleared += HandleClearGame;
+        WaveManager.OnStageCleared += TriggerGameClear;
         WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
         WaveIntroUi.OnFinished += HandleWaveIntroFinished;
         Enemy.OnExpGained += AddExp;
@@ -268,49 +268,43 @@ public class GameManager : MonoBehaviour
             return;
 
         pendingGameOverCause = cause;
-        StartCoroutine(SlowMotionCo());
-    }
-
-    // Dieに、まずSlowMotionを購読させて呼び出す。
-    // スローになって倒れた後、GameOverのSceneに遷移。
-    private void SlowMotion()
-    {
-        if (State != GameState.Playing)
-            return;
-
-        StartCoroutine(SlowMotionCo());
-    }
-    private IEnumerator SlowMotionCo()
-    {
-        State = GameState.GameOverSlowing;
-        Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(3f);
-        Time.timeScale = 1f;
-
-        GameOver();
+        StartCoroutine(SlowMotionCo(false));
     }
 
     public void GameOver()
     {
-        if (State != GameState.GameOverSlowing)
+        if (State != GameState.Slowing)
             return;
 
         EndGame(false, pendingGameOverCause);
     }
 
-    // イベント購読用
-    public void HandleClearGame()
+    public void TriggerGameClear()
     {
-        ClearGame();
+        StartCoroutine(SlowMotionCo(true));
     }
 
-    private void ClearGame()
+    private void GameClear()
     {
-        // Playing中以外に呼ばれても、何もしない
-        if (State != GameState.Playing)
+        if (State != GameState.Slowing)
             return;
 
         EndGame(true);
+    }
+
+    // GameOver, GameClear時のスロー演出
+    private IEnumerator SlowMotionCo(bool isGameClear)
+    {
+        State = GameState.Slowing;
+        Time.timeScale = 0.5f;
+        yield return new WaitForSecondsRealtime(3f);
+        Time.timeScale = 1f;
+
+        // スローが終わってから、各結果に移動
+        if (isGameClear)
+            GameClear();
+        else
+            GameOver();
     }
 
     // Clear, GameOver共通処理

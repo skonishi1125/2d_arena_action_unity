@@ -20,6 +20,9 @@ public class UIBossAlert : MonoBehaviour
     [SerializeField] private float performTime;
     [SerializeField] private int loopCount = 3;
 
+    [Header("Alert SFX")]
+    [SerializeField] private AudioClip alertSfx;
+
     private Coroutine playingRoutine;
 
     private void Awake()
@@ -39,6 +42,8 @@ public class UIBossAlert : MonoBehaviour
     // 簡単な処理なので、試しにDOTweenを使わず書いてみる
     private IEnumerator PlayAlertCo()
     {
+        AudioManager.Instance?.PlaySfx(alertSfx);
+
         PlayRedFlash();
 
         isDisplayed = true;

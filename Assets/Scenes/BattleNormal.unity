@@ -65300,12 +65300,13 @@ MonoBehaviour:
   rootBossAlert: {fileID: 6312806144811910063}
   alertText: {fileID: 2326718070604504438}
   displayTime: 5
-  blinkTime: 0.5
+  blinkTime: 0.3
   redScreen: {fileID: 3997298853430828510}
   maxAlpha: 0.4
   minAlpha: 0
   performTime: 0.8
   loopCount: 3
+  alertSfx: {fileID: 8300000, guid: c4547026ec6b6e04b96e2ded11c65f73, type: 3}
 --- !u!1 &1577168450354986754
 GameObject:
   m_ObjectHideFlags: 0
