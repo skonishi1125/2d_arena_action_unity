@@ -36,7 +36,7 @@ public class ResultButtonHighlight : MonoBehaviour,
 
     public void OnDeselect(BaseEventData eventData)
     {
-        Debug.Log("deseclect");
+        //Debug.Log("deseclect");
         Apply(false);
     }
 
@@ -48,7 +48,7 @@ public class ResultButtonHighlight : MonoBehaviour,
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("exit");
+        //Debug.Log("exit");
         Apply(false);
     }
 
@@ -56,7 +56,7 @@ public class ResultButtonHighlight : MonoBehaviour,
     // 選ばれたときボタンフレーム、テキストの色を変える
     public void Apply(bool highlight)
     {
-        Debug.Log("Apply: " + highlight);
+        //Debug.Log("Apply: " + highlight);
         if (frame != null) frame.color = highlight ? selectedColor : normalColor;
         if (label != null) label.color = highlight ? selectedColor : normalColor;
     }

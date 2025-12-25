@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public enum GameState
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     public UIWaveIntro WaveIntroUi { get; private set; }
     public UIBossAlert BossAlertUi { get; private set; }
     public UIResult ResultUi { get; private set; }
+    public UIClearFlash ClearFlash { get; private set; }
     public WaveManager WaveManager { get; private set; }
 
     // Player等の初回キャッシュフラグ
@@ -159,6 +161,10 @@ public class GameManager : MonoBehaviour
         if (!LogHelper.AssertNotNull(ResultUi, nameof(ResultUi), this))
             return false;
 
+        ClearFlash = FindFirstObjectByType<UIClearFlash>();
+        if (!LogHelper.AssertNotNull(ClearFlash, nameof(ClearFlash), this))
+            return false;
+
         WaveManager = FindFirstObjectByType<WaveManager>();
         if (!LogHelper.AssertNotNull(WaveManager, nameof(WaveManager), this))
             return false;
@@ -281,6 +287,7 @@ public class GameManager : MonoBehaviour
 
     public void TriggerGameClear()
     {
+        ClearFlash.Play(); // フラッシュ演出
         StartCoroutine(SlowMotionCo(true));
     }
 

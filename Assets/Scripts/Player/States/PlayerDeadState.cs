@@ -10,7 +10,7 @@ public class PlayerDeadState : PlayerState
     {
         base.Enter();
         input.Disable(); // 操作受付をなくす
-        rb.simulated = false; // RBの物理挙動をオフに
+        //rb.simulated = false; // RBの物理挙動をオフに
     }
 
 }
