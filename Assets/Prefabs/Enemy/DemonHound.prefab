@@ -419,8 +419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
-  groundCheckDistance: 0.5
-  wallCheckDistance: 1.2
+  groundCheckDistance: 0.3
+  wallCheckDistance: 1.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -438,7 +438,7 @@ MonoBehaviour:
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1.36
   maxWallJumpAttempts: 2
-  wallJumpVelocity: {x: 6, y: 12}
+  wallJumpVelocity: {x: 6, y: 15}
   wallJumpCooldown: 0.2
   whatIsPlayer:
     serializedVersion: 2

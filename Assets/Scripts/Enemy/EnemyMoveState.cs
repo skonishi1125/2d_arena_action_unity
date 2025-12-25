@@ -6,6 +6,9 @@ public class EnemyMoveState : EnemyGroundState
     private float lastWallJumpTime;
     private bool isWallJumping;
 
+    private float wallJumpStartTime;
+    private float GroundIgnoreAfterWallJump = 0.10f;
+
     public EnemyMoveState(Enemy enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
     }
@@ -30,7 +33,11 @@ public class EnemyMoveState : EnemyGroundState
         // すでに壁ジャンプ中
         if (isWallJumping)
         {
-            // 着地したら壁ジャンプ終了
+            // 開始直後は ground 判定を無視
+            if (Time.time < wallJumpStartTime + GroundIgnoreAfterWallJump)
+                return;
+
+            // 着地したら壁ジャンプ終了（後述の判定も推奨）
             if (enemy.groundDetected)
                 isWallJumping = false;
 
@@ -90,6 +97,7 @@ public class EnemyMoveState : EnemyGroundState
             wallJumpAttempts++;
             lastWallJumpTime = Time.time;
             isWallJumping = true;
+            wallJumpStartTime = Time.time;
 
             float dir = enemy.facingDir;
             rb.linearVelocity = new Vector2(
