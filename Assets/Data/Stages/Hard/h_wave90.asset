@@ -10,38 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7200f800d58eb94bacacaa70fabb48e, type: 3}
-  m_Name: h_wave2
+  m_Name: h_wave90
   m_EditorClassIdentifier: 
   waveName: 
   startDelay: 0
   enemyGroups:
+  - enemyPrefab: {fileID: 1809468293360127420, guid: 2377a4ce687654f4c9323509f89bca15, type: 3}
+    spawnCount: 1
+    spawnInterval: 1
+    enemyRole: 1
+    countForWaveClear: 1
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 6
-    spawnInterval: 2
-    enemyRole: 1
-    countForWaveClear: 1
-  - enemyPrefab: {fileID: 8463614821022854828, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
-    spawnCount: 2
-    spawnInterval: 2
-    enemyRole: 0
-    countForWaveClear: 0
-  - enemyPrefab: {fileID: 2270201892672900070, guid: 1fec7dda837a15f469b2246762ae64f9, type: 3}
-    spawnCount: 3
-    spawnInterval: 3
-    enemyRole: 1
-    countForWaveClear: 1
-  - enemyPrefab: {fileID: 8463614821022854828, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
-    spawnCount: 3
-    spawnInterval: 3
+    spawnCount: 1
+    spawnInterval: 30
     enemyRole: 1
     countForWaveClear: 1
   enemyStatMultiplier:
-    hp: 3
-    atk: 4
+    hp: 1
+    atk: 1
     def: 1
     eva: 1
     crit: 1
-    exp: 10
+    exp: 1
   clearType: 0
   surviveDuration: 0
   isBossWave: 0

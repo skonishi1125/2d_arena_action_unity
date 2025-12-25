@@ -850,7 +850,7 @@ MonoBehaviour:
     additiveBonus: 0
     multiplier: 1
   attack:
-    baseValue: 5
+    baseValue: 4
     additiveBonus: 0
     multiplier: 1
   defense:
