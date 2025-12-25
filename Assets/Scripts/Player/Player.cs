@@ -13,6 +13,7 @@ public class Player : Entity
     public PlayerLevel Level { get; private set; }
     public PlayerSkillController Skill {  get; private set; }
     public PlayerVFX Vfx { get; private set; }
+    public PlayerSFX Sfx { get; private set; }
 
     // StateMachine
     // Playerの状態を別のコードでも見ることになるので、publicとしておくとよい
@@ -144,6 +145,10 @@ public class Player : Entity
 
         Vfx = GetComponent<PlayerVFX>();
         if (!LogHelper.AssertNotNull(Vfx, nameof(Vfx), this))
+            return;
+
+        Sfx = GetComponent<PlayerSFX>();
+        if (!LogHelper.AssertNotNull(Sfx, nameof(Sfx), this))
             return;
 
         // イベント購読

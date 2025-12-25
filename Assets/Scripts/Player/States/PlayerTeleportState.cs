@@ -7,11 +7,14 @@ public class PlayerTeleportState : PlayerState
 
     public PlayerTeleportState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
+        this.player = player;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        player.Sfx.PlayTeleport();
 
         // 速度リセット（Dashと違い、物理で移動しない）
         rb.linearVelocity = Vector2.zero;

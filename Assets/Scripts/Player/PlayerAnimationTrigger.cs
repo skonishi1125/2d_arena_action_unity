@@ -37,10 +37,7 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
             entityCombat.PerformAttack();
     }
 
-    private void PlayMagicSfxTrigger()
-    {
-        sfx.PlayMagic();
-    }
+
     protected virtual void ShootProjectileTrigger()
     {
         if (projectileSpawner == null)
@@ -54,6 +51,32 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
         }
 
 
+    }
+
+    private void PlayMagicSfxTrigger()
+    {
+        sfx.PlayMagic();
+    }
+
+    private void PlayDashSfxTrigger()
+    {
+        sfx.PlayDash();
+    }
+
+    // Teleportはアニメがないので、TeleportState.Enter()で呼ぶ
+    //private void PlayTeleportSfxTrigger()
+    //{
+    //    sfx.PlayTeleport();
+    //}
+
+    private void PlayAttackSfxTrigger()
+    {
+        sfx.PlayAttack();
+    }
+
+    private void PlaySkillAttackSfxTrigger()
+    {
+        sfx.PlaySkillAttack();
     }
 
 }

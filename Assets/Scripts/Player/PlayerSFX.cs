@@ -12,6 +12,9 @@ public class PlayerSFX : MonoBehaviour
     [SerializeField] private AudioClip hittedSfx; // 被弾
     [SerializeField] private AudioClip diedSfx; // ドガンみたいな音(カービィのやられたときの音みたいなやつ）
     [SerializeField] private AudioClip levelUpSfx;
+    [SerializeField] private AudioClip dashSfx;
+    [SerializeField] private AudioClip teleportSfx;
+    [SerializeField] private AudioClip skillAttackSfx;
 
     private void Awake()
     {
@@ -87,6 +90,21 @@ public class PlayerSFX : MonoBehaviour
     public void HandlePlayLevelUp(int _)
     {
         PlayLevelUp();
+    }
+
+    public void PlayDash()
+    {
+        AudioManager.Instance?.PlaySfx(dashSfx);
+    }
+
+    public void PlayTeleport()
+    {
+        AudioManager.Instance?.PlaySfx(teleportSfx);
+    }
+
+    public void PlaySkillAttack()
+    {
+        AudioManager.Instance?.PlaySfx(skillAttackSfx);
     }
 
 
