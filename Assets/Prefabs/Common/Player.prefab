@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 5728190401651403911}
   - component: {fileID: 1064059733593565200}
   - component: {fileID: 8565690001906540101}
+  - component: {fileID: 4168919727690289246}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -321,7 +322,7 @@ MonoBehaviour:
   airAttackDamageMultiplier: 1
   airAttackKnockbackPower: {x: 1, y: 2}
   airAttackKnockbackDuration: 0.15
-  teleportDistance: 4
+  teleportDistance: 5
   teleportCheckStep: 0.25
   teleportRadius: 0.2
   groundSlumCheck: {fileID: 5135899857297449238}
@@ -540,6 +541,24 @@ MonoBehaviour:
   defenseBuffColor: {r: 0.3, g: 0.6, b: 1, a: 1}
   evasionBuffColor: {r: 0.3, g: 1, b: 0.3, a: 1}
   critBuffColor: {r: 1, g: 1, b: 0.3, a: 1}
+--- !u!114 &4168919727690289246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2311999036730397486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78af9a3736cce2a4eac3aa8b3905b44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSfx: {fileID: 8300000, guid: f261f35201c80cc4e8a9c0d8604c8232, type: 3}
+  magicSfx: {fileID: 8300000, guid: 4bc8643f7ff19a64396720fc74ae560f, type: 3}
+  itemSfx: {fileID: 8300000, guid: 58dbe35d34333e446bb896fd1ce2c76c, type: 3}
+  hittedSfx: {fileID: 8300000, guid: 72680c2968bfd92458a4a8d8ced16153, type: 3}
+  diedSfx: {fileID: 8300000, guid: 287fc9056aced8740b3de8f7ef91a641, type: 3}
+  levelUpSfx: {fileID: 8300000, guid: 831e02c2586723243ab16d49797a018d, type: 3}
 --- !u!1 &5057036140705593264
 GameObject:
   m_ObjectHideFlags: 0

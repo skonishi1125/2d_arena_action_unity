@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705fad165e1661b4a872dac21141e130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 300
+  maxHp: 1000
   currentHp: 0
   isDestroyed: 0
   damageCollider: {fileID: 668818243155572700}
