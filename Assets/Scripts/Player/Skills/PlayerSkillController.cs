@@ -175,6 +175,7 @@ public class PlayerSkillController : MonoBehaviour
         // パッシブ適用
         ApplyPassiveDelta(state, oldLevel, newLevel);
         OnStatusChangedBySkill?.Invoke();
+        // UIInGameのヘルスバーも更新が必要
 
         // 初回習得の場合、枠を確定
         if (state.currentLevel == 1 && state.definition.exclusiveInSlot)

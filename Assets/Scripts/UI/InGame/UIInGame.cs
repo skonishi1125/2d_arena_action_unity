@@ -11,6 +11,7 @@ public class UIInGame : MonoBehaviour
 
     private Player player;
     private EntityStatus entityStatus;
+    private PlayerSkillController playerSkill;
     private PlayerHealth playerHealth;
     private PlayerLevel playerLevel;
 
@@ -76,6 +77,10 @@ public class UIInGame : MonoBehaviour
         if (!LogHelper.AssertNotNull(playerLevel, nameof(playerLevel), this))
             return;
 
+        playerSkill = player.GetComponent<PlayerSkillController>();
+        if (!LogHelper.AssertNotNull(playerSkill, nameof(playerSkill), this))
+            return;
+
 
         // ========= 購読 ==========
         // WaveManager
@@ -85,6 +90,9 @@ public class UIInGame : MonoBehaviour
 
         // Health Actionイベントに、体力バー更新の購読
         playerHealth.OnHealthUpdate += UpdatePlayerHealthBar;
+
+        // パッシブなどで変わったとき用
+        playerSkill.OnStatusChangedBySkill += UpdatePlayerHealthBar;
 
         // Level Actionイベントに、体力バー更新の購読
         playerLevel.OnLevelUp += HandlePlayerLevelUp;
@@ -122,6 +130,9 @@ public class UIInGame : MonoBehaviour
             playerLevel.OnExpChanged -= HandleExpChanged;
             playerLevel.OnSkillPointsChanged -= HandleSkillPointsChanged;
         }
+
+        if (playerSkill != null)
+            playerSkill.OnStatusChangedBySkill -= UpdatePlayerHealthBar;
 
     }
 
