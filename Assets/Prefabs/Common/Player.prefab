@@ -559,6 +559,9 @@ MonoBehaviour:
   hittedSfx: {fileID: 8300000, guid: 72680c2968bfd92458a4a8d8ced16153, type: 3}
   diedSfx: {fileID: 8300000, guid: 287fc9056aced8740b3de8f7ef91a641, type: 3}
   levelUpSfx: {fileID: 8300000, guid: 831e02c2586723243ab16d49797a018d, type: 3}
+  dashSfx: {fileID: 8300000, guid: 16bea55f238f3314988363f80546f644, type: 3}
+  teleportSfx: {fileID: 8300000, guid: a8c5512313c431f48bff2e7c9ab83e03, type: 3}
+  skillAttackSfx: {fileID: 8300000, guid: fb932d9d68948304da072022f072d929, type: 3}
 --- !u!1 &5057036140705593264
 GameObject:
   m_ObjectHideFlags: 0

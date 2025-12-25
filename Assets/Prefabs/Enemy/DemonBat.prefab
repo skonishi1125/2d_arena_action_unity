@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 3429717907479935169}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: -0.9, z: 0}
+  m_LocalPosition: {x: 0.55, y: 0.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -714,8 +714,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.2, y: 2.5}
+  m_Offset: {x: 0, y: -0.3}
+  m_Size: {x: 1.2, y: 1.9}
   m_Direction: 0
 --- !u!114 &7804143552794595572
 MonoBehaviour:
@@ -731,7 +731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
   groundCheckDistance: 5
-  wallCheckDistance: 1.2
+  wallCheckDistance: 1.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -749,7 +749,7 @@ MonoBehaviour:
   moveSpeed: 3
   moveAnimSpeedMultiplier: 1
   maxWallJumpAttempts: 2
-  wallJumpVelocity: {x: 4, y: 15}
+  wallJumpVelocity: {x: 1, y: 17}
   wallJumpCooldown: 0.2
   whatIsPlayer:
     serializedVersion: 2

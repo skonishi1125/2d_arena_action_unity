@@ -75,8 +75,6 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayDied()
     {
-        // 一旦ここでBGMも止めているが、責務外かも。
-        AudioManager.Instance?.StopBgm();
         AudioManager.Instance?.PlaySfx(diedSfx);
 
     }

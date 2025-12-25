@@ -5,11 +5,16 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
 {
     private Objective objective;
 
+    // 殴られる用
+    [SerializeField] private Collider2D damageCollider;
+
     [SerializeField] private float maxHp = 100f;
     [SerializeField] private float currentHp;
     [SerializeField] private bool isDestroyed;
 
-    [SerializeField] private Collider2D damageCollider; // ←殴られる用だけ
+    // 破壊サウンド（ずがんという音）
+    [SerializeField] private AudioClip diedSfx;
+
 
     // HPバーの更新とかに使う
     public event Action OnHealthUpdate;
@@ -53,6 +58,7 @@ public class ObjectiveHealth : MonoBehaviour, IDamagable
         if (currentHp <= 0)
         {
             currentHp = 0;
+            AudioManager.Instance?.PlaySfx(diedSfx);
             objective.anim.SetBool("objectiveDestroy", true);
             isDestroyed = true;
 

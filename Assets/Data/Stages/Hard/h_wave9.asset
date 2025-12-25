@@ -10,26 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7200f800d58eb94bacacaa70fabb48e, type: 3}
-  m_Name: h_wave15
+  m_Name: h_wave9
   m_EditorClassIdentifier: 
   waveName: 
   startDelay: 0
   enemyGroups:
-  - enemyPrefab: {fileID: 1388535888265352816, guid: e8852fde68767db4ba02efe0ad21d48c, type: 3}
+  - enemyPrefab: {fileID: 1270969576811452150, guid: 765c44b25b013704ab6c16feb32f117c, type: 3}
     spawnCount: 1
-    spawnInterval: 5
-    enemyRole: 1
-    countForWaveClear: 1
+    spawnInterval: 1
+    enemyRole: 0
+    countForWaveClear: 0
+  - enemyPrefab: {fileID: 1809468293360127420, guid: 2377a4ce687654f4c9323509f89bca15, type: 3}
+    spawnCount: 1
+    spawnInterval: 2
+    enemyRole: 0
+    countForWaveClear: 0
   enemyStatMultiplier:
-    hp: 5
-    atk: 4
+    hp: 1
+    atk: 1
     def: 1
     eva: 1
     crit: 1
-    exp: 2
-  clearType: 2
+    exp: 7
+  clearType: 0
   surviveDuration: 0
-  isBossWave: 1
-  spawnHealChestOnClear: 0
+  isBossWave: 0
+  spawnHealChestOnClear: 1
   spawnAttackChestOnClear: 0
   spawnDefenseChestOnClear: 0

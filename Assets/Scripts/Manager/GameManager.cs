@@ -303,6 +303,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator SlowMotionCo(bool isGameClear)
     {
         State = GameState.Slowing;
+        AudioManager.Instance?.StopBgm();
         Time.timeScale = 0.5f;
         yield return new WaitForSecondsRealtime(3f);
         Time.timeScale = 1f;
