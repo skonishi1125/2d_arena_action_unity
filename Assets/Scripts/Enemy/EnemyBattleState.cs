@@ -2,7 +2,7 @@
 
 public class EnemyBattleState : EnemyState
 {
-    private Transform target;
+    protected Transform target;
     private float verticalOutOfRangeTimer; // 縦に離れた時間のタイマー
 
     // ジャンプ関連

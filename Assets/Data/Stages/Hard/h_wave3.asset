@@ -17,9 +17,14 @@ MonoBehaviour:
   enemyGroups:
   - enemyPrefab: {fileID: 1809468293360127420, guid: 2377a4ce687654f4c9323509f89bca15, type: 3}
     spawnCount: 1
+    spawnInterval: 1
+    enemyRole: 1
+    countForWaveClear: 1
+  - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
+    spawnCount: 1
     spawnInterval: 30
     enemyRole: 1
-    countForWaveClear: 0
+    countForWaveClear: 1
   enemyStatMultiplier:
     hp: 1
     atk: 1

@@ -21,11 +21,11 @@ public class DarkKnightBattleState : EnemyBattleState
         // baseの処理は雑魚用の記載なので、呼ばない
         // (attackDistanceで制御しないようにする)
 
-        Transform player = darkKnight.GetPlayerReference();
-        if (player == null)
+        //Transform player = darkKnight.GetPlayerReference();
+        if (target == null)
             return;
 
-        AttackKind kind = DecideAttackKind(player);
+        AttackKind kind = DecideAttackKind(target);
 
         switch (kind)
         {
@@ -47,9 +47,9 @@ public class DarkKnightBattleState : EnemyBattleState
     }
 
     // どの攻撃を選ぶのか、決定する
-    private AttackKind DecideAttackKind(Transform player)
+    private AttackKind DecideAttackKind(Transform target)
     {
-        float dx = player.position.x - enemy.transform.position.x;
+        float dx = target.position.x - enemy.transform.position.x;
         float distanceX = Mathf.Abs(dx);
 
 
