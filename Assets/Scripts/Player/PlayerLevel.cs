@@ -83,6 +83,9 @@ public class PlayerLevel : MonoBehaviour
             return;
 
         CurrentExp += amount;
+
+        bool leveledUp = false;
+
         // 必要経験値を満たす限りレベルアップ
         while (true)
         {
@@ -102,14 +105,19 @@ public class PlayerLevel : MonoBehaviour
                 AddSkillPoint(1);
 
                 ApplyLevelStatus();
+                leveledUp = true;
                 //playerHealth.FullHeal(); // 体力全回復は一旦やめる(サクサクlvが上がるから）
-                OnLevelUp?.Invoke(Level);
+                //OnLevelUp?.Invoke(Level);
             }
             else
             {
                 break;
             }
         }
+
+        // レベルアップ演出や通知は1回だけで済ませる
+        if (leveledUp)
+            OnLevelUp?.Invoke(Level);
 
         // 経験値が更新されたことで発生するイベントの発火
         // EXPバーの更新など。
