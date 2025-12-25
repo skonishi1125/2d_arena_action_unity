@@ -12,6 +12,7 @@ public class Enemy : Entity
 {
     public EnemyHealth enemyHealth;
     private EnemyReward enemyReward;
+    private EntityCombat entityCombat;
 
     public EnemyIdleState idleState; // Playerと違い、さらに子要素で使うためpublic
     public EnemyMoveState moveState;
@@ -81,6 +82,7 @@ public class Enemy : Entity
         base.Awake();
         enemyHealth = GetComponent<EnemyHealth>();
         enemyReward = GetComponent<EnemyReward>();
+        entityCombat = GetComponent<EntityCombat>();
 
         // 設定されるべき値のチェック
         if (!LogHelper.AssertNotNull(playerCheck, nameof(playerCheck), this))
@@ -114,7 +116,7 @@ public class Enemy : Entity
 
     private void OnEnable()
     {
-        if (GameManager.Instance != null && GameManager.Instance.Player != null)
+        if (GameManager.Instance != null && GameManager.Instance.Player != null) { }
             GameManager.Instance.Player.Health.OnDied += HandlePlayerDeath;
     }
 
@@ -240,6 +242,7 @@ public class Enemy : Entity
     private void HandlePlayerDeath()
     {
         stateMachine.ChangeState(idleState);
+        entityCombat.StopContinuousAttack(); // 持続攻撃で倒した場合は、中断
     }
 
     // Enemy死亡時の責務
