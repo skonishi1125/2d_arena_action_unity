@@ -3,18 +3,24 @@
 public class PlayerSFX : MonoBehaviour
 {
     private PlayerHealth health;
+    private PlayerLevel level;
 
     [Header("Player SE Clips")]
     [SerializeField] private AudioClip attackSfx;
     [SerializeField] private AudioClip magicSfx;
     [SerializeField] private AudioClip itemSfx;
     [SerializeField] private AudioClip hittedSfx; // 被弾
-    [SerializeField] private AudioClip diedSfx; // ドガンみたいな音
+    [SerializeField] private AudioClip diedSfx; // ドガンみたいな音(カービィのやられたときの音みたいなやつ）
+    [SerializeField] private AudioClip levelUpSfx;
 
     private void Awake()
     {
         health = GetComponent<PlayerHealth>();
         if (!LogHelper.AssertNotNull(health, nameof(health), this))
+            return;
+
+        level = GetComponent<PlayerLevel>();
+        if (!LogHelper.AssertNotNull(level, nameof(level), this))
             return;
     }
 
@@ -24,6 +30,10 @@ public class PlayerSFX : MonoBehaviour
             return;
         health.OnTakeDamage += PlayHitted;
         health.OnDied += PlayDied;
+
+        if (level == null)
+            return;
+        level.OnLevelUp += HandlePlayLevelUp;
 
         ItemPickup.OnTakeItem += PlayItem;
     }
@@ -66,6 +76,17 @@ public class PlayerSFX : MonoBehaviour
         AudioManager.Instance?.StopBgm();
         AudioManager.Instance?.PlaySfx(diedSfx);
 
+    }
+
+    public void PlayLevelUp()
+    {
+        AudioManager.Instance?.PlaySfx(levelUpSfx);
+    }
+
+    // OnLevelUpがintを渡すので、intを受け取るハンドラを用意するイメージ
+    public void HandlePlayLevelUp(int _)
+    {
+        PlayLevelUp();
     }
 
 

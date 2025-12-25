@@ -55841,6 +55841,7 @@ MonoBehaviour:
   itemSfx: {fileID: 8300000, guid: 58dbe35d34333e446bb896fd1ce2c76c, type: 3}
   hittedSfx: {fileID: 8300000, guid: 72680c2968bfd92458a4a8d8ced16153, type: 3}
   diedSfx: {fileID: 8300000, guid: 287fc9056aced8740b3de8f7ef91a641, type: 3}
+  levelUpSfx: {fileID: 8300000, guid: 831e02c2586723243ab16d49797a018d, type: 3}
 --- !u!1 &572890338
 GameObject:
   m_ObjectHideFlags: 0
@@ -56603,7 +56604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e975b1048498b149b115305ed9e3d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgm: {fileID: 8300000, guid: febd2d25f7669914db250e7d03fc5e4c, type: 3}
+  bgm: {fileID: 8300000, guid: eddcc8ece59036041a091364e7039f51, type: 3}
   loop: 1
 --- !u!4 &1392878700
 Transform:
@@ -56649,7 +56650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f7247ea029b994f84881a563cd87bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageConfig: {fileID: 11400000, guid: b4c6405fff002784d81df82ccc082dc1, type: 2}
+  stageConfig: {fileID: 11400000, guid: dbd8232b545cad04fa60210ebe6076c7, type: 2}
   enemyWandererSpawnPoints: {fileID: 775247240}
   enemyRaiderSpawnPoints: {fileID: 1308022963}
   healChestDropPoints: {fileID: 1973984107}
@@ -61265,7 +61266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4953783495460416331, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: debugChangeLevel
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5146616458025720666, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: m_LocalPosition.x
