@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DescriptionPanel : MonoBehaviour
@@ -9,6 +10,7 @@ public class DescriptionPanel : MonoBehaviour
 
     [Header("TipBar")]
     [SerializeField] private TipBar tipBar;
+    private bool disableTip;
 
     [Header("Top")]
     [SerializeField] private Image skillIcon;
@@ -32,6 +34,10 @@ public class DescriptionPanel : MonoBehaviour
     private void Awake()
     {
         descriptionRow.SetActive(false);
+
+        // シーン名で一度だけ判定
+        var sceneName = SceneManager.GetActiveScene().name;
+        disableTip = (sceneName == "BattleHard");
     }
 
     public void Show(SkillDefinition def, int currentLevel)
@@ -146,6 +152,8 @@ public class DescriptionPanel : MonoBehaviour
     // TipBar操作用のAPI
     public void ShowTip(float seconds = 4f)
     {
+        if (disableTip)
+            return;
         if (tipBar == null)
            return;
 
@@ -154,6 +162,9 @@ public class DescriptionPanel : MonoBehaviour
 
     public void HideTip()
     {
+        if (disableTip)
+            return;
+
         if (tipBar == null)
             return;
 

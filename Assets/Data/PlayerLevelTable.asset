@@ -149,7 +149,161 @@ MonoBehaviour:
   - level: 20
     requiredExp: 319
     maxHp: 77
-    attack: 8
-    defense: 2
-    evasion: 0.15
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 22
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 23
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 24
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 25
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 26
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 27
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 28
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 29
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 319
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 319
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 319
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 319
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 319
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 319
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 21
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 41
+    requiredExp: 350
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
+    critical: 0.1
+  - level: 42
+    requiredExp: 9999
+    maxHp: 80
+    attack: 7
+    defense: 1
+    evasion: 0.1
     critical: 0.1
