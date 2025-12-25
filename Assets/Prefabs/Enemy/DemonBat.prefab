@@ -625,6 +625,7 @@ GameObject:
   - component: {fileID: 6647120895430520476}
   - component: {fileID: 7427643307766106272}
   - component: {fileID: 839018200884713469}
+  - component: {fileID: 4837650383102067649}
   m_Layer: 8
   m_Name: DemonBat
   m_TagString: Untagged
@@ -736,6 +737,8 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 3025132507249297759}
   wallCheck: {fileID: 7894264287360057576}
+  enemyHealth: {fileID: 0}
+  role: 0
   isBoss: 0
   battleMoveSpeed: 8
   attackDistance: 1.5
@@ -756,6 +759,8 @@ MonoBehaviour:
   commonAttackDamageMultiplier: 1
   commonAttackKnockbackPower: {x: 1.5, y: 2.5}
   commonAttackKnockbackDuration: 0.15
+  aggroDuration: 3
+  knockbackMultiplier: 1
 --- !u!114 &8922484288946237121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,18 +849,6 @@ MonoBehaviour:
     baseValue: 30
     additiveBonus: 0
     multiplier: 1
-  regenHp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  maxMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  regenMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
   attack:
     baseValue: 5
     additiveBonus: 0
@@ -884,4 +877,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp: 2
+  baseExp: 1
+--- !u!114 &4837650383102067649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8915588882732984533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91939c69b4a308e48bce394fd9f3c4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedSfx: {fileID: 8300000, guid: b144c67019bb4434d8a5247142e3d816, type: 3}

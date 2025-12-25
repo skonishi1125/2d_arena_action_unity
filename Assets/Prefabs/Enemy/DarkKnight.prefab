@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1106183364887970928}
   - component: {fileID: 2611881859272160179}
   - component: {fileID: 3544975909139341596}
+  - component: {fileID: -7116709399290244353}
   m_Layer: 8
   m_Name: DarkKnight
   m_TagString: Untagged
@@ -128,6 +129,8 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 5319601100785592936}
   wallCheck: {fileID: 9030221380566427255}
+  enemyHealth: {fileID: 0}
+  role: 0
   isBoss: 1
   battleMoveSpeed: 3
   attackDistance: 0
@@ -148,6 +151,8 @@ MonoBehaviour:
   commonAttackDamageMultiplier: 0
   commonAttackKnockbackPower: {x: 0, y: 0}
   commonAttackKnockbackDuration: 0
+  aggroDuration: 3
+  knockbackMultiplier: 1
   meleeAttackDistance: 3
   meleeAttackDamageMultiplier: 2
   meleeAttackKnockbackPower: {x: 5, y: 10}
@@ -245,18 +250,6 @@ MonoBehaviour:
     baseValue: 10
     additiveBonus: 0
     multiplier: 1
-  regenHp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  maxMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  regenMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
   attack:
     baseValue: 2
     additiveBonus: 0
@@ -285,7 +278,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp: 10
+  baseExp: 1
+--- !u!114 &-7116709399290244353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388535888265352816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91939c69b4a308e48bce394fd9f3c4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedSfx: {fileID: 8300000, guid: b144c67019bb4434d8a5247142e3d816, type: 3}
 --- !u!1 &2587713152416835878
 GameObject:
   m_ObjectHideFlags: 0

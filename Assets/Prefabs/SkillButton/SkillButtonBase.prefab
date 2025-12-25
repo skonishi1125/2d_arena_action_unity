@@ -483,13 +483,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd4523a643dd224085bb4299b892e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillPanel: {fileID: 0}
   skillDefinition: {fileID: 0}
   skillId: 0
   descriptionPanel: {fileID: 0}
   cooldownMask: {fileID: 5409356992424838810}
+  lockOverlay: {fileID: 0}
+  hoverFrame: {fileID: 0}
   levelText: {fileID: 3781606314365552118}
   keyText: {fileID: 1356608770644821876}
   keyLabel: 
   canLevelUpOnClick: 1
   showDescriptionOnHover: 1
-  skillPanel: {fileID: 0}
+  skillGetClip: {fileID: 8300000, guid: 01c2b5e028d4f7f4e95bada691bc3616, type: 3}

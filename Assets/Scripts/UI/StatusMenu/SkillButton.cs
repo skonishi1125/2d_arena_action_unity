@@ -43,6 +43,9 @@ public class SkillButton : MonoBehaviour,
     [SerializeField] private bool canLevelUpOnClick = true;// クリックでレベルアップするか
     [SerializeField] private bool showDescriptionOnHover = true; // ホバーで説明を出すか
 
+    [Header("Audio Clip")]
+    [SerializeField] private AudioClip skillGetClip;
+
     public enum SkillUpgradeFailReason
     {
         NotEnoughSkillPoints,
@@ -250,6 +253,8 @@ public class SkillButton : MonoBehaviour,
         // 問題なければスキルレベルアップ処理。
         if (playerSkill.LevelUp(skillId))
         {
+            AudioManager.Instance?.PlaySfx(skillGetClip);
+
             // スキルポイント減算処理
             playerLevel.TrySpendSkillPoints(skillCost);
             UpdateView();

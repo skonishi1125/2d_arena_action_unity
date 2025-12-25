@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7200f800d58eb94bacacaa70fabb48e, type: 3}
+  m_Name: h_wave1
+  m_EditorClassIdentifier: 
+  waveName: 
+  startDelay: 0
+  enemyGroups:
+  - enemyPrefab: {fileID: 8463614821022854828, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
+    spawnCount: 1
+    spawnInterval: 15
+    enemyRole: 1
+    countForWaveClear: 1
+  - enemyPrefab: {fileID: 8915588882732984533, guid: a063f786848735d4fa7ef88f9110d78e, type: 3}
+    spawnCount: 1
+    spawnInterval: 15
+    enemyRole: 0
+    countForWaveClear: 0
+  - enemyPrefab: {fileID: 1809468293360127420, guid: 2377a4ce687654f4c9323509f89bca15, type: 3}
+    spawnCount: 1
+    spawnInterval: 15
+    enemyRole: 1
+    countForWaveClear: 1
+  enemyStatMultiplier:
+    hp: 1
+    atk: 1
+    def: 1
+    eva: 1
+    crit: 1
+    exp: 1
+  clearType: 0
+  surviveDuration: 0
+  isBossWave: 0
+  spawnHealChestOnClear: 0
+  spawnAttackChestOnClear: 0
+  spawnDefenseChestOnClear: 0

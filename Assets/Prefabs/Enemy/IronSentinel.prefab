@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 7916270894214689213}
   - component: {fileID: 8822006073865651746}
   - component: {fileID: 8303125784005678315}
+  - component: {fileID: 6730240113947279237}
   m_Layer: 8
   m_Name: IronSentinel
   m_TagString: Untagged
@@ -314,6 +315,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseExp: 1
+--- !u!114 &6730240113947279237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809468293360127420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91939c69b4a308e48bce394fd9f3c4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedSfx: {fileID: 8300000, guid: b144c67019bb4434d8a5247142e3d816, type: 3}
 --- !u!1 &2318547851369563091
 GameObject:
   m_ObjectHideFlags: 0

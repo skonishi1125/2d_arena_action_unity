@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 3044772991371229956}
   - component: {fileID: 5435773374504957144}
   - component: {fileID: 2963667002974157780}
+  - component: {fileID: -7388295498115654643}
   m_Layer: 8
   m_Name: QuickSlime
   m_TagString: Untagged
@@ -354,7 +355,7 @@ MonoBehaviour:
   moveSpeed: 8
   moveAnimSpeedMultiplier: 1
   maxWallJumpAttempts: 2
-  wallJumpVelocity: {x: 4, y: 12}
+  wallJumpVelocity: {x: 6, y: 16}
   wallJumpCooldown: 0.2
   whatIsPlayer:
     serializedVersion: 2
@@ -483,6 +484,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseExp: 2
+--- !u!114 &-7388295498115654643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581665048904097675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91939c69b4a308e48bce394fd9f3c4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedSfx: {fileID: 8300000, guid: b144c67019bb4434d8a5247142e3d816, type: 3}
 --- !u!1 &5448803073853832658
 GameObject:
   m_ObjectHideFlags: 0

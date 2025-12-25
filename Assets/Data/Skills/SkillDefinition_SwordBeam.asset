@@ -50,9 +50,9 @@ MonoBehaviour:
     levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B250%\u3067\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B\u304C\u5897\u52A0\u3002"
     isPassive: 0
     passiveModifiers: []
-  - level: 5
+  - level: 4
     minPlayerLevel: 15
-    damageMultiplier: 400
+    damageMultiplier: 3.5
     knockbackPower: {x: 5, y: 8}
     knockbackDuration: 0.25
     cooldownTime: 3
@@ -60,9 +60,9 @@ MonoBehaviour:
     levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B350%\u3067\u653B\u6483\u3002"
     isPassive: 0
     passiveModifiers: []
-  - level: 4
+  - level: 5
     minPlayerLevel: 15
-    damageMultiplier: 400
+    damageMultiplier: 4
     knockbackPower: {x: 5, y: 12}
     knockbackDuration: 0.3
     cooldownTime: 2

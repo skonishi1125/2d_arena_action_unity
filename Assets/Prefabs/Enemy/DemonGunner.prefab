@@ -621,6 +621,7 @@ GameObject:
   - component: {fileID: 8884622380363377465}
   - component: {fileID: 6228213883293854358}
   - component: {fileID: 6743812158174146373}
+  - component: {fileID: 2211114508416283882}
   m_Layer: 8
   m_Name: DemonGunner
   m_TagString: Untagged
@@ -733,6 +734,8 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 6842935581121348886}
   wallCheck: {fileID: 4148491810542341174}
+  enemyHealth: {fileID: 0}
+  role: 0
   isBoss: 0
   battleMoveSpeed: 3
   attackDistance: 8
@@ -753,6 +756,8 @@ MonoBehaviour:
   commonAttackDamageMultiplier: 1
   commonAttackKnockbackPower: {x: 1.5, y: 2.5}
   commonAttackKnockbackDuration: 0.15
+  aggroDuration: 3
+  knockbackMultiplier: 1
   projectilePrefab: {fileID: 7979862103626190576, guid: 2e95147672afa194c8b33431f2cfc350, type: 3}
 --- !u!114 &2309834349971394908
 MonoBehaviour:
@@ -856,18 +861,6 @@ MonoBehaviour:
     baseValue: 30
     additiveBonus: 0
     multiplier: 1
-  regenHp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  maxMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
-  regenMp:
-    baseValue: 0
-    additiveBonus: 0
-    multiplier: 1
   attack:
     baseValue: 1
     additiveBonus: 0
@@ -896,7 +889,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp: 5
+  baseExp: 1
+--- !u!114 &2211114508416283882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463614821022854828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91939c69b4a308e48bce394fd9f3c4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hittedSfx: {fileID: 8300000, guid: b144c67019bb4434d8a5247142e3d816, type: 3}
 --- !u!1 &8692915778102728159
 GameObject:
   m_ObjectHideFlags: 0
