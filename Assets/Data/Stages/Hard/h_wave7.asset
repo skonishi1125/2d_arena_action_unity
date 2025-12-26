@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: h_wave7
   m_EditorClassIdentifier: 
   waveName: 
-  startDelay: 10
+  startDelay: 0
   enemyGroups:
   - enemyPrefab: {fileID: 4581665048904097675, guid: 64e08da70bcc5cb41873031204bf1d16, type: 3}
     spawnCount: 3

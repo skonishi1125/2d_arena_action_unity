@@ -43,7 +43,7 @@ MonoBehaviour:
   - level: 3
     minPlayerLevel: 1
     damageMultiplier: 2.5
-    knockbackPower: {x: 7, y: 15}
+    knockbackPower: {x: 10, y: 15}
     knockbackDuration: 0.4
     cooldownTime: 4
     manaCost: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   - level: 4
     minPlayerLevel: 25
     damageMultiplier: 3
-    knockbackPower: {x: 7, y: 15}
+    knockbackPower: {x: 10, y: 15}
     knockbackDuration: 0.4
     cooldownTime: 4
     manaCost: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   - level: 5
     minPlayerLevel: 25
     damageMultiplier: 3.5
-    knockbackPower: {x: 10, y: 20}
+    knockbackPower: {x: 15, y: 20}
     knockbackDuration: 0.5
     cooldownTime: 3
     manaCost: 0

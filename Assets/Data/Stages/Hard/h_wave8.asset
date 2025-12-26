@@ -16,7 +16,7 @@ MonoBehaviour:
   startDelay: 0
   enemyGroups:
   - enemyPrefab: {fileID: 1270969576811452150, guid: 765c44b25b013704ab6c16feb32f117c, type: 3}
-    spawnCount: 2
+    spawnCount: 1
     spawnInterval: 0.5
     enemyRole: 0
     countForWaveClear: 0

@@ -38,7 +38,7 @@ MonoBehaviour:
     crit: 1
     exp: 8.5
   clearType: 0
-  surviveDuration: 10
+  surviveDuration: 0
   isBossWave: 0
   spawnHealChestOnClear: 0
   spawnAttackChestOnClear: 0
