@@ -50,6 +50,6 @@ MonoBehaviour:
   clearType: 0
   surviveDuration: 0
   isBossWave: 0
-  spawnHealChestOnClear: 1
+  spawnHealChestOnClear: 0
   spawnAttackChestOnClear: 0
-  spawnDefenseChestOnClear: 1
+  spawnDefenseChestOnClear: 0
