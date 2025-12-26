@@ -42,4 +42,4 @@ MonoBehaviour:
   isBossWave: 0
   spawnHealChestOnClear: 0
   spawnAttackChestOnClear: 1
-  spawnDefenseChestOnClear: 0
+  spawnDefenseChestOnClear: 1

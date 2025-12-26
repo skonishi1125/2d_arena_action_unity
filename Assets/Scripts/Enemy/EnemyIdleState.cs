@@ -12,6 +12,9 @@ public class EnemyIdleState : EnemyGroundState
         base.Enter();
         stateTimer = enemy.idleTime;
 
+        // 持続攻撃判定を切っておく
+        enemy.EntityCombat.StopContinuousAttack();
+
     }
 
     public override void LogicUpdate()

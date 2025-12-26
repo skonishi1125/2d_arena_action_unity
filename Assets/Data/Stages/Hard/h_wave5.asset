@@ -36,7 +36,7 @@ MonoBehaviour:
     def: 1
     eva: 1
     crit: 1
-    exp: 7
+    exp: 8.5
   clearType: 0
   surviveDuration: 10
   isBossWave: 0

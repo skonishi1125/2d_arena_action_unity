@@ -66,12 +66,12 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B45%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B35%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.45
+      value: 0.35
   - level: 5
     minPlayerLevel: 25
     damageMultiplier: 0
@@ -79,9 +79,9 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B60%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B40%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.6
+      value: 0.4

@@ -10,15 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9944031e9ee8ac64dbd2a325307727b8, type: 3}
-  m_Name: HardStage
+  m_Name: debugHardStage
   m_EditorClassIdentifier: 
   waves:
   - {fileID: 11400000, guid: 8c121043146b3274d9618a0816d45528, type: 2}
-  - {fileID: 11400000, guid: 7dd3d2c6e312944448243736d1d81412, type: 2}
-  - {fileID: 11400000, guid: 51db6b0bf7506f34eb31a1113e4c38b3, type: 2}
-  - {fileID: 11400000, guid: 7d57abf5f2ecb4641b8ec2b98c403ae2, type: 2}
-  - {fileID: 11400000, guid: bf29e932387b68b49b069dd8f8333a2e, type: 2}
-  - {fileID: 11400000, guid: 3d9fc450e91a68546a965724d72bf10c, type: 2}
+  - {fileID: 11400000, guid: 8fe5f7da9bbfa47408bfa571ee0e8eae, type: 2}
   - {fileID: 11400000, guid: 5b63e2b050683fb45b5206c59353fa3b, type: 2}
   - {fileID: 11400000, guid: 036f25d7d8dca344d858750abc33a236, type: 2}
   - {fileID: 11400000, guid: 357ef2dc48e15dc49b7f713498d5386d, type: 2}

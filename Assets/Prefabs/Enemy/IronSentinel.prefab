@@ -190,7 +190,7 @@ MonoBehaviour:
   aggroDuration: 3
   knockbackMultiplier: 0.5
   meleeAttackDistance: 1.75
-  meleeAttackDamageMultiplier: 2
+  meleeAttackDamageMultiplier: 1.5
   meleeAttackKnockbackPower: {x: 5, y: 10}
   meleeAttackKnockbackDuration: 0.3
   dashAttackDistance: 4
@@ -245,7 +245,7 @@ MonoBehaviour:
   targetCheckBoxAngle: 0
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 128
   continuousInterval: 0.3
   defaultDamageMultiplier: 1
   defaultKnockbackPower: {x: 1.5, y: 2.5}
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseExp: 250
+  baseExp: 100
 --- !u!114 &6730240113947279237
 MonoBehaviour:
   m_ObjectHideFlags: 0

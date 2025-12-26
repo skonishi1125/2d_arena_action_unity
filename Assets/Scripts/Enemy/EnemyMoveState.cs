@@ -17,6 +17,9 @@ public class EnemyMoveState : EnemyGroundState
     {
         base.Enter();
 
+        // 持続攻撃判定を切っておく
+        enemy.EntityCombat.StopContinuousAttack();
+
         // idleから再び動き出すとき、反転
         if (!enemy.groundDetected || enemy.wallDetected)
             enemy.Flip();

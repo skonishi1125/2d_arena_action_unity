@@ -131,7 +131,7 @@ MonoBehaviour:
   wallCheck: {fileID: 5957350584295483900}
   enemyHealth: {fileID: 0}
   role: 0
-  isBoss: 0
+  isBoss: 1
   battleMoveSpeed: 3
   attackDistance: 0.5
   destroyWaitTime: 1
@@ -247,15 +247,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 100
+    baseValue: 60
     additiveBonus: 0
     multiplier: 1
   attack:
-    baseValue: 20
+    baseValue: 4
     additiveBonus: 0
     multiplier: 1
   defense:
-    baseValue: 3
+    baseValue: 1
     additiveBonus: 0
     multiplier: 1
   evasion:
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseExp: 250
+  baseExp: 10
 --- !u!114 &6680552671177545098
 MonoBehaviour:
   m_ObjectHideFlags: 0

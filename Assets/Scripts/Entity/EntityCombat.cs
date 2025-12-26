@@ -15,8 +15,8 @@ public class EntityCombat : MonoBehaviour
     [SerializeField] private HitShape defaultHitShape = HitShape.Circle;
     [SerializeField] private Transform targetCheck;
     [SerializeField] private float targetCheckRadius;
-    [SerializeField] private Vector2 targetCheckBoxSize = new(3f, 1f); // 追加
-    [SerializeField] private float targetCheckBoxAngle = 0f;       // 追加（基本0でOK
+    [SerializeField] private Vector2 targetCheckBoxSize = new(3f, 1f);
+    [SerializeField] private float targetCheckBoxAngle = 0f;
     [SerializeField] private LayerMask whatIsTarget;
 
     private bool useCustomHitbox;
@@ -30,7 +30,8 @@ public class EntityCombat : MonoBehaviour
     private bool useCustomTargetCheck;
 
     // 突進など持続攻撃
-    // ※現状darkKnightしか使ってないので、そっちに持たせるべきかも
+    // ※現状DarkKnight, IronSentinelしか使ってない
+    // 管理が煩雑になりそうなら、専用のコンポーネントに分ける。
     [Header("Continuous Attack")]
     [SerializeField] private float continuousInterval = .3f; // 何秒ごとにダメージを与えるか
     private bool isContinuousAttacking = false;
@@ -176,7 +177,11 @@ public class EntityCombat : MonoBehaviour
     // 持続攻撃終了
     public void StopContinuousAttack()
     {
-        isContinuousAttacking = false;
+        if (isContinuousAttacking == true)
+        {
+            Debug.Log("stop.");
+            isContinuousAttacking = false;
+        }
     }
 
 

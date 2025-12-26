@@ -651,12 +651,12 @@ MonoBehaviour:
   aggroDuration: 3
   knockbackMultiplier: 1
   meleeAttackDistance: 2
-  meleeAttackDamageMultiplier: 2
+  meleeAttackDamageMultiplier: 1.8
   meleeAttackKnockbackPower: {x: 5, y: 10}
   meleeAttackKnockbackDuration: 0.4
   dashAttackDistance: 7
   dashAttackXVelocity: 10
-  dashAttackDamageMultiplier: 1
+  dashAttackDamageMultiplier: 0.8
   dashAttackKnockbackPower: {x: 10, y: 5}
   dashAttackKnockbackDuration: 0.4
 --- !u!114 &4352754367332585161
@@ -701,7 +701,7 @@ MonoBehaviour:
   criticalRate: 1.5
   defaultHitShape: 0
   targetCheck: {fileID: 282771374916245762}
-  targetCheckRadius: 1
+  targetCheckRadius: 0.8
   targetCheckBoxSize: {x: 3, y: 1}
   targetCheckBoxAngle: 0
   whatIsTarget:
@@ -775,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseExp: 1
+  baseExp: 7
 --- !u!114 &6968912999916341561
 MonoBehaviour:
   m_ObjectHideFlags: 0

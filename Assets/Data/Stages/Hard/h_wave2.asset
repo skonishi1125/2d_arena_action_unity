@@ -31,8 +31,8 @@ MonoBehaviour:
     enemyRole: 1
     countForWaveClear: 1
   - enemyPrefab: {fileID: 8463614821022854828, guid: 0351a251d264d9b48b9d909e4d48f792, type: 3}
-    spawnCount: 3
-    spawnInterval: 3
+    spawnCount: 2
+    spawnInterval: 5
     enemyRole: 1
     countForWaveClear: 1
   enemyStatMultiplier:
@@ -41,7 +41,7 @@ MonoBehaviour:
     def: 1
     eva: 1
     crit: 1
-    exp: 7
+    exp: 8.5
   clearType: 0
   surviveDuration: 0
   isBossWave: 0

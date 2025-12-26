@@ -23,6 +23,9 @@ public class EnemyBattleState : EnemyState
         base.Enter();
         nextSenseTime = Time.time;
 
+        // 持続攻撃判定を切っておく
+        enemy.EntityCombat.StopContinuousAttack();
+
         // 今狙うべき相手のTransformを取得
         // Playerなのか、Objectiveなのか。
         target = enemy.GetCurrentTarget();

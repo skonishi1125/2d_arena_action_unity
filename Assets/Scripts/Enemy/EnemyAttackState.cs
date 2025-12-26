@@ -9,6 +9,10 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+
+        // 持続攻撃判定を切っておく
+        enemy.EntityCombat.StopContinuousAttack();
+
         SetAttackDetail();
     }
 

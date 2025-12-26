@@ -154,12 +154,12 @@ MonoBehaviour:
   aggroDuration: 3
   knockbackMultiplier: 1
   meleeAttackDistance: 3
-  meleeAttackDamageMultiplier: 2
+  meleeAttackDamageMultiplier: 1.8
   meleeAttackKnockbackPower: {x: 5, y: 10}
   meleeAttackKnockbackDuration: 0.5
   dashAttackDistance: 7
   dashAttackXVelocity: 13
-  dashAttackDamageMultiplier: 1
+  dashAttackDamageMultiplier: 0.8
   dashAttackKnockbackPower: {x: 10, y: 5}
   dashAttackKnockbackDuration: 0.4
 --- !u!114 &4928228115774339219

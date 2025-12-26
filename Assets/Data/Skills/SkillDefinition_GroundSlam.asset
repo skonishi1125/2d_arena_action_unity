@@ -47,7 +47,7 @@ MonoBehaviour:
     knockbackDuration: 0.4
     cooldownTime: 4
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B250%\u3067\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B\u304C\u5897\u52A0\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B250%\u3067\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u304C\u4E0A\u6607\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 4
@@ -57,7 +57,7 @@ MonoBehaviour:
     knockbackDuration: 0.4
     cooldownTime: 4
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B300%\u3067\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B\u304C\u5897\u52A0\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B300%\u3067\u653B\u6483\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 5
@@ -67,6 +67,6 @@ MonoBehaviour:
     knockbackDuration: 0.5
     cooldownTime: 3
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B350%\u3067\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B\u304C\u5897\u52A0\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\n\u5468\u56F2\u3092\u5A01\u529B350%\u3067\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u304C\u4E0A\u6607\u3002"
     isPassive: 0
     passiveModifiers: []
