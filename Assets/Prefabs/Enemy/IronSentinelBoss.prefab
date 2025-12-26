@@ -42,6 +42,7 @@ Transform:
   - {fileID: 1657179150234123756}
   - {fileID: 5454819421335216603}
   - {fileID: 5957350584295483900}
+  - {fileID: 7025650627958145986}
   - {fileID: 4287107134727448995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -129,6 +130,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 1657179150234123756}
   wallCheck: {fileID: 5957350584295483900}
+  wallDetected: 0
   enemyHealth: {fileID: 0}
   role: 0
   isBoss: 1
@@ -153,6 +155,7 @@ MonoBehaviour:
   commonAttackKnockbackDuration: 0
   aggroDuration: 3
   knockbackMultiplier: 0.5
+  secondWallCheck: {fileID: 7025650627958145986}
   meleeAttackDistance: 1.75
   meleeAttackDamageMultiplier: 2
   meleeAttackKnockbackPower: {x: 5, y: 10}
@@ -632,7 +635,38 @@ Transform:
   m_GameObject: {fileID: 5160142591857373790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.94, z: 0}
+  m_LocalPosition: {x: 0, y: 0.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8567671425049711510}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5482836135284183622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7025650627958145986}
+  m_Layer: 8
+  m_Name: SecondWallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7025650627958145986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482836135284183622}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

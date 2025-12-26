@@ -22,14 +22,14 @@ public abstract class Entity : MonoBehaviour
 
     [Header("Collision Detection")]
     [SerializeField] private float groundCheckDistance;
-    [SerializeField] private float wallCheckDistance;
+    [SerializeField] protected float wallCheckDistance;
     // EnemyでPlayer検知時、壁ごしのチェックに使うのでprotectedとする
     [SerializeField] public LayerMask whatIsGround; // teleportStateで使う
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
 
     public bool groundDetected { get; private set; }
-    public bool wallDetected { get; private set; }
+    public bool wallDetected;
 
     // ノックバック中かどうか
     private bool isKnockbacked;
@@ -140,7 +140,7 @@ public abstract class Entity : MonoBehaviour
     }
 
     // 地面, 壁判定チェック
-    private void HandleCollisionDetection()
+    protected virtual void HandleCollisionDetection()
     {
         groundDetected = Physics2D.Raycast(
             groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround

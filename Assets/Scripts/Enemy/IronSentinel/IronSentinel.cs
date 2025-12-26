@@ -2,6 +2,9 @@
 
 public class IronSentinel : Enemy
 {
+    // 2つ目の壁判定
+    [SerializeField] private Transform secondWallCheck;
+
     public IronSentinelDashAttackState dashAttackState;
     public IronSentinelMeleeAttackState meleeAttackState;
 
@@ -29,6 +32,25 @@ public class IronSentinel : Enemy
         meleeAttackState = new IronSentinelMeleeAttackState(this, stateMachine, "meleeAttack");
         deadState = new EnemyDeadState(this, stateMachine, "NONE");
 
+    }
+
+    protected override void HandleCollisionDetection()
+    {
+        base.HandleCollisionDetection();
+        wallDetected = Physics2D.Raycast(
+            secondWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround
+        );
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        // 壁
+        Gizmos.DrawLine(
+            secondWallCheck.position,
+            secondWallCheck.position + new Vector3(wallCheckDistance * facingDir, 0)
+        );
     }
 
     protected override void OnDrawBattleToAttackGizmos()

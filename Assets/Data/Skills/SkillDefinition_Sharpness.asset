@@ -27,12 +27,12 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B10%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B5%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.1
+      value: 0.05
   - level: 2
     minPlayerLevel: 5
     damageMultiplier: 0
@@ -40,12 +40,12 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B20%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B10%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.2
+      value: 0.1
   - level: 3
     minPlayerLevel: 10
     damageMultiplier: 0
@@ -53,13 +53,26 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B30%\u4E0A\u6607\u3002"
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B15%\u4E0A\u6607\u3002"
     isPassive: 1
     passiveModifiers:
     - param: 4
       mode: 0
-      value: 0.3
+      value: 0.15
   - level: 4
+    minPlayerLevel: 25
+    damageMultiplier: 0
+    knockbackPower: {x: 0, y: 0}
+    knockbackDuration: 0
+    cooldownTime: 0
+    manaCost: 0
+    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B25%\u4E0A\u6607\u3002"
+    isPassive: 1
+    passiveModifiers:
+    - param: 4
+      mode: 0
+      value: 0.25
+  - level: 5
     minPlayerLevel: 25
     damageMultiplier: 0
     knockbackPower: {x: 0, y: 0}
@@ -72,16 +85,3 @@ MonoBehaviour:
     - param: 4
       mode: 0
       value: 0.35
-  - level: 5
-    minPlayerLevel: 25
-    damageMultiplier: 0
-    knockbackPower: {x: 0, y: 0}
-    knockbackDuration: 0
-    cooldownTime: 0
-    manaCost: 0
-    levelDescription: "Critical\u3092\u6C38\u7D9A\u7684\u306B40%\u4E0A\u6607\u3002"
-    isPassive: 1
-    passiveModifiers:
-    - param: 4
-      mode: 0
-      value: 0.4

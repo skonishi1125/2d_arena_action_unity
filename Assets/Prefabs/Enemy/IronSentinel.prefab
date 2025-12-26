@@ -165,6 +165,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 4794023371587798056}
   wallCheck: {fileID: 3639662303276674620}
+  wallDetected: 0
   enemyHealth: {fileID: 0}
   role: 0
   isBoss: 0
@@ -189,6 +190,7 @@ MonoBehaviour:
   commonAttackKnockbackDuration: 0
   aggroDuration: 3
   knockbackMultiplier: 0.5
+  secondWallCheck: {fileID: 3639662303276674620}
   meleeAttackDistance: 1.75
   meleeAttackDamageMultiplier: 1.5
   meleeAttackKnockbackPower: {x: 5, y: 10}

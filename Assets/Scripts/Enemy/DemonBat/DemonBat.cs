@@ -2,6 +2,9 @@
 
 public class DemonBat : Enemy
 {
+    // 2つ目の壁判定
+    [SerializeField] private Transform secondWallCheck;
+
     protected override void Awake()
     {
         base.Awake();
@@ -15,5 +18,25 @@ public class DemonBat : Enemy
         //// deadに入る時は、dead前のアニメーションを使う
         deadState = new EnemyDeadState(this, stateMachine, "NONE");
 
+    }
+
+
+    protected override void HandleCollisionDetection()
+    {
+        base.HandleCollisionDetection();
+        wallDetected = Physics2D.Raycast(
+            secondWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround
+        );
+    }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        // 壁
+        Gizmos.DrawLine(
+            secondWallCheck.position,
+            secondWallCheck.position + new Vector3(wallCheckDistance * facingDir, 0)
+        );
     }
 }
