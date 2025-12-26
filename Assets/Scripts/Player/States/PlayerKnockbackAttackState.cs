@@ -8,6 +8,7 @@ public class PlayerKnockbackAttackState : PlayerState
 
     public override void Enter()
     {
+        triggerCalled = false; // triggerの残留を防ぐ
         base.Enter();
 
         // 現レベル時点でのSkillデータを取得

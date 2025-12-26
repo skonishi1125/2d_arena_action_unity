@@ -15,6 +15,7 @@ public class PlayerDashState : PlayerState
 
     public override void Enter()
     {
+        triggerCalled = false; // triggerの残留を防ぐ
         base.Enter();
 
         // 向き先、有効時間、重力加速度無効化設定

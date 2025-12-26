@@ -12,6 +12,7 @@ public class PlayerTeleportState : PlayerState
 
     public override void Enter()
     {
+        triggerCalled = false; // triggerの残留を防ぐ
         base.Enter();
 
         player.Sfx.PlayTeleport();

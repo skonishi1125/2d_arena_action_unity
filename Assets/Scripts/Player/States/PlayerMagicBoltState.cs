@@ -10,6 +10,7 @@ public class PlayerMagicBoltState : PlayerState
 
     public override void Enter()
     {
+        triggerCalled = false; // triggerの残留を防ぐ
         base.Enter();
         attackVelocityTimer = player.attackVelocityDuration;
 

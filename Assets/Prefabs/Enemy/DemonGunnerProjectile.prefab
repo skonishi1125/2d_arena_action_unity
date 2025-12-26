@@ -51,7 +51,7 @@ MonoBehaviour:
   defaultDamageMultiplier: 1
   defaultKnockbackPower: {x: 1.5, y: 2.5}
   defaultKnockbackDuration: 0.2
-  lifeTime: 5
+  lifeTime: 2.5
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 640

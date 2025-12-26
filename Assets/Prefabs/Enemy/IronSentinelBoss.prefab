@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 60
+    baseValue: 300
     additiveBonus: 0
     multiplier: 1
   attack:

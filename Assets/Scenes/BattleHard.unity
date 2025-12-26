@@ -49351,7 +49351,7 @@ Transform:
   m_GameObject: {fileID: 1321349516}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.07, y: -1.99, z: 0}
+  m_LocalPosition: {x: 12.02, y: 10.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49432,7 +49432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f7247ea029b994f84881a563cd87bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageConfig: {fileID: 11400000, guid: 1b33ce5c5fd1fd8428f8a013f3998150, type: 2}
+  stageConfig: {fileID: 11400000, guid: 95d40cb3984a1cf4a9c3e716b7d00bb9, type: 2}
   enemyWandererSpawnPoints: {fileID: 775247240}
   enemyRaiderSpawnPoints: {fileID: 1308022963}
   healChestDropPoints: {fileID: 1973984107}
@@ -51499,6 +51499,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1617662339256183318, guid: 8d907b33eac8e164b82b1eca587823a7, type: 3}
+      propertyPath: maxHp
+      value: 1200
+      objectReference: {fileID: 0}
     - target: {fileID: 1617662339256183318, guid: 8d907b33eac8e164b82b1eca587823a7, type: 3}
       propertyPath: diedSfx
       value: 
