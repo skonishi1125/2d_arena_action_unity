@@ -17,12 +17,12 @@ MonoBehaviour:
   enemyGroups:
   - enemyPrefab: {fileID: 8915588882732984533, guid: a063f786848735d4fa7ef88f9110d78e, type: 3}
     spawnCount: 5
-    spawnInterval: 3
+    spawnInterval: 4
     enemyRole: 1
     countForWaveClear: 0
   - enemyPrefab: {fileID: 7966066285144115138, guid: 02d68359b3813bc4e995518a0c2762ac, type: 3}
     spawnCount: 1
-    spawnInterval: 3
+    spawnInterval: 5
     enemyRole: 1
     countForWaveClear: 0
   - enemyPrefab: {fileID: 4581665048904097675, guid: 64e08da70bcc5cb41873031204bf1d16, type: 3}
@@ -32,12 +32,12 @@ MonoBehaviour:
     countForWaveClear: 0
   - enemyPrefab: {fileID: 2270201892672900070, guid: 1fec7dda837a15f469b2246762ae64f9, type: 3}
     spawnCount: 2
-    spawnInterval: 3
+    spawnInterval: 5
     enemyRole: 1
     countForWaveClear: 0
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
     spawnCount: 5
-    spawnInterval: 2
+    spawnInterval: 4
     enemyRole: 1
     countForWaveClear: 0
   enemyStatMultiplier:

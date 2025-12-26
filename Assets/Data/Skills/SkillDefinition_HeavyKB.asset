@@ -52,21 +52,21 @@ MonoBehaviour:
     passiveModifiers: []
   - level: 4
     minPlayerLevel: 25
-    damageMultiplier: 4
+    damageMultiplier: 4.25
     knockbackPower: {x: 23, y: 7}
     knockbackDuration: 0.6
     cooldownTime: 4
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3002\n\u524D\u65B9\u306B\u5A01\u529B400%\u306E\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B30\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E04\u79D2\u3002\n\u524D\u65B9\u306B\u5A01\u529B425%\u306E\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B30\u3002"
     isPassive: 0
     passiveModifiers: []
   - level: 5
     minPlayerLevel: 25
-    damageMultiplier: 4.5
-    knockbackPower: {x: 30, y: 10}
-    knockbackDuration: 0.7
+    damageMultiplier: 5
+    knockbackPower: {x: 25, y: 10}
+    knockbackDuration: 1
     cooldownTime: 3
     manaCost: 0
-    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\n\u524D\u65B9\u306B\u5A01\u529B450%\u306E\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B40\u3002"
+    levelDescription: "\u30AF\u30FC\u30EB\u30BF\u30A4\u30E03\u79D2\u3002\n\u524D\u65B9\u306B\u5A01\u529B500%\u306E\u653B\u6483\u3002\n\u5439\u3063\u98DB\u3070\u3057\u529B35\u3002"
     isPassive: 0
     passiveModifiers: []

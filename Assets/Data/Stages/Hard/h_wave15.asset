@@ -32,21 +32,21 @@ MonoBehaviour:
     countForWaveClear: 1
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
     spawnCount: 5
-    spawnInterval: 1
+    spawnInterval: 3
     enemyRole: 1
     countForWaveClear: 1
   - enemyPrefab: {fileID: 7966066285144115138, guid: 02d68359b3813bc4e995518a0c2762ac, type: 3}
     spawnCount: 1
-    spawnInterval: 3
+    spawnInterval: 5
     enemyRole: 0
     countForWaveClear: 0
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 10
-    spawnInterval: 1
+    spawnCount: 5
+    spawnInterval: 2
     enemyRole: 0
     countForWaveClear: 0
   - enemyPrefab: {fileID: 2916633050222161211, guid: aa66e77ce1bf8ae4a8dcae1fb2275cfb, type: 3}
-    spawnCount: 10
+    spawnCount: 5
     spawnInterval: 3
     enemyRole: 1
     countForWaveClear: 0
