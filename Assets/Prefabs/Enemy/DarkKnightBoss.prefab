@@ -129,6 +129,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 5319601100785592936}
   wallCheck: {fileID: 9030221380566427255}
+  wallDetected: 0
   enemyHealth: {fileID: 0}
   role: 0
   isBoss: 1
@@ -247,11 +248,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 10
+    baseValue: 250
     additiveBonus: 0
     multiplier: 1
   attack:
-    baseValue: 2
+    baseValue: 3
     additiveBonus: 0
     multiplier: 1
   defense:

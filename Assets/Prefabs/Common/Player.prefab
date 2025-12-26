@@ -288,6 +288,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 5146616458025720666}
   wallCheck: {fileID: 150228062743924709}
+  wallDetected: 0
   moveSpeed: 8
   jumpForce: 12
   maxJumps: 2
@@ -448,7 +449,7 @@ MonoBehaviour:
   heavyKnockbackDuration: 0.7
   heavyDamageTreshold: 0.3
   regenInterval: 5
-  regenPercent: 0.01
+  regenPercent: 0.02
 --- !u!114 &4953783495460416331
 MonoBehaviour:
   m_ObjectHideFlags: 0

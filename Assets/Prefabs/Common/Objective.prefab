@@ -259,10 +259,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705fad165e1661b4a872dac21141e130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1000
+  damageCollider: {fileID: 668818243155572700}
+  maxHp: 1500
   currentHp: 0
   isDestroyed: 0
-  damageCollider: {fileID: 668818243155572700}
+  diedSfx: {fileID: 8300000, guid: 287fc9056aced8740b3de8f7ef91a641, type: 3}
 --- !u!114 &5624280990799123966
 MonoBehaviour:
   m_ObjectHideFlags: 0

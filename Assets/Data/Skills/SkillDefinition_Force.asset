@@ -83,10 +83,10 @@ MonoBehaviour:
     knockbackDuration: 0
     cooldownTime: 0
     manaCost: 0
-    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B3\u4E0A\u6607\u3002\n(\u5408\u8A08:
-      12\u30DD\u30A4\u30F3\u30C8)"
+    levelDescription: "Attack\u3092\u6C38\u7D9A\u7684\u306B4\u4E0A\u6607\u3002\n(\u5408\u8A08:
+      13\u30DD\u30A4\u30F3\u30C8)"
     isPassive: 1
     passiveModifiers:
     - param: 1
       mode: 0
-      value: 12
+      value: 13

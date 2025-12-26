@@ -20,7 +20,7 @@ MonoBehaviour:
     spawnInterval: 3
     enemyRole: 1
     countForWaveClear: 1
-  - enemyPrefab: {fileID: 3714439288355158456, guid: f78cbbfd48537e041a14b14c1831fafd, type: 3}
+  - enemyPrefab: {fileID: 1388535888265352816, guid: e8852fde68767db4ba02efe0ad21d48c, type: 3}
     spawnCount: 1
     spawnInterval: 0
     enemyRole: 1
