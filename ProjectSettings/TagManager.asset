@@ -74,6 +74,9 @@ TagManager:
   - name: Grassland
     uniqueID: 3909449261
     locked: 0
+  - name: UI
+    uniqueID: 3321464691
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
