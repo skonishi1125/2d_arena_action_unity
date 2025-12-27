@@ -181,7 +181,7 @@ public class UITitleMenu : MonoBehaviour
 
         }
 
-        lastSelectedObject = target;
+        lastSelectedObject = null;
 
         // 念のためクリアしてから改めてセットしておく
         EventSystem.current.SetSelectedGameObject(null);

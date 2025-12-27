@@ -22,13 +22,13 @@ MonoBehaviour:
     countForWaveClear: 1
   enemyStatMultiplier:
     hp: 0.2
-    atk: 1
+    atk: 0.1
     def: 1
     eva: 1
     crit: 1
     exp: 0.47
   clearType: 0
-  surviveDuration: 0
+  surviveDuration: 99
   isBossWave: 0
   spawnHealChestOnClear: 0
   spawnAttackChestOnClear: 0

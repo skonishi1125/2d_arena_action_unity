@@ -164,7 +164,7 @@ MonoBehaviour:
   lifeTime: 0.25
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
