@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: -7017764914941092107, guid: b36158ffb08fd174a863af20cff0831a, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -612,6 +612,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 7286822956785895495}
   wallCheck: {fileID: 5235569745034622540}
+  wallDetected: 0
   enemyHealth: {fileID: 0}
   role: 1
   isBoss: 1

@@ -289,6 +289,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 2427352890057551327}
   wallCheck: {fileID: 1736822693005519500}
+  wallDetected: 0
   enemyHealth: {fileID: 0}
   role: 0
   isBoss: 0
@@ -430,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14636354dc2b54849a66b2e37087b49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseExp: 1
+  baseExp: 6
 --- !u!114 &-7870173448697212625
 MonoBehaviour:
   m_ObjectHideFlags: 0

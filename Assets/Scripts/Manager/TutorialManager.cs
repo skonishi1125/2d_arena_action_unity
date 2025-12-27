@@ -15,18 +15,28 @@ public class TutorialManager : MonoBehaviour
     private void OnEnable()
     {
         Enemy.OnExpGained += AddExp;
-
+        Player.Level.OnLevelUp += HandleLevelUp;
     }
 
     private void OnDisable()
     {
         Enemy.OnExpGained -= AddExp;
+        Player.Level.OnLevelUp -= HandleLevelUp;
     }
 
     private void AddExp(int exp)
     {
-        Debug.Log("tutorial add!");
         Player.Level.AddExp(exp);
+    }
+
+    private void HandleLevelUp(int newLevel)
+    {
+        if (Player == null)
+        {
+            Debug.LogWarning("GameManager:HandleLevelUp(): Playerがnullです。");
+            return;
+        }
+        Player.Vfx.CreateOnLevelUpVfx(Player.transform);
     }
 
 }

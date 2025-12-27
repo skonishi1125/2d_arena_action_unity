@@ -116,7 +116,7 @@ public class Enemy : Entity
 
     private void OnEnable()
     {
-        if (GameManager.Instance != null && GameManager.Instance.Player != null) { }
+        if (GameManager.Instance != null && GameManager.Instance.Player != null)
             GameManager.Instance.Player.Health.OnDied += HandlePlayerDeath;
     }
 
