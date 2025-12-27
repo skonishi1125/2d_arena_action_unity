@@ -26,6 +26,11 @@ public class TutorialManager : MonoBehaviour
 
     private void AddExp(int exp)
     {
+        if (Player == null)
+        {
+            Debug.LogWarning("Tutorial:AddExp(): Playerがnullです。");
+            return;
+        }
         Player.Level.AddExp(exp);
     }
 
@@ -33,7 +38,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (Player == null)
         {
-            Debug.LogWarning("GameManager:HandleLevelUp(): Playerがnullです。");
+            Debug.LogWarning("Tutorial:HandleLevelUp(): Playerがnullです。");
             return;
         }
         Player.Vfx.CreateOnLevelUpVfx(Player.transform);

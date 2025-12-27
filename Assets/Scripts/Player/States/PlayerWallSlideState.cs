@@ -1,6 +1,4 @@
-﻿using UnityEditor.Tilemaps;
-
-public class PlayerWallSlideState : PlayerState
+﻿public class PlayerWallSlideState : PlayerState
 {
     public PlayerWallSlideState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -19,13 +17,13 @@ public class PlayerWallSlideState : PlayerState
         if (input.Player.Jump.WasPressedThisFrame())
             stateMachine.ChangeState(player.wallJumpState);
 
-        if (! player.wallDetected)
+        if (!player.wallDetected)
             stateMachine.ChangeState(player.fallState);
 
         if (player.groundDetected)
         {
             stateMachine.ChangeState(player.idleState);
-            if(player.facingDir != player.moveInput.x)
+            if (player.facingDir != player.moveInput.x)
                 player.Flip();
         }
     }
