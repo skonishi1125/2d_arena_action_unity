@@ -12256,7 +12256,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 799, y: 483}
+  m_AnchoredPosition: {x: 740, y: 483}
   m_SizeDelta: {x: 547.6946, y: 154.3084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6528981935973479810
@@ -12287,7 +12287,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Wave: 99'
+  m_text: 'Wave: 99/99'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d8a1e6af35e9134dba1eca742b7b61f, type: 2}
   m_sharedMaterial: {fileID: 7184005828953360956, guid: 3d8a1e6af35e9134dba1eca742b7b61f, type: 2}
