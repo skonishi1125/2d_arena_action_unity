@@ -106,8 +106,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.35000002, y: -0.1}
-  m_Size: {x: 2, y: 2.9}
+  m_Offset: {x: 0.07499999, y: -0.24}
+  m_Size: {x: 1.6, y: 2.67}
   m_Direction: 0
 --- !u!114 &661768280608636694
 MonoBehaviour:
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityCombat: {fileID: 0}
-  groundCheckDistance: 0.5
-  wallCheckDistance: 1.5
+  groundCheckDistance: 0.4
+  wallCheckDistance: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -136,13 +136,13 @@ MonoBehaviour:
   battleMoveSpeed: 3
   attackDistance: 0
   destroyWaitTime: 2
-  attackVerticalRange: 5
+  attackVerticalRange: 2
   verticalOutOfRangeTime: 5
   idleTime: 2
   moveSpeed: 2
   moveAnimSpeedMultiplier: 1
   maxWallJumpAttempts: 2
-  wallJumpVelocity: {x: 4, y: 12}
+  wallJumpVelocity: {x: 6, y: 15}
   wallJumpCooldown: 0.2
   whatIsPlayer:
     serializedVersion: 2
@@ -248,15 +248,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 250
+    baseValue: 350
     additiveBonus: 0
     multiplier: 1
   attack:
-    baseValue: 3
+    baseValue: 10
     additiveBonus: 0
     multiplier: 1
   defense:
-    baseValue: 0
+    baseValue: 3
     additiveBonus: 0
     multiplier: 1
   evasion:
@@ -318,7 +318,7 @@ Transform:
   m_GameObject: {fileID: 2587713152416835878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.08, y: -1.53, z: 0}
+  m_LocalPosition: {x: 1.6, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
