@@ -18,15 +18,15 @@ public class MissVfx : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        // スパイクで一瞬で終わらないように上限を付ける
+        float dt = Mathf.Min(Time.deltaTime, 1f / 30f);
 
-        // 上方向に移動
-        transform.position += Vector3.up * floatSpeed * Time.deltaTime;
+        timer += dt;
 
-        // 経過割合 (0〜1)
-        float t = timer / lifeTime;
+        transform.position += Vector3.up * floatSpeed * dt;
 
-        // アルファを徐々に0に
+        float t = Mathf.Clamp01(timer / lifeTime);
+
         if (text != null)
         {
             var c = text.color;
@@ -35,8 +35,6 @@ public class MissVfx : MonoBehaviour
         }
 
         if (timer >= lifeTime)
-        {
             Destroy(gameObject);
-        }
     }
 }
