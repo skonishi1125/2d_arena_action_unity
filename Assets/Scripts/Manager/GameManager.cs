@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour
     public UIClearFlash ClearFlash { get; private set; }
     public WaveManager WaveManager { get; private set; }
 
+    // イベント購読用
+    private PlayerHealth playerHealth;
+    private PlayerLevel playerLevel;
+    private ObjectiveHealth objectiveHealth;
+
     // Player等の初回キャッシュフラグ
     private int _initializedSceneHandle = -1;
 
@@ -171,23 +176,38 @@ public class GameManager : MonoBehaviour
         if (!LogHelper.AssertNotNull(cameraManager, nameof(CameraManager), this))
             return false;
 
+        // player.Levelというようにイベント購読することもできる。
+        // ただし、その場合Levelの有無はplayer側の取得方法に依存する。
+        // WebGLで上手く取れないパターンに遭遇したため、シンプルにGetComponentでとってしまうのが良い。
+        playerHealth = Player.GetComponent<PlayerHealth>();
+        if (!LogHelper.AssertNotNull(playerHealth, nameof(playerHealth), this))
+            return false;
+
+        playerLevel = Player.GetComponent<PlayerLevel>();
+        if (!LogHelper.AssertNotNull(playerLevel, nameof(playerLevel), this))
+            return false;
+
+        objectiveHealth = Objective.GetComponent<ObjectiveHealth>();
+        if (!LogHelper.AssertNotNull(objectiveHealth, nameof(objectiveHealth), this))
+            return false;
+
         // キャッシュがうまくいったときは、購読を進める
 
-        cameraManager.BindPlayerHealth(Player.Health);
-        cameraManager.BindObjectiveHealth(Objective.Health);
+        cameraManager.BindPlayerHealth(playerHealth);
+        cameraManager.BindObjectiveHealth(objectiveHealth);
 
         // scene 再ロード時の二重登録防止のため、一度解除してから登録し直す
-        Player.Level.OnLevelUp -= HandleLevelUp;
+        playerLevel.OnLevelUp -= HandleLevelUp;
 
         // ============= ラムダ購読解除（学習メモを書いとく）
         // コメントアウトした書き方だと、線用メソッドでなく使い捨てメソッド(ラムダ)として購読している
         // なので、度のメソッドを購読したのか or 解除したのかが分からないので、解除できない
         // HandleXXXとしておくと、HandleXXXの 購読 or 解除 ができるようになる
         // なので、購読するときは購読専用のメソッドを作っておくとよい
-        Player.Health.OnDied -= HandlePlayerDied;
-        Objective.Health.OnDestroyed -= HandleObjectiveDestroyed;
+        playerHealth.OnDied -= HandlePlayerDied;
+        objectiveHealth.OnDestroyed -= HandleObjectiveDestroyed;
         // Player.Health.OnDied -= () => TriggerGameOver(GameOverCause.PlayerDied);
-        // Objective.Health.OnDestroyed -= _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
+        // objectiveHealth.OnDestroyed -= _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
 
         WaveManager.OnStageCleared -= TriggerGameClear;
         WaveManager.OnBossWaveStarted -= HandleBossWaveStarted;
@@ -195,12 +215,12 @@ public class GameManager : MonoBehaviour
         Enemy.OnExpGained -= AddExp;
 
         // ============= ラムダ購読の開始
-        Player.Level.OnLevelUp += HandleLevelUp;
+        playerLevel.OnLevelUp += HandleLevelUp;
 
-        Player.Health.OnDied += HandlePlayerDied;
-        Objective.Health.OnDestroyed += HandleObjectiveDestroyed;
+        playerHealth.OnDied += HandlePlayerDied;
+        objectiveHealth.OnDestroyed += HandleObjectiveDestroyed;
         //Player.Health.OnDied += () => TriggerGameOver(GameOverCause.PlayerDied);
-        //Objective.Health.OnDestroyed += _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
+        //objectiveHealth.OnDestroyed += _ => TriggerGameOver(GameOverCause.ObjectiveDestroyed);
 
         WaveManager.OnStageCleared += TriggerGameClear;
         WaveManager.OnBossWaveStarted += HandleBossWaveStarted;
