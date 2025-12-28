@@ -21,8 +21,8 @@ MonoBehaviour:
     enemyRole: 1
     countForWaveClear: 0
   enemyStatMultiplier:
-    hp: 0.5
-    atk: 20
+    hp: 0.01
+    atk: 0.01
     def: 1
     eva: 1
     crit: 1

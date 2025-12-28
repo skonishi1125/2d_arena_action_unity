@@ -256,6 +256,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 497707092828696756, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
+      propertyPath: levelUpVfx
+      value: 
+      objectReference: {fileID: 7141587425839467445, guid: ea6d496c8631d7d488ad5feb8f5fa2de, type: 3}
     - target: {fileID: 2311999036730397486, guid: fb991eb36e6943446b2d3058c46ca45e, type: 3}
       propertyPath: m_Name
       value: Player

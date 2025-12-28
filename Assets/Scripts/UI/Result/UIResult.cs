@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class UIResult : MonoBehaviour
 {
@@ -47,8 +46,18 @@ public class UIResult : MonoBehaviour
 
         if (isClear)
         {
-            resultText.text = "GAME CLEAR!";
-            return;
+            var sceneName = SceneManager.GetActiveScene().name;
+
+            if (sceneName == "BattleHard")
+            {
+                resultText.text = "INCREDIBLE!";
+                return;
+            }
+            else
+            {
+                resultText.text = "GAME CLEAR!";
+                return;
+            }
         }
 
         resultText.text = cause switch
