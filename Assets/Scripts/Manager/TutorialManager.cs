@@ -1,47 +1,65 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using System.Collections;
+using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
-    private Player Player;
+    [SerializeField] private Player player;
+    private bool bound;
 
     private void Awake()
     {
-        Player = FindFirstObjectByType<Player>();
-        if (!LogHelper.AssertNotNull(Player, nameof(Player), this))
-            return;
+        if (player == null)
+            player = FindFirstObjectByType<Player>(FindObjectsInactive.Include);
+
     }
 
     private void OnEnable()
     {
         Enemy.OnExpGained += AddExp;
-        Player.Level.OnLevelUp += HandleLevelUp;
+        StartCoroutine(BindWhenReady());
     }
 
     private void OnDisable()
     {
         Enemy.OnExpGained -= AddExp;
-        Player.Level.OnLevelUp -= HandleLevelUp;
+        if (bound && player != null && player.Level != null)
+            player.Level.OnLevelUp -= HandleLevelUp;
+
+        bound = false;
+    }
+
+    private IEnumerator BindWhenReady()
+    {
+        if (bound) yield break;
+
+        while (player == null)
+            player = FindFirstObjectByType<Player>(FindObjectsInactive.Include);
+
+        while (player.Level == null)
+            yield return null; // 1フレーム待つ
+
+        player.Level.OnLevelUp += HandleLevelUp;
+        bound = true;
     }
 
     private void AddExp(int exp)
     {
-        if (Player == null)
+        if (player == null)
         {
             Debug.LogWarning("Tutorial:AddExp(): Playerがnullです。");
             return;
         }
-        Player.Level.AddExp(exp);
+        player.Level.AddExp(exp);
     }
 
     private void HandleLevelUp(int newLevel)
     {
-        if (Player == null)
+        if (player == null)
         {
             Debug.LogWarning("Tutorial:HandleLevelUp(): Playerがnullです。");
             return;
         }
-        Player.Vfx.CreateOnLevelUpVfx(Player.transform);
+        player.Vfx.CreateOnLevelUpVfx(player.transform);
     }
 
 }

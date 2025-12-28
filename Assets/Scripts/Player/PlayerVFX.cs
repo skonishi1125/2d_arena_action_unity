@@ -61,6 +61,18 @@ public class PlayerVFX : EntityVFX
     public void CreateOnLevelUpVfx(Transform target)
     {
         GameObject vfx = Instantiate(levelUpVfx, target.position, Quaternion.identity);
+        Debug.Log($"[LVUP_VFX] spawned name={vfx.name} active={vfx.activeInHierarchy} pos={vfx.transform.position} layer={vfx.layer}");
+
+        var r = vfx.GetComponentInChildren<Renderer>(true);
+        if (r != null)
+        {
+            Debug.Log($"[LVUP_VFX] renderer={r.GetType().Name} enabled={r.enabled} sortingLayer={r.sortingLayerName} order={r.sortingOrder}");
+        }
+        else
+        {
+            Debug.LogWarning("[LVUP_VFX] Renderer not found");
+        }
+
     }
 
     public void PlayBuffOverlay(Color color)
