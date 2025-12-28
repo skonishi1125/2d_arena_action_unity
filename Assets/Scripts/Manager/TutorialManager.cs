@@ -4,62 +4,50 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private Player player;
-    private bool bound;
+    private PlayerLevel level;
+    private PlayerVFX vfx;
 
     private void Awake()
     {
         if (player == null)
-            player = FindFirstObjectByType<Player>(FindObjectsInactive.Include);
+            player = FindFirstObjectByType<Player>();
+
+        level = player.GetComponent<PlayerLevel>();
+        vfx = player.GetComponent<PlayerVFX>();
 
     }
 
     private void OnEnable()
     {
         Enemy.OnExpGained += AddExp;
-        StartCoroutine(BindWhenReady());
+        level.OnLevelUp += HandleLevelUp;
     }
 
     private void OnDisable()
     {
         Enemy.OnExpGained -= AddExp;
-        if (bound && player != null && player.Level != null)
-            player.Level.OnLevelUp -= HandleLevelUp;
-
-        bound = false;
+        level.OnLevelUp -= HandleLevelUp;
     }
 
-    private IEnumerator BindWhenReady()
-    {
-        if (bound) yield break;
-
-        while (player == null)
-            player = FindFirstObjectByType<Player>(FindObjectsInactive.Include);
-
-        while (player.Level == null)
-            yield return null; // 1フレーム待つ
-
-        player.Level.OnLevelUp += HandleLevelUp;
-        bound = true;
-    }
 
     private void AddExp(int exp)
     {
-        if (player == null)
+        if (level == null)
         {
-            Debug.LogWarning("Tutorial:AddExp(): Playerがnullです。");
+            Debug.LogWarning("Tutorial:AddExp(): levelがnullです。");
             return;
         }
-        player.Level.AddExp(exp);
+        level.AddExp(exp);
     }
 
     private void HandleLevelUp(int newLevel)
     {
         if (player == null)
         {
-            Debug.LogWarning("Tutorial:HandleLevelUp(): Playerがnullです。");
+            Debug.LogWarning("Tutorial:HandleLevelUp(): levelがnullです。");
             return;
         }
-        player.Vfx.CreateOnLevelUpVfx(player.transform);
+        vfx.CreateOnLevelUpVfx(player.transform);
     }
 
 }
