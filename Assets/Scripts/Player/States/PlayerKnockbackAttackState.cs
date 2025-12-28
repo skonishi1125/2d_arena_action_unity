@@ -33,6 +33,9 @@ public class PlayerKnockbackAttackState : PlayerState
     {
         base.LogicUpdate();
 
+        if (stateMachine.currentState != this)
+            return;
+
         if (triggerCalled)
             stateMachine.ChangeState(player.idleState);
     }

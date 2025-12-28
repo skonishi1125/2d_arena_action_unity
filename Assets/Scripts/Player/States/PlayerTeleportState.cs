@@ -43,6 +43,9 @@ public class PlayerTeleportState : PlayerState
     {
         base.LogicUpdate();
 
+        if (stateMachine.currentState != this)
+            return;
+
         if (!teleported) return;
 
         // 次のUpdateで衝突判定が更新された後に遷移する想定

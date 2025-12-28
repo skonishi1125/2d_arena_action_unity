@@ -25,6 +25,9 @@
     {
         base.LogicUpdate();
 
+        if (stateMachine.currentState != this)
+            return;
+
         if (rb.linearVelocity.y <= 0)
             stateMachine.ChangeState(player.groundSlamFallState);
     }

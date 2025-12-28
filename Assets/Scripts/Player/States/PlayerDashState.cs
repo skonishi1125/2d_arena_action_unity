@@ -49,6 +49,10 @@ public class PlayerDashState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (stateMachine.currentState != this)
+            return;
+
         CancelDashIfNeeded();
 
         if (stateTimer < 0)

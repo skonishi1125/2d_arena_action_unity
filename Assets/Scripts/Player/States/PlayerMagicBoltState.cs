@@ -48,6 +48,9 @@ public class PlayerMagicBoltState : PlayerState
     {
         base.LogicUpdate();
 
+        if (stateMachine.currentState != this)
+            return;
+
         if (triggerCalled)
         {
             if (player.groundDetected)

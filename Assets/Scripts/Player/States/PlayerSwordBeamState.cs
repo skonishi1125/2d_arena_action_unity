@@ -49,6 +49,9 @@ public class PlayerSwordBeamState : PlayerState
     {
         base.LogicUpdate();
 
+        if (stateMachine.currentState != this)
+            return;
+
         if (triggerCalled)
         {
             if (player.groundDetected)
