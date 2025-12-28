@@ -1626,7 +1626,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1998641233
-  m_SortingLayer: -11
+  m_SortingLayer: -12
   m_SortingOrder: 0
   m_Sprite: {fileID: 4846415957705988891, guid: f07b5e435efc1424ab829d48a740dd07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1713,7 +1713,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -892019643
-  m_SortingLayer: -12
+  m_SortingLayer: -13
   m_SortingOrder: 0
   m_Sprite: {fileID: -7553719280495955898, guid: 870f65c6e77d941449260c5876c05ef9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2372,7 +2372,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 306686859
-  m_SortingLayer: -10
+  m_SortingLayer: -11
   m_SortingOrder: 0
   m_Sprite: {fileID: 2346778045093890471, guid: 052489502c51b9c4bbf4a36b3da07459, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4811,7 +4811,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1998641233
-  m_SortingLayer: -11
+  m_SortingLayer: -12
   m_SortingOrder: 0
   m_Sprite: {fileID: 4846415957705988891, guid: f07b5e435efc1424ab829d48a740dd07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5182,7 +5182,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 306686859
-  m_SortingLayer: -10
+  m_SortingLayer: -11
   m_SortingOrder: 0
   m_Sprite: {fileID: 2346778045093890471, guid: 052489502c51b9c4bbf4a36b3da07459, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5296,7 +5296,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -892019643
-  m_SortingLayer: -12
+  m_SortingLayer: -13
   m_SortingOrder: 0
   m_Sprite: {fileID: -7553719280495955898, guid: 870f65c6e77d941449260c5876c05ef9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5557,7 +5557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7142583984803614741, guid: 923e953a972b4ac4697ee648641fe53e, type: 3}
       propertyPath: m_Name
-      value: '*** AUDIO MANAGER ***'
+      value: ___AUDIO MANAGER___
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

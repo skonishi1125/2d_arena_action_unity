@@ -17,6 +17,9 @@ public class ParallaxBackground : MonoBehaviour
         CalculateImageLength();
     }
 
+    // Teleport等を使うと画面ががたつく
+    // カメラ側もLateUpdateとして、こちらもLateで合わせる
+    // そのあとUnity本体の実行順序を調整して、必ずカメラ移動の後、背景を移動させるようにする
     private void LateUpdate()
     {
         cameraHalfWidth = mainCamera.orthographicSize * mainCamera.aspect;
