@@ -58,13 +58,13 @@ public class StatusPanel : MonoBehaviour
         if (status == null || level == null)
             return;
 
-        levelText.text = $"Player Lv: {level.Level}";
+        levelText.text = $"Player Level: {level.Level}";
         expText.text = $"EXP: {level.CurrentExp} / {level.CurrentRequiredExp}";
         hpText.text = $"HP: {health.GetCurrentHp()} / {status.GetMaxHp():0}";
-        attackText.text = $"ATTACK: {status.GetAttack():0}";
-        defenseText.text = $"DEFENSE: {status.GetDefense():0}";
-        critText.text = $"CRITICAL: {(status.GetCritical() * 100f):0}%";
-        evasionText.text = $"EVASION: {(status.GetEvasion() * 100f):0}%";
+        attackText.text = $"Attack: {status.GetAttack():0}";
+        defenseText.text = $"Defense: {status.GetDefense():0}";
+        critText.text = $"Critical: {(status.GetCritical() * 100f):0}%";
+        evasionText.text = $"Evasion: {(status.GetEvasion() * 100f):0}%";
     }
 
     private void OnDestroy()

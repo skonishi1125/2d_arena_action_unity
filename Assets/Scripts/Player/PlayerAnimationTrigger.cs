@@ -27,10 +27,12 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
 
     protected override void AttackTrigger()
     {
-        //Debug.Log("AttackTrigger! " + Time.deltaTime);
-
-        sfx?.PlayAttack();
         base.AttackTrigger();
+
+        if (entityCombat != null && entityCombat.LastAttackHitEnemy == false)
+            sfx?.PlayAttack(); // 空振り音
+
+
     }
 
     private void DashStartAttackTrigger()

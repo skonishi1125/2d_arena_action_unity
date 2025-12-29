@@ -108,7 +108,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1887474961
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: -374287682, guid: bf3132d8d863bab4f9361d4a46f5cb84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -363,7 +363,7 @@ MonoBehaviour:
   projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   projectileCritHitVfx: {fileID: 1003673438635462287, guid: 2bca4fe4277e78e489a946b3d22a0983, type: 3}
   projectileCritHitColor: {r: 0.97323865, g: 1, b: 0.33490568, a: 1}
-  missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
+  missHitVfx: {fileID: 5948691531939224696, guid: 55659e40efd85a347818a543ac693121, type: 3}
   teleportVfx: {fileID: 4416121855561363331, guid: 8deebf8c3bde24d4293d2352db8bf2f7, type: 3}
   teleportColor: {r: 0, g: 0.0081414, b: 0.6981132, a: 1}
   levelUpVfx: {fileID: 7141587425839467445, guid: ea6d496c8631d7d488ad5feb8f5fa2de, type: 3}
@@ -372,6 +372,9 @@ MonoBehaviour:
   buffPulseDuration: 0.6
   buffMinAlpha: 0.15
   buffMaxAlpha: 0.45
+  itemGetVfx: {fileID: 7738267996883149465, guid: 0947a7a34010a1d4c80bf73b510c9438, type: 3}
+  itemVfxAnchor: {fileID: 0}
+  itemTextOffset: {x: 0, y: 1.2, z: 0}
 --- !u!114 &9195739058760271538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +545,10 @@ MonoBehaviour:
   defenseBuffColor: {r: 0.3, g: 0.6, b: 1, a: 1}
   evasionBuffColor: {r: 0.3, g: 1, b: 0.3, a: 1}
   critBuffColor: {r: 1, g: 1, b: 0.3, a: 1}
+  attackUpText: ATK UP!
+  defenseUpText: DEF UP!
+  evasionUpText: EVA UP!
+  critUpText: CRIT UP!
 --- !u!114 &4168919727690289246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +644,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1887474961
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}

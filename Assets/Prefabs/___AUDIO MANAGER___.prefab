@@ -52,8 +52,8 @@ MonoBehaviour:
   sfxSource: {fileID: 7958641283469638309}
   master: 1
   bgm: 1
-  ui: 1
-  sfx: 1
+  ui: 0.6
+  sfx: 0.5
 --- !u!82 &4112413801150732566
 AudioSource:
   m_ObjectHideFlags: 0

@@ -49,6 +49,8 @@ public class EntityCombat : MonoBehaviour
     private float currentKnockbackDuration;
     private bool useCustomKnockback = false;
 
+    public bool LastAttackHitEnemy;
+
     public bool HasCustomKnockback => useCustomKnockback;
     public Vector2 CurrentKnockbackPower => currentKnockbackPower;
     public float CurrentKnockbackDuration => currentKnockbackDuration;
@@ -99,6 +101,8 @@ public class EntityCombat : MonoBehaviour
     // 通常 単発攻撃
     public void PerformAttack()
     {
+        LastAttackHitEnemy = false;
+
         foreach (Collider2D target in GetDetectedColliders())
         {
             IDamagable damagable = target.GetComponent<IDamagable>();
@@ -137,6 +141,10 @@ public class EntityCombat : MonoBehaviour
             };
 
             damagable.TakeDamage(ctx);
+
+            // チェストなら空振り、敵なら敵被弾音
+            if (target.GetComponent<EnemyHealth>() != null)
+                LastAttackHitEnemy = true;
 
 
             if (isCritical)

@@ -546,7 +546,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1956590931
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 5116622871210979762, guid: 6b83fd827cc50e640849c5c7c04af99c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -734,6 +734,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 6842935581121348886}
   wallCheck: {fileID: 4148491810542341174}
+  wallDetected: 0
   enemyHealth: {fileID: 0}
   role: 0
   isBoss: 0
@@ -785,7 +786,7 @@ MonoBehaviour:
   projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   projectileCritHitVfx: {fileID: 3690044743846267362, guid: 0fe689911db46064b9bb3461625500a2, type: 3}
   projectileCritHitColor: {r: 0.9559822, g: 1, b: 0, a: 1}
-  missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
+  missHitVfx: {fileID: 5948691531939224696, guid: 55659e40efd85a347818a543ac693121, type: 3}
 --- !u!114 &6691876901166095622
 MonoBehaviour:
   m_ObjectHideFlags: 0

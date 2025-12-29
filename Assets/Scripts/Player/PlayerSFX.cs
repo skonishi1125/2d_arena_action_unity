@@ -43,13 +43,18 @@ public class PlayerSFX : MonoBehaviour
 
     private void OnDisable()
     {
-        if (health == null)
-            return;
-        health.OnTakeDamage -= PlayHitted;
-        health.OnDied -= PlayDied;
+        if (health != null)
+        {
+            health.OnTakeDamage -= PlayHitted;
+            health.OnDied -= PlayDied;
+        }
 
+        if (level != null)
+        {
+            level.OnLevelUp -= HandlePlayLevelUp;
+        }
 
-        ItemPickup.OnTakeItem += PlayItem;
+        ItemPickup.OnTakeItem -= PlayItem;
     }
 
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using TMPro; // 追加
 
 public class PlayerVFX : EntityVFX
 {
@@ -20,6 +21,13 @@ public class PlayerVFX : EntityVFX
     [SerializeField] private float buffPulseDuration = 0.6f;
     [SerializeField, Range(0f, 1f)] private float buffMinAlpha = 0.15f;
     [SerializeField, Range(0f, 1f)] private float buffMaxAlpha = 0.45f;
+
+    // アイテム取得文字
+    [Header("Item VFX")]
+    [SerializeField] private GameObject itemGetVfx;
+
+    [SerializeField] private Transform itemVfxAnchor;
+    [SerializeField] private Vector3 itemTextOffset = new(0f, 1.2f, 0f);
 
     private Tween buffTween;
 
@@ -105,6 +113,23 @@ public class PlayerVFX : EntityVFX
             if (buffOverlaySr != null)
                 buffOverlaySr.gameObject.SetActive(false);
         });
+    }
+
+    public void SpawnItemGetText(string text, Color color)
+    {
+        if (itemGetVfx == null)
+            return;
+
+        var anchor = itemVfxAnchor != null ? itemVfxAnchor : transform;
+        var go = Instantiate(itemGetVfx, anchor.position + itemTextOffset, Quaternion.identity);
+
+        // TextMeshPro(Text) / TextMeshProUGUI どちらでも拾えるよう TMP_Text で取得
+        var tmp = go.GetComponentInChildren<TMP_Text>(true);
+        if (tmp != null)
+        {
+            tmp.text = text;
+            tmp.color = color;
+        }
     }
 
 }

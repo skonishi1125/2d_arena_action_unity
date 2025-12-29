@@ -40,7 +40,7 @@ public class Chest : MonoBehaviour, IDamagable
             rb.angularVelocity = Random.Range(-200, 200);
         }
 
-        entityVfx.PlayOnDamageVfx();
+        entityVfx?.PlayOnDamageVfx();
     }
 
     // Animation Eventから呼ぶ。アイテムスポーン処理

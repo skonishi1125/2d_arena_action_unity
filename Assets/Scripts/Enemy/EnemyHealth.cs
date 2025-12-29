@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyHealth : EntityHealth
@@ -19,6 +18,9 @@ public class EnemyHealth : EntityHealth
     // WaveManager側で討伐したことの通知などの用途
     // どのEnemyHealthにも関わらず紐づけたいので、staticを付与する。
     public static event Action<EnemyHealth> OnAnyEnemyDied;
+
+    // EnemyHealthだけの死亡通知（SFXやVFX用）
+    public event Action OnDiedLocal;
 
     protected override void Awake()
     {
@@ -79,6 +81,7 @@ public class EnemyHealth : EntityHealth
     protected override void Die()
     {
         base.Die();
+        OnDiedLocal?.Invoke();
         OnAnyEnemyDied?.Invoke(this);
     }
 
