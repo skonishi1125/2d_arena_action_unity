@@ -35,7 +35,7 @@ public class PlayerGroundSlamImpactState : PlayerState
         base.LogicUpdate();
 
         if (triggerCalled)
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.idleState, "GroundSlamImpact: トリガーが呼ばれた");
     }
 
     public override void Exit()

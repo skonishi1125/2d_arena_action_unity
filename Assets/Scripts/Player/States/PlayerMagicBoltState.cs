@@ -54,9 +54,9 @@ public class PlayerMagicBoltState : PlayerState
         if (triggerCalled)
         {
             if (player.groundDetected)
-                stateMachine.ChangeState(player.idleState);
+                stateMachine.ChangeState(player.idleState, "MBolt: トリガーが呼ばれた");
             else
-                stateMachine.ChangeState(player.fallState);
+                stateMachine.ChangeState(player.fallState, "MBolt: 空中でトリガーが呼ばれた");
         }
     }
 

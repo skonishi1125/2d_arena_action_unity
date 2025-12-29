@@ -15,14 +15,14 @@
         base.LogicUpdate();
 
         if (input.Player.Jump.WasPressedThisFrame())
-            stateMachine.ChangeState(player.wallJumpState);
+            stateMachine.ChangeState(player.wallJumpState, "WSlide: ジャンプ");
 
         if (!player.wallDetected)
-            stateMachine.ChangeState(player.fallState);
+            stateMachine.ChangeState(player.fallState, "WSlide: 壁から離れた");
 
         if (player.groundDetected)
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.idleState, "WSlide: 地面に着地した");
             if (player.facingDir != player.moveInput.x)
                 player.Flip();
         }

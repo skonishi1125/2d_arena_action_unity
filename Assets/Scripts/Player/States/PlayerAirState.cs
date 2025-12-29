@@ -11,10 +11,10 @@ public class PlayerAirState : PlayerState
         base.LogicUpdate();
 
         if (CanMultiJump())
-            stateMachine.ChangeState(player.jumpState);
+            stateMachine.ChangeState(player.jumpState, "Air: Jump");
 
         if(input.Player.Attack.WasPressedThisFrame())
-            stateMachine.ChangeState(player.airAttackState);
+            stateMachine.ChangeState(player.airAttackState, "Air: AkirAttack");
 
     }
 

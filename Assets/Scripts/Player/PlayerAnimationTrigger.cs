@@ -19,8 +19,16 @@ public class PlayerAnimationTrigger : EntityAnimationTrigger
 
     }
 
+    protected override void CurrentStateTrigger()
+    {
+        //Debug.Log("CurrentStateTrigger で、終わったことを通知。 " + Time.deltaTime);
+        base.CurrentStateTrigger();
+    }
+
     protected override void AttackTrigger()
     {
+        //Debug.Log("AttackTrigger! " + Time.deltaTime);
+
         sfx?.PlayAttack();
         base.AttackTrigger();
     }

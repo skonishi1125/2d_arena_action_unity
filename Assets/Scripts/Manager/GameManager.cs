@@ -264,6 +264,8 @@ public class GameManager : MonoBehaviour
             return;
 
         State = GameState.Playing;
+        //QualitySettings.vSyncCount = 0;
+        //Application.targetFrameRate = 15;
         WaveManager.BeginStage();
     }
 

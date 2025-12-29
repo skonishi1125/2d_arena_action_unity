@@ -241,7 +241,7 @@ public class Enemy : Entity
     // Player側の死亡時のActionEventにsubscribeしているのでそちらで検知する。
     private void HandlePlayerDeath()
     {
-        stateMachine.ChangeState(idleState);
+        stateMachine.ChangeState(idleState, "HandlePlayerDeath");
         entityCombat.StopContinuousAttack(); // 持続攻撃で倒した場合は、中断
     }
 

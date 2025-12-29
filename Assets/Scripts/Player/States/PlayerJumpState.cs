@@ -19,7 +19,7 @@ public class PlayerJumpState : PlayerAirState
         base.LogicUpdate();
 
         if (rb.linearVelocity.y < 0)
-            stateMachine.ChangeState(player.fallState);
+            stateMachine.ChangeState(player.fallState, "Jump: yVelocityが0より下になった");
     }
 
 
