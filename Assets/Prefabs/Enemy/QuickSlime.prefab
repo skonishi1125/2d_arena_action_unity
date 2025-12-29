@@ -343,6 +343,7 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 1170860535499701589}
   wallCheck: {fileID: 3029160138005248241}
+  wallDetected: 0
   enemyHealth: {fileID: 0}
   role: 0
   isBoss: 0
@@ -393,7 +394,7 @@ MonoBehaviour:
   projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   projectileCritHitVfx: {fileID: 0}
   projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
-  missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
+  missHitVfx: {fileID: 5948691531939224696, guid: 55659e40efd85a347818a543ac693121, type: 3}
 --- !u!114 &2717453470906927272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,7 +671,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1956590931
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7577377085695938668, guid: 206bcd3ca0281f740aacdca8692cf367, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

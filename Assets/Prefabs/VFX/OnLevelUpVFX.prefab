@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7184005828953360956, guid: 3d8a1e6af35e9134dba1eca742b7b61f, type: 2}
+  - {fileID: 9071005960361326131, guid: c4205e71138f63b48b3ccb31206d24a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,10 +103,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: level up!
+  m_text: LEVEL UP!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3d8a1e6af35e9134dba1eca742b7b61f, type: 2}
-  m_sharedMaterial: {fileID: 7184005828953360956, guid: 3d8a1e6af35e9134dba1eca742b7b61f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4205e71138f63b48b3ccb31206d24a7, type: 2}
+  m_sharedMaterial: {fileID: 9071005960361326131, guid: c4205e71138f63b48b3ccb31206d24a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -136,11 +136,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 2
   m_fontSizeMax: 4
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

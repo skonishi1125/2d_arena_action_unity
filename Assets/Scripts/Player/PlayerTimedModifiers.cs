@@ -15,6 +15,12 @@ public class PlayerTimedModifiers : MonoBehaviour
     [SerializeField] private Color evasionBuffColor = new Color(0.3f, 1f, 0.3f, 1f);
     [SerializeField] private Color critBuffColor = new Color(1f, 1f, 0.3f, 1f);
 
+    [Header("Buff Text")]
+    [SerializeField] private string attackUpText = "ATK UP!";
+    [SerializeField] private string defenseUpText = "DEF UP!";
+    [SerializeField] private string evasionUpText = "EVA UP!";
+    [SerializeField] private string critUpText = "CRIT UP!";
+
     // ステータス変化時のイベント
     public event Action OnStatusChangedByItem;
 
@@ -34,6 +40,10 @@ public class PlayerTimedModifiers : MonoBehaviour
         OnStatusChangedByItem?.Invoke();
 
         BeginBuffVfx(param);
+
+        // 取得テキストVFX
+        if (playerVfx != null)
+            playerVfx.SpawnItemGetText(GetBuffText(param), GetBuffColor(param));
 
         StartCoroutine(RemoveLater(status, mode, delta, duration, param));
     }
@@ -116,4 +126,18 @@ public class PlayerTimedModifiers : MonoBehaviour
             _ => null
         };
     }
+
+    private string GetBuffText(StatusParam param)
+    {
+        return param switch
+        {
+            StatusParam.Attack => attackUpText,
+            StatusParam.Defense => defenseUpText,
+            StatusParam.Evasion => evasionUpText,
+            StatusParam.Critical => critUpText,
+            _ => "UP!"
+        };
+    }
+
+
 }

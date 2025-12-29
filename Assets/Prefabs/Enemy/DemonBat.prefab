@@ -613,7 +613,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1956590931
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 411267208435681827, guid: 94d48293752e43e4a9fc6da60cf2162c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -821,7 +821,7 @@ MonoBehaviour:
   projectileHitVfxColor: {r: 1, g: 1, b: 1, a: 1}
   projectileCritHitVfx: {fileID: 0}
   projectileCritHitColor: {r: 1, g: 1, b: 1, a: 1}
-  missHitVfx: {fileID: 6947713731366692993, guid: 69ddb9288feca8745a5d2d1a5f866224, type: 3}
+  missHitVfx: {fileID: 5948691531939224696, guid: 55659e40efd85a347818a543ac693121, type: 3}
 --- !u!114 &9219983551386002570
 MonoBehaviour:
   m_ObjectHideFlags: 0
