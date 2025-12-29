@@ -39,7 +39,7 @@ public class EnemySFX : MonoBehaviour
 
     public void PlayHitted()
     {
-        AudioManager.Instance?.PlaySfx(hittedSfx);
+        AudioManager.Instance?.PlaySfx(hittedSfx, 0.3f);
     }
 
     private void HandlerPlayHitted(EnemyHealth _)

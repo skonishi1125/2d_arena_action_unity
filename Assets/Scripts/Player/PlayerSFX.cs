@@ -55,7 +55,7 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayAttack()
     {
-        AudioManager.Instance?.PlaySfx(attackSfx);
+        AudioManager.Instance?.PlaySfx(attackSfx, 0.3f);
     }
 
     public void PlayMagic()
@@ -81,7 +81,7 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayLevelUp()
     {
-        AudioManager.Instance?.PlaySfx(levelUpSfx);
+        AudioManager.Instance?.PlaySfx(levelUpSfx, 0.35f);
     }
 
     // OnLevelUpがintを渡すので、intを受け取るハンドラを用意するイメージ
