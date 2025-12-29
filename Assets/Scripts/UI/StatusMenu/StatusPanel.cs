@@ -58,7 +58,7 @@ public class StatusPanel : MonoBehaviour
         if (status == null || level == null)
             return;
 
-        levelText.text = $"Player Lv: {level.Level}";
+        levelText.text = $"Player Level: {level.Level}";
         expText.text = $"EXP: {level.CurrentExp} / {level.CurrentRequiredExp}";
         hpText.text = $"HP: {health.GetCurrentHp()} / {status.GetMaxHp():0}";
         attackText.text = $"ATTACK: {status.GetAttack():0}";
