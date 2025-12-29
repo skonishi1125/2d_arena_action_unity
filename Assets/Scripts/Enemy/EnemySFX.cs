@@ -22,9 +22,7 @@ public class EnemySFX : MonoBehaviour
         if (health == null)
             return;
         health.OnTakeDamaged += PlayHitted;
-
-        EnemyHealth.OnAnyEnemyDied += HandlerPlayHitted;
-
+        health.OnDiedLocal += PlayHitted;
     }
 
     private void OnDisable()
@@ -32,18 +30,14 @@ public class EnemySFX : MonoBehaviour
         if (health == null)
             return;
         health.OnTakeDamaged -= PlayHitted;
+        health.OnDiedLocal -= PlayHitted;
 
-        EnemyHealth.OnAnyEnemyDied -= HandlerPlayHitted;
 
     }
 
     public void PlayHitted()
     {
-        AudioManager.Instance?.PlaySfx(hittedSfx, 0.3f);
+        AudioManager.Instance?.PlaySfx(hittedSfx);
     }
 
-    private void HandlerPlayHitted(EnemyHealth _)
-    {
-        PlayHitted();
-    }
 }
