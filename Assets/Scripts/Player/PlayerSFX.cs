@@ -43,19 +43,24 @@ public class PlayerSFX : MonoBehaviour
 
     private void OnDisable()
     {
-        if (health == null)
-            return;
-        health.OnTakeDamage -= PlayHitted;
-        health.OnDied -= PlayDied;
+        if (health != null)
+        {
+            health.OnTakeDamage -= PlayHitted;
+            health.OnDied -= PlayDied;
+        }
 
+        if (level != null)
+        {
+            level.OnLevelUp -= HandlePlayLevelUp;
+        }
 
-        ItemPickup.OnTakeItem += PlayItem;
+        ItemPickup.OnTakeItem -= PlayItem;
     }
 
 
     public void PlayAttack()
     {
-        AudioManager.Instance?.PlaySfx(attackSfx, 0.3f);
+        AudioManager.Instance?.PlaySfx(attackSfx);
     }
 
     public void PlayMagic()
@@ -81,7 +86,7 @@ public class PlayerSFX : MonoBehaviour
 
     public void PlayLevelUp()
     {
-        AudioManager.Instance?.PlaySfx(levelUpSfx, 0.35f);
+        AudioManager.Instance?.PlaySfx(levelUpSfx);
     }
 
     // OnLevelUpがintを渡すので、intを受け取るハンドラを用意するイメージ
