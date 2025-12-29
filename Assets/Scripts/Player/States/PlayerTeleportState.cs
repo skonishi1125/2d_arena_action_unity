@@ -50,9 +50,9 @@ public class PlayerTeleportState : PlayerState
 
         // 次のUpdateで衝突判定が更新された後に遷移する想定
         if (player.groundDetected)
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.idleState, "Teleport: 地面に触れた");
         else
-            stateMachine.ChangeState(player.fallState);
+            stateMachine.ChangeState(player.fallState, "Teleport: 空中で終わった");
     }
 
     private Vector2 FindSafeTeleportPos(Vector2 start, Vector2 desired)

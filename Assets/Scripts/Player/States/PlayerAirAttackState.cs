@@ -34,7 +34,7 @@ public class PlayerAirAttackState : PlayerAirState
         // 攻撃中に着地したら、Idle
         if (player.groundDetected)
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.idleState, "AirAttack: 攻撃中の着地");
             return;
         }
 

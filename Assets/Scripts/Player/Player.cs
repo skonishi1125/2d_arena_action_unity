@@ -154,6 +154,10 @@ public class Player : Entity
         // イベント購読
         Health.OnDied += HandleDied;
 
+        // デバッグ用
+        //stateMachine.logTransitions = false;
+        //stateMachine.logStackTrace = false;
+
     }
 
     protected override void Start()
@@ -190,7 +194,7 @@ public class Player : Entity
     private IEnumerator EnterAttackStateWithDelayCo()
     {
         yield return new WaitForEndOfFrame();
-        stateMachine.ChangeState(basicAttackState);
+        stateMachine.ChangeState(basicAttackState, "BasicAttack EnterAttackStateWithDelayCo");
     }
 
     // Health.Dieとの違い
@@ -198,7 +202,7 @@ public class Player : Entity
     public override void Death()
     {
         base.Death();
-        stateMachine.ChangeState(deadState);
+        stateMachine.ChangeState(deadState, "DeadState Death");
     }
 
     // イベントへの入口をはっきりさせるため、Deathと分けておく

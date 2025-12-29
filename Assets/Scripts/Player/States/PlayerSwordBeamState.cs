@@ -55,9 +55,9 @@ public class PlayerSwordBeamState : PlayerState
         if (triggerCalled)
         {
             if (player.groundDetected)
-                stateMachine.ChangeState(player.idleState);
+                stateMachine.ChangeState(player.idleState, "SBeam: トリガーが呼ばれた");
             else
-                stateMachine.ChangeState(player.fallState);
+                stateMachine.ChangeState(player.fallState, "SBeam: 空中でトリガーが呼ばれた");
         }
     }
 

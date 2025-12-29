@@ -58,9 +58,9 @@ public class PlayerDashState : PlayerState
         if (stateTimer < 0)
         {
             if (player.groundDetected)
-                stateMachine.ChangeState(player.idleState);
+                stateMachine.ChangeState(player.idleState, "Dash: 地面で終了");
             else
-                stateMachine.ChangeState(player.fallState);
+                stateMachine.ChangeState(player.fallState, "Dash: 空中で終了");
 
         }
     }
@@ -90,9 +90,9 @@ public class PlayerDashState : PlayerState
         if (player.wallDetected)
         {
             if (player.groundDetected)
-                stateMachine.ChangeState(player.idleState);
+                stateMachine.ChangeState(player.idleState, "Dash: 地上壁にぶつかった");
             else
-                stateMachine.ChangeState(player.wallSlideState);
+                stateMachine.ChangeState(player.wallSlideState, "Dash: 空中壁にぶつかった");
         }
     }
 

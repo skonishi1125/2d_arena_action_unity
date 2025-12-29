@@ -8,6 +8,8 @@ public class PlayerKnockbackAttackState : PlayerState
 
     public override void Enter()
     {
+        //Debug.Log($"Enter Knockback frame={Time.frameCount}");
+
         triggerCalled = false; // triggerの残留を防ぐ
         base.Enter();
 
@@ -37,7 +39,10 @@ public class PlayerKnockbackAttackState : PlayerState
             return;
 
         if (triggerCalled)
-            stateMachine.ChangeState(player.idleState);
+        {
+            //Debug.Log("Triggerが呼ばれたので、idleへ " + Time.deltaTime);
+            stateMachine.ChangeState(player.idleState, "KB:Trigger");
+        }
     }
 
     public override void PhysicsUpdate()
@@ -50,6 +55,8 @@ public class PlayerKnockbackAttackState : PlayerState
 
     public override void Exit()
     {
+        //Debug.Log($"Exit  Knockback frame={Time.frameCount}");
+
         base.Exit(); // これで anim.SetBool(false) を呼んでいる
         player.EntityCombat.ResetDamageMultiplier();
         player.EntityCombat.ResetKnockback();

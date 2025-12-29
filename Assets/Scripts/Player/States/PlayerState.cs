@@ -1,6 +1,7 @@
 ﻿// Stateが、Playerのrb, anim等にアクセスするための抽象クラス
 // EntityStateで用意すると、敵にEntityStateを使うときに邪魔になる
 // ただし敵にもrb, animはあるため、変数定義だけはEntityStateで済ませておく
+
 public abstract class PlayerState : EntityState
 {
     protected Player player;
@@ -36,14 +37,14 @@ public abstract class PlayerState : EntityState
             if (id == SkillId.Dash && CanDashMovementConditions() && player.Skill.CanUse(id))
             {
                 player.Skill.OnUse(id);
-                stateMachine.ChangeState(player.dashState);
+                stateMachine.ChangeState(player.dashState, "SkillZ Dash");
                 return;
             }
 
             if (id == SkillId.Teleport && player.Skill.CanUse(id))
             {
                 player.Skill.OnUse(id);
-                stateMachine.ChangeState(player.teleportState);
+                stateMachine.ChangeState(player.teleportState, "SkillZ Teleport");
                 return;
             }
         }
@@ -56,14 +57,14 @@ public abstract class PlayerState : EntityState
             if (id == SkillId.HeavyKB && player.Skill.CanUse(id))
             {
                 player.Skill.OnUse(id);
-                stateMachine.ChangeState(player.knockbackAttackState);
+                stateMachine.ChangeState(player.knockbackAttackState, "SkillD KB");
                 return;
             }
 
             if (id == SkillId.SwordBeam && player.Skill.CanUse(id))
             {
                 player.Skill.OnUse(id);
-                stateMachine.ChangeState(player.swordBeamState);
+                stateMachine.ChangeState(player.swordBeamState, "SkillD SwordBeam");
                 return;
             }
         }
@@ -77,14 +78,14 @@ public abstract class PlayerState : EntityState
             if (id == SkillId.GroundSlam && player.Skill.CanUse(id))
             {
                 player.Skill.OnUse(id);
-                stateMachine.ChangeState(player.groundSlamJumpState);
+                stateMachine.ChangeState(player.groundSlamJumpState, "SkillV GSlam");
                 return;
             }
 
             if (id == SkillId.MagicBolt && player.Skill.CanUse(id))
             {
                 player.Skill.OnUse(id);
-                stateMachine.ChangeState(player.magicBoltState);
+                stateMachine.ChangeState(player.magicBoltState, "SkillV MBolt");
                 return;
             }
         }

@@ -144,7 +144,7 @@ public class PlayerBasicAttackState : PlayerState
         }
         else
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.idleState, "通常攻撃が終わったのでIdleに");
         }
     }
 

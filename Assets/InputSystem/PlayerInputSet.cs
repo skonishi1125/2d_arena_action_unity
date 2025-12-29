@@ -487,8 +487,8 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""74b17328-e770-471a-b456-faf7651489f4"",
-                    ""path"": """",
+                    ""id"": ""fd2f0501-0814-42b9-bf0e-287958bbd507"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

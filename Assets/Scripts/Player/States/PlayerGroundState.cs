@@ -17,15 +17,15 @@ public class PlayerGroundState : PlayerState
         base.LogicUpdate();
 
         if (rb.linearVelocity.y < 0 && ! player.groundDetected)
-            stateMachine.ChangeState(player.fallState);
+            stateMachine.ChangeState(player.fallState, "Fall");
 
         // このStateを継承すれば、地上Stateの子状態のどれでも、
         // 条件を満たせばジャンプに移行できるようになる
         if (CanMultiJump())
-            stateMachine.ChangeState(player.jumpState);
+            stateMachine.ChangeState(player.jumpState, "Jump");
 
         if (input.Player.Attack.WasPerformedThisFrame())
-            stateMachine.ChangeState(player.basicAttackState);
+            stateMachine.ChangeState(player.basicAttackState, "Ground: BasicAttack");
 
     }
 
