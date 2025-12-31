@@ -25,14 +25,14 @@ https://unityroom.com/games/relic_guardian
 ### 作成の目的
 以下の理解を目的としました。
 * StateMachineを使用した、Objectの状態遷移の流れ
-* アセットとして用意したSpriteの切り分け方法
+* アセットとして用意したSpriteの割当て方法
 * Animatorを使用したキャラクターアニメーションの流れ
 * Tilemapを使用したステージの作成手順
 * パララックスな背景の仕組み
 * Cinemachineを使用したカメラの移動、画面揺れ等の演出方法
 * NewInputSetを使用した、Player操作とUI操作の切り離し方法
 * 敵味方の共通化の仕組み
-* キャラクタースキルのアンロックから習得までの大まかな流れ
+* キャラクタースキルの実装、アンロックから習得までの大まかな流れ
 * 被弾時のVFX, SFXの実装方法
 
 
@@ -64,7 +64,9 @@ https://unityroom.com/games/relic_guardian
   * ScriptableObjectとしてスキルデータを管理する形とした
     * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/Skills/SkillDefinition.cs
   * パッシブスキル、アクティブスキルの用意
-  * スキルを使ったときのクールタイムの可視化
+  * 物理か魔法、どちらかのビルドを選択できるような設計とした
+  * スキルを使ったときのクールタイムを可視化
+    * <img width="242" height="114" alt="image" src="https://github.com/user-attachments/assets/54f28e6e-b002-4d35-a19c-ad9a4da6f60e" />
   * スキルのアンロックからレベルアップまでの流れの用意
 * 敵AIの実装
   * プレイヤーを狙うのか、クリスタルを狙うのか
