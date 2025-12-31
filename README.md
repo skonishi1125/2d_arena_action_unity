@@ -6,21 +6,37 @@ https://github.com/user-attachments/assets/add79d30-f475-49c1-9134-6e2e63574aa3
 
 <img width="1052" height="589" alt="image" src="https://github.com/user-attachments/assets/e361b8f9-0a8d-4728-ba0e-56e708b185e6" />
 
-### URL
+### ゲームについて
+#### URL
 https://unityroom.com/games/relic_guardian
 
-### 環境等
-* 製作時間：170時間ほど
-* Unity Ver：6000.0.60f1
-* ジャンル：2D アクション
-* 作業範囲：ゲームデザイン / プログラム / UIなど
+#### 操作方法
+```
+【ゲーム中】
+[Z]: 攻撃
+[C]: ジャンプ (2段まで)
+[Z] [D] [V]: 対応したスキルを使う
+[ESC]: ステータス画面を開く
 
-### ゲームの説明
+【メニュー・タイトル・ステータス画面】
+[Z] / [Enter] : 決定
+[ESC] / [X] : 戻る
+```
+
+#### ゲームの説明
 キーボードで操作する 2D 横スクロールアクションです。
 
 フィールドに存在するクリスタルを一定時間護り抜くゲームです。
 
 護りながら、最後に現れるボスを倒せばクリアになります。
+
+
+### 開発環境等
+* 製作時間：170時間ほど
+* Unity Ver：6000.0.60f1
+* ジャンル：2D アクション
+* 作業範囲：ゲームデザイン / プログラム / UIなど
+
 
 ### 作成の目的
 以下の理解を目的としました。
@@ -90,9 +106,32 @@ https://unityroom.com/games/relic_guardian
     * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Etc/StageConfig.cs
       * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Etc/WaveConfig.cs
 
-
-
 #### その他
 * バージョン管理※アニメーション等の外部素材はignore済
 * DOTween等外部ライブラリの使用
+
+
+### クレジット
+```
+お借りしたドット素材等
+https://pixramen.itch.io/
+https://bdragon1727.itch.io/free-smoke-fx-pixel-2
+https://parasaito.itch.io/
+https://bdragon1727.itch.io/free-effect-and-bullet-16x16
+https://kurai7.itch.io/
+https://jdsherbert.itch.io/pixel-ui-sfx-pack
+https://creativekind.itch.io/floating-magic-crystal
+https://edermunizz.itch.io/
+https://tienlev.itch.io/slime-pixel-set
+
+お借りしたBGM
+https://www.youtube.com/@-misogi-misogi
+
+お借りしたフォント
+3x4 dot font
+https://piano-no-renshu.itch.io/3x4-dot-font
+
+ベストテンFONT
+https://flopdesign.booth.pm/items/2747965
+```
 
