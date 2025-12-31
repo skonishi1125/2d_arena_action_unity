@@ -111,27 +111,39 @@ https://unityroom.com/games/relic_guardian
 * DOTween等外部ライブラリの使用
 
 
-### クレジット
+### お借りした素材など
 ```
-お借りしたドット素材等
+プレイヤー・敵・クリスタル・タイルセット
 https://pixramen.itch.io/
+https://creativekind.itch.io/floating-magic-crystal
+https://tienlev.itch.io/slime-pixel-set
+
+VFX
 https://bdragon1727.itch.io/free-smoke-fx-pixel-2
 https://parasaito.itch.io/
 https://bdragon1727.itch.io/free-effect-and-bullet-16x16
-https://kurai7.itch.io/
-https://jdsherbert.itch.io/pixel-ui-sfx-pack
-https://creativekind.itch.io/floating-magic-crystal
-https://edermunizz.itch.io/
-https://tienlev.itch.io/slime-pixel-set
 
-お借りしたBGM
+スキルアイコン
+https://kurai7.itch.io/
+
+効果音
+https://soundeffect-lab.info/
+http://www.kurage-kosho.info/
+https://umipla.com/
+https://jdsherbert.itch.io/pixel-ui-sfx-pack
+
+背景
+https://edermunizz.itch.io/
+
+BGM
 https://www.youtube.com/@-misogi-misogi
 
-お借りしたフォント
+フォント
 3x4 dot font
 https://piano-no-renshu.itch.io/3x4-dot-font
 
 ベストテンFONT
 https://flopdesign.booth.pm/items/2747965
+
 ```
 
