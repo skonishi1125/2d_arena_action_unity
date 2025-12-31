@@ -93,7 +93,6 @@ public class Player : Entity
     [SerializeField] private LayerMask whatIsChest;
     public bool chestDetected { get; private set; } // チェストに着地したときのバグ対策用
 
-
     // 公開用変数等
     public float AttackInputBufferTime => attackInputBufferTime;
     public float AirAttackFallSpeed => airAttackFallSpeed;
