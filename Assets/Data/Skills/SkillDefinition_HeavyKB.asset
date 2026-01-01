@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   displayName: Heavy KB
-  description: "D\u30AD\u30FC\u3067\u76EE\u306E\u524D\u306E\u6575\u3092\u5439\u304D\u98DB\u3070\u3059\u3002\nSLv\u304C\u9AD8\u3044\u307B\u3069\u5A01\u529B\u3068\u5439\u3063\u98DB\u3070\u3057\u304C\u4E0A\u6607\u3002"
+  description: "K\u30AD\u30FC\u3067\u76EE\u306E\u524D\u306E\u6575\u3092\u5439\u304D\u98DB\u3070\u3059\u3002\nSLv\u304C\u9AD8\u3044\u307B\u3069\u5A01\u529B\u3068\u5439\u3063\u98DB\u3070\u3057\u304C\u4E0A\u6607\u3002"
   icon: {fileID: 1469954616, guid: eb2e25690043b4241bfa460f109fbeb4, type: 3}
   slot: 2
   exclusiveInSlot: 1

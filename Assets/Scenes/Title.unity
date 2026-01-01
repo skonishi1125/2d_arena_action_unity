@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'BACK: [ESC] / [X]'
+  m_text: 'BACK: [ESC]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4205e71138f63b48b3ccb31206d24a7, type: 2}
   m_sharedMaterial: {fileID: 9071005960361326131, guid: c4205e71138f63b48b3ccb31206d24a7, type: 2}
