@@ -79,6 +79,9 @@ https://unityroom.com/games/relic_guardian
 * プレイヤースキル関連
   * ScriptableObjectとしてスキルデータを管理する形とした
     * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/Skills/SkillDefinition.cs
+    * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/Skills/SkillId.cs
+    * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/Skills/PlayerSkillController.cs
+    * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/Skills/SkillRuntimeState.cs
   * パッシブスキル、アクティブスキルの用意
   * 物理か魔法、どちらかのビルドを選択できるような設計とした
   * スキルを使ったときのクールタイムを可視化
