@@ -55,11 +55,11 @@ https://unityroom.com/games/relic_guardian
 ### 考慮した部分など
 #### 状態遷移
 * 待機、移動などそれぞれのStateを管理するためのStateMachineの用意
-  * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Etc/StateMachine.cs
+  https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Etc/StateMachine.cs
 * 全ての状態の親クラスEntityStateを用意し、そこから敵味方別にStateを管理するようにした
 * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Entity/EntityState.cs
-  * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Player/States/PlayerState.cs
-    * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Player/States/PlayerIdleState.cs
+  * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/States/PlayerState.cs
+    * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/States/PlayerIdleState.cs
   * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Enemy/EnemyState.cs
     * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Enemy/EnemyIdleState.cs
 
@@ -70,8 +70,8 @@ https://unityroom.com/games/relic_guardian
     * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Player/Player.cs
     * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Enemy/Enemy.cs
 * ヘルスや各種ステータスなど、項目をComponentとして分割して割り当てた
-  * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Entity/EntityHealth.cs
-  * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Entity/EntityStatus.cs
+  * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Entity/EntityHealth.cs
+  * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Entity/EntityStatus.cs
 * Animatorの導入
   * BlendTree(ジャンプ/落下など）含む、State別アニメーションの用意
   * SpriteEditorでの切り出し、ピボットポイントの調整
@@ -102,9 +102,9 @@ https://unityroom.com/games/relic_guardian
 * パララックスな背景の実装
 * 簡易的なミニマップの実装
 * ScriptableObjectを用いてWave単位でスポーンを区切り、WaveをまとめたものをStageとして運用
-  * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Manager/WaveManager.cs
-    * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Etc/StageConfig.cs
-      * https://github.com/skonishi1125/2d_arena_action_unity/blob/efc5c28d28a8aa4f5afe1cba469a672192768962/Assets/Scripts/Etc/WaveConfig.cs
+  * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Manager/WaveManager.cs
+    * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Etc/StageConfig.cs
+      * https://github.com/skonishi1125/2d_arena_action_unity/blob/main/Assets/Scripts/Etc/WaveConfig.cs
 
 #### その他
 * バージョン管理※アニメーション等の外部素材はignore済
