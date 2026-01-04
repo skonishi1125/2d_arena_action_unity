@@ -1,6 +1,5 @@
 ## Relic Guardian
-
-https://github.com/user-attachments/assets/add79d30-f475-49c1-9134-6e2e63574aa3
+https://github.com/user-attachments/assets/f41f3d86-1477-41bb-8fb5-3b6acfc0adb7
 
 <img width="967" height="540" alt="image" src="https://github.com/user-attachments/assets/fdf2d275-ec8d-4716-b8c2-8c3cc04dad31" />
 
